@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	
+	<title>Ветровая нагрузка</title>
+	
+	<link rel="stylesheet" href="../css/style_sidebar.css">
+
+	<script src="../js/wind Load.js" defer></script>
+</head>
+
+<body>
+	
+	<div class="container-1">
+	
+		<header class="sidebar">
+			<div class="logo">
+				<a href="index.html">
+					<img src="../img/Logo-Kompass-Grupp-500px-214x75.png" alt="Logo"/>
+				</a>
+			</div>
+			
+			<nav>
+				<div class="sidebar-nav">
+					<ul>
+						<li>
+							<a href="wind load.html">
+								Ветровые нагрузки
+							</a>
+						</li>
+						<li>
+							<a href="#snow load.html">
+								Снеговые нагрузки
+							</a>
+						</li>
+						<li>
+							<a href="#steel structures calculation.html">
+								Расчет металлоконструкций
+							</a>
+						</li>
+						<li>
+							<a href="#curtain wall glazing calculation.html">
+								Расчет конструкций остекления
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+	
+		<div class="container-2">
+	
+			<div class="top-pannel">
+				TOP-PANNEL
+			</div>
+			
+			<div class="container-3">
+				<div class="content-calculation">
+					<h3>Ветровая нагрузка</h3>
+					Предельное расчетное значение ветровой нагрузки определяется по формуле:
+					
+					<table>
+						<tr>
+							<td><p><em>W<sub>m</sub> = <big>γ</big><sub>fm</sub>*W<sub>0</sub>*C =</em></p></td>
+							<td id="Wm"></td>
+							<td><em>кг/м<sup>2</sup>,</em></td>
+						</tr>
+					</table>
+					
+					где:
+					
+					<p><table>
+						<tr>
+							<td><em><big>γ</big><sub>fm =</sub></em></td>
+							<td><input id="γfm" type="text" value="" size="1"/></td>
+							<td>- коэффициент надежности по предельному значению ветровой нагрузки (зависит от T, лет);</td>
+						</tr>
+					</table></p>
+						
+					<p><form>
+						<input id="medialRepeatabilityPeriod" type="search" placeholder="Укажите T, лет:" list="medialRepeatabilityPeriodList" size="15" onchange="WmGetSelect_γfm()"/>
+					</form></p>
+					<datalist id="medialRepeatabilityPeriodList"></datalist>
+					
+					<!-- <hr align="left"/> -->
+					
+					<p><table>
+						<tr>
+							<td><em>W<sub>0</sub> =</em></td>
+							<td><input id="Wo" type="text" value="" size="1"/></td>
+							<td><em>кг/м<sup>2</sup></em></td>
+							<td>- характеристическое значение ветрового давления (зависит от города);</td>
+						</tr>
+					</table></p>
+					
+					<p><form>
+						<input id="cities" type="search" placeholder="Выберите город:" list="citiesList" size="15" onchange="WmGetSelectCity()"/></p>
+					</form>
+					<datalist id="citiesList"></datalist>
+					
+					<!-- <hr align="left"/> -->
+					
+					Коэффициент <b><em>С</em></b> определяется по формуле:
+					<table>
+						<tr>
+							<td><p><em>C = C<sub>aer</sub>*C<sub>h</sub>*C<sub>alt</sub>*C<sub>rel</sub>*C<sub>dir</sub>*C<sub>d</sub> =</em></p></td>
+							<td id="C"></td>
+						</tr>
+					</table>
+					
+					где:
+					
+					<p><table>
+						<tr>
+							<td><em>C<sub>aer</sub> =</em></td>
+							<td><input id="Caer" type="text" value="0.8" size="1"/></td>
+							<td>- аэродинамический коэффициент</td>
+						</tr>
+						<tr>
+							<td><em>C<sub>h</sub> =</em></td>
+							<td><input id="Ch" type="text" value="" size="1"/></td>
+							<td>- коэффициент высоты сооружения (зависит от 3-х значений ниже),</td>
+						</tr>
+					</table></p>
+					
+					<p><select id="constructionHight" onchange="WmGetSelectCh()"></select>
+					<select id="terrainType" onchange="WmGetSelectCh()">
+						<option disabled selected>Укажите тип местности:</option>
+						<option>ТипI</option>
+						<option>ТипII</option>
+						<option>ТипIII</option>
+						<option>ТипIV</option>
+					</select>
+					<select id="ownFluctuationPeriod" onchange="WmGetSelectCh()">
+						<option disabled selected>Укажите период собственных колебаний:</option>
+						<option>< 0.25 сек.</option>
+						<option>> 0.25 сек.</option>
+					</select></p>
+					
+					где:
+					<p>Z - высота конструкции над поверхностью земли;</p>
+					Типы местности:<br/>
+					I - открытые поверхности морей, озер, а также плоские равнины без препятствий, которые подвергаются действию ветра на участке длиной не менее чем 3 км;<br/>
+					II - сельская местность с ограждениями (заборами), небольшими сооружениями, домами и деревьями;<br/>
+					III - пригородные и промышленные зоны, протяжные лесные массиви;<br/>
+					IV - городские территории, на которых по крайней мере 15% поверхности заняты зданиями, которые имеют вреднюю висоту свыше 15 м.
+					<p>Если период собственных колебаний не известен, то данное значение принимать "> 0,25 сек" </p>
+					
+					<!-- <hr align="left"/> -->
+					
+					<p><table>
+						<tr>
+							<td><em>C<sub>alt</sub> =</em></td>
+							<td><input id="Calt" type="text" value="1" size="1"/></td>
+							<td>- коэффициент географической высоты</td>
+						</tr>
+						<tr>
+							<td><em>C<sub>rel</sub> =</em></td>
+							<td><input id="Crel" type="text" value="1" size="1"/></td>
+							<td>- коэффициент рельефа</td>
+						</tr>
+						<tr>
+							<td><em>C<sub>dir</sub> =</em></td>
+							<td><input id="Cdir" type="text" value="1" size="1"/></td>
+							<td>- коэффициент направления</td>
+						</tr>
+						<tr>
+							<td><em>C<sub>d</sub> =</em></td>
+							<td><input id="Cd" type="text" value="1" size="1"/></td>
+							<td>- коэффициент динамичности</td>
+						</tr>
+					</table></p>
+					<form>
+						<input type="button" value="Расчитать" onclick="Wm()"></button>
+					</form>
+				</div>
+			</div>
+			<footer class="footer">
+				FOOTER
+			</footer>
+		</div>
+	</div>
+</body>
+
+</html>
