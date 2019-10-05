@@ -95,7 +95,7 @@ body:not(.home) .site-content {
 .design-department-wrap {
 	width: 33.33333333%;
 	float: left;
-	padding: 0 15px;
+	padding: 0 15px 30px 15px;
 }
 
 /*.content-wrap {
@@ -150,5 +150,20 @@ body:not(.home) .site-content {
 
 .content-wrap>ol {
 	margin: 30px 0;
+	padding: 0;
+}
+
+.content-wrap>p {
+	margin: 30px 0 0;
+	padding: 0;
+}
+
+.content-wrap>.interior {
+	margin: 10px 0 0 30px;
+	padding: 0;
+}
+
+.content-wrap>.interior-paragraph {
+	margin: 10px 0 0;
 	padding: 0;
 }
