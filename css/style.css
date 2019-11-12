@@ -158,12 +158,17 @@ body:not(.home) .site-content {
 	padding: 0;
 }
 
-.content-wrap>.interior {
+.content-wrap .interior {
 	margin: 10px 0 0 30px;
 	padding: 0;
 }
 
 .content-wrap>.interior-paragraph {
+	margin: 10px 0 0;
+	padding: 0;
+}
+
+.interior .interior-paragraph {
 	margin: 10px 0 0;
 	padding: 0;
 }
