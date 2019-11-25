@@ -3077,7 +3077,7 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
  	margin-bottom:0
  	}
  	kbd kbd,label{
- 	font-weight:700
+ 	/*font-weight:700*/
  	}
  	@media (min-width:768px){
  	.lead{

@@ -3,15 +3,17 @@
 
 <head>
 	<meta charset="utf-8">
-
-	<title>Конструкторский отдел</title>
-
+	
+	<title>Расчет ветровой нагрузки</title>
+	
+	<!-- <link rel="stylesheet" href="../css/style_sidebar.css"> -->
 	<link rel="stylesheet" href="../css/style.css">
 	<link rel="stylesheet" href="../css/fonts.css">
 	<link rel="stylesheet" href="../css/style.css_ver=1.0.1.css">
 	<link rel="stylesheet" href="../css/menu-icon.css">
 
 	<script src="../js/drop-down menu.js" defer></script>
+	<script src="../js/wind Load.js" defer></script>
 
 	<style>
 		button,h1,h2,h3,h4,h5,h6,select {
@@ -1877,6 +1879,15 @@
 				</div>
 			</div>
 			<!-- Боковая панель -->
+
+			<!-- <div class="sidebar-nav">
+			<ul>
+				<li><a href="wind load.html">Ветровые нагрузки</a></li>
+				<li><a href="#snow load.html">Снеговые нагрузки</a></li>
+				<li><a href="#steel structures calculation.html">Расчет металлоконструкций</a></li>
+				<li><a href="#curtain wall glazing calculation.html">Расчет конструкций остекления</a></li>
+			</ul>
+		</div> -->
 			<header id="masthead" class="site-header" role="banner">
 				<div class="nano has-scrollbar">
 					<div class="content" tabindex="0" style="right: -17px;">
@@ -1996,7 +2007,7 @@
 					<main id="main" role="main">
 						<section class="entry-header">
 							<div class="container">
-								<h1 class="entry-title">Конструкторский отдел</h1>
+								<h1 class="entry-title">Расчет ветровой нагрузки</h1>
 								<div class="breadcrumbs">
 									<span property="itemListElement" typeof="ListItem">
 										<a property="item" typeof="WebPage" title="Go to КОМПАС-групп" href="../index.html" class="home">
@@ -2019,27 +2030,131 @@
 										<meta property="position" content="2">
 									</span>
 									<i class="fa fa-angle-right"></i>
+									<span>
+										<a property="item" typeof="WebPage" title="Go to Конструкторский отдел" href="design-department.html" class="home">
+											<span property="name">Конструкторский отдел</span>
+										</a>
+										<meta property="position" content="3">
+									</span>
+									<i class="fa fa-angle-right"></i>
+									<span>
+										<a property="item" typeof="WebPage" title="Go to Рабочие инструкции" href="load-collection.html" class="home">
+											<span property="name">Сбор нагрузок</span>
+										</a>
+										<meta property="position" content="3">
+									</span>
+									<i class="fa fa-angle-right"></i>
 									<span property="itemListElement" typeof="ListItem">
-										<span property="name">Конструкторский отдел</span>
+										<span property="name">Расчет ветровой нагрузки</span>
 									</span>
 								</div>
 							</div>
 							<div class="container">
-								<div class="row-content">
-									<div class="design-department-wrap">
-										<a href="work-instructions.html">
-											<div class="design-department">
-												<span>Рабочие инструкции</span>
-											</div>
-										</a>
-									</div>
-									<div class="design-department-wrap">
-										<a href="load-collection.html">
-											<div class="design-department">
-												<span>Сбор нагрузок</span>
-											</div>
-										</a>
-									</div>
+								<div class="content-wrap">
+									<p><em><b>Предельное расчетное значение ветровой нагрузки</b></em> определяется по формуле:</p>
+
+									<p class="interior-paragraph">
+										<em>W<sub>m</sub> = <big>γ</big><sub>fm</sub>*W<sub>0</sub>*C = </em>
+										<span id="Wm"></span>
+										<em>кг/м<sup>2</sup>,</em>
+									</p>
+
+									<!-- <hr align="left"/> -->
+
+									<p class="interior-paragraph">где:</p>
+
+									<p class="interior-paragraph">
+										<em><big>γ</big><sub>fm =</sub></em>
+										<input id="γfm" type="text" value="" size="1"/>
+										- <em>коэффициент надежности по предельному значению ветровой нагрузки</em> (зависит от T, лет);
+									</p>
+									<p class="interior-paragraph">
+										<input id="medialRepeatabilityPeriod" type="search" placeholder="Укажите T, лет:" list="medialRepeatabilityPeriodList" size="15" onchange="WmGetSelect_γfm()"/>
+										<datalist id="medialRepeatabilityPeriodList"></datalist>
+									</p>
+									
+									<!-- <hr align="left"/> -->
+
+									<p class="interior-paragraph">
+										<em>W<sub>0</sub> =</em>
+										<input id="Wo" type="text" value="" size="1"/>
+										<em>кг/м<sup>2</sup></em> - <em>характеристическое значение ветрового давления</em> (зависит от города);
+									</p>
+									<p class="interior-paragraph">
+										<input id="cities" type="search" placeholder="Выберите город:" list="citiesList" size="15" onchange="WmGetSelectCity()"/>
+										<datalist id="citiesList"></datalist>
+									</p>
+									
+									<!-- <hr align="left"/> -->
+									
+									<p class="interior-paragraph"><em>Коэффициент</em> <em><b>С</b></em> определяется по формуле:</p>
+									<p class="interior-paragraph">
+										<em>C = C<sub>aer</sub>*C<sub>h</sub>*C<sub>alt</sub>*C<sub>rel</sub>*C<sub>dir</sub>*C<sub>d</sub> =</em>
+										<span id="C"></span>
+									</p>
+									
+									<p class="interior-paragraph">где:</p>
+
+									<p class="interior-paragraph">
+										<label><em>C<sub>aer</sub> =</em></label>
+										<input id="Caer" type="text" value="0.8" size="1"/>
+										- <em>аэродинамический коэффициент;</em>
+										<br>
+										<label><em>C<sub>h</sub> =</em></label>
+										<input id="Ch" type="text" value="" size="1"/>
+										- <em>коэффициент высоты сооружения</em> - зависит от 3-х значений, приведенных ниже:
+									</p>
+									
+									<select id="constructionHight" onchange="WmGetSelectCh()"></select>
+									<select id="terrainType" onchange="WmGetSelectCh()">
+										<option disabled selected>Укажите тип местности:</option>
+										<option>ТипI</option>
+										<option>ТипII</option>
+										<option>ТипIII</option>
+										<option>ТипIV</option>
+									</select>
+									
+									<select id="ownFluctuationPeriod" onchange="WmGetSelectCh()">
+										<option disabled selected>Укажите период собственных колебаний:</option>
+										<option>< 0.25 сек.</option>
+										<option>> 0.25 сек.</option>
+									</select>
+									
+									<p class="interior-paragraph">где:</p>
+
+									<p class="interior-paragraph">Z - <em>высота конструкции над поверхностью земли;</em></p>
+									<p class="interior-paragraph"><em>Типы местности:</em></p>
+									<ul>
+										<li>I - открытые поверхности морей, озер, а также плоские равнины без препятствий, которые подвергаются действию ветра на участке длиной не менее чем 3 км;</li>
+										<li>II - сельская местность с ограждениями (заборами), небольшими сооружениями, домами и деревьями;</li>
+										<li>III - пригородные и промышленные зоны, протяжные лесные массиви;</li>
+										<li>IV - городские территории, на которых по крайней мере 15% поверхности заняты зданиями, которые имеют вреднюю висоту свыше 15 м.</li>
+									</ul>
+									<p class="interior-paragraph">Если <em>период собственных колебаний</em> не известен, то данное значение принимать <em><b>> 0,25 сек</b></em>.</p>
+									
+									<!-- <hr align="left"/> -->
+
+									<p class="interior-paragraph">
+										<label><em>C<sub>alt</sub> =</em></label>
+										<input id="Calt" type="text" value="1" size="1"/>
+										- <em>коэффициент географической высоты;</em>
+										<br>
+										<label><em>C<sub>rel</sub> =</em></label>
+										<input id="Crel" type="text" value="1" size="1"/>
+										- <em>коэффициент рельефа;</em>
+										<br>
+										<label><em>C<sub>dir</sub> =</em></label>
+										<input id="Cdir" type="text" value="1" size="1"/>
+										- <em>коэффициент направления;</em>
+										<br>
+										<label><em>C<sub>d</sub> =</em></label>
+										<input id="Cd" type="text" value="1" size="1"/>
+										- <em>коэффициент динамичности.</em>
+									</p>
+									
+									<form>
+										<input type="button" value="Расчитать" onclick="Wm()"></button>
+									</form>
 								</div>
 							</div>
 						</section>
@@ -2048,6 +2163,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- Подвал -->
 	<div id="colophon" class="site-footer" role="contentinfo">
 		<div class="bottom-pannel">
 			<div class="container">

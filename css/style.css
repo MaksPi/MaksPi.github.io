@@ -1,8 +1,13 @@
+#Wm{
+	color: red;
+}
+#C{
+	color: red;
+}
 .top-pannel {
 	background-color: #1f1f1f;
 	z-index: 10;
 }
-
 .menu-item>a::before{
  	content:'\f14e';
  	position:relative;
@@ -16,82 +21,64 @@
  	color:#DAA520;
  	opacity:.5;
 }
-
 .load-collection>a::before {
 	content: '\f24e';
 }
-
 .strength-calculations>a::before {
 	content: '\f0c1';
 }
-
 .job-descriptions>a::before {
 	content: '\f15c';
 }
-
 .educational-information>a::before {
 	content: '\f19d';
 }
-
 .heat-engineering-calculations>a::before {
 	content: '\f06d';
 }
-
 .wind-load>a::before {
 	content: '\f074';
 }
-
 .snow-load>a::before {
 	content: '\f069';
 }
-
 .own-weight>a::before {
 	content: '\f019';
 }
-
 .calculation>a::before {
 	content: '\f1ec';
 }
-
 .site-content {
 	padding-top: 86px;
 	min-height: calc(100vh - 108px);
 	background-color: #f0f0f0;
 }
-
 body:not(.home) .site-content {
 	background-color: #fff;
 }
-
 .site-content,.site-footer {
 	position: relative;
 	padding-left: 300px;
 }
-
 .row-content {
 	margin: 30px -15px 0 -15px;
 }
-
 .form__link-box {
 	margin-left: 20px;
 }
-
 .form__link-box-alignment {
 	position: absolute;
 	top: 50%;
 	transform: translate(0, -50%);
 }
-
 .form__link {
 	display: block;
 	font-size: 14px;
 }
-
 .entry-header {
 	padding-top: 30px;
 	padding-bottom: 15px;
 }
-
 .design-department-wrap {
 	width: 33.33333333%;
 	float: left;
@@ -109,7 +96,6 @@ body:not(.home) .site-content {
 	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
 	text-align: center;
 }
-
 .design-department span {
 	position: absolute;
 	font-family: RobotoCondensedBold,sans-serif;
@@ -120,11 +106,9 @@ body:not(.home) .site-content {
 	top: 50%;
 	transform: translate(0, -50%);
 }
-
 .design-department:hover {
 	background-color: rgba(218, 165, 32, 0.8);
 }
-
 .departments h1 {
 	margin-top: -5px;
 	margin-bottom: 30px;
@@ -135,39 +119,45 @@ body:not(.home) .site-content {
 	letter-spacing: .08em;
 	word-spacing: .1em;
 }
-
 .content-wrap ol {
 	list-style: none; /* убираем стандартную нумерацию */
 	counter-reset: li; /* Идентифицируем счетчик и даем ему имя li. Значение счетчика не указано - по умолчанию оно равно 0 */
 	margin: 10px 0;
-	padding-left: 30px;
+	padding-left: 20px;
 }
-
-.content-wrap li:before {
+.content-wrap ol>li:before {
 	counter-increment: li; /* Определяем элемент, который будет нумероваться — li. Псевдоэлемент before указывает, что содержимое, вставляемое при помощи свойства content, будет располагаться перед пунктами списка. Здесь же устанавливается значение приращения счетчика (по умолчанию равно 1). */
 	content: counters(li, ".") ". "; /* С помощью свойства content выводится номер пункта списка. counters() означает, что генерируемый текст представляет собой значения всех счетчиков с таким именем. Точка в кавычках добавляет разделяющую точку между цифрами, а точка с пробелом добавляется перед содержимым каждого пункта списка */
 }
-
 .content-wrap>ol {
 	margin: 30px 0;
 	padding: 0;
 }
-
+.content-wrap ul {
+	margin: 0 0 10px 0;
+	padding: 0;
+}
 .content-wrap>p {
 	margin: 30px 0 0;
 	padding: 0;
 }
-
+.content-wrap form {
+	margin: 20px 0 0;
+}
+.content-wrap select {
+	margin: 10px 0 0;
+}
+.content-wrap label {
+	width: 45px;
+}
 .content-wrap .interior {
-	margin: 10px 0 0 30px;
+	margin: 10px 0 0 20px;
 	padding: 0;
 }
-
 .content-wrap>.interior-paragraph {
 	margin: 10px 0 0;
 	padding: 0;
 }
-
 .interior .interior-paragraph {
 	margin: 10px 0 0;
 	padding: 0;
