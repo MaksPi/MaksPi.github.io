@@ -1,0 +1,42 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+caption {
+	padding: 5px 0;
+}
+table {
+	border-collapse: collapse;
+}
+td {
+	border: 1px solid;
+	padding: 2px 5px;
+}
+th {
+	border: 1px solid;
+	padding: 10px 5px;
+	background-color: #87cefa;
+}
+.barbell-squats td:first-child, .dumbbell-lunges td:first-child, .handstand td:first-child, .handstand-push-ups td:first-child, .planche td:first-child, .pull-ups td:first-child, .push-ups td:first-child {
+	text-align: center;
+}
+.days td {
+	text-align: center;
+	padding: 5px 0;
+}
+.empty td {
+	background-color: #ffa500;
+}
+.jogging td:not(:nth-child(2)), .neck td:not(:nth-child(2)), .stretching td:not(:nth-child(2)) {
+	text-align: center;
+}
+.page-wrapper {
+	display: table;
+	margin: auto;
+}
+@media (max-width: 480px) {
+	.page-wrapper {
+		max-width: 90%;
+		margin: 0 auto;
+	}
+}

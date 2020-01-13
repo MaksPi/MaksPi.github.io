@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+
+	<title>Преобразование типов</title>
+	
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/fonts.css">
+</head>
+<body>
+	<div class="page-wrapper">
+		<div class="page">
+			<h1 class="page__title">Преобразование типов</h1>
+			<p>Чаще всего операторы и функции автоматически приводят переданные им значения к нужному типу.</p>
+			<p>Например, <code>alert</code> автоматически преобразует любое значение к строке. Математические операторы преобразуют значения к числам.</p>
+			<p>Есть также случаи, когда нужно явно преобразовать значение в ожидаемый тип.</p>
+			<h2>Строковое преобразование</h2>
+			<p>Функция <code>String(value)</code> преобразовывает значение к строке:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers  language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">let</code>
+							value
+							<code class="token operator">=</code>
+							<code class="token boolean">true</code><code class="token punctuation">;</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code>
+							<code class="token keyword">typeof</code>
+							value<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// boolean</code><br><br>
+							value
+							<code class="token operator">=</code>
+							<code class="token function">String</code><code class="token punctuation">(</code>value<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// теперь value это строка "true"</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code><code class="token keyword">typeof</code>
+							value<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// string</code>
+						</code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span><br>
+							<span>5</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<h2>Численное преобразование</h2>
+			<p>Численное преобразование происходит в математических функциях и выражениях.</p>
+			<p>Например, когда операция деления <code>/</code> применяется не к числу:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers  language-javascript">
+						<code class="language-javascript">
+							<code class="token function">alert</code><code class="token punctuation">(</code>
+							<code class="token string">"6"</code>
+							<code class="token operator">/</code>
+							<code class="token string">"2"</code>
+							<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// 3, Строки преобразуются в числа</code>
+						</code>
+						<span class="line-numbers-rows">
+							<span>1</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Можно использовать функцию <code>Number(value)</code>, чтобы явно преобразовать <code>value</code> к числу:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers  language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">let</code>
+							str
+							<code class="token operator">=</code>
+							<code class="token string">"123"</code><code class="token punctuation">;</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code><code class="token keyword">typeof</code>
+							str<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// string</code><br><br>
+							<code class="token keyword">let</code>
+							num
+							<code class="token operator">=</code>
+							<code class="token function">Number</code><code class="token punctuation">(</code>str<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// становится числом 123</code><br><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code><code class="token keyword">typeof</code>
+							num<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// number</code>
+						</code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span><br>
+							<span>5</span><br>
+							<span>6</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Если строка не может быть явно приведена к числу, то результатом преобразования будет <code>NaN</code>. Например:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers  language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">let</code>
+							age
+							<code class="token operator">=</code>
+							<code class="token function">Number</code><code class="token punctuation">(</code><code class="token string">"Любая строка вместо числа"</code><code class="token punctuation">)</code><code class="token punctuation">;</code><br><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code>age<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// NaN, преобразование  не удалось</code>
+						</code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Правила численного преобразования:</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Значение</th>
+						<th>Преобразуется в…</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><code>undefined</code></td>
+						<td><code>NaN</code></td>
+					</tr>
+					<tr>
+						<td><code>null</code></td>
+						<td><code>0</code></td>
+					</tr>
+					<tr>
+						<td><code>true&nbsp;/&nbsp;false</code></td>
+						<td><code>1</code> / <code>0</code></td>
+					</tr>
+					<tr>
+						<td><code>string</code></td>
+						<td>Пробельные символы по краям обрезаются. Далее, если остаётся пустая строка, то <code>0</code>, иначе из непустой строки «считывается» число. При ошибке результат <code>NaN</code>.</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Примеры:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers  language-javascript">
+						<code class="language-javascript">
+							<code class="token function">alert</code><code class="token punctuation">(</code>
+							<code class="token function">Number</code><code class="token punctuation">(</code><code class="token string">"   123   "</code><code class="token punctuation">)</code>
+							<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// 123</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code>
+							<code class="token function">Number</code><code class="token punctuation">(</code><code class="token string">"123z"</code><code class="token punctuation">)</code>
+							<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// NaN (ошибка чтения числа в "z")</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code>
+							<code class="token function">Number</code><code class="token punctuation">(</code><code class="token boolean">true</code><code class="token punctuation">)</code>
+							<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// 1</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code>
+							<code class="token function">Number</code><code class="token punctuation">(</code><code class="token boolean">false</code><code class="token punctuation">)</code>
+							<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// 0</code>
+						</code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="important important_smart">
+				<div class="important__header"><span class="important__type">Сложение „+“ объединяет строки</span></div>
+				<div class="important__content"><p>Почти все математические операторы выполняют численное преобразование. Исключение составляет <code>+</code>. Если одно из слагаемых является строкой, тогда и все остальные приводятся к строкам.</p>
+					<p>Тогда они конкатенируются (присоединяются) друг к другу:</p>
+					<div class="code-example">
+						<div class="codebox">
+							<div class="line-numbers  language-javascript">
+								<code class="language-javascript">
+									<code class="token function">alert</code><code class="token punctuation">(</code>
+									<code class="token number">1</code>
+									<code class="token operator">+</code>
+									<code class="token string">'2'</code>
+									<code class="token punctuation">)</code><code class="token punctuation">;</code>
+									<code class="token comment">// '12' (строка справа)</code><br>
+									<code class="token function">alert</code><code class="token punctuation">(</code>
+									<code class="token string">'1'</code>
+									<code class="token operator">+</code>
+									<code class="token number">2</code>
+									<code class="token punctuation">)</code><code class="token punctuation">;</code>
+									<code class="token comment">// '12' (строка слева)</code>
+								</code>
+								<span class="line-numbers-rows">
+									<span>1</span><br>
+									<span>2</span>
+								</span>
+							</div>
+						</div>
+					</div>
+					<p>Так происходит, только если хотя бы один из аргументов является строкой. Во всех остальных случаях значения складываются как числа.</p>
+				</div>
+			</div>
+			<h2>Логическое преобразование</h2>
+			<p>Происходит в логических операторах, но также может быть выполнено явно с помощью функции <code>Boolean(value)</code>.</p>
+			<p>Правило преобразования:</p>
+			<ul>
+				<li>Значения, которые интуитивно «пустые», вроде <code>0</code>, пустой строки, <code>null</code>, <code>undefined</code> и <code>NaN</code>, становятся <code>false</code>.</li>
+				<li>Все остальные значения становятся <code>true</code>.</li>
+			</ul>
+			<table>
+				<thead>
+					<tr>
+						<th>Значение</th>
+						<th>Становится…</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><code>0</code>, <code>null</code>, <code>undefined</code>, <code>NaN</code>, <code>""</code></td>
+						<td><code>false</code></td>
+					</tr>
+					<tr>
+						<td>любое другое значение</td>
+						<td><code>true</code></td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Например:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers  language-javascript">
+						<code class="language-javascript">
+							<code class="token function">alert</code><code class="token punctuation">(</code>
+							<code class="token function">Boolean</code><code class="token punctuation">(</code><code class="token number">1</code><code class="token punctuation">)</code>
+							<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// true</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code>
+							<code class="token function">Boolean</code><code class="token punctuation">(</code><code class="token number">0</code><code class="token punctuation">)</code>
+							<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// false</code><br><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code>
+							<code class="token function">Boolean</code><code class="token punctuation">(</code><code class="token string">"Привет!"</code><code class="token punctuation">)</code>
+							<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// true</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code>
+							<code class="token function">Boolean</code><code class="token punctuation">(</code><code class="token string">""</code><code class="token punctuation">)</code>
+							<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// false</code>
+						</code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span><br>
+							<span>5</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="important important_warn">
+				<div class="important__header"><span class="important__type">Заметим, что строчка с нулём <code>"0"</code> это <code>true</code></span></div>
+				<div class="important__content">
+					<p>Некоторые языки (к примеру, PHP) воспринимают строку <code>"0"</code> как <code>false</code>. Но в JavaScript, если строка не пустая, то она всегда <code>true</code>.</p>
+					<div class="code-example">
+						<div class="codebox">
+							<div class="line-numbers  language-javascript">
+								<code class="language-javascript">
+									<code class="token function">alert</code><code class="token punctuation">(</code>
+									<code class="token function">Boolean</code><code class="token punctuation">(</code><code class="token string">"0"</code><code class="token punctuation">)</code>
+									<code class="token punctuation">)</code><code class="token punctuation">;</code>
+									<code class="token comment">// true</code><br>
+									<code class="token function">alert</code><code class="token punctuation">(</code>
+									<code class="token function">Boolean</code><code class="token punctuation">(</code><code class="token string">" "</code><code class="token punctuation">)</code>
+									<code class="token punctuation">)</code><code class="token punctuation">;</code>
+									<code class="token comment">// пробел это тоже true (любая непустая строка это true)</code>
+								</code>
+								<span class="line-numbers-rows">
+									<span>1</span><br>
+									<span>2</span>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

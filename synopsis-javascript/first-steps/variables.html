@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+
+	<title>Переменные</title>
+	
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/fonts.css">
+</head>
+
+<body>
+	<div class="page-wrapper">
+		<div class="page">
+			<h1 class="page__title">Переменные</h1>
+			<p><a href="https://ru.wikipedia.org/wiki/%D0%9F%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)">Переменная</a> – это «именованное хранилище» для данных.</p>
+			<p>Для создания переменной в JavaScript, используется ключевое слово <code>let</code>.</p>
+			<p>Приведённая ниже инструкция создаёт (другими словами: <em>объявляет</em> или <em>определяет</em>) переменную и помещает в переменную данные, используя оператор присваивания <code>=</code>:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers  language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">let</code>
+							message
+							<code class="token operator">=</code>
+							<code class="token string">'Hello!'</code><code class="token punctuation">;</code>
+							<code class="token comment">// объявляем переменную и присваиваем ей значение</code><br><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code>message<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// Hello!</code>
+						</code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Можно объявить несколько переменных в одной строке:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers  language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">let</code>
+							user
+							<code class="token operator">=</code>
+							<code class="token string">'John!'</code><code class="token punctuation">,</code>
+							age
+							<code class="token operator">=</code>
+							<code class="token number">25</code><code class="token punctuation">,</code>
+							message
+							<code class="token operator">=</code>
+							<code class="token string">'Hello!'</code><code class="token punctuation">;</code>
+						</code>
+						<span class="line-numbers-rows">
+							<span>1</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Но для лучшей читаемости кода лучше объявлять каждую переменную на новой строке:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers  language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">let</code>
+							user
+							<code class="token operator">=</code>
+							<code class="token string">'John!'</code><code class="token punctuation">,</code><br>
+							<span class="rows-indentation">age</span>
+							<code class="token operator">=</code>
+							<code class="token number">25</code><code class="token punctuation">,</code><br>
+							<span class="rows-indentation">message</span>
+							<code class="token operator">=</code>
+							<code class="token string">'Hello!'</code><code class="token punctuation">;</code>
+						</code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="important important_smart">
+				<div class="important__header">
+					<span class="important__type"><code>var</code> вместо <code>let</code></span>
+				</div>
+				<div class="important__content">
+					<p><em>Устаревшее</em> ключевое слово <code>var</code> - <em>почти</em> то же самое, что и <code>let</code>:</p>
+					<div class="code-example">
+						<div class="codebox">
+							<div class="line-numbers  language-javascript">
+								<code class="language-javascript">
+									<code class="token keyword">var</code>
+									message
+									<code class="token operator">=</code>
+									<code class="token string">'Hello!'</code><code class="token punctuation">;</code>
+								</code>
+								<span class="line-numbers-rows">
+									<span>1</span>
+								</span>
+							</div>
+						</div>
+					</div>
+					<p>Оно тоже объявляет переменную, но немного по-другому, «устаревшим» способом.</p>
+					<p>На первый взгляд, поведение <code>var</code> похоже на <code>let</code>. Например, объявление переменной:</p>
+					<div class="code-example">
+						<div class="codebox">
+							<div class="line-numbers  language-javascript">
+								<code class="language-javascript">
+									<code class="token keyword">function</code>
+									<code class="token function">sayHi</code><code class="token punctuation">(</code><code class="token punctuation">)</code>
+									<code class="token punctuation">{</code><br>
+									<code class="token keyword rows-indentation">var</code>
+									phrase
+									<code class="token operator">=</code>
+									<code class="token string">"Привет!"</code><code class="token punctuation">;</code>
+									<code class="token comment">// локальная переменная, "var" вместо "let"</code><br><br>
+									<code class="token function rows-indentation">alert</code><code class="token punctuation">(</code>phrase<code class="token punctuation">)</code><code class="token punctuation">;</code>
+									<code class="token comment">// Привет</code><br>
+									<code class="token punctuation">}</code><br><br>
+									<code class="token function">sayHi</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code><br><br>
+									<code class="token function">alert</code><code class="token punctuation">(</code>phrase<code class="token punctuation">)</code><code class="token punctuation">;</code>
+									<code class="token comment">// Ошибка: phrase не определена</code><br>
+								</code>
+								<span class="line-numbers-rows">
+									<span>1</span><br>
+									<span>2</span><br>
+									<span>3</span><br>
+									<span>4</span><br>
+									<span>5</span><br>
+									<span>6</span><br>
+									<span>7</span><br>
+									<span>8</span><br>
+									<span>9</span>
+								</span>
+							</div>
+						</div>
+					</div>
+					<p>…Однако, отличия всё же есть.</p>
+					<h3>Для «var» не существует блочной области видимости</h3>
+					<p>Область видимости переменных <code>var</code> ограничивается либо функцией, либо, если переменная глобальная, то скриптом. Такие переменные доступны за пределами блока.</p>
+					<p>Например:</p>
+					<div class="code-example">
+						<div class="codebox">
+							<div class="line-numbers  language-javascript">
+								<code class="language-javascript">
+									<code class="token keyword">if</code>
+									<code class="token punctuation">(</code><code class="token boolean">true</code><code class="token punctuation">)</code>
+									<code class="token punctuation">{</code><br>
+									<code class="token keyword rows-indentation">var</code>
+									test
+									<code class="token operator">=</code>
+									<code class="token boolean">true</code><code class="token punctuation">;</code>
+									<code class="token comment">// используем var вместо let</code><br>
+									<code class="token punctuation">}</code><br><br>
+									<code class="token function">alert</code><code class="token punctuation">(</code>test<code class="token punctuation">)</code><code class="token punctuation">;</code>
+									<code class="token comment">// true, переменная существует вне блока if</code>
+								</code>
+								<span class="line-numbers-rows">
+									<span>1</span><br>
+									<span>2</span><br>
+									<span>3</span><br>
+									<span>4</span><br>
+									<span>5</span>
+								</span>
+							</div>
+						</div>
+					</div>
+					<p>Так как <code>var</code> игнорирует блоки, переменная <code>test</code> - глобальная.</p>
+					<p>В случае использования <code>let test</code> вместо <code>var test</code>, переменная была бы видна только внутри <code>if</code>:</p>
+					<div class="code-example">
+						<div class="codebox">
+							<div class="line-numbers  language-javascript">
+								<code class="language-javascript">
+									<code class="token keyword">if</code>
+									<code class="token punctuation">(</code><code class="token boolean">true</code><code class="token punctuation">)</code>
+									<code class="token punctuation">{</code><br>
+									<code class="token keyword rows-indentation">let</code>
+									test
+									<code class="token operator">=</code>
+									<code class="token boolean">true</code><code class="token punctuation">;</code>
+									<code class="token comment">// используем let</code><br>
+									<code class="token punctuation">}</code><br><br>
+									<code class="token function">alert</code><code class="token punctuation">(</code>test<code class="token punctuation">)</code><code class="token punctuation">;</code>
+									<code class="token comment">// Error: test is not defined</code>
+								</code>
+								<span class="line-numbers-rows">
+									<span>1</span><br>
+									<span>2</span><br>
+									<span>3</span><br>
+									<span>4</span><br>
+									<span>5</span>
+								</span>
+							</div>
+						</div>
+					</div>
+					<p>Аналогично для циклов: <code>var</code> не может быть блочной или локальной внутри цикла.</p>
+					<p>Если блок кода находится внутри функции, то <code>var</code> становится локальной переменной в этой функции:</p>
+					<div class="code-example">
+						<div class="codebox">
+							<div class="line-numbers  language-javascript">
+								<code class="language-javascript">
+									<code class="token keyword">function</code>
+									<code class="token function">sayHi</code><code class="token punctuation">(</code><code class="token punctuation">)</code>
+									<code class="token punctuation">{</code><br>
+									<code class="token keyword rows-indentation">if</code>
+									<code class="token punctuation">(</code><code class="token boolean">true</code><code class="token punctuation">)</code>
+									<code class="token punctuation">{</code><br>
+									<code class="token keyword rows-double-indentation">var</code>
+									phrase
+									<code class="token operator">=</code>
+									<code class="token string">"Привет!"</code><code class="token punctuation">;</code><br>
+									<code class="token punctuation rows-indentation">}</code><br><br>
+									<code class="token function rows-indentation">alert</code><code class="token punctuation">(</code>phrase<code class="token punctuation">)</code><code class="token punctuation">;</code>
+									<code class="token comment">// срабатывает и выводит "Привет"</code><br>
+									<code class="token punctuation">}</code><br><br>
+									<code class="token function">sayHi</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+									<code class="token function">alert</code><code class="token punctuation">(</code>phrase<code class="token punctuation">)</code><code class="token punctuation">;</code>
+									<code class="token comment">// Ошибка: phrase не определена (видна в консоли разработчика)</code><br>
+								</code>
+								<span class="line-numbers-rows">
+									<span>1</span><br>
+									<span>2</span><br>
+									<span>3</span><br>
+									<span>4</span><br>
+									<span>5</span><br>
+									<span>6</span><br>
+									<span>7</span><br>
+									<span>8</span><br>
+									<span>9</span><br>
+									<span>10</span>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h2>Имена переменных</h2>
+			<p>В JavaScript есть два ограничения, касающиеся имён переменных:</p>
+			<ol>
+				<li>Имя переменной должно содержать только буквы, цифры или символы <code>$</code> и <code>_</code>.</li>
+				<li>Первый символ не должен быть цифрой.</li>
+			</ol>
+			<p>Примеры допустимых имен:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers  language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">let</code>
+							userName<code class="token punctuation">;</code><br>
+							<code class="token keyword">let</code>
+							test123<code class="token punctuation">;</code>
+						</code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Если имя содержит несколько слов, обычно используется <a href="https://ru.wikipedia.org/wiki/CamelCase">верблюжья нотация</a>, то есть, слова следуют одно за другим, где каждое следующее слово начинается с заглавной буквы: <code>myVeryLongName</code>.</p>
+			<div class="important important_smart">
+				<div class="important__header">
+					<span class="important__type">Регистр имеет значение</span>
+				</div>
+				<div class="important__content">
+					<p>Переменные с именами <code>apple</code> and <code>AppLE</code> – это две разные переменные.</p>
+				</div>
+			</div>
+			<div class="important important_warn">
+				<div class="important__header">
+					<span class="important__type">Зарезервированные имена</span>
+				</div>
+				<div class="important__content">
+					<p>Существует <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Lexical_grammar#%D0%9A%D0%BB%D1%8E%D1%87%D0%B5%D0%B2%D1%8B%D0%B5_%D1%81%D0%BB%D0%BE%D0%B2%D0%B0">список зарезервированных слов</a>, которые нельзя использовать в качестве имён переменных, потому что они используются самим языком.</p>
+					<p>Например: <code>let</code>, <code>class</code>, <code>return</code> и <code>function</code> зарезервированы.</p>
+					<p>Приведённый ниже код даёт синтаксическую ошибку:</p>
+					<div class="code-example">
+						<div class="codebox">
+							<div class="line-numbers  language-javascript">
+								<code class="language-javascript">
+									<code class="token keyword">let</code>
+									<code class="token keyword">let</code>
+									<code class="token operator">=</code>
+									<code class="token number">5</code><code class="token punctuation">;</code>
+									<code class="token comment">// нельзя назвать переменную "let", ошибка!</code><br>
+									<code class="token keyword">let</code>
+									<code class="token keyword">let</code>
+									<code class="token operator">=</code>
+									<code class="token number">5</code><code class="token punctuation">;</code>
+									<code class="token comment">// также нельзя назвать переменную "return", ошибка!</code>
+								</code>
+								<span class="line-numbers-rows">
+									<span>1</span><br>
+									<span>2</span><br>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h2>Константы</h2>
+			<p>Чтобы объявить константную, то есть, неизменяемую переменную, используется <code>const</code> вместо <code>let</code>:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers  language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">const</code>
+							myBirthday
+							<code class="token operator">=</code>
+							<code class="token string">'08.06.1984'</code><code class="token punctuation">;</code>
+						</code>
+						<span class="line-numbers-rows">
+							<span>1</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Переменные, объявленные с помощью <code>const</code>, называются «константами». Их нельзя изменить. Попытка сделать это приведёт к ошибке.</p>
+			<h3>Константы в верхнем регистре</h3>
+			<p>Широко распространена практика использования констант в качестве псевдонимов для трудно запоминаемых значений, которые известны до начала исполнения скрипта.</p>
+			<p>Названия таких констант пишутся с использованием заглавных букв и подчёркивания.</p>
+			<p>Например, константы для различных цветов в «шестнадцатеричном формате»:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers  language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">const</code>
+							COLOR_RED
+							<code class="token operator">=</code>
+							<code class="token string">"#F00"</code><code class="token punctuation">;</code><br>
+							<code class="token keyword">const</code>
+							COLOR_GREEN
+							<code class="token operator">=</code>
+							<code class="token string">"#0F0"</code><code class="token punctuation">;</code><br>
+							<code class="token keyword">const</code>
+							COLOR_BLUE
+							<code class="token operator">=</code>
+							<code class="token string">"#00F"</code><code class="token punctuation">;</code><br>
+							<code class="token keyword">const</code>
+							COLOR_ORANGE
+							<code class="token operator">=</code>
+							<code class="token string">"#FF7F00"</code><code class="token punctuation">;</code><br><br>
+							<code class="token comment">// ...когда нам нужно выбрать цвет</code><br>
+							<code class="token keyword">let</code>
+							color
+							<code class="token operator">=</code>
+							COLOR_ORANGE<code class="token punctuation">;</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code>color<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// #FF7F00</code>
+						</code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span><br>
+							<span>5</span><br>
+							<span>6</span><br>
+							<span>7</span><br>
+							<span>8</span>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
