@@ -17,36 +17,65 @@
 			<h2>document.getElementById или просто id</h2>
 			<p>Если у элемента есть атрибут <code>id</code>, то можно получить его вызовом <code>document.getElementbyId(id)</code>, где бы он ни находился:</p>
 			<div class="code-example">
-						<div class="codebox">
-							<div class="line-numbers language-javascript">
-								<code class="language-javascript">
-									<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>div</code> <code class="token attr-name">id</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>elem<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code><br>
-									<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;</code>div</code> <code class="token attr-name">id</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>elem-content<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code>Element<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br>
-									<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br><br>
-									<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><br>
-									<code class="token comment rows-double-indentation">// получить элемент</code><br>
-									<code class="token keyword rows-double-indentation">let</code>
-									elem
-									<code class="token operator">=</code>
-									document<code class="token punctuation">.</code><code class="token function">getElementById</code><code class="token punctuation">(</code><code class="token string">'elem'</code><code class="token punctuation">)</code><code class="token punctuation">;</code><br>
-									
-								</code>
-								<span class="line-numbers-rows">
-									<span>1</span><br>
-									<span>2</span><br>
-									<span>3</span><br>
-									<span>4</span><br>
-									<span>5</span><br>
-									<span>6</span><br>
-									<span>7</span><br>
-									<span>8</span><br>
-									<span>9</span><br>
-									<span>10</span><br>
-									<span>11</span>
-								</span>
-							</div>
-						</div>
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>div</code> <code class="token attr-name">id</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>elem<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;</code>div</code> <code class="token attr-name">id</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>elem-content<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code>Element<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token comment rows-double-indentation">// получить элемент</code><br>
+							<code class="token keyword rows-double-indentation">let</code>
+							elem
+							<code class="token operator">=</code>
+							document<code class="token punctuation">.</code><code class="token function">getElementById</code><code class="token punctuation">(</code><code class="token string">'elem'</code><code class="token punctuation">)</code><code class="token punctuation">;</code><br><br>
+							<code class="token comment rows-double-indentation">// сделать его фон красным</code><br>
+							<code class="rows-double-indentation">elem</code><code class="token punctuation ">.</code>style<code class="token punctuation">.</code>background
+							<code class="token operator">=</code>
+							<code class="token string">'red'</code><code class="token punctuation">;</code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>script</code><code class="token punctuation">&gt;</code></code>
+						</code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span><br>
+							<span>5</span><br>
+							<span>6</span><br>
+							<span>7</span><br>
+							<span>8</span><br>
+							<span>9</span><br>
+							<span>10</span><br>
+							<span>11</span>
+						</span>
 					</div>
+				</div>
+			</div>
+			<p>Также есть глобальная переменная с именем, указанным в <code>id</code>:</p>
+			<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>div</code> <code class="token attr-name">id</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>elem<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;</code>div</code> <code class="token attr-name">id</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>elem-content<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code>Элемент<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><br>
+						</code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span><br>
+							<span>5</span><br>
+							<span>6</span><br>
+							<span>7</span><br>
+							<span>8</span><br>
+							<span>9</span><br>
+							<span>10</span><br>
+							<span>11</span>
+						</span>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
