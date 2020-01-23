@@ -52,13 +52,21 @@
 				</div>
 			</div>
 			<p>Также есть глобальная переменная с именем, указанным в <code>id</code>:</p>
-			<div class="codebox">
+			<div class="code-example">
+				<div class="codebox">
 					<div class="line-numbers language-javascript">
 						<code class="language-javascript">
 							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>div</code> <code class="token attr-name">id</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>elem<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code><br>
 							<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;</code>div</code> <code class="token attr-name">id</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>elem-content<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code>Элемент<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br>
 							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br><br>
 							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token comment rows-double-indentation">// elem - ссылка на элемент с id="elem"</code><br>
+							<code class="rows-double-indentation">elem</code><code class="token punctuation">.</code>style<code class="token punctuation">.</code>background
+							<code class="token operator">=</code>
+							<code class="token string">'red'</code><code class="token punctuation">;</code><br><br>
+							<code class="token comment rows-double-indentation">// внутри id="elem-content" есть дефис, так что такой id не может служить именем переменной</code><br>
+							<code class="token comment rows-double-indentation">// ...но мы можем обратиться к нему через квадратные скобки: window['elem-content']</code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>script</code><code class="token punctuation">&gt;</code></code>
 						</code>
 						<span class="line-numbers-rows">
 							<span>1</span><br>
@@ -76,6 +84,143 @@
 					</div>
 				</div>
 			</div>
+			<p>…Но это только если мы не объявили в JavaScript переменную с таким же именем, иначе она будет иметь приоритет:</p>
+			<div class="important important_warn">
+				<div class="important__header"><span class="important__type">Не нужно использовать такие глобальные переменные для доступа к элементам</span></div>
+				<div class="important__content"><p>Это поведение соответствует <a href="http://www.whatwg.org/specs/web-apps/current-work/#dom-window-nameditem">стандарту</a>, но поддерживается в основном для совместимости, как осколок далёкого прошлого.</p>
+					<p>Браузер пытается помочь, смешивая пространства имён JS и DOM. Это удобно для простых скриптов, которые находятся прямо в HTML, но, вообще говоря, не очень хорошо. Возможны конфликты имён. Кроме того, при чтении JS-кода, не видя HTML, непонятно, откуда берётся переменная.</p>
+				</div>
+			</div>
+			<div class="important important_smart">
+				<div class="important__header"><span class="important__type">Значение <code>id</code> должно быть уникальным</span></div>
+				<div class="important__content"><p>Значение <code>id</code> должно быть уникальным. В документе может быть только один элемент с данным <code>id</code>.</p>
+					<p>Если в документе есть несколько элементов с одинаковым значением <code>id</code>, то поведение методов поиска непредсказуемо. Браузер может вернуть любой из них случайным образом.</p>
+				</div>
+			</div>
+			<div class="important important_warn">
+				<div class="important__header"><span class="important__type">Только <code>document.getElementById</code>, а не <code>anyElem.getElementById</code></span></div>
+				<div class="important__content"><p>Метод <code>getElementById</code> можно вызвать только для объекта <code>document</code>. Он осуществляет поиск по <code>id</code> по всему документу.</p>
+				</div>
+			</div>
+			<h2>querySelectorAll</h2>
+			<p>Самый универсальный метод поиска – это <code>elem.querySelectorAll(css)</code>, он возвращает все элементы внутри <code>elem</code>, удовлетворяющие данному CSS-селектору.</p>
+			<p>Следующий запрос получает все элементы <code>&lt;li&gt;</code>, которые являются последними потомками в <code>&lt;ul&gt;</code>:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>ul</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;</code>li</code><code class="token punctuation">&gt;</code></code>Этот<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>li</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;</code>li</code><code class="token punctuation">&gt;</code></code>тест<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>li</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>ul</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>ul</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;</code>li</code><code class="token punctuation">&gt;</code></code>полностью<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>li</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;</code>li</code><code class="token punctuation">&gt;</code></code>пройден<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>li</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>ul</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token keyword rows-double-indentation">let</code>
+							elements
+							<code class="token operator">=</code>
+							document<code class="token punctuation">.</code><code class="token function">querySelectorAll</code><code class="token punctuation">(</code><code class="token string">'ul &gt; li:last-child'</code><code class="token punctuation">)</code><code class="token punctuation">;</code><br><br>
+							<code class="token keyword rows-double-indentation">for</code>
+							<code class="token punctuation">(</code><code class="token keyword">let</code>
+							elem
+							<code class="token keyword">of</code>
+							elements<code class="token punctuation">)</code>
+							<code class="token punctuation">{</code><br>
+							<code class="rows-double-indentation">
+								<code class="token function rows-indentation">alert</code><code class="token punctuation">(</code>elem<code class="token punctuation">.</code>innerHTML<code class="token punctuation">)</code><code class="token punctuation">;</code>
+								<code class="token comment">// "тест", "пройден"</code>
+							</code><br>
+							<code class="token punctuation rows-double-indentation">}</code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>script</code><code class="token punctuation">&gt;</code></code>
+						</code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span><br>
+							<span>5</span><br>
+							<span>6</span><br>
+							<span>7</span><br>
+							<span>8</span><br>
+							<span>9</span><br>
+							<span>10</span><br>
+							<span>11</span><br>
+							<span>12</span><br>
+							<span>13</span><br>
+							<span>14</span><br>
+							<span>15</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Этот метод действительно мощный, потому что можно использовать любой CSS-селектор.</p>
+			<div class="important important_smart">
+				<div class="important__header"><span class="important__type">Псевдоклассы тоже работают</span></div>
+				<div class="important__content"><p>Псевдоклассы в CSS-селекторе, в частности <code>:hover</code> и <code>:active</code>, также поддерживаются. Например, <code>document.querySelectorAll(':hover')</code> вернёт коллекцию (в порядке вложенности: от внешнего к внутреннему) из текущих элементов под курсором мыши.</p>
+				</div>
+			</div>
+			<h2>querySelector</h2>
+			<p>Метод <code>elem.querySelector(css)</code> возвращает первый элемент, соответствующий данному CSS-селектору.</p>
+			<p>Иначе говоря, результат такой же, как при вызове <code>elem.querySelectorAll(css)[0]</code>, но он сначала найдёт <em>все</em> элементы, а потом возьмёт первый, в то время как <code>elem.querySelector</code> найдёт только первый и остановится. Это быстрее, кроме того, его короче писать.</p>
+			<h2>matches</h2>
+			<p>Предыдущие методы искали по DOM.</p>
+			<p>Метод <a href="http://dom.spec.whatwg.org/#dom-element-matches">elem.matches(css)</a> ничего не ищет, а проверяет, удовлетворяет ли <code>elem</code> CSS-селектору, и возвращает <code>true</code> или <code>false</code>.</p>
+			<p>Этот метод удобен, когда мы перебираем элементы (например, в массиве или в чём-то подобном) и пытаемся выбрать те из них, которые нас интересуют:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>a</code> <code class="token attr-name">href</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>http://example.com/file.zip<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code>...<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>a</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>a</code> <code class="token attr-name">href</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>http://ya.ru<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code>...<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>a</code><code class="token punctuation">&gt;</code></code><br><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token comment rows-double-indentation">// может быть любая коллекция вместо document.body.children</code><br>
+							<code class="token keyword rows-double-indentation">for</code>
+							<code class="token punctuation">(</code><code class="token keyword">let</code>
+							elem
+							<code class="token keyword">of</code>
+							document<code class="token punctuation">.</code>body<code class="token punctuation">.</code>children<code class="token punctuation">)</code>
+							<code class="token punctuation">{</code><br>
+							<code class="token rows-double-indentation">
+								<code class="token keyword rows-indentation">if</code>
+								<code class="token punctuation">(</code>elem<code class="token punctuation">.</code><code class="token function">matches</code><code class="token punctuation">(</code><code class="token string">'a[href$="zip"]'</code><code class="token punctuation">))</code>
+								<code class="token punctuation">{</code>
+							</code><br>
+							<code class="token rows-double-indentation">
+								<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code><code class="token string">"Ссылка на архив: "</code>
+								<code class="token operator">+</code>
+								elem
+								<code class="token punctuation">.</code>href
+								<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							</code><br>
+							<code class="token rows-double-indentation">
+								<code class="token punctuation rows-indentation">}</code>
+							</code><br>
+							<code class="token punctuation rows-double-indentation">}</code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>script</code><code class="token punctuation">&gt;</code></code>
+						</code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span><br>
+							<span>5</span><br>
+							<span>6</span><br>
+							<span>7</span><br>
+							<span>8</span><br>
+							<span>9</span><br>
+							<span>10</span><br>
+							<span>11</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<h2>closest</h2>
+			<p><em>Предки</em> элемента – родитель, родитель родителя, его родитель и так далее. Вместе они образуют цепочку иерархии от элемента до вершины.</p>
+			<p>Метод <code>elem.closest(css)</code> ищет ближайшего предка, который соответствует CSS-селектору. Сам элемент также включается в поиск.</p>
+			<p>Другими словами, метод <code>closest</code> поднимается вверх от элемента и проверяет каждого из родителей. Если он соответствует селектору, поиск прекращается. Метод возвращает либо предка, либо <code>null</code>, если такой элемент не найден:</p>
+			
 		</div>
 	</div>
 </body>

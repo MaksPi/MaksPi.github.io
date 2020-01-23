@@ -189,6 +189,9 @@ p {
 .menu-item.job-descriptions>a::before {
 	content: '\f15c';
 }
+.menu-item.job-descriptions .sub-menu a::before {
+	content: '\f15b';
+}
 .menu-item.load-collection>a::before {
 	content: '\f24e';
 }
@@ -207,11 +210,11 @@ p {
 .menu-item.strength-calculations>a::before {
 	content: '\f0c1';
 }
-.menu-item.work-instructions .sub-menu a::before {
-	content: '\f15b';
-}
 .menu-item.work-instructions>a::before {
 	content: '\f02d';
+}
+.menu-item.work-instructions .sub-menu a::before {
+	content: '\f15b';
 }
 .mobile-top-pannel {
 	position: fixed;
