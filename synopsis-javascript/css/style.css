@@ -103,7 +103,7 @@ ul {
 	top: 34px;
 	font-size: 48px;
 }
-.browser-environment .javascript>div {
+.browser-environment .javascript>div, .browser-environment .dom>div {
 	margin: 0 0 12px;
 }
 .browser-environment .javascript>div>span {
@@ -124,12 +124,18 @@ ul {
 	font-family: PTMono-Regular, "PT Mono";
 	color: rgb(199, 74, 108);
 }
-.browser-environment .javascript>.points {
+.browser-environment .javascript>.points, .browser-environment .dom>.points {
 	position: relative;
+}
+.browser-environment .points {
+	font-family: PTMono-Regular, "PT Mono";
+	font-size: 24px;
+	color: rgb(114, 113, 85);
+	text-align: center;
 }
 .dom .body {
 	font-size: 14px;
-	width: 117px;
+	width: 113px;
 	height: 24px;
 	margin: 0 auto 8px;
 	border: 2px solid rgb(232, 196, 142);
@@ -139,7 +145,7 @@ ul {
 }
 .dom .body span:nth-child(2) {
 	left: 130px;
-	right: -100px;
+	right: -110px;
 }
 .dom .childNodes {
 	font-size: 14px;
@@ -152,7 +158,8 @@ ul {
 	color: rgb(238, 107, 71);
 }
 .dom .div {
-	width: 117px;
+	width: 76px;
+	/*width: 113px;*/
 	height: 24px;
 	margin: 39px auto 0;
 	border: 2px solid rgb(232, 196, 142);
@@ -178,21 +185,22 @@ ul {
 .dom .div span:nth-child(2) {
 	font-size: 14px;
 	left: -120px;
-	right: 120px;
+	right: 100px;
 	top: -5px;
 }
 .dom.elements .div span:nth-child(2) {
-	left: -140px;
+	left: -150px;
+	right: 90px;
 }
 .dom .div span:nth-child(3) {
 	font-size: 14px;
-	left: 110px;
-	right: -110px;
+	left: 100px;
+	right: -100px;
 	top: -5px;
 }
 .dom.elements .div span:nth-child(3) {
-	left: 120px;
-	right: -120px;
+	left: 90px;
+	right: -130px;
 }
 .dom .div span:nth-child(4) {
 	font-size: 14px;
@@ -215,7 +223,7 @@ ul {
 }
 .dom .documentElement {
 	font-size: 14px;
-	width: 198px;
+	width: 194px;
 	height: 24px;
 	margin: 0 auto 39px;
 	border: 2px solid rgb(232, 196, 142);
@@ -241,8 +249,11 @@ ul {
 .dom .parentNode span {
 	color: rgb(238, 107, 71);
 }
+.image {
+	margin: 18px 0;
+}
 .image.browser-environment {
-	margin: 15px 0 15px 30px;
+	margin-left: 30px;
 	width: 338px;
 	max-width: 100%;
 	position: relative;
@@ -262,16 +273,142 @@ ul {
 	transform: rotate(-40deg);
 }
 .image.dom {
-	margin: 18px 0;
 	padding-bottom: 50px;
 	width: 420px;
 	max-width: 100%;
 	text-align: center;
 	position: relative;
 }
+.image.DOM-node-classes .column1, .image.DOM-node-classes .column2, .image.DOM-node-classes .column3 {
+	margin: 0 auto;
+}
+.image.DOM-node-classes .EventTarget, .image.DOM-node-classes .node, .image.DOM-node-classes .text, .image.DOM-node-classes .element, .image.DOM-node-classes .comment, .image.DOM-node-classes .HTMLElement, .image.DOM-node-classes .SVGElement {
+	font-size: 12px;
+	width: 90px;
+	height: 24px;
+	margin: 0 auto 39px;
+	border: 2px solid rgb(232, 196, 142);
+	background-color: rgb(255, 249, 235);
+	text-align: center;
+	position: relative;
+}
+.image.DOM-node-classes .node {
+	margin-bottom: 19px;
+}
+.image.DOM-node-classes .HTMLElement {
+	margin: 39px auto 0;
+}
+.image.DOM-node-classes .SVGElement {
+	margin: 39px auto 0;
+}
+.image.DOM-node-classes .comment {
+	margin: 0 auto;
+}
+.image.DOM-node-classes .element {
+	margin: 20px auto 0;
+}
+.image.DOM-node-classes .text {
+	margin: 0 auto;
+}
+.image.DOM-node-classes .column1>span {
+	font-size: 12px;
+	color: rgb(138, 112, 77);
+}
+.image.DOM-node-classes .column2>span {
+	font-size: 12px;
+	color: rgb(138, 112, 77);
+}
+.image.DOM-node-classes .column3>span {
+	font-size: 12px;
+	color: rgb(245, 166, 35);
+}
+.image.DOM-node-classes .column1>span span {
+	color: rgb(245, 166, 35);
+}
+.image.DOM-node-classes .column2>span span {
+	color: rgb(245, 166, 35);
+}
+.image.DOM-node-classes .HTMLInputElement, .image.DOM-node-classes .HTMLBodyElement, .image.DOM-node-classes .HTMLAnchorElement {
+	font-size: 12px;
+	width: 120px;
+	height: 24px;
+	margin: 0 auto;
+	border: 2px solid rgb(232, 196, 142);
+	background-color: rgb(255, 249, 235);
+	text-align: center;
+	position: relative;
+}
+.image.DOM-node-classes .HTMLBodyElement {
+	margin: 39px auto 0;
+}
+.image.DOM-node-classes .HTMLAnchorElement {
+	margin: 39px auto 0;
+}
+.image.DOM-node-classes .HTMLInputElement {
+	margin: 39px auto 0;
+}
+.image.DOM-node-classes {
+	width: 400px;
+	max-width: 100%;
+	text-align: center;
+	position: relative;
+}
+.image.DOM-node-classes .columns_one {
+	display: flex;
+	justify-content: space-between;
+	margin: 0 20px;
+}
+.image.DOM-node-classes .columns_two {
+	display: flex;
+	justify-content: space-between;
+}
+.image.DOM-node-classes .up {
+	position: absolute;
+	left: 0;
+	right: 0;
+	font-size: 40px;
+	color: rgb(238, 107, 71);
+}
+.image.DOM-node-classes .up.one {
+	top: 33px;
+}
+.image.DOM-node-classes .up.two {
+	top: 100px;
+}
+.image.DOM-node-classes .up.three {
+	top: 191px;
+}
+.image.DOM-node-classes .up.four {
+	top: 259px;
+}
+.image.DOM-node-classes .up.left.one {
+	top: 85px;
+	right: 125px;
+	transform: rotate(45deg);
+}
+.image.DOM-node-classes .up.left.two {
+	top: 260px;
+	right: 125px;
+	transform: rotate(45deg);
+}
+.image.DOM-node-classes .up.right.one {
+	top: 85px;
+	left: 125px;
+	transform: rotate(-45deg);
+}
+.image.DOM-node-classes .up.right.two {
+	top: 176px;
+	left: 125px;
+	transform: rotate(-45deg);
+}
+.image.DOM-node-classes .up.right.three {
+	top: 260px;
+	left: 125px;
+	transform: rotate(-45deg);
+}
 .image.dom .document {
 	font-size: 14px;
-	width: 117px;
+	width: 113px;
 	height: 24px;
 	margin: 0 auto 39px;
 	border: 2px solid rgb(232, 196, 142);
@@ -282,41 +419,42 @@ ul {
 .image.dom .left {
 	position: absolute;
 	left: -120px;
-	right: 120px;
+	right: 100px;
 	font-size: 40px;
 	color: rgb(238, 107, 71);
 }
 .image.dom.elements .left {
-	left: -140px;
+	left: -150px;
+	right: 90px;
 }
 .image.dom .left.rotate {
 	position: absolute;
-	left: -78px;
-	right: 78px;
+	left: -70px;
+	right: 70px;
 	top: 40px;
 	font-size: 40px;
 	color: rgb(238, 107, 71);
-	transform: rotate(-60deg);
+	transform: rotate(-45deg);
 }
 .image.dom .right {
 	position: absolute;
-	left: 110px;
-	right: -110px;
+	left: 100px;
+	right: -100px;
 	font-size: 40px;
 	color: rgb(238, 107, 71);
 }
 .image.dom.elements .right {
-	left: 120px;
-	right: -120px;
+	left: 90px;
+	right: -130px;
 }
 .image.dom .right.rotate {
 	position: absolute;
-	left: 78px;
-	right: -78px;
+	left: 70px;
+	right: -70px;
 	top: 40px;
 	font-size: 40px;
 	color: rgb(238, 107, 71);
-	transform: rotate(60deg);
+	transform: rotate(45deg);
 }
 .image.dom .up {
 	position: absolute;
@@ -485,12 +623,6 @@ ul {
 	margin-left: -20px;
 	font-size: 8px;
 }
-.browser-environment .points {
-	font-family: PTMono-Regular, "PT Mono";
-	font-size: 24px;
-	color: rgb(114, 113, 85);
-	text-align: center;
-}
 .right {
 	position: absolute;
 	left: 210px;
@@ -552,8 +684,14 @@ ul {
 .token.operator {
 	color: #a67f59;
 }
+.token.property {
+	color: #905;
+}
 .token.punctuation {
 	color: #999;
+}
+.token.selector {
+	color: #690;
 }
 .token.attr-name, .token.string {
 	color: #690;

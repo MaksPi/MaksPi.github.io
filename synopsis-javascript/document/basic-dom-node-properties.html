@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Свойства узлов: тип, тег и содержимое</title>
+	
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/fonts.css">
+</head>
+<body>
+	<div class="page-wrapper">
+		<div class="page">
+			<h1 class="page__title">Свойства узлов: тип, тег и содержимое</h1>
+			<p>Более подробный взгляд на DOM узлы:</p>
+			<h2>Классы DOM-узлов</h2>
+			<p>У разных DOM-узлов могут быть разные свойства. Например, у узла, соответствующего тегу <code>&lt;a&gt;</code>, есть свойства, связанные со ссылками, а у соответствующего тегу <code>&lt;input&gt;</code> – свойства, связанные с полем ввода и т.д. Текстовые узлы отличаются от узлов-элементов. Но у них есть общие свойства и методы, потому что все классы DOM-узлов образуют единую иерархию.</p>
+			<p>Каждый DOM-узел принадлежит соответствующему встроенному классу.</p>
+			<p>Корнем иерархии является <a href="https://dom.spec.whatwg.org/#eventtarget">EventTarget</a>, от него наследует <a href="http://dom.spec.whatwg.org/#interface-node">Node</a> и остальные DOM-узлы.</p>
+			<p>На рисунке ниже изображены основные классы:</p>
+			<div class="image DOM-node-classes">
+				<div class="EventTarget">
+					<span>EventTarget</span>
+				</div>
+				<div class="node">
+					<span>Node</span>
+				</div>
+				<div class="columns_one">
+					<div class="column1">
+						<div class="text">
+							<span>Text</span>
+						</div>
+						<span>&lt;div&gt;<span>Text</span>&lt;/div&gt;</span>
+					</div>
+					<div class="column2">
+						<div class="element">
+							<span>Element</span>
+						</div>
+						<span>&lt;<span>div</span>&gt;Text&lt;/<span>div</span>&gt;</span>
+						<div class="HTMLElement">
+							<span>HTMLElement</span>
+						</div>
+					</div>
+					<div class="column3">
+						<div class="comment">
+							<span>Comment</span>
+						</div>
+						<span>&lt;!--comment--&gt;</span>
+						<div class="SVGElement">
+							<span>SVGElement</span>
+						</div>
+					</div>
+				</div>
+				<div class="columns_two">
+					<div class="column1">
+						<div class="HTMLInputElement">
+							<span>HTMLInputElement</span>
+						</div>
+						<span><span>&lt;input type="..."&gt;</span></span>
+					</div>
+					<div class="column2">
+						<div class="HTMLBodyElement">
+							<span>HTMLBodyElement</span>
+						</div>
+						<span><span>&lt;body&gt;</span></span>
+					</div>
+					<div class="column3">
+						<div class="HTMLAnchorElement">
+							<span>HTMLAnchorElement</span>
+						</div>
+						<span>&lt;a href="..."&gt;</span>
+					</div>
+				</div>
+				<span class="up one">↑</span>
+				<span class="up two">↑</span>
+				<span class="up three">↑</span>
+				<span class="up four">↑</span>
+				<span class="up left one">↑</span>
+				<span class="up left two">↑</span>
+				<span class="up right one">↑</span>
+				<span class="up right two">↑</span>
+				<span class="up right three">↑</span>
+			</div>
+			<p>Существуют следующие классы:</p>
+			<ul>
+				<li><a href="https://dom.spec.whatwg.org/#eventtarget">EventTarget</a> – это корневой «абстрактный» класс. Объекты этого класса никогда не создаются. Он служит основой, благодаря которой все DOM-узлы поддерживают так называемые «события».</li>
+				<li><a href="http://dom.spec.whatwg.org/#interface-node">Node</a> – также является «абстрактным» классом, и служит основой для DOM-узлов. Он обеспечивает базовую функциональность: <code>parentNode</code>, <code>nextSibling</code>, <code>childNodes</code> и т.д. (это геттеры). Объекты класса <code>Node</code> никогда не создаются. Но есть определённые классы узлов, которые наследуют от него: <code>Text</code> – для текстовых узлов, <code>Element</code> – для узлов-элементов и более экзотический <code>Comment</code> – для узлов-комментариев.</li>
+				<li><a href="http://dom.spec.whatwg.org/#interface-element">Element</a> – это базовый класс для DOM-элементов. Он обеспечивает навигацию на уровне элементов: <code>nextElementSibling</code>, <code>children</code> и методы поиска: <code>getElementsByTagName</code>, <code>querySelector</code>. Браузер поддерживает не только HTML, но также XML и SVG. Класс Element служит базой для следующих классов: <code>SVGElement</code>, <code>XMLElement</code> и <code>HTMLElement</code>.</li>
+				<li><a href="https://html.spec.whatwg.org/multipage/dom.html#htmlelement">HTMLElement</a> – является базовым классом для всех остальных HTML-элементов. От него наследуют конкретные элементы:
+					<ul>
+						<li><a href="https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement">HTMLInputElement</a> – класс для тега <code>&lt;input&gt;</code>,</li>
+						<li><a href="https://html.spec.whatwg.org/multipage/semantics.html#htmlbodyelement">HTMLBodyElement</a> – класс для тега <code>&lt;body&gt;</code>,</li>
+						<li><a href="https://html.spec.whatwg.org/multipage/semantics.html#htmlanchorelement">HTMLAnchorElement</a> – класс для тега <code>&lt;a&gt;</code>,</li>
+						<li>…и т.д, каждому тегу соответствует свой класс, который предоставляет определённые свойства и методы.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>Таким образом, полный набор свойств и методов данного узла собирается в результате наследования.</p>
+			<p>DOM-объект для тега <code>&lt;input&gt;</code> принадлежит классу <a href="https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement">HTMLInputElement</a>.</p>
+			<p>Он получает свойства и методы из (в порядке наследования):</p>
+			<ul>
+				<li><code>HTMLInputElement</code> – этот класс предоставляет специфичные для элементов формы свойства,</li>
+				<li><code>HTMLElement</code> – предоставляет общие для HTML-элементов методы (и геттеры/сеттеры),</li>
+				<li><code>Element</code> – предоставляет типовые методы элемента,</li>
+				<li><code>Node</code> – предоставляет общие свойства DOM-узлов,</li>
+				<li><code>EventTarget</code> – обеспечивает поддержку событий,</li>
+				<li>…и, наконец, он наследует от <code>Object</code>, поэтому доступны также методы «обычного объекта», такие как <code>hasOwnProperty</code>.</li>
+			</ul>
+			<p>Для того, чтобы узнать имя класса DOM-узла, понадобится такое свойство объекта, как <code>constructor</code>. Оно ссылается на конструктор класса, и в свойстве <code>constructor.name</code> содержится его имя:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token function">alert</code><code class="token punctuation">(</code>
+							document<code class="token punctuation">.</code>body<code class="token punctuation">.</code>constructor<code class="token punctuation">.</code>name <code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// HTMLBodyElement</code>
+						</code>
+						<span class="line-numbers-rows">
+							<span>1</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>…Или можно просто привести его к <code>строке</code>:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers  language-javascript">
+						<code class="language-javascript">
+							<code class="token function">alert</code><code class="token punctuation">(</code>
+							document<code class="token punctuation">.</code>body <code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// [object HTMLBodyElement]</code>
+						</code>
+						<span class="line-numbers-rows">
+							<span>1</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Проверить наследование можно также при помощи <code>instanceof</code>:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token function">alert</code><code class="token punctuation">(</code>
+							document<code class="token punctuation">.</code>body <code class="token keyword">instanceof</code>
+							<code class="token class-name">HTMLBodyElement</code>
+							<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// true</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code>
+							document<code class="token punctuation">.</code>body <code class="token keyword">instanceof</code>
+							<code class="token class-name">HTMLElement</code>
+							<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// true</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code>
+							document<code class="token punctuation">.</code>body <code class="token keyword">instanceof</code>
+							<code class="token class-name">Element</code>
+							<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// true</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code>
+							document<code class="token punctuation">.</code>body <code class="token keyword">instanceof</code>
+							<code class="token class-name">Node</code>
+							<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// true</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code>
+							document<code class="token punctuation">.</code>body <code class="token keyword">instanceof</code>
+							<code class="token class-name">EventTarget</code>
+							<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// true</code>
+						</code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span><br>
+							<span>5</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Как видно, DOM-узлы – это обычные JavaScript объекты. Для наследования они используют классы, основанные на прототипах.</p>
+			<p>В этом легко убедиться, если вывести в консоли браузера любой элемент через <code>console.dir(elem)</code>. Или даже напрямую обратиться к методам, которые хранятся в <code>HTMLElement.prototype</code>, <code>Element.prototype</code> и т.д.</p>
+			<div class="important important_smart">
+				<div class="important__header"><span class="important__type"><code>console.dir(elem)</code> и <code>console.log(elem)</code></span></div>
+				<div class="important__content"><p>Большинство браузеров поддерживают в инструментах разработчика две команды : <code>console.log</code> и <code>console.dir</code>. Они выводят свои аргументы в консоль. Для JavaScript-объектов эти команды обычно выводят одно и то же.</p>
+					<p>Но для DOM-элементов они работают по-разному:</p>
+					<ul>
+						<li><code>console.log(elem)</code> выводит элемент в виде DOM-дерева.</li>
+						<li><code>console.dir(elem)</code> выводит элемент в виде DOM-объекта, что удобно для анализа его свойств.</li>
+					</ul>
+					<p>Попробуйте сами на <code>document.body</code>.</p>
+				</div>
+			</div>
+			<div class="important important_smart">
+				<div class="important__header"><span class="important__type">Спецификация IDL</span></div>
+				<div class="important__content"><p>В спецификации для описания классов DOM используется не JavaScript, а специальный язык <a href="https://ru.wikipedia.org/wiki/%D0%AF%D0%B7%D1%8B%D0%BA_%D0%BE%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D1%8F_%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81%D0%BE%D0%B2">Interface description language</a> (IDL), с которым достаточно легко разобраться.</p>
+					<p>В IDL все свойства представлены с указанием их типов. Например, <code>DOMString</code>, <code>boolean</code> и т.д.</p>
+					<p>Небольшой отрывок IDL с комментариями:</p>
+					<div class="code-example">
+						<div class="codebox">
+							<div class="line-numbers language-javascript">
+								<code class="language-javascript">
+									<code class="token comment">// Объявление HTMLInputElement</code><br>
+									<code class="token comment">// Двоеточие ":" после HTMLInputElement означает, что он наследует от HTMLElement</code><br>
+									<code class="token keyword">interface</code>
+									<code class="token class-name">HTMLInputElement</code><code class="token punctuation">:</code>
+									HTMLElement <code class="token punctuation">{</code><br>
+									<code class="token comment rows-double-indentation">// далее идут свойства и методы элемента &lt;input&gt;</code><br><br>
+									<code class="token comment rows-double-indentation">// "DOMString" означает, что значение свойства - строка</code><br>
+									<code class="token rows-double-indentation">attribute DOMString accept</code><code class="token punctuation">;</code><br>
+									<code class="token rows-double-indentation">attribute DOMString alt</code><code class="token punctuation">;</code><br>
+									<code class="token rows-double-indentation">attribute DOMString autocomplete</code><code class="token punctuation">;</code><br>
+									<code class="token rows-double-indentation">attribute DOMString value</code><code class="token punctuation">;</code><br><br>
+									<code class="token comment rows-double-indentation">// boolean - значит, что autofocus хранит логический тип данных (true/false)</code><br>
+									<code class="token rows-double-indentation">attribute boolean autofocus</code><code class="token punctuation">;</code><br>
+									<code class="token operator rows-double-indentation">...</code><br>
+									<code class="token comment rows-double-indentation">// "void" перед методом означает, что данный метод не возвращает значение</code><br>
+									<code class="token keyword rows-double-indentation">void</code>
+									<code class="token function rows-double-indentation">select</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+									<code class="token operator rows-double-indentation">...</code><br>
+									<code class="token punctuation">}</code>
+								</code>
+								<span class="line-numbers-rows">
+									<span>1</span><br>
+									<span>2</span><br>
+									<span>3</span><br>
+									<span>4</span><br>
+									<span>5</span><br>
+									<span>6</span><br>
+									<span>7</span><br>
+									<span>8</span><br>
+									<span>9</span><br>
+									<span>10</span><br>
+									<span>11</span><br>
+									<span>12</span><br>
+									<span>13</span><br>
+									<span>14</span><br>
+									<span>15</span><br>
+									<span>16</span><br>
+									<span>17</span><br>
+									<span>18</span>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h2>Свойство «nodeType»</h2>
+			<p>Свойство <code>nodeType</code> предоставляет ещё один, «старомодный» способ узнать «тип» DOM-узла.</p>
+			<p>Его значением является цифра:</p>
+			<ul>
+				<li><code>elem.nodeType == 1</code> для узлов-элементов,</li>
+				<li><code>elem.nodeType == 3</code> для текстовых узлов,</li>
+				<li><code>elem.nodeType == 9</code> для объектов документа,</li>
+				<li><a href="https://dom.spec.whatwg.org/#node">В спецификации</a> можно посмотреть остальные значения.</li>
+			</ul>
+			<p>Например:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>body</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token rows-double-indentation"><code class="token keyword rows-double-indentation">let</code> elem <code class="token operator">=</code>
+								document<code class="token punctuation">.</code>body<code class="token punctuation">;</code></code><br><br>
+							<code class="token rows-double-indentation"><code class="token comment rows-double-indentation">// посмотрим что это?</code></code><br>
+							<code class="token rows-double-indentation"><code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code>elem<code class="token punctuation">.</code>nodeType<code class="token punctuation">)</code><code class="token punctuation">;</code>
+								<code class="token comment">// 1 =&gt; элемент</code></code><br><br>
+							<code class="token rows-double-indentation"><code class="token comment rows-double-indentation">// и первый потомок...</code></code><br>
+							<code class="token rows-double-indentation"><code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code>elem<code class="token punctuation">.</code>firstChild<code class="token punctuation">.</code>nodeType<code class="token punctuation">)</code><code class="token punctuation">;</code>
+								<code class="token comment">// 3 =&gt; текст</code></code><br><br>
+							<code class="token rows-double-indentation"><code class="token comment rows-double-indentation">// для объекта document значение типа -- 9</code></code><br>
+							<code class="token rows-double-indentation"><code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code>
+								document<code class="token punctuation">.</code>nodeType <code class="token punctuation">)</code><code class="token punctuation">;</code>
+								<code class="token comment">// 9</code></code><br>
+							<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;/</code>script</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>body</code><code class="token punctuation">&gt;</code></code>
+						</code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span><br>
+							<span>5</span><br>
+							<span>6</span><br>
+							<span>7</span><br>
+							<span>8</span><br>
+							<span>9</span><br>
+							<span>10</span><br>
+							<span>11</span><br>
+							<span>12</span><br>
+							<span>13</span><br>
+							<span>14</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>В современных скриптах, чтобы узнать тип узла, можно использовать метод <code>instanceof</code> и другие способы проверить класс, но иногда <code>nodeType</code> проще использовать. Нельзя изменить значение <code>nodeType</code>, только прочитать его.</p>
+			<h2>Тег: nodeName и tagName</h2>
+			<p>Получив DOM-узел, можно узнать имя его тега из свойств <code>nodeName</code> и <code>tagName</code>:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="token function">alert</code><code class="token punctuation">(</code>
+						document<code class="token punctuation">.</code>body<code class="token punctuation">.</code>nodeName <code class="token punctuation">)</code><code class="token punctuation">;</code>
+						<code class="token comment">// BODY</code><br>
+						<code class="token function">alert</code><code class="token punctuation">(</code>
+						document<code class="token punctuation">.</code>body<code class="token punctuation">.</code>tagName <code class="token punctuation">)</code><code class="token punctuation">;</code>
+						<code class="token comment">// BODY</code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Разница между <code>tagName</code> и <code>nodeName</code> отражена в названиях свойств, но не очевидна:</p>
+			<ul>
+				<li>Свойство <code>tagName</code> есть только у элементов <code>Element</code>.</li>
+				<li>Свойство <code>nodeName</code> определено для любых узлов <code>Node</code>:
+					<ul>
+						<li>для элементов оно равно <code>tagName</code>.</li>
+						<li>для остальных типов узлов (текст, комментарий и т.д.) оно содержит строку с типом узла.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>Другими словами, свойство <code>tagName</code> есть только у узлов-элементов (поскольку они происходят от класса <code>Element</code>), а <code>nodeName</code> может что-то сказать о других типах узлов:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>body</code><code class="token punctuation">&gt;</code></code><code class="token comment">&lt;!-- комментарий --&gt;</code><br><br>
+						<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><br>
+						<code class="token rows-double-indentation"><code class="token comment rows-double-indentation">// для комментария</code></code><br>
+						<code class="token rows-double-indentation"><code class="token function rows-double-indentation">alert</code></code><code class="token punctuation">(</code> document<code class="token punctuation">.</code>body<code class="token punctuation">.</code>firstChild<code class="token punctuation">.</code>tagName <code class="token punctuation">)</code><code class="token punctuation">;</code>
+						<code class="token comment">// undefined (не элемент)</code><br>
+						<code class="token rows-double-indentation"><code class="token function rows-double-indentation">alert</code></code><code class="token punctuation">(</code> document<code class="token punctuation">.</code>body<code class="token punctuation">.</code>firstChild<code class="token punctuation">.</code>nodeName <code class="token punctuation">)</code><code class="token punctuation">;</code>
+						<code class="token comment">// #comment</code><br><br>
+						<code class="token rows-double-indentation"><code class="token comment rows-double-indentation">// for document</code></code><br>
+						<code class="token rows-double-indentation"><code class="token function rows-double-indentation">alert</code></code><code class="token punctuation">(</code> document<code class="token punctuation">.</code>tagName <code class="token punctuation">)</code><code class="token punctuation">;</code>
+						<code class="token comment">// undefined (не элемент)</code><br>
+						<code class="token rows-double-indentation"><code class="token function rows-double-indentation">alert</code></code><code class="token punctuation">(</code> document<code class="token punctuation">.</code>nodeName <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// #document</code><br>
+						<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;/</code>script</code><code class="token punctuation">&gt;</code></code><br>
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>body</code><code class="token punctuation">&gt;</code></code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span><br>
+							<span>5</span><br>
+							<span>6</span><br>
+							<span>7</span><br>
+							<span>8</span><br>
+							<span>9</span><br>
+							<span>10</span><br>
+							<span>11</span><br>
+							<span>12</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>В случае работы только с элементами, можно использовать <code>tagName</code> или <code>nodeName</code>, нет разницы.</p>
+			<div class="important important_smart">
+				<div class="important__header"><span class="important__type">Имена тегов (кроме XHTML) всегда пишутся в верхнем регистре</span></div>
+				<div class="important__content"><p>В браузере существуют два режима обработки документа: HTML и XML. HTML-режим обычно используется для веб-страниц. XML-режим включается, если браузер получает XML-документ с заголовком: <code>Content-Type: application/xml+xhtml</code>.</p>
+					<p>В HTML-режиме значения <code>tagName/nodeName</code> всегда записаны в верхнем регистре. Будет выведено <code>BODY</code> вне зависимости от того, как записан тег в HTML <code>&lt;body&gt;</code> или <code>&lt;BoDy&gt;</code>.</p>
+					<p>В XML-режиме регистр сохраняется «как есть». В настоящее время XML-режим применяется редко.</p>
+				</div>
+			</div>
+			<h2>innerHTML: содержимое элемента</h2>
+			<p>Свойство <a href="https://w3c.github.io/DOM-Parsing/#widl-Element-innerHTML">innerHTML</a> позволяет получить  HTML-содержимое элемента в виде строки.</p>
+			<p>Его также можно и изменять. Это один из самых мощный способов менять содержимое на странице.</p>
+			<p>Пример ниже показывает содержимое <code>document.body</code>, а затем полностью заменяет его:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>body</code><code class="token punctuation">&gt;</code></code><br>
+						<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;</code>p</code><code class="token punctuation">&gt;</code></code>Параграф<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>p</code><code class="token punctuation">&gt;</code></code><br>
+						<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;</code>div</code><code class="token punctuation">&gt;</code></code>DIV<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br><br>
+						<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><br>
+						<code class="token rows-double-indentation"><code class="token function rows-double-indentation">alert</code></code><code class="token punctuation">(</code> document<code class="token punctuation">.</code>body<code class="token punctuation">.</code>innerHTML <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// читаем текущее содержимое</code><br>
+						<code class="token rows-double-indentation"><code class="token rows-double-indentation">document</code></code><code class="token punctuation">.</code>body<code class="token punctuation">.</code>innerHTML <code class="token operator">=</code> <code class="token string">'Новый BODY!'</code><code class="token punctuation">;</code> <code class="token comment">// заменяем содержимое</code><br>
+						<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;/</code>script</code><code class="token punctuation">&gt;</code></code><br><br>
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>body</code><code class="token punctuation">&gt;</code></code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span><br>
+							<span>5</span><br>
+							<span>6</span><br>
+							<span>7</span><br>
+							<span>8</span><br>
+							<span>9</span><br>
+							<span>10</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Если вставить некорректный HTML, браузер исправит наши ошибки:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>body</code><code class="token punctuation">&gt;</code></code><br><br>
+						<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><br>
+						<code class="token rows-double-indentation"><code class="token rows-double-indentation">document</code></code><code class="token punctuation">.</code>body<code class="token punctuation">.</code>innerHTML <code class="token operator">=</code> <code class="token string">'&lt;b&gt;тест'</code><code class="token punctuation">;</code> <code class="token comment">// забыли закрыть тег</code><br>
+						<code class="token rows-double-indentation"><code class="token function rows-double-indentation">alert</code></code><code class="token punctuation">(</code> document<code class="token punctuation">.</code>body<code class="token punctuation">.</code>innerHTML <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// &lt;b&gt;тест&lt;/b&gt; (исправлено)</code><br>
+						<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;/</code>script</code><code class="token punctuation">&gt;</code></code><br><br>
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>body</code><code class="token punctuation">&gt;</code></code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span><br>
+							<span>5</span><br>
+							<span>6</span><br>
+							<span>7</span><br>
+							<span>8</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="important important_smart">
+				<div class="important__header"><span class="important__type">Скрипты не выполнятся</span></div>
+				<div class="important__content"><p>Если <code>innerHTML</code> вставляет в документ тег <code>&lt;script&gt;</code> – он становится частью HTML, но не запускается.</p>
+				</div>
+			</div>
+			<h3>Внимание! «innerHTML+=» осуществляет перезапись</h3>
+			<p>Можно добавить HTML к элементу, используя <code>elem.innerHTML+="ещё html"</code>:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						chatDiv<code class="token punctuation">.</code>innerHTML <code class="token operator">+=</code> <code class="token string">"&lt;div&gt;Привет&lt;img src='smile.gif'/&gt; !&lt;/div&gt;"</code><code class="token punctuation">;</code><br>
+						chatDiv<code class="token punctuation">.</code>innerHTML <code class="token operator">+=</code> <code class="token string">"Как дела?"</code><code class="token punctuation">;</code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>На практике этим следует пользоваться с большой осторожностью, так как фактически происходит <em>не</em> добавление, а перезапись.</p>
+			<p>Технически эти две строки делают одно и то же:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						elem<code class="token punctuation">.</code>innerHTML <code class="token operator">+=</code> <code class="token string">"..."</code><code class="token punctuation">;</code><br>
+						<code class="token comment">// это более короткая запись для:</code><br>
+						elem<code class="token punctuation">.</code>innerHTML <code class="token operator">=</code> elem<code class="token punctuation">.</code>innerHTML <code class="token operator">+</code> <code class="token string">"..."</code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Другими словами, <code>innerHTML+=</code> делает следующее:</p>
+			<ol>
+				<li>Старое содержимое удаляется.</li>
+				<li>На его место становится новое значение <code>innerHTML</code> (с добавленной строкой).</li>
+			</ol>
+			<p><strong>Так как содержимое «обнуляется» и переписывается заново, все изображения и другие ресурсы будут перезагружены</strong>.</p>
+			<p>В примере <code>chatDiv</code> выше строка <code>chatDiv.innerHTML+="Как дела?"</code> заново создаёт содержимое HTML и перезагружает <code>smile.gif</code> (надеемся, картинка закеширована). Если в <code>chatDiv</code> много текста и изображений, то эта перезагрузка будет очень заметна.</p>
+			<p>Есть и другие побочные эффекты. Например, если существующий текст выделен мышкой, то при переписывании <code>innerHTML</code> большинство браузеров снимут выделение. А если это поле ввода <code>&lt;input&gt;</code> с текстом, введённым пользователем, то текст будет удалён. И т.д.</p>
+			<h2>outerHTML: HTML элемента целиком</h2>
+			<p>Свойство <code>outerHTML</code> содержит HTML элемента целиком. Это как <code>innerHTML</code> плюс сам элемент:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>div</code>
+						<code class="token attr-name">id</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>elem<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code>Привет
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>b</code><code class="token punctuation">&gt;</code></code>Мир<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>b</code><code class="token punctuation">&gt;</code></code><code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br><br>
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><code class="token script"><code class="token language-javascript"><br>
+						<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code>elem<code class="token punctuation">.</code>outerHTML<code class="token punctuation">)</code><code class="token punctuation">;</code>
+						<code class="token comment">// &lt;div id="elem"&gt;Привет &lt;b&gt;Мир&lt;/b&gt;&lt;/div&gt;</code><br>
+						</code></code><code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>script</code><code class="token punctuation">&gt;</code></code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span><br>
+							<span>5</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p><strong>Осторожно! В отличие от <code>innerHTML</code>, запись в <code>outerHTML</code> не изменяет элемент. Вместо этого элемент заменяется целиком во внешнем контексте:</strong></p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>div</code><code class="token punctuation">&gt;</code></code>Привет, мир!<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br><br>
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><br>
+						<code class="token keyword rows-double-indentation">let</code> div <code class="token operator">=</code> document<code class="token punctuation">.</code><code class="token function">querySelector</code><code class="token punctuation">(</code><code class="token string">'div'</code><code class="token punctuation">)</code><code class="token punctuation">;</code><br><br>
+						<code class="token comment rows-double-indentation">// заменяем div.outerHTML на &lt;p&gt;...&lt;/p&gt;</code><br>
+						<code class="token rows-double-indentation">div</code><code class="token punctuation">.</code>outerHTML <code class="token operator">=</code> <code class="token string">'&lt;p&gt;Новый элемент&lt;/p&gt;'</code><code class="token punctuation">;</code> <code class="token comment">// (*)</code><br><br>
+						<code class="token comment rows-double-indentation">// Содержимое div осталось тем же!</code><br>
+						<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code>div<code class="token punctuation">.</code>outerHTML<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// &lt;div&gt;Привет, мир!&lt;/div&gt; (**)</code><br>
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>script</code><code class="token punctuation">&gt;</code></code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span><br>
+							<span>5</span><br>
+							<span>6</span><br>
+							<span>7</span><br>
+							<span>8</span><br>
+							<span>9</span><br>
+							<span>10</span><br>
+							<span>11</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Магия...?</p>
+			<p>В строке <code>(*)</code> <code>div</code> был заменён на <code>&lt;p&gt;Новый элемент&lt;/p&gt;</code>. Во внешнем документе видно новое содержимое вместо <code>&lt;div&gt;</code>. Но, как видно в строке (<code>**</code>), старая переменная <code>div</code> осталась прежней!</p>
+			<p>Это потому, что использование <code>outerHTML</code> не изменяет DOM-элемент, а удаляет его из внешнего контекста и вставляет вместо него новый HTML-код.</p>
+			<p>То есть, при <code>div.outerHTML=...</code> произошло следующее:</p>
+			<ul>
+				<li><code>div</code> был удалён из документа.</li>
+				<li>Вместо него был вставлен другой HTML <code>&lt;p&gt;Новый элемент&lt;/p&gt;</code>.</li>
+				<li>В <code>div</code> осталось старое значение. Новый HTML не сохранён ни в какой переменной.</li>
+			</ul>
+			<p>Здесь легко сделать ошибку: заменить <code>div.outerHTML</code>, а потом продолжить работать с <code>div</code>, как будто там новое содержимое. Но это не так. Подобное верно для <code>innerHTML</code>, но не для <code>outerHTML</code>.</p>
+			<p>Можно писать в <code>elem.outerHTML</code>, но надо иметь в виду, что это не меняет элемент, в который пишется код. Вместо этого создаётся новый HTML на его месте. Можно получить ссылки на новые элементы, обратившись к DOM.</p>
+			<h2>nodeValue/data: содержимое текстового узла</h2>
+			<p>Свойство <code>innerHTML</code> есть только у узлов-элементов.</p>
+			<p>У других типов узлов, в частности, у текстовых, есть свои аналоги: свойства <code>nodeValue</code> и <code>data</code>. Эти свойства очень похожи при использовании, есть лишь небольшие различия в спецификации.</p>
+			<p>Чтение содержимое текстового узла и комментария:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>body</code><code class="token punctuation">&gt;</code></code><br>
+						<code class="token rows-double-indentation">Привет</code><br>
+						<code class="token comment rows-double-indentation">&lt;!-- Комментарий --&gt;</code><br>
+						<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><br>
+						<code class="token rows-double-indentation"><code class="token keyword rows-double-indentation">let</code></code> text <code class="token operator">=</code> document<code class="token punctuation">.</code>body<code class="token punctuation">.</code>firstChild<code class="token punctuation">;</code><br>
+						<code class="token rows-double-indentation"><code class="token function rows-double-indentation">alert</code></code><code class="token punctuation">(</code>text<code class="token punctuation">.</code>data<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// Привет</code><br><br>
+						<code class="token rows-double-indentation"><code class="token keyword rows-double-indentation">let</code></code> comment <code class="token operator">=</code> text<code class="token punctuation">.</code>nextSibling<code class="token punctuation">;</code><br>
+						<code class="token rows-double-indentation"><code class="token function rows-double-indentation">alert</code></code><code class="token punctuation">(</code>comment<code class="token punctuation">.</code>data<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// Комментарий</code><br>
+						<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;/</code>script</code><code class="token punctuation">&gt;</code></code><br>
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>body</code><code class="token punctuation">&gt;</code></code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span><br>
+							<span>5</span><br>
+							<span>6</span><br>
+							<span>7</span><br>
+							<span>8</span><br>
+							<span>9</span><br>
+							<span>10</span><br>
+							<span>11</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Можно представить, для чего может понадобиться читать или изменять текстовый узел, но комментарии...</p>
+			<p>Иногда их используют для вставки информации и инструкций шаблонизатора в HTML, как в примере ниже:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="token comment">&lt;!-- if isAdmin --&gt;</code><br>
+						<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;</code>div</code><code class="token punctuation">&gt;</code></code>Добро пожаловать, Admin!<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br>
+						<code class="token comment">&lt;!-- /if --&gt;</code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>…Затем JavaScript может прочитать это из свойства <code>data</code> и обработать инструкции.</p>
+			<h2>textContent: просто текст</h2>
+			<p>Свойство <code>textContent</code> предоставляет доступ к <em>тексту</em> внутри элемента за вычетом всех <code>&lt;тегов&gt;</code>:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>div</code> <code class="token attr-name">id</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>news<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code><br>
+						<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;</code>h1</code><code class="token punctuation">&gt;</code></code>Срочно в номер!<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>h1</code><code class="token punctuation">&gt;</code></code><br>
+						<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;</code>p</code><code class="token punctuation">&gt;</code></code>Марсиане атаковали человечество!<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>p</code><code class="token punctuation">&gt;</code></code><br>
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br><br>
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><br>
+						<code class="token comment rows-double-indentation">// Срочно в номер! Марсиане атаковали человечество!</code><br>
+						<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code>news<code class="token punctuation">.</code>textContent<code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>script</code><code class="token punctuation">&gt;</code></code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span><br>
+							<span>5</span><br>
+							<span>6</span><br>
+							<span>7</span><br>
+							<span>8</span><br>
+							<span>9</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Как видно, возвращается только текст, как если бы все <code>&lt;теги&gt;</code> были вырезаны, но текст в них остался.</p>
+			<p>На практике редко появляется необходимость читать текст таким образом.</p>
+			<p><strong>Намного полезнее возможность записывать текст в <code>textContent</code>, т.к. позволяет писать текст «безопасным способом».</strong></p>
+			<p>Отличия при введении пользователем произвольной строки, которую нужно показать:</p>
+			<ul>
+				<li>С <code>innerHTML</code> вставка происходит «как HTML», со всеми HTML-тегами.</li>
+				<li>С <code>textContent</code> вставка получается «как текст», все символы трактуются буквально.</li>
+			</ul>
+			<p>Два тега div в сравнении:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>div</code> <code class="token attr-name">id</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>elem1<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code><code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br>
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>div</code> <code class="token attr-name">id</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>elem2<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code><code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br><br>
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><br>
+						<code class="token keyword rows-double-indentation">let</code> name <code class="token operator">=</code> <code class="token function">prompt</code><code class="token punctuation">(</code><code class="token string">"Введите ваше имя?"</code><code class="token punctuation">,</code> <code class="token string">"&lt;b&gt;Винни-пух!&lt;/b&gt;"</code><code class="token punctuation">)</code><code class="token punctuation">;</code><br><br>
+						<code class="token rows-double-indentation">elem1</code><code class="token punctuation">.</code>innerHTML <code class="token operator">=</code> name<code class="token punctuation">;</code><br>
+						<code class="token rows-double-indentation">elem2</code><code class="token punctuation">.</code>textContent <code class="token operator">=</code> name<code class="token punctuation">;</code><br>
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>script</code><code class="token punctuation">&gt;</code></code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span><br>
+							<span>5</span><br>
+							<span>6</span><br>
+							<span>7</span><br>
+							<span>8</span><br>
+							<span>9</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<ol>
+				<li>В первый <code>&lt;div&gt;</code> имя приходит «как HTML»: все теги стали именно тегами, поэтому мы видим имя, выделенное жирным шрифтом.</li>
+				<li>Во второй <code>&lt;div&gt;</code> имя приходит «как текст», поэтому мы видим <code>&lt;b&gt;Винни-пух!&lt;/b&gt;</code>.</li>
+			</ol>
+			<p>В большинстве случаев рассчитывается получить от пользователя текст таким образом, чтобы он интерпретировался как текст, а не как произвольный HTML-код на сайте. Присваивание через <code>textContent</code> – один из способов от этого защититься.</p>
+			<h2>Свойство «hidden»</h2>
+			<p>Атрибут и DOM-свойство «hidden» указывает на то, виден ли элемент или нет.</p>
+			<p>Его можно использовать в HTML или назначать при помощи JavaScript, как в примере ниже:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>div</code><code class="token punctuation">&gt;</code></code>Оба тега DIV внизу невидимы<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br><br>
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>div</code> <code class="token attr-name">hidden</code><code class="token punctuation">&gt;</code></code>С атрибутом "hidden"<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br><br>
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>div</code> <code class="token attr-name">id</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>elem<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code>С назначенным JavaScript свойством "hidden"<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br><br>
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><br>
+						<code class="token rows-double-indentation">elem</code><code class="token punctuation">.</code>hidden <code class="token operator">=</code><code class="token boolean">true</code><code class="token punctuation">;</code><br>
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>script</code><code class="token punctuation">&gt;</code></code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span><br>
+							<span>5</span><br>
+							<span>6</span><br>
+							<span>7</span><br>
+							<span>8</span><br>
+							<span>9</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Технически, <code>hidden</code> работает так же, как <code>style="display:none"</code>. Но его применение проще.</p>
+			<p>Мигающий элемент:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>div</code> <code class="token attr-name">id</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>elem<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code>Мигающий элемент<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br><br>
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><br>
+						<code class="token function rows-double-indentation">setInterval</code><code class="token punctuation">(</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token operator">=&gt;</code> elem<code class="token punctuation">.</code>hidden <code class="token operator">=</code> <code class="token operator">!</code>elem<code class="token punctuation">.</code>hidden<code class="token punctuation">,</code> <code class="token number">1000</code><code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>script</code><code class="token punctuation">&gt;</code></code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span><br>
+							<span>5</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<h2>Другие свойства</h2>
+			<p>У DOM-элементов есть дополнительные свойства, в частности, зависящие от класса:</p>
+			<ul>
+				<li><code>value</code> – значение для <code>&lt;input&gt;</code>, <code>&lt;select&gt;</code> и <code>&lt;textarea&gt;</code> (<code>HTMLInputElement</code>, <code>HTMLSelectElement</code>…).</li>
+				<li><code>href</code> – адрес ссылки «href» для <code>&lt;a href="..."&gt;</code> (<code>HTMLAnchorElement</code>).</li>
+				<li><code>id</code> – значение атрибута «id» для всех элементов (<code>HTMLElement</code>).</li>
+				<li>…и многие другие…</li>
+			</ul>
+			<p>Например:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>input</code> <code class="token attr-name">type</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>text<code class="token punctuation">"</code></code> <code class="token attr-name">id</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>elem<code class="token punctuation">"</code></code> <code class="token attr-name">value</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>значение<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code><br><br>
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><br>
+						<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code>elem<code class="token punctuation">.</code>type<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// "text"</code><br>
+						<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code>elem<code class="token punctuation">.</code>id<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// "elem"</code><br>
+						<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code>elem<code class="token punctuation">.</code>value<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// значение</code><br>
+						<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>script</code><code class="token punctuation">&gt;</code></code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span><br>
+							<span>5</span><br>
+							<span>6</span><br>
+							<span>7</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Большинство стандартных HTML-атрибутов имеют соответствующее DOM-свойство, к которому можно получить доступ.</p>
+			<p>Если нужно узнать полный список поддерживаемых свойств для данного класса, можно найти их в спецификации. Например, класс <code>HTMLInputElement</code> описывается здесь: <a href="https://html.spec.whatwg.org/#htmlinputelement">https://html.spec.whatwg.org/#htmlinputelement</a>.</p>
+			<p>Если же нужно быстро что-либо узнать или интересует специфика определённого браузера – всегда можно вывести элемент в консоль, используя <code>console.dir(elem)</code>, и прочитать все свойства. Или исследовать «свойства DOM» во вкладке Elements браузерных инструментов разработчика.</p>
+		</div>
+	</div>
+</body>
+</html>

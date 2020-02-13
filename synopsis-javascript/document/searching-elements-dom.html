@@ -220,7 +220,305 @@
 			<p><em>Предки</em> элемента – родитель, родитель родителя, его родитель и так далее. Вместе они образуют цепочку иерархии от элемента до вершины.</p>
 			<p>Метод <code>elem.closest(css)</code> ищет ближайшего предка, который соответствует CSS-селектору. Сам элемент также включается в поиск.</p>
 			<p>Другими словами, метод <code>closest</code> поднимается вверх от элемента и проверяет каждого из родителей. Если он соответствует селектору, поиск прекращается. Метод возвращает либо предка, либо <code>null</code>, если такой элемент не найден:</p>
-			
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>h1</code><code class="token punctuation">&gt;</code></code>Содержание<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>h1</code><code class="token punctuation">&gt;</code></code><br><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>div</code> <code class="token attr-name">class</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>contents<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;</code>ul</code> <code class="token attr-name">class</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>book<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag rows-double-indentation"><code class="token tag rows-double-indentation"><code class="token punctuation">&lt;</code>li</code> <code class="token attr-name">class</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>chapter<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code>Глава 1<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>li</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag rows-double-indentation"><code class="token tag rows-double-indentation"><code class="token punctuation">&lt;</code>li</code> <code class="token attr-name">class</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>chapter<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code>Глава 2<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>li</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;/</code>ul</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token keyword rows-double-indentation">let</code>
+							chapter
+							<code class="token operator">=</code>
+							document<code class="token punctuation">.</code><code class="token function">querySelector</code><code class="token punctuation">(</code><code class="token string">'.chapter'</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// LI</code><br><br>
+							<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code>chapter<code class="token punctuation">.</code><code class="token function">closest</code><code class="token punctuation">(</code><code class="token string">'.book'</code><code class="token punctuation">)</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// UL</code><br>
+							<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code>chapter<code class="token punctuation">.</code><code class="token function">closest</code><code class="token punctuation">(</code><code class="token string">'.contents'</code><code class="token punctuation">)</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// DIV</code><br><br>
+							<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code>chapter<code class="token punctuation">.</code><code class="token function">closest</code><code class="token punctuation">(</code><code class="token string">'h1'</code><code class="token punctuation">)</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// null (потому что h1 - не предок)</code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>script</code><code class="token punctuation">&gt;</code></code>
+						</code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span><br>
+							<span>5</span><br>
+							<span>6</span><br>
+							<span>7</span><br>
+							<span>8</span><br>
+							<span>9</span><br>
+							<span>10</span><br>
+							<span>11</span><br>
+							<span>12</span><br>
+							<span>13</span><br>
+							<span>14</span><br>
+							<span>15</span><br>
+							<span>16</span><br>
+							<span>17</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<h2>getElementsBy*</h2>
+			<p>Существуют также другие методы поиска элементов по тегу, классу и так далее.</p>
+			<p>На данный момент, они скорее исторические, так как <code>querySelector</code> более чем эффективен.</p>
+			<ul>
+				<li><code>elem.getElementsByTagName(tag)</code> ищет элементы с данным тегом и возвращает их коллекцию. Передав <code>"*"</code> вместо тега, можно получить всех потомков.</li>
+				<li><code>elem.getElementsByClassName(className)</code> возвращает элементы, которые имеют данный CSS-класс.</li>
+				<li><code>document.getElementsByName(name)</code> возвращает элементы с заданным атрибутом <code>name</code>. Очень редко используется.</li>
+			</ul>
+			<p>Например:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token comment">// получить все элементы div в документе</code><br>
+							<code class="token keyword">let</code>
+							divs
+							<code class="token operator">=</code>
+							document<code class="token punctuation">.</code><code class="token function">getElementsByTagName</code><code class="token punctuation">(</code><code class="token string">'div'</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+						</code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="important important_warn">
+				<div class="important__header"><span class="important__type">Не забываем про букву <code>"s"</code>!</span></div>
+				<div class="important__content"><p>Одна из самых частых ошибок начинающих разработчиков (впрочем, иногда и не только)  – это забыть букву <code>"s"</code>. То есть пробовать вызывать метод <code>getElementByTagName</code> вместо <code>getElement<b>s</b>ByTagName</code>.</p>
+					<p>Буква <code>"s"</code> отсутствует в названии метода <code>getElementById</code>, так как в данном случае возвращает один элемент. Но <code>getElementsByTagName</code> вернёт список элементов, поэтому <code>"s"</code> обязательна.</p>
+				</div>
+			</div>
+			<div class="important important_warn">
+				<div class="important__header"><span class="important__type">Возвращает коллекцию, а не элемент!</span></div>
+				<div class="important__content"><p>Другая распространённая ошибка – написать:</p>
+					<div class="code-example">
+						<div class="codebox">
+							<div class="line-numbers language-javascript">
+								<code class="language-javascript">
+									<code class="token comment">// не работает</code><br>
+									document<code class="token punctuation">.</code><code class="token function">getElementsByTagName</code><code class="token punctuation">(</code><code class="token string">'input'</code><code class="token punctuation">)</code><code class="token punctuation">.</code>value
+									<code class="token operator">=</code>
+									<code class="token number">5</code><code class="token punctuation">;</code>
+								</code>
+								<span class="line-numbers-rows">
+									<span>1</span><br>
+									<span>2</span>
+								</span>
+							</div>
+						</div>
+					</div>
+					<p>Попытка присвоить значение <em>коллекции</em>, а не элементам внутри неё, не сработает.</p>
+					<p>Нужно перебрать коллекцию в цикле или получить элемент по номеру и уже ему присваивать значение, например, так:</p>
+					<div class="code-example">
+						<div class="codebox">
+							<div class="line-numbers language-javascript">
+								<code class="language-javascript">
+									<code class="token comment">// работает (если есть input)</code><br>
+									document<code class="token punctuation">.</code><code class="token function">getElementsByTagName</code><code class="token punctuation">(</code><code class="token string">'input'</code><code class="token punctuation">)</code><code class="token punctuation">[</code><code class="token number">0</code><code class="token punctuation">]</code><code class="token punctuation">.</code>value
+									<code class="token operator">=</code>
+									<code class="token number">5</code><code class="token punctuation">;</code>
+								</code>
+								<span class="line-numbers-rows">
+									<span>1</span><br>
+									<span>2</span>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<p>Пример поиска элементов с классом <code>.article</code>:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>form</code> <code class="token attr-name">name</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>my-form<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;</code>div</code> <code class="token attr-name">class</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>article<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code>Article<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;</code>div</code> <code class="token attr-name">class</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>long article<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code>Long article<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>form</code><code class="token punctuation">&gt;</code></code><br><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token comment rows-double-indentation">// ищем по имени атрибута</code><br>
+							<code class="token keyword rows-double-indentation">let</code>
+							form
+							<code class="token operator">=</code>
+							document<code class="token punctuation">.</code><code class="token function">getElementsByName</code><code class="token punctuation">(</code><code class="token string">'my-form'</code><code class="token punctuation">)</code><code class="token punctuation">[</code><code class="token number">0</code><code class="token punctuation">]</code><code class="token punctuation">;</code><br><br>
+							<code class="token comment rows-double-indentation">// ищем по классу внутри form</code><br>
+							<code class="token keyword rows-double-indentation">let</code>
+							articles
+							<code class="token operator">=</code>
+							form<code class="token punctuation">.</code><code class="token function">getElementsByClassName</code><code class="token punctuation">(</code><code class="token string">'article'</code><code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+							<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code>articles<code class="token punctuation">.</code>length<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// 2, находим два элемента с классом article</code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>script</code><code class="token punctuation">&gt;</code></code>
+						</code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span><br>
+							<span>5</span><br>
+							<span>6</span><br>
+							<span>7</span><br>
+							<span>8</span><br>
+							<span>9</span><br>
+							<span>10</span><br>
+							<span>11</span><br>
+							<span>12</span><br>
+							<span>13</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<h2>Живые коллекции</h2>
+			<p>Все методы <code>"getElementsBy*"</code> возвращают <em>живую</em> коллекцию. Такие коллекции всегда отражают текущее состояние документа и автоматически обновляются при его изменении.</p>
+			<p>В приведённом ниже примере есть два скрипта.</p>
+			<ol>
+				<li>Первый создаёт ссылку на коллекцию <code>&lt;div&gt;</code>. На этот момент её длина равна <code>1</code>.</li>
+				<li>Второй скрипт запускается после того, как браузер встречает ещё один <code>&lt;div&gt;</code>, теперь её длина – <code>2</code>.</li>
+			</ol>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>div</code><code class="token punctuation">&gt;</code></code>First div<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token keyword rows-double-indentation">let</code>
+							divs
+							<code class="token operator">=</code>
+							document<code class="token punctuation">.</code><code class="token function">getElementsByTagName</code><code class="token punctuation">(</code><code class="token string">'div'</code><code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+							<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code>divs<code class="token punctuation">.</code>length<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// 1</code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>script</code><code class="token punctuation">&gt;</code></code><br><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>div</code><code class="token punctuation">&gt;</code></code>Second div<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code>divs<code class="token punctuation">.</code>length<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// 2</code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>script</code><code class="token punctuation">&gt;</code></code>
+						</code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span><br>
+							<span>5</span><br>
+							<span>6</span><br>
+							<span>7</span><br>
+							<span>8</span><br>
+							<span>9</span><br>
+							<span>10</span><br>
+							<span>11</span><br>
+							<span>12</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Напротив, <code>querySelectorAll</code> возвращает <em>статическую</em> коллекцию. Это похоже на фиксированный массив элементов:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>div</code><code class="token punctuation">&gt;</code></code>First div<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token keyword rows-double-indentation">let</code>
+							divs
+							<code class="token operator">=</code>
+							document<code class="token punctuation">.</code><code class="token function">querySelectorAll</code><code class="token punctuation">(</code><code class="token string">'div'</code><code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+							<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code>divs<code class="token punctuation">.</code>length<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// 1</code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>script</code><code class="token punctuation">&gt;</code></code><br><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>div</code><code class="token punctuation">&gt;</code></code>Second div<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code>divs<code class="token punctuation">.</code>length<code class="token punctuation">)</code><code class="token punctuation">;</code>
+							<code class="token comment">// 1</code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>script</code><code class="token punctuation">&gt;</code></code>
+						</code>
+						<span class="line-numbers-rows">
+							<span>1</span><br>
+							<span>2</span><br>
+							<span>3</span><br>
+							<span>4</span><br>
+							<span>5</span><br>
+							<span>6</span><br>
+							<span>7</span><br>
+							<span>8</span><br>
+							<span>9</span><br>
+							<span>10</span><br>
+							<span>11</span><br>
+							<span>12</span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<h2>Итого</h2>
+			<p>Есть 6 основных методов поиска элементов в DOM:</p>
+			<table>
+				<thead>
+					<tr>
+						<td>Метод</td>
+						<td>Ищет по...</td>
+						<td>Ищет внутри элемента?</td>
+						<td>Возвращает живую коллекцию?</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><code>querySelector</code></td>
+						<td>CSS-selector</td>
+						<td>✔</td>
+						<td>-</td>
+					</tr>
+					<tr>
+						<td><code>querySelectorAll</code></td>
+						<td>CSS-selector</td>
+						<td>✔</td>
+						<td>-</td>
+					</tr>
+					<tr>
+						<td><code>getElementById</code></td>
+						<td><code>id</code></td>
+						<td>-</td>
+						<td>-</td>
+					</tr>
+					<tr>
+						<td><code>getElementsByName</code></td>
+						<td><code>name</code></td>
+						<td>-</td>
+						<td>✔</td>
+					</tr>
+					<tr>
+						<td><code>getElementsByTagName</code></td>
+						<td>tag or <code>'*'</code></td>
+						<td>✔</td>
+						<td>✔</td>
+					</tr>
+					<tr>
+						<td><code>getElementsByClassName</code></td>
+						<td>class</td>
+						<td>✔</td>
+						<td>✔</td>
+					</tr>
+				</tbody>
+			</table>
+			<p>Кроме того:</p>
+			<ul>
+				<li>Есть метод <code>elem.matches(css)</code>, который проверяет, удовлетворяет ли элемент CSS-селектору.</li>
+				<li>Метод <code>elem.closest(css)</code> ищет ближайшего по иерархии предка, соответствующему данному CSS-селектору. Сам элемент также включён в поиск.</li>
+			</ul>
+			<p>И ещё один метод, который проверяет наличие отношений между предком и потомком:</p>
+			<ul>
+				<li><code>elemA.contains(elemB)</code> вернёт <code>true</code>, если <code>elemB</code> находится внутри <code>elemA</code> (<code>elemB</code> потомок <code>elemA</code>) или когда <code>elemA==elemB</code>.</li>
+			</ul>
 		</div>
 	</div>
 </body>
