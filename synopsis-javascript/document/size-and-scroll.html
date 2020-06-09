@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Размеры и прокрутка элементов</title>
+	
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/fonts.css">
+</head>
+<body>
+	<div class="page-wrapper">
+		<div class="page">
+			<h1 class="page__title">Размеры и прокрутка элементов</h1>
+			<p>Существует множество JavaScript-свойств, которые позволяют считывать информацию об элементе: ширину, высоту и другие геометрические характеристики, нак называемые «метрики».</p>
+			<p>Они часто требуются, когда нужно передвигать или позиционировать элементы с помощью JavaScript.</p>
+			<h2>Простой пример</h2>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>div</code> <code class="token attr-name">id</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>example<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token rows-double-indentation">...Текст...</code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>style</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token selector rows-double-indentation"><code class="token id">#example</code></code> <code class="token punctuation">{</code><br>
+							<code class="token property rows-double-indentation"><code class="token rows-double-indentation">width</code></code><code class="token punctuation">:</code> <code class="token number">300</code><code class="token unit">px</code><code class="token punctuation">;</code><br>
+							<code class="token property rows-double-indentation"><code class="token rows-double-indentation">height</code></code><code class="token punctuation">:</code> <code class="token number">200</code><code class="token unit">px</code><code class="token punctuation">;</code><br>
+							<code class="token property rows-double-indentation"><code class="token rows-double-indentation">border</code></code><code class="token punctuation">:</code> <code class="token number">25</code><code class="token unit">px</code> solid <code class="token hexcode">#E8C48F</code><code class="token punctuation">;</code><br>
+							<code class="token property rows-double-indentation"><code class="token rows-double-indentation">padding</code></code><code class="token punctuation">:</code> <code class="token number">20</code><code class="token unit">px</code><code class="token punctuation">;</code><br>
+							<code class="token property rows-double-indentation"><code class="token rows-double-indentation">overflow</code></code><code class="token punctuation">:</code> auto<code class="token punctuation">;</code><br>
+							<code class="token punctuation rows-double-indentation">}</code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>style</code><code class="token punctuation">&gt;</code></code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(12);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>У элемента есть рамка (border), внутренний отступ (padding) и прокрутка. Полный набор характеристик. Внимание, тут нет внешних отступов (margin), потому что они не являются частью элемента, для них нет особых JavaScript-свойств.</p>
+			<p>Результат выглядит так:</p>
+			<div class="image" style="width: 566px">
+				<iframe style="width: 566px; height: calc(469px + 4px)" src="../html/image_metrics_css.html"></iframe>
+				<div class="image__ratio" style="padding-top: 82.98245614035%"></div>
+			</div>
+			<div class="important important_smart">
+				<div class="important__header"><span class="important__type">Внимание, полоса прокрутки</span></div>
+				<div class="important__content"><p>В иллюстрации выше намеренно продемонстрирован самый сложный и полный случай, когда у элемента есть ещё и полоса прокрутки. Некоторые браузеры (не все) отбирают место для неё, забирая его у области, отведённой для содержимого (помечена как «content width» выше).</p>
+					<p>Таким образом, без учёта полосы прокрутки ширина области содержимого (content width) будет <code>300px</code>, но если предположить, что ширина полосы прокрутки равна <code>16px</code> (её точное значение зависит от устройства и браузера), тогда остаётся только <code>300 - 16 = 284px</code>, и это нужно учитывать. Вот почему примеры в этой главе даны с полосой прокрутки. Без неё некоторые вычисления будут проще.</p>
+				</div>
+			</div>
+			<div class="important important_smart">
+				<div class="important__header"><span class="important__type">Область <code>padding-bottom</code> (нижний внутренний отступ) может быть заполнена текстом</span></div>
+				<div class="important__content"><p>Нижние внутренние отступы <code>padding-bottom</code> изображены пустыми на иллюстрациях, но если элемент содержит много текста, то он будет перекрывать <code>padding-bottom</code>, это нормально.</p>
+				</div>
+			</div>
+			<h2>Метрики</h2>
+			<p>Вот общая картина с геометрическими свойствами:</p>
+			<div class="image" style="width: 670px">
+				<iframe style="width: 670px; height: calc(602px + 4px)" src="../html/image_metrics.html"></iframe>
+				<div class="image__ratio" style="padding-top: 89.8507462686567%"></div>
+			</div>
+			<p>Значениями свойств являются числа, подразумевается, что они в пикселях.</p>
+			<h2>offsetParent, offsetLeft/Top</h2>
+			<p>В свойстве <code>offsetParent</code> находится предок элемента, который используется внутри браузера для вычисления координат при рендеринге.</p>
+			<p>То есть, ближайший предок, который удовлетворяет следующим условиям:</p>
+			<ol>
+				<li>Является CSS-позиционированным (CSS-свойство <code>position</code> равно <code>absolute</code>, <code>relative</code>, <code>fixed</code> или <code>sticky</code>),</li>
+				<li>или <code>&lt;td&gt;</code>, <code>&lt;th&gt;</code>, <code>&lt;table&gt;</code>,</li>
+				<li>или <code>&lt;body&gt;</code>.</li>
+			</ol>
+			<p>Свойства <code>offsetLeft/offsetTop</code> содержат координаты x/y относительно верхнего левого угла <code>offsetParent</code>.</p>
+			<p>В примере ниже внутренний <code>&lt;div&gt;</code> имеет элемент <code>&lt;main&gt;</code> в качестве <code>offsetParent</code>, а свойства <code>offsetLeft/offsetTop</code> являются сдвигами относительно верхнего левого угла (<code>180</code>):</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>main</code><code class="token style-attr language-css"><code class="token attr-name"> <code class="token attr-name">style</code></code><code class="token punctuation">="</code><code class="token attr-value"><code class="token property">position</code><code class="token punctuation">:</code> relative</code><code class="token punctuation">"</code></code> <code class="token attr-name">id</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>main<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;</code>article</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag rows-double-indentation"><code class="token tag rows-double-indentation"><code class="token punctuation">&lt;</code>div</code> <code class="token attr-name">id</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>example<code class="token punctuation">"</code></code><code class="token style-attr language-css"><code class="token attr-name"> <code class="token attr-name">style</code></code><code class="token punctuation">="</code><code class="token attr-value"><code class="token property">position</code><code class="token punctuation">:</code> absolute<code class="token punctuation">;</code> <code class="token property">left</code><code class="token punctuation">:</code> <code class="token number">180</code><code class="token unit">px</code><code class="token punctuation">;</code> <code class="token property">top</code><code class="token punctuation">:</code> <code class="token number">180</code><code class="token unit">px</code></code><code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code>...<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>div</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag rows-double-indentation"><code class="token tag"><code class="token punctuation">&lt;/</code>article</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>main</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><br>
+							<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code>example<code class="token punctuation">.</code>offsetParent<code class="token punctuation">.</code>id<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// main</code><br>
+							<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code>example<code class="token punctuation">.</code>offsetLeft<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 180 (обратите внимание: число, а не строка "180px")</code><br>
+							<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code>example<code class="token punctuation">.</code>offsetTop<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 180</code><br>
+							<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>script</code><code class="token punctuation">&gt;</code></code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(10);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="image" style="width: 597px">
+				<iframe style="width: 597px; height: calc(520px + 4px)" src="../html/metric-offset-parent.html"></iframe>
+				<div class="image__ratio" style="padding-top:87.10217755443887%"></div>
+			</div>
+			<p>Существует несколько ситуаций, когда <code>offsetParent</code> равно <code>null</code>:</p>
+			<ol>
+				<li>Для скрытых элементов (с CSS-свойством <code>display:none</code> или когда его нет в документе).</li>
+				<li>Для элементов <code>&lt;body&gt;</code> и <code>&lt;html&gt;</code>.</li>
+				<li>Для элементов с <code>position:fixed</code>.</li>
+			</ol>
+			<h2>offsetWidth/Height</h2>
+			<p>Эти два свойства – самые простые. Они содержат «внешнюю» ширину/высоту элемента, то есть его полный размер, включая рамки.</p>
+			<div class="image" style="width: 508px">
+				<iframe style="width: 508px; height: calc(509px + 4px)" src="../html/metric-offset-width-height.html"></iframe>
+				<div class="image__ratio" style="padding-top:100.19685039370079%"></div>
+			</div>
+			<p>Для данного элемента:</p>
+			<ul>
+				<li><code>offsetWidth = 390</code> – внешняя ширина блока, её можно получить сложением CSS-ширины (<code>300px</code>), внутренних отступов (<code>2 * 20px</code>) и рамок (<code>2 * 25px</code>).</li>
+				<li><code>offsetHeight = 290</code> – внешняя высота блока.</li>
+			</ul>
+			<div class="important important_smart">
+				<div class="important__header"><span class="important__type">Метрики для не показываемых элементов равны нулю.</span></div>
+				<div class="important__content"><p>Координаты и размеры в JavaScript устанавливаются только для видимых элементов.</p>
+					<p>Если элемент (или любой его родитель) имеет <code>display:none</code> или отсутствует в документе, то все его метрики равны нулю (или <code>null</code>, если это <code>offsetParent</code>).</p>
+					<p>Например, свойство <code>offsetParent</code> равно <code>null</code>, а <code>offsetWidth</code> и <code>offsetHeight</code> равны <code>0</code>, когда элемент создан, но ещё не вставлен в документ, или если у элемента (или у его родителя) <code>display:none</code>.</p>
+					<p>Это можно использовать, чтобы делать проверку на видимость:</p>
+					<div class="code-example">
+						<div class="codebox">
+							<div class="line-numbers language-javascript">
+								<code class="language-javascript">
+									<code class="token keyword">function</code> <code class="token function">isHidden</code><code class="token punctuation">(</code><code class="token parameter">elem</code><code class="token punctuation">)</code> <code class="token punctuation">{</code><br>
+									<code class="token keyword rows-double-indentation">return</code> <code class="token operator">!</code>elem<code class="token punctuation">.</code>offsetWidth <code class="token operator">&amp;&amp;</code> <code class="token operator">!</code>elem<code class="token punctuation">.</code>offsetHeight<code class="token punctuation">;</code><br>
+									<code class="token punctuation">}</code>
+								</code>
+								<span class="line-numbers-rows">
+									<script src="../js/line-numbers-rows.js"></script>
+									<script>rowsNumbers(3);</script>
+								</span>
+							</div>
+						</div>
+					</div>
+					<p>Следует заметить, что функция <code>isHidden</code> также вернёт <code>true</code> для элементов, которые в принципе показываются, но их размеры равны нулю (например, пустые <code>&lt;div&gt;</code>).</p>
+				</div>
+			</div>
+			<h2>clientTop/Left</h2>
+			<p>Внутри элемента - рамки (border).</p>
+			<p>Для них есть свойства-метрики <code>clientTop</code> и <code>clientLeft</code>.</p>
+			<p>В примере выше:</p>
+			<ul>
+				<li><code>clientLeft = 25</code> – ширина левой рамки</li>
+				<li><code>clientTop = 25</code> – ширина верхней рамки</li>
+			</ul>
+			<div class="image" style="width: 353px">
+				<iframe style="width: 353px; height: calc(316px + 4px)" src="../html/metric-client-left-top.html"></iframe>
+				<div class="image__ratio" style="padding-top:89.51841359773371%"></div>
+			</div>
+			<p>…Но на самом деле эти свойства – вовсе не ширины рамок, а отступы внутренней части элемента от внешней.</p>
+			<p>В чём же разница?</p>
+			<p>Она возникает, когда документ располагается справа налево (операционная система на арабском языке или иврите). Полоса прокрутки в этом случае находится слева, и тогда свойство <code>clientLeft</code> включает в себя ещё и ширину полосы прокрутки.</p>
+			<p>В этом случае <code>clientLeft</code> будет равно <code>25</code>, но с прокруткой – <code>25 + 16 = 41</code>.</p>
+			<p>Вот соответствующий пример на иврите:</p>
+			<div class="image" style="width: 359px">
+				<iframe style="width: 359px; height: calc(316px + 4px)" src="../html/metric-client-left-top-rtl.html"></iframe>
+				<div class="image__ratio" style="padding-top:88.02228412256268%"></div>
+			</div>
+			<h2>clientWidth/Height</h2>
+			<p>Эти свойства – размер области внутри рамок элемента.</p>
+			<p>Они включают в себя ширину области содержимого вместе с внутренними отступами <code>padding</code>, но без прокрутки:</p>
+			<div class="image" style="width: 500px">
+				<iframe style="width: 500px; height: calc(493px + 4px)" src="../html/metric-client-width-height.html"></iframe>
+				<div class="image__ratio" style="padding-top:98.6%"></div>
+			</div>
+			<p>Горизонтальной прокрутки нет, так что <code>clientHeight</code> в точности то, что внутри рамок: CSS-высота <code>200px</code> плюс верхние и нижние внутренние отступы (<code>2 * 20px</code>), итого <code>240px</code>.</p>
+			<p>Теперь <code>clientWidth</code> – ширина содержимого здесь равна не <code>300px</code>, а <code>284px</code>, т.к. <code>16px</code> отведено для полосы прокрутки. Таким образом: <code>284px</code> плюс левый и правый отступы – всего <code>324px</code>.</p>
+			<p><strong>Если нет внутренних отступов <code>padding</code>, то <code>clientWidth/Height</code> в точности равны размеру области содержимого внутри рамок и полосы прокрутки (если она есть).</strong></p>
+			<div class="image" style="width: 409px">
+				<iframe style="width: 409px; height: calc(467px + 4px)" src="../html/metric-client-width-nopadding.html"></iframe>
+				<div class="image__ratio" style="padding-top:114.18092909535453%"></div>
+			</div>
+			<p>Поэтому в тех случаях, когда точно известно, что отступов нет, можно использовать <code>clientWidth/clientHeight</code> для получения размеров внутренней области содержимого.</p>
+			<h2>scrollWidth/Height</h2>
+			<p>Эти свойства – как <code>clientWidth/clientHeight</code>, но также включают в себя прокрученную (которую не видно) часть элемента.</p>
+			<div class="image" style="width: 463px">
+				<iframe style="width: 463px; height: calc(524px + 4px)" src="../html/metric-scroll-width-height.html"></iframe>
+				<div class="image__ratio" style="padding-top:113.17494600431965%"></div>
+			</div>
+			<p>На рисунке выше:</p>
+			<ul>
+				<li><code>scrollHeight = 723</code> – полная внутренняя высота, включая прокрученную область.</li>
+				<li><code>scrollWidth = 324</code> – полная внутренняя ширина, в данном случае прокрутки нет, поэтому она равна <code>clientWidth</code>.</li>
+			</ul>
+			<p>Эти свойства можно использовать, чтобы «распахнуть» элемент на всю ширину/высоту.</p>
+			<p>Таким кодом:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token comment">// распахнуть элемент на всю высоту</code><br>
+							element<code class="token punctuation">.</code>style<code class="token punctuation">.</code>height <code class="token operator">=</code> <code class="token template-string"><code class="token string">`</code><code class="token interpolation"><code class="token interpolation-punctuation punctuation">${</code>element<code class="token punctuation">.</code>scrollHeight<code class="token interpolation-punctuation punctuation">}</code></code><code class="token string">px`</code></code><code class="token punctuation">;</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(2);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Нажмите на кнопку, чтобы распахнуть элемент:</p>
+			<div id="element" style="width: 300px; height: 200px; padding: 0; overflow: auto; border: 1px solid black;">текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст</div>
+			<p>
+				<button style="padding:0" onclick="element.style.height = `${element.scrollHeight}px`">element.style.height = <code>${element.scrollHeight}px</code></button>
+			</p>
+			<h2>scrollLeft/scrollTop</h2>
+			<p>Свойства <code>scrollLeft/scrollTop</code> – ширина/высота невидимой, прокрученной в данный момент, части элемента слева и сверху.</p>
+			<p>Следующая иллюстрация показывает значения <code>scrollHeight</code> и <code>scrollTop</code> для блока с вертикальной прокруткой.</p>
+			<div class="image" style="width: 489px">
+				<iframe style="width: 489px; height: calc(542px + 4px)" src="../html/metric-scroll-top.html"></iframe>
+				<div class="image__ratio" style="padding-top:110.83844580777095%"></div>
+			</div>
+			<p>Другими словами, свойство <code>scrollTop</code> – это «сколько уже прокручено вверх».</p>
+			<div class="important important_smart">
+				<div class="important__header"><span class="important__type"><code>Свойства scrollLeft/scrollTop</code> можно изменять</span></div>
+				<div class="important__content"><p>В отличие от большинства свойств, которые доступны только для чтения, значения <code>scrollLeft/scrollTop</code> можно изменять, и браузер выполнит прокрутку элемента…</p>
+					<p>При клике на следующий элемент будет выполняться код  <code>elem.scrollTop += 10</code>. Поэтому он будет прокручиваться на <code>10px</code> вниз.</p>
+					<div onclick="this.scrollTop+=10" style="cursor: pointer; border: 1px solid black; width: 100px; height: 80px; overflow: auto">Кликни<br>Меня<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9</div>
+					<p>Установка значения <code>scrollTop</code> на <code>0</code> или <code>Infinity</code> прокрутит элемент в самый верх/низ соответственно.</p>
+				</div>
+			</div>
+			<h2>Не стоит брать width/height из CSS</h2>
+			<p>Выше были рассмотрены метрики, которые есть у DOM-элементов, и которые можно использовать для получения различных высот, ширин и прочих расстояний.</p>
+			<p>Но как известно из главы <a href="/styles-and-classes">Стили и классы</a>, CSS-высоту и ширину можно извлечь, используя <code>getComputedStyle</code>.</p>
+			<p>Так почему бы не получать, к примеру, ширину элемента при помощи <code>getComputedStyle</code>, вот так?</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">let</code> elem <code class="token operator">=</code> document<code class="token punctuation">.</code>body<code class="token punctuation">;</code><br><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token function">getComputedStyle</code><code class="token punctuation">(</code>elem<code class="token punctuation">)</code><code class="token punctuation">.</code>width <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// показывает CSS-ширину elem</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(3);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Почему нужно использовать свойства-метрики вместо этого? На то есть две причины:</p>
+			<ol>
+				<li>
+					<p>Во-первых, CSS-свойства <code>width/height</code> зависят от другого свойства – <code>box-sizing</code>, которое определяет, «что такое», собственно, эти CSS-ширина и высота. Получается, что изменение <code>box-sizing</code>, к примеру, для более удобной вёрстки, сломает такой JavaScript.</p>
+				</li>
+				<li>
+					<p>Во-вторых, в CSS свойства <code>width/height</code> могут быть равны <code>auto</code>, например, для инлайнового элемента:</p>
+					<div class="code-example">
+						<div class="codebox">
+							<div class="line-numbers language-javascript">
+								<code class="language-javascript">
+									<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>span</code> <code class="token attr-name">id</code><code class="token attr-value"><code class="token punctuation">=</code><code class="token punctuation">"</code>elem<code class="token punctuation">"</code></code><code class="token punctuation">&gt;</code></code>Привет!<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>span</code><code class="token punctuation">&gt;</code></code><br><br>
+									<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;</code>script</code><code class="token punctuation">&gt;</code></code><br>
+									<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code> <code class="token function">getComputedStyle</code><code class="token punctuation">(</code>elem<code class="token punctuation">)</code><code class="token punctuation">.</code>width <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// auto</code><br>
+									<code class="token tag"><code class="token tag"><code class="token punctuation">&lt;/</code>script</code><code class="token punctuation">&gt;</code></code>
+								</code>
+								<span class="line-numbers-rows">
+									<script src="../js/line-numbers-rows.js"></script>
+									<script>rowsNumbers(5);</script>
+								</span>
+							</div>
+						</div>
+					</div>
+					<p>Конечно, с точки зрения CSS <code>width:auto</code> – совершенно нормально, но нам-то в JavaScript нужен конкретный размер в <code>px</code>, который мы могли бы использовать для вычислений. Получается, что в данном случае ширина из CSS вообще бесполезна.</p>
+				</li>
+			</ol>
+			<p>Есть и ещё одна причина: полоса прокрутки. Бывает, без полосы прокрутки код работает прекрасно, но стоит ей появиться, как начинают проявляться баги. Так происходит потому, что полоса прокрутки «отъедает» место от области внутреннего содержимого в некоторых браузерах. Таким образом, реальная ширина содержимого <em>меньше</em> CSS-ширины. Как раз это и учитывают свойства <code>clientWidth/clientHeight</code>.</p>
+			<p>…Но с <code>getComputedStyle(elem).width</code> ситуация иная. Некоторые браузеры (например, Chrome) возвращают реальную внутреннюю ширину с вычетом ширины полосы прокрутки, а некоторые (например, Firefox) – именно CSS-свойство (игнорируя полосу прокрутки). Эти кроссбраузерные отличия – ещё один повод не использовать <code>getComputedStyle</code>, а использовать свойства-метрики.</p>
+			<p>Если браузер показывает полосу прокрутки (например, под Windows почти все браузеры так делают), то можно протестировать это, нажав на кнопку в ифрейме ниже.</p>
+			<div class="code-result">
+				<iframe class="code-result__iframe" data-trusted="1" style="height:300px" src="../html/cssWidthScroll.html"></iframe>
+			</div>
+			<p>У элемента с текстом в стилях указано CSS-свойство <code>width:300px</code>.</p>
+			<p>На ОС Windows браузеры Firefox, Chrome и Edge резервируют место для полосы прокрутки. Но Firefox отображает <code>300px</code>, в то время как Chrome и Edge – меньше. Это из-за того, что Firefox возвращает именно CSS-ширину, а остальные браузеры – «реальную» ширину за вычетом прокрутки.</p>
+			<p>Стоит обратить внимание на то, что описанные различия касаются только чтения свойства <code>getComputedStyle(...).width</code> из JavaScript, визуальное отображение корректно в обоих случаях.</p>
+		</div>
+	</div>
+</body>
+</html>

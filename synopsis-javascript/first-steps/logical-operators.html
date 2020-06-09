@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial=scale=1.0">
+
+	<title>Логические операторы</title>
+	
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/fonts.css">
+</head>
+
+<body>
+	<div class="page-wrapper">
+		<div class="page">
+			<h1 class="page__title">Логические операторы</h1>
+				<p>В JavaScript есть три логических оператора: <code>||</code> (ИЛИ), <code>&amp;&amp;</code> (И) и <code>!</code> (НЕ).</p>
+				<p>Несмотря на своё название, данные операторы могут применяться к значениям любых типов. Полученные результаты также могут иметь различный тип.</p>
+				<h2>|| (ИЛИ)</h2>
+				<p>Оператор «ИЛИ» выглядит как двойной символ вертикальной черты:</p>
+				<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							result <code class="token operator">=</code> a <code class="token operator">||</code> b<code class="token punctuation">;</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(1);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Традиционно в программировании ИЛИ предназначено только для манипулирования булевыми значениями: в случае, если какой-либо из аргументов <code>true</code>, он вернёт <code>true</code>, в противоположной ситуации возвращается  <code>false</code>.</p>
+			<p>В JavaScript, как будет видно далее, этот оператор работает несколько иным образом. Но сперва стоит посмотреть, что происходит с булевыми значениями.</p>
+			<p>Существует всего четыре возможные логические комбинации:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token boolean">true</code> <code class="token operator">||</code> <code class="token boolean">true</code> <code class="token punctuation">)</code><code class="token punctuation">;</code>   <code class="token comment">// true</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token boolean">false</code> <code class="token operator">||</code> <code class="token boolean">true</code> <code class="token punctuation">)</code><code class="token punctuation">;</code>  <code class="token comment">// true</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token boolean">true</code> <code class="token operator">||</code> <code class="token boolean">false</code> <code class="token punctuation">)</code><code class="token punctuation">;</code>  <code class="token comment">// true</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token boolean">false</code> <code class="token operator">||</code> <code class="token boolean">false</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// false</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(4);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Как можно наблюдать, результат операций всегда равен <code>true</code>, за исключением случая, когда оба аргумента <code>false</code>.</p>
+			<p>Если значение не логического типа,  то оно к нему приводится в целях вычислений.</p>
+			<p>Например, число <code>1</code> будет воспринято как <code>true</code>, а <code>0</code> – как <code>false</code>:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">if</code> <code class="token punctuation">(</code><code class="token number">1</code> <code class="token operator">||</code> <code class="token number">0</code><code class="token punctuation">)</code> <code class="token punctuation">{</code> <code class="token comment">// работает как if( true || false )</code><br>
+							<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code> <code class="token string">'truthy!'</code> <code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+							<code class="token punctuation">}</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(3);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Обычно оператор <code>||</code> используется в <code>if</code> для проверки истинности любого из заданных условий.</p>
+			<p>К примеру:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">let</code> hour <code class="token operator">=</code> <code class="token number">9</code><code class="token punctuation">;</code><br><br>
+							<code class="token keyword">if</code> <code class="token punctuation">(</code>hour <code class="token operator">&lt;</code> <code class="token number">10</code> <code class="token operator">||</code> hour <code class="token operator">&gt;</code> <code class="token number">18</code><code class="token punctuation">)</code> <code class="token punctuation">{</code><br>
+							<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code> <code class="token string">'Офис закрыт.'</code> <code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+							<code class="token punctuation">}</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(5);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Можно передать и больше условий:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">let</code> hour <code class="token operator">=</code> <code class="token number">12</code><code class="token punctuation">;</code><br>
+							<code class="token keyword">let</code> isWeekend <code class="token operator">=</code> <code class="token boolean">true</code><code class="token punctuation">;</code><br><br>
+							<code class="token keyword">if</code> <code class="token punctuation">(</code>hour <code class="token operator">&lt;</code> <code class="token number">10</code> <code class="token operator">||</code> hour <code class="token operator">&gt;</code> <code class="token number">18</code> <code class="token operator">||</code> isWeekend<code class="token punctuation">)</code> <code class="token punctuation">{</code><br>
+							<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code> <code class="token string">'Офис закрыт.'</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// это выходной</code><br>
+							<code class="token punctuation">}</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(6);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<h2>ИЛИ «||» находит первое истинное&nbsp;значение</h2>
+			<p>Описанная выше логика соответствует традиционной. Теперь о «дополнительных» возможностях JavaScript.</p>
+			<p>Расширенный алгоритм работает следующим образом.</p>
+			<p>При выполнении ИЛИ || с несколькими значениями:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							result <code class="token operator">=</code> value1 <code class="token operator">||</code> value2 <code class="token operator">||</code> value3<code class="token punctuation">;</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(1);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Оператор <code>||</code> выполняет следующие действия:</p>
+			<ul>
+				<li>Вычисляет операнды слева направо.</li>
+				<li>Каждый операнд конвертирует в логическое значение. Если результат <code>true</code>, останавливается и возвращает исходное значение этого операнда.</li>
+				<li>Если все операнды являются ложными (<code>false</code>), возвращает последний из них.</li>
+			</ul>
+			<p>Значение возвращается в исходном виде, без преобразования.</p>
+			<p>Другими словами, цепочка ИЛИ <code>"||"</code> возвращает первое истинное значение или последнее, если такое значение не найдено.</p>
+			<p>Например:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token number">1</code> <code class="token operator">||</code> <code class="token number">0</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 1</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token boolean">true</code> <code class="token operator">||</code> <code class="token string">'no matter what'</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// true</code><br><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token keyword">null</code> <code class="token operator">||</code> <code class="token number">1</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 1 (первое истинное значение)</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token keyword">null</code> <code class="token operator">||</code> <code class="token number">0</code> <code class="token operator">||</code> <code class="token number">1</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 1 (первое истинное значение)</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token keyword">undefined</code> <code class="token operator">||</code> <code class="token keyword">null</code> <code class="token operator">||</code> <code class="token number">0</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 0 (поскольку все ложно, возвращается последнее значение)</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(6);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Это делает возможным более интересное применение оператора по сравнению с «чистым, традиционным, только булевым ИЛИ».</p>
+			<ol>
+				<li>
+					<p><strong>Получение первого истинного значения из списка переменных или выражений.</strong></p>
+					<p>Если представить, что имеется ряд переменных, которые могут содержать данные или быть <code>null/undefined</code>. Как можно найти первую переменную с данными?</p>
+					<p>С помощью <code>||</code>:</p>
+					<div class="code-example">
+						<div class="codebox">
+							<div class="line-numbers language-javascript">
+								<code class="language-javascript">
+									<code class="token keyword">let</code> currentUser <code class="token operator">=</code> <code class="token keyword">null</code><code class="token punctuation">;</code><br>
+									<code class="token keyword">let</code> defaultUser <code class="token operator">=</code> <code class="token string">"John"</code><code class="token punctuation">;</code><br><br>
+									<code class="token keyword">let</code> name <code class="token operator">=</code> currentUser <code class="token operator">||</code> defaultUser <code class="token operator">||</code> <code class="token string">"unnamed"</code><code class="token punctuation">;</code><br><br>
+									<code class="token function">alert</code><code class="token punctuation">(</code> name <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// выбирается "John" – первое истинное значение</code>
+								</code>
+								<span class="line-numbers-rows">
+									<script src="../js/line-numbers-rows.js"></script>
+									<script>rowsNumbers(6);</script>
+								</span>
+							</div>
+						</div>
+					</div>
+					<p>Если бы и <code>currentUser</code>, и <code>defaultUser</code> были ложными, в качестве результата был бы <code>"unnamed"</code>.</p>
+				</li>
+				<li>
+					<p><strong>Сокращённое вычисление.</strong></p>
+					<p>Операндами могут быть как отдельные значения, так и произвольные выражения. ИЛИ вычисляет их слева направо. Вычисление останавливается при достижении первого истинного значения. Этот процесс называется «сокращённым вычислением», поскольку второй операнд вычисляется только в том случае, если первого недостаточно для вычисления всего выражения.</p>
+					<p>Это хорошо заметно, когда выражение, указанное в качестве второго аргумента, имеет побочный эффект, например, изменение переменной.</p>
+					<p>В приведённом ниже примере <code>x</code> не изменяется:</p>
+					<div class="code-example">
+						<div class="codebox">
+							<div class="line-numbers language-javascript">
+								<code class="language-javascript">
+									<code class="token keyword">let</code> x<code class="token punctuation">;</code><br><br>
+									<code class="token boolean">true</code> <code class="token operator">||</code> <code class="token punctuation">(</code>x <code class="token operator">=</code> <code class="token number">1</code><code class="token punctuation">)</code><code class="token punctuation">;</code><br><br>
+									<code class="token function">alert</code><code class="token punctuation">(</code>x<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// undefined, потому что (x = 1) не вычисляется</code>
+								</code>
+								<span class="line-numbers-rows">
+									<script src="../js/line-numbers-rows.js"></script>
+									<script>rowsNumbers(5);</script>
+								</span>
+							</div>
+						</div>
+					</div>
+					<p>Если бы первый аргумент имел значение <code>false</code>, то <code>||</code> приступил бы к вычислению второго и выполнил операцию присваивания:</p>
+					<div class="code-example">
+						<div class="codebox">
+							<div class="line-numbers language-javascript">
+								<code class="language-javascript">
+									<code class="token keyword">let</code> x<code class="token punctuation">;</code><br><br>
+									<code class="token boolean">false</code> <code class="token operator">||</code> <code class="token punctuation">(</code>x <code class="token operator">=</code> <code class="token number">1</code><code class="token punctuation">)</code><code class="token punctuation">;</code><br><br>
+									<code class="token function">alert</code><code class="token punctuation">(</code>x<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 1</code>
+								</code>
+								<span class="line-numbers-rows">
+									<script src="../js/line-numbers-rows.js"></script>
+									<script>rowsNumbers(5);</script>
+								</span>
+							</div>
+						</div>
+					</div>
+					<p>Присваивание – лишь один пример. Конечно, могут быть и другие побочные эффекты, которые не проявятся, если вычисление до них не дойдёт.</p>
+					<p>Как видно, этот вариант использования <code>||</code> является "аналогом <code>if</code>". Первый операнд преобразуется в логический. Если он оказывается ложным, начинается вычисление второго.</p>
+					<p>В большинстве случаев лучше использовать «обычный» <code>if</code>, чтобы облегчить понимание кода, но иногда это может быть удобно.</p>
+				</li>
+			</ol>
+			<h2>&amp;&amp; (И)</h2>
+			<p>Оператор И пишется как два амперсанда <code>&amp;&amp;</code>:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							result <code class="token operator">=</code> a <code class="token operator">&amp;&amp;</code> b<code class="token punctuation">;</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(1);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>В традиционном программировании И возвращает <code>true</code>, если оба аргумента истинны, а иначе – <code>false</code>:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token boolean">true</code> <code class="token operator">&amp;&amp;</code> <code class="token boolean">true</code> <code class="token punctuation">)</code><code class="token punctuation">;</code>   <code class="token comment">// true</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token boolean">false</code> <code class="token operator">&amp;&amp;</code> <code class="token boolean">true</code> <code class="token punctuation">)</code><code class="token punctuation">;</code>  <code class="token comment">// false</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token boolean">true</code> <code class="token operator">&amp;&amp;</code> <code class="token boolean">false</code> <code class="token punctuation">)</code><code class="token punctuation">;</code>  <code class="token comment">// false</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token boolean">false</code> <code class="token operator">&amp;&amp;</code> <code class="token boolean">false</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// false</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(4);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Пример с <code>if</code>:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">let</code> hour <code class="token operator">=</code> <code class="token number">12</code><code class="token punctuation">;</code><br>
+							<code class="token keyword">let</code> minute <code class="token operator">=</code> <code class="token number">30</code><code class="token punctuation">;</code><br><br>
+							<code class="token keyword">if</code> <code class="token punctuation">(</code>hour <code class="token operator">==</code> <code class="token number">12</code> <code class="token operator">&amp;&amp;</code> minute <code class="token operator">==</code> <code class="token number">30</code><code class="token punctuation">)</code> <code class="token punctuation">{</code><br>
+							<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code> <code class="token string">'The time is 12:30'</code> <code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+							<code class="token punctuation">}</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(6);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Как и в случае с ИЛИ, любое значение допускается в качестве операнда И:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">if</code> <code class="token punctuation">(</code><code class="token number">1</code> <code class="token operator">&amp;&amp;</code> <code class="token number">0</code><code class="token punctuation">)</code> <code class="token punctuation">{</code> <code class="token comment">// вычисляется как true &amp;&amp; false</code><br>
+							<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code> <code class="token string">"не сработает, так как результат ложный"</code> <code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+							<code class="token punctuation">}</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(3);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<h2>И «&amp;&amp;» находит первое ложное&nbsp;значение</h2>
+			<p>При нескольких подряд операторах И:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							result <code class="token operator">=</code> value1 <code class="token operator">&amp;&amp;</code> value2 <code class="token operator">&amp;&amp;</code> value3<code class="token punctuation">;</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(1);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Оператор <code>&amp;&amp;</code> выполняет следующие действия:</p>
+			<ul>
+				<li>Вычисляет операнды слева направо.</li>
+				<li>Каждый операнд преобразует в логическое значение. Если результат <code>false</code>, останавливается и возвращает исходное значение этого операнда.</li>
+				<li>Если все операнды были истинными, возвращается последний.</li>
+			</ul>
+			<p>Другими словами, И возвращает первое ложное значение. Или последнее, если ничего не найдено.</p>
+			<p>Вышеуказанные правила схожи с поведением ИЛИ. Разница в том, что И возвращает первое <em>ложное</em> значение, а ИЛИ –  первое <em>истинное</em>.</p>
+			<p>Примеры:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token comment">// Если первый операнд истинный,</code><br>
+							<code class="token comment">// И возвращает второй:</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token number">1</code> <code class="token operator">&amp;&amp;</code> <code class="token number">0</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 0</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token number">1</code> <code class="token operator">&amp;&amp;</code> <code class="token number">5</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 5</code><br><br>
+							<code class="token comment">// Если первый операнд ложный,</code><br>
+							<code class="token comment">// И возвращает его. Второй операнд игнорируется</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token keyword">null</code> <code class="token operator">&amp;&amp;</code> <code class="token number">5</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// null</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token number">0</code> <code class="token operator">&amp;&amp;</code> <code class="token string">"no matter what"</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 0</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(9);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Можно передать несколько значений подряд. В таком случае возвратится первое «ложное» значение, на котором остановились вычисления.</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token number">1</code> <code class="token operator">&amp;&amp;</code> <code class="token number">2</code> <code class="token operator">&amp;&amp;</code> <code class="token keyword">null</code> <code class="token operator">&amp;&amp;</code> <code class="token number">3</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// null</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(1);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Когда все значения верны, возвращается последнее</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token number">1</code> <code class="token operator">&amp;&amp;</code> <code class="token number">2</code> <code class="token operator">&amp;&amp;</code> <code class="token number">3</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 3</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(1);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="important important_smart">
+				<div class="important__header"><span class="important__type">Приоритет оператора <code>&amp;&amp;</code> больше, чем у <code>||</code></span></div>
+				<div class="important__content"><p>Приоритет оператора И <code>&amp;&amp;</code> больше, чем ИЛИ <code>||</code>, так что он выполняется раньше.</p>
+					<p>Таким образом, код <code>a &amp;&amp; b || c &amp;&amp; d</code> по существу такой же, как если бы выражения <code>&amp;&amp;</code> были в круглых скобках: <code>(a &amp;&amp; b) || (c &amp;&amp; d)</code>.</p>
+				</div>
+			</div>
+			<p>Как и оператор ИЛИ, И <code>&amp;&amp;</code> иногда может заменять <code>if</code>.</p>
+			<p>К примеру:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">let</code> x <code class="token operator">=</code> <code class="token number">1</code><code class="token punctuation">;</code><br><br>
+							<code class="token punctuation">(</code>x <code class="token operator">&gt;</code> <code class="token number">0</code><code class="token punctuation">)</code> <code class="token operator">&amp;&amp;</code> <code class="token function">alert</code><code class="token punctuation">(</code> <code class="token string">'Greater than zero!'</code> <code class="token punctuation">)</code><code class="token punctuation">;</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(3);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Действие в правой части <code>&amp;&amp;</code> выполнится только в том случае, если до него дойдут вычисления. То есть, <code>alert</code> сработает, если в левой части (<code>x &gt; 0)</code> будет <code>true</code>.</p>
+			<p>Получился аналог:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">let</code> x <code class="token operator">=</code> <code class="token number">1</code><code class="token punctuation">;</code><br><br>
+							<code class="token keyword">if</code> <code class="token punctuation">(</code>x <code class="token operator">&gt;</code> <code class="token number">0</code><code class="token punctuation">)</code> <code class="token punctuation">{</code><br>
+							<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code> <code class="token string">'Greater than zero!'</code> <code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+							<code class="token punctuation">}</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(5);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Однако, как правило, вариант с <code>if</code> лучше читается и воспринимается.</p>
+			<p>Он более очевиден, поэтому лучше использовать его.</p>
+			<h2>! (НЕ)</h2>
+			<p>Оператор НЕ представлен восклицательным знаком <code>!</code>.</p>
+			<p>Синтаксис довольно прост:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							result <code class="token operator">=</code> <code class="token operator">!</code>value<code class="token punctuation">;</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(1);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Оператор принимает один аргумент и выполняет следующие действия:</p>
+			<ol>
+				<li>Сначала приводит аргумент к логическому типу <code>true/false</code>.</li>
+				<li>Затем возвращает противоположное значение.</li>
+			</ol>
+			<p>Например:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token operator">!</code><code class="token boolean">true</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// false</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token operator">!</code><code class="token number">0</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// true</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(2);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>В частности, двойное НЕ используют для преобразования значений к логическому типу:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token operator">!</code><code class="token operator">!</code><code class="token string">"non-empty string"</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// true</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token operator">!</code><code class="token operator">!</code><code class="token keyword">null</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// false</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(2);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>То есть первое НЕ преобразует значение в логическое значение и возвращает обратное, а второе НЕ снова инвертирует его. В конце мы имеем простое преобразование значения в логическое.</p>
+			<p>Есть немного более подробный способ сделать то же самое – встроенная функция <code>Boolean</code>:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token function">Boolean</code><code class="token punctuation">(</code><code class="token string">"non-empty string"</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// true</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token function">Boolean</code><code class="token punctuation">(</code><code class="token keyword">null</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// false</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(2);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Приоритет НЕ <code>!</code> является наивысшим из всех логических операторов, поэтому он всегда выполняется первым, перед <code>&amp;&amp;</code> или <code>||</code>.</p>
+		</div>
+	</div>
+</body>
+
+</html>

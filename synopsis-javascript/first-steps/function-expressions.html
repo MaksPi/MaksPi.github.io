@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial=scale=1.0">
+
+	<title>Function Expression</title>
+	
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/fonts.css">
+</head>
+
+<body>
+	<div class="page-wrapper">
+		<div class="page">
+			<h1 class="page__title">Function Expression</h1>
+
+			<p>Функция в JavaScript – это не магическая языковая структура, а особого типа значение.</p>
+			<p>Синтаксис, который был рассмотрен до этого, называется <em>Function Declaration</em> (Объявление Функции):</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">function</code> <code class="token function">sayHi</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code><br>
+							<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code> <code class="token string">"Привет"</code> <code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+							<code class="token punctuation">}</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(3);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Существует ещё один синтаксис создания функций, который называется <em>Function Expression</em> (Функциональное Выражение).</p>
+			<p>Оно выглядит вот так:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">let</code> <code class="token function-variable function">sayHi</code> <code class="token operator">=</code> <code class="token keyword">function</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code><br>
+							<code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code> <code class="token string">"Привет"</code> <code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+							<code class="token punctuation">}</code><code class="token punctuation">;</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(3);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>В коде выше функция создаётся и явно присваивается переменной, как любое другое значение. По сути без разницы, как мы определили функцию, это просто значение, хранимое в переменной <code>sayHi</code>.</p>
+			<p>Смысл обоих примеров кода одинаков: "создать функцию и поместить её значение в переменную <code>sayHi</code>".</p>
+			<p>Мы можем даже вывести это значение с помощью <code>alert</code>:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">function</code> <code class="token function">sayHi</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token string">"Привет"</code> <code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+							<code class="token punctuation">}</code><br><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> sayHi <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// выведет код функции</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(5);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Обратите внимание, что последняя строка не вызывает функцию <code>sayHi</code>, после её имени нет круглых скобок. Существуют языки программирования, в которых любое упоминание имени функции совершает её вызов. JavaScript – не один из них.</p>
+			<p>В JavaScript функции – это значения, поэтому мы и обращаемся с ними, как со значениями. Код выше выведет строковое представление функции, которое является её исходным кодом.</p>
+			<p>Конечно, функция – не обычное значение, в том смысле, что мы можем вызвать его при помощи скобок: <code>sayHi()</code>.</p>
+			<p>Но всё же это значение. Поэтому мы можем делать с ним то же самое, что и с любым другим значением.</p>
+			<p>Мы можем скопировать функцию в другую переменную:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">function</code> <code class="token function">sayHi</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>   <code class="token comment">// (1) создаём</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token string">"Привет"</code> <code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+							<code class="token punctuation">}</code><br><br>
+							<code class="token keyword">let</code> func <code class="token operator">=</code> sayHi<code class="token punctuation">;</code>    <code class="token comment">// (2) копируем</code><br><br>
+							<code class="token function">func</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// Привет    // (3) вызываем копию (работает)!</code><br>
+							<code class="token function">sayHi</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// Привет   //     прежняя тоже работает (почему бы нет)</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(8);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Давайте подробно разберём всё, что тут произошло:</p>
+			<ol>
+				<li>Объявление Function Declaration <code>(1)</code> создало функцию и присвоило её значение переменной с именем <code>sayHi</code>.</li>
+				<li>В строке <code>(2)</code> мы скопировали её значение в переменную <code>func</code>. Обратите внимание (ещё раз): нет круглых скобок после <code>sayHi</code>. Если бы они были, то выражение <code>func = sayHi()</code> записало бы <em>результат вызова</em> <code>sayHi()</code> в переменную <code>func</code>, а не саму <em>функцию</em> <code>sayHi</code>.</li>
+				<li>Теперь функция может быть вызвана с помощью обеих переменных <code>sayHi()</code> и <code>func()</code>.</li>
+			</ol>
+			<p>Заметим, что мы могли бы использовать и Function Expression для того, чтобы создать <code>sayHi</code> в первой строке:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">let</code> <code class="token function-variable function">sayHi</code> <code class="token operator">=</code> <code class="token keyword">function</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token string">"Привет"</code> <code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+							<code class="token punctuation">}</code><code class="token punctuation">;</code><br>
+							<br>
+							<code class="token keyword">let</code> func <code class="token operator">=</code> sayHi<code class="token punctuation">;</code><br>
+							<code class="token comment">// ...</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(6);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Результат был бы таким же.</p>
+			<div class="important important_smart">
+				<div class="important__header"><span class="important__type">Зачем нужна точка с запятой в конце?</span></div>
+				<div class="important__content"><p>У вас мог возникнуть вопрос: Почему в Function Expression ставится точка с запятой <code>;</code> на конце, а в Function Declaration нет:</p>
+					<div class="code-example">
+						<div class="codebox">
+							<div class="line-numbers language-javascript">
+								<code class="language-javascript">
+									<code class="token keyword">function</code> <code class="token function">sayHi</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code><br>
+									<code class="token comment">// ...</code><br>
+									<code class="token punctuation">}</code><br><br>
+									<code class="token keyword">let</code> <code class="token function-variable function">sayHi</code> <code class="token operator">=</code> <code class="token keyword">function</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code><br>
+									<code class="token comment">// ...</code><br>
+									<code class="token punctuation">}</code><code class="token punctuation">;</code>
+								</code>
+								<span class="line-numbers-rows">
+									<script src="../js/line-numbers-rows.js"></script>
+									<script>rowsNumbers(7);</script>
+								</span>
+							</div>
+						</div>
+					</div>
+					<p>Ответ прост:</p>
+					<ul>
+						<li>Нет необходимости в <code>;</code> в конце блоков кода и синтаксических конструкций, которые их используют, таких как <code>if { ... }</code>, <code>for { }</code>, <code>function f { }</code> и т.д.</li>
+						<li>Function Expression использует внутри себя инструкции присваивания <code>let sayHi = ...;</code> как значение. Это не блок кода, а выражение с присваиванием. Таким образом, точка с запятой не относится непосредственно к Function Expression, она лишь завершает инструкцию.</li>
+					</ul>
+				</div>
+			</div>
+			<h2>Функции-«колбэки»</h2>
+			<p>Рассмотрим ещё примеры функциональных выражений и передачи функции как значения.</p>
+			<p>Давайте напишем функцию <code>ask(question, yes, no)</code> с тремя параметрами:</p>
+			<dl>
+				<dt><code>question</code></dt>
+				<dd>Текст вопроса</dd>
+				<dt><code>yes</code></dt>
+				<dd>Функция, которая будет вызываться, если ответ будет «Yes»</dd>
+				<dt><code>no</code></dt>
+				<dd>Функция, которая будет вызываться, если ответ будет «No»</dd>
+			</dl>
+			<p>Наша функция должна задать вопрос <code>question</code> и, в зависимости от того, как ответит пользователь, вызвать <code>yes()</code> или <code>no()</code>:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">function</code> <code class="token function">ask</code><code class="token punctuation">(</code><code class="token parameter">question<code class="token punctuation">,</code> yes<code class="token punctuation">,</code> no</code><code class="token punctuation">)</code> <code class="token punctuation">{</code><br>
+							<code class="token keyword">if</code> <code class="token punctuation">(</code><code class="token function">confirm</code><code class="token punctuation">(</code>question<code class="token punctuation">)</code><code class="token punctuation">)</code> <code class="token function">yes</code><code class="token punctuation">(</code><code class="token punctuation">)</code><br>
+							<code class="token keyword">else</code> <code class="token function">no</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+							<code class="token punctuation">}</code><br><br>
+							<code class="token keyword">function</code> <code class="token function">showOk</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token string">"Вы согласны."</code> <code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+							<code class="token punctuation">}</code><br><br>
+							<code class="token keyword">function</code> <code class="token function">showCancel</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token string">"Вы отменили выполнение."</code> <code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+							<code class="token punctuation">}</code><br><br>
+							<code class="token comment">// использование: функции showOk, showCancel передаются в качестве аргументов ask</code><br>
+							<code class="token function">ask</code><code class="token punctuation">(</code><code class="token string">"Вы согласны?"</code><code class="token punctuation">,</code> showOk<code class="token punctuation">,</code> showCancel<code class="token punctuation">)</code><code class="token punctuation">;</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(15);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>На практике подобные функции очень полезны. Основное отличие «реальной» функции <code>ask</code> от примера выше будет в том, что она использует более сложные способы взаимодействия с пользователем, чем простой вызов <code>confirm</code>. В браузерах такие функции обычно отображают красивые диалоговые окна. Но это уже другая история.</p>
+			<p><strong>Аргументы функции <code>ask</code> ещё называют <em>функциями-колбэками</em> или просто <em>колбэками</em>.</strong></p>
+			<p>Ключевая идея в том, что мы передаём функцию и ожидаем, что она вызовется обратно (от англ. «call back» – обратный вызов) когда-нибудь позже, если это будет необходимо. В нашем случае, <code>showOk</code> становится <em>колбэком</em>’ для ответа «yes», а <code>showCancel</code> – для ответа «no».</p>
+			<p>Мы можем переписать этот пример значительно короче, используя Function Expression:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">function</code> <code class="token function">ask</code><code class="token punctuation">(</code><code class="token parameter">question<code class="token punctuation">,</code> yes<code class="token punctuation">,</code> no</code><code class="token punctuation">)</code> <code class="token punctuation">{</code><br>
+							<code class="token keyword">if</code> <code class="token punctuation">(</code><code class="token function">confirm</code><code class="token punctuation">(</code>question<code class="token punctuation">)</code><code class="token punctuation">)</code> <code class="token function">yes</code><code class="token punctuation">(</code><code class="token punctuation">)</code><br>
+							<code class="token keyword">else</code> <code class="token function">no</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+							<code class="token punctuation">}</code><br><br>
+							<code class="token function">ask</code><code class="token punctuation">(</code><br>
+							<code class="token string">"Вы согласны?"</code><code class="token punctuation">,</code><br>
+							<code class="token keyword">function</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code> <code class="token function">alert</code><code class="token punctuation">(</code><code class="token string">"Вы согласились."</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token punctuation">}</code><code class="token punctuation">,</code><br>
+							<code class="token keyword">function</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code> <code class="token function">alert</code><code class="token punctuation">(</code><code class="token string">"Вы отменили выполнение."</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token punctuation">}</code><br>
+							<code class="token punctuation">)</code><code class="token punctuation">;</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(10);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Здесь функции объявляются прямо внутри вызова <code>ask(...)</code>. У них нет имён, поэтому они называются <em>анонимными</em>. Такие функции недоступны снаружи <code>ask</code> (потому что они не присвоены переменным), но это как раз то, что нам нужно.</p>
+			<p>Подобный код, появившийся в нашем скрипте выглядит очень естественно, в духе JavaScript.</p>
+			<div class="important important_smart">
+				<div class="important__header"><span class="important__type">Функция – это значение, представляющее «действие»</span></div>
+				<div class="important__content"><p>Обычные значения, такие как строки или числа представляют собой <em>данные</em>.</p>
+					<p>Функции, с другой стороны, можно воспринимать как «действия».</p>
+					<p>Мы можем передавать их из переменной в переменную и запускать, когда захотим.</p>
+				</div>
+			</div>
+			<h2>Function Expression в сравнении с Function Declaration</h2>
+			<p>Давайте разберём ключевые отличия Function Declaration от Function Expression.</p>
+			<p>Во-первых, синтаксис: как определить, что есть что в коде.</p>
+			<ul>
+				<li>
+					<p>Function Declaration: функция объявляется отдельной конструкцией «function…» в основном потоке кода.</p>
+					<div class="code-example">
+						<div class="codebox">
+							<div class="line-numbers language-javascript">
+								<code class="language-javascript">
+									<code class="token comment">// Function Declaration</code><br>
+									<code class="token keyword">function</code> <code class="token function">sum</code><code class="token punctuation">(</code><code class="token parameter">a<code class="token punctuation">,</code> b</code><code class="token punctuation">)</code> <code class="token punctuation">{</code><br>
+									<code class="token keyword">return</code> a <code class="token operator">+</code> b<code class="token punctuation">;</code><br>
+									<code class="token punctuation">}</code>
+								</code>
+								<span class="line-numbers-rows">
+									<script src="../js/line-numbers-rows.js"></script>
+									<script>rowsNumbers(4);</script>
+								</span>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<p>Function Expression: функция, созданная внутри другого выражения или синтаксической конструкции. В данном случае функция создаётся в правой части «выражения присваивания» <code>=</code>:</p>
+					<div class="code-example">
+						<div class="codebox">
+							<div class="line-numbers language-javascript">
+								<code class="language-javascript">
+									<code class="token comment">// Function Expression</code><br>
+									<code class="token keyword">let</code> <code class="token function-variable function">sum</code> <code class="token operator">=</code> <code class="token keyword">function</code><code class="token punctuation">(</code><code class="token parameter">a<code class="token punctuation">,</code> b</code><code class="token punctuation">)</code> <code class="token punctuation">{</code><br>
+									<code class="token keyword">return</code> a <code class="token operator">+</code> b<code class="token punctuation">;</code><br>
+									<code class="token punctuation">}</code><code class="token punctuation">;</code>
+								</code>
+								<span class="line-numbers-rows">
+									<script src="../js/line-numbers-rows.js"></script>
+									<script>rowsNumbers(4);</script>
+								</span>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<p>Более тонкое отличие состоит, в том, <em>когда</em> создаётся функция движком JavaScript.</p>
+			<p><strong>Function Expression создаётся, когда выполнение доходит до него, и затем уже может использоваться.</strong></p>
+			<p>После того, как поток выполнения достигнет правой части выражения присваивания <code>let sum = function…</code> – с этого момента, функция считается созданной и может быть использована (присвоена переменной, вызвана и т.д. ).</p>
+			<p>С Function Declaration всё иначе.</p>
+			<p><strong>Function Declaration можно использовать во всем скрипте (или блоке кода, если функция объявлена в блоке).</strong></p>
+			<p>Другими словами, когда движок JavaScript <em>готовится</em> выполнять скрипт или блок кода, прежде всего он ищет в нём Function Declaration и создаёт все такие функции.  Можно считать этот процесс «стадией инициализации».</p>
+			<p>И только после того, как все объявления Function Declaration будут обработаны, продолжится выполнение.</p>
+			<p>В результате, функции, созданные, как Function Declaration могут быть вызваны раньше своих определений.</p>
+			<p>Например, так будет работать:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token function">sayHi</code><code class="token punctuation">(</code><code class="token string">"Вася"</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// Привет, Вася</code><br><br>
+							<code class="token keyword">function</code> <code class="token function">sayHi</code><code class="token punctuation">(</code><code class="token parameter">name</code><code class="token punctuation">)</code> <code class="token punctuation">{</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token template-string"><code class="token string">`Привет, </code><code class="token interpolation"><code class="token interpolation-punctuation punctuation">${</code>name<code class="token interpolation-punctuation punctuation">}</code></code><code class="token string">`</code></code> <code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+							<code class="token punctuation">}</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(5);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Функция <code>sayHi</code> была создана, когда движок JavaScript подготавливал скрипт к выполнению, и такая функция видна повсюду в этом скрипте.</p>
+			<p>…Если бы это было Function Expression, то такой код вызовет ошибку:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token function">sayHi</code><code class="token punctuation">(</code><code class="token string">"Вася"</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// ошибка!</code><br><br>
+							<code class="token keyword">let</code> <code class="token function-variable function">sayHi</code> <code class="token operator">=</code> <code class="token keyword">function</code><code class="token punctuation">(</code><code class="token parameter">name</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>  <code class="token comment">// (*) магии больше нет</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token template-string"><code class="token string">`Привет, </code><code class="token interpolation"><code class="token interpolation-punctuation punctuation">${</code>name<code class="token interpolation-punctuation punctuation">}</code></code><code class="token string">`</code></code> <code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+							<code class="token punctuation">}</code><code class="token punctuation">;</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(5);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+																		<p>Функции, объявленные при помощи Function Expression, создаются тогда, когда выполнение доходит до них. Это случится только на строке, помеченной звёздочкой <code>(*)</code>. Слишком поздно.</p>
+																		<p>Ещё одна важная особенность Function Declaration заключается в их блочной области видимости.</p>
+																		<p><strong>В строгом режиме, когда Function Declaration находится в блоке <code>{...}</code>, функция доступна везде внутри блока. Но не снаружи него.</strong></p>
+																		<p>Для примера давайте представим, что нам нужно создать функцию <code>welcome()</code> в зависимости от значения переменной <code>age</code>, которое мы получим во время выполнения кода. И затем запланируем использовать её когда-нибудь в будущем.</p>
+																		<p>Такой код, использующий Function Declaration, работать не будет:</p>
+																		<div data-trusted="1" class="code-example" data-highlight="[{&quot;start&quot;:18,&quot;end&quot;:18}]" data-prism-highlighted="1">
+																			<div class="codebox code-example__codebox">
+
+																				<div class="toolbar codebox__toolbar">
+																					<div class="toolbar__tool">
+																						<a href="#" title="выполнить" data-action="run" class="toolbar__button toolbar__button_run"></a>
+																					</div>
+																					<div class="toolbar__tool">
+																						<a href="#" title="открыть в песочнице" target="_blank" data-action="edit" class="toolbar__button toolbar__button_edit"></a>
+																					</div>
+																				</div>
+																				<div class="codebox__code" data-code="1">
+																					<pre class="line-numbers  language-javascript"><code class="block-highlight" data-start="18">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+																						<code class="mask">
+																						</code></code><code class=" language-javascript"><code class="token keyword">let</code> age <code class="token operator">=</code> <code class="token function">prompt</code><code class="token punctuation">(</code><code class="token string">"Сколько Вам лет?"</code><code class="token punctuation">,</code> <code class="token number">18</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+																						<code class="token comment">// в зависимости от условия объявляем функцию</code>
+																						<code class="token keyword">if</code> <code class="token punctuation">(</code>age <code class="token operator">&lt;</code> <code class="token number">18</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+
+																						<code class="token keyword">function</code> <code class="token function">welcome</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+																						<code class="token function">alert</code><code class="token punctuation">(</code><code class="token string">"Привет!"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+																						<code class="token punctuation">}</code>
+
+																						<code class="token punctuation">}</code> <code class="token keyword">else</code> <code class="token punctuation">{</code>
+
+																						<code class="token keyword">function</code> <code class="token function">welcome</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+																						<code class="token function">alert</code><code class="token punctuation">(</code><code class="token string">"Здравствуйте!"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+																						<code class="token punctuation">}</code>
+
+																						<code class="token punctuation">}</code>
+
+																						<code class="token comment">// ...не работает</code>
+																						<code class="token function">welcome</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// Error: welcome is not defined</code></code><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre>
+																					</div>
+																				</div>
+
+																			</div><p>Это произошло, так как объявление Function Declaration видимо только внутри блока кода, в котором располагается.</p>
+																			<p>Вот ещё один пример:</p>
+																			<div data-trusted="1" class="code-example" data-highlight="[{&quot;start&quot;:21,&quot;end&quot;:21},{&quot;start&quot;:9,&quot;end&quot;:9},{&quot;start&quot;:3,&quot;end&quot;:3}]" data-prism-highlighted="1">
+																				<div class="codebox code-example__codebox">
+
+																					<div class="toolbar codebox__toolbar">
+																						<div class="toolbar__tool">
+																							<a href="#" title="выполнить" data-action="run" class="toolbar__button toolbar__button_run"></a>
+																						</div>
+																						<div class="toolbar__tool">
+																							<a href="#" title="открыть в песочнице" target="_blank" data-action="edit" class="toolbar__button toolbar__button_edit"></a>
+																						</div>
+																					</div>
+																					<div class="codebox__code" data-code="1">
+																						<pre class="line-numbers  language-javascript"><code class="block-highlight" data-start="21">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+																							<code class="mask">
+																							</code></code><code class="block-highlight" data-start="9">
+
+
+
+
+
+
+
+
+																								<code class="mask">
+																								</code></code><code class="block-highlight" data-start="3">
+
+
+																									<code class="mask">
+																									</code></code><code class=" language-javascript"><code class="token keyword">let</code> age <code class="token operator">=</code> <code class="token number">16</code><code class="token punctuation">;</code> <code class="token comment">// присвоим для примера 16</code>
+
+																									<code class="token keyword">if</code> <code class="token punctuation">(</code>age <code class="token operator">&lt;</code> <code class="token number">18</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+																									<code class="token function">welcome</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code>               <code class="token comment">// \   (выполнится)</code>
+																									<code class="token comment">//  |</code>
+																									<code class="token keyword">function</code> <code class="token function">welcome</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>     <code class="token comment">//  |</code>
+																									<code class="token function">alert</code><code class="token punctuation">(</code><code class="token string">"Привет!"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>      <code class="token comment">//  |  Function Declaration доступно</code>
+																									<code class="token punctuation">}</code>                        <code class="token comment">//  |  во всём блоке кода, в котором объявлено</code>
+																									<code class="token comment">//  |</code>
+																									<code class="token function">welcome</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code>               <code class="token comment">// /   (выполнится)</code>
+
+																									<code class="token punctuation">}</code> <code class="token keyword">else</code> <code class="token punctuation">{</code>
+
+																									<code class="token keyword">function</code> <code class="token function">welcome</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+																									<code class="token function">alert</code><code class="token punctuation">(</code><code class="token string">"Здравствуйте!"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+																									<code class="token punctuation">}</code>
+																									<code class="token punctuation">}</code>
+
+																									<code class="token comment">// здесь фигурная скобка закрывается,</code>
+																									<code class="token comment">// поэтому Function Declaration, созданные внутри блока кода выше -- недоступны отсюда.</code>
+
+																									<code class="token function">welcome</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// Ошибка: welcome is not defined</code></code><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre>
+																								</div>
+																							</div>
+
+																						</div><p>Что можно сделать, чтобы <code>welcome</code> была видима снаружи <code>if</code>?</p>
+																						<p>Верным подходом будет воспользоваться функцией, объявленной при помощи Function Expression, и присвоить значение <code>welcome</code> переменной, объявленной снаружи <code>if</code>, что обеспечит нам нужную видимость.</p>
+																						<p>Такой код работает, как ожидалось:</p>
+																						<div data-trusted="1" class="code-example" data-highlight="[{&quot;start&quot;:18,&quot;end&quot;:18}]" data-prism-highlighted="1">
+																							<div class="codebox code-example__codebox">
+
+																								<div class="toolbar codebox__toolbar">
+																									<div class="toolbar__tool">
+																										<a href="#" title="выполнить" data-action="run" class="toolbar__button toolbar__button_run"></a>
+																									</div>
+																									<div class="toolbar__tool">
+																										<a href="#" title="открыть в песочнице" target="_blank" data-action="edit" class="toolbar__button toolbar__button_edit"></a>
+																									</div>
+																								</div>
+																								<div class="codebox__code" data-code="1">
+																									<pre class="line-numbers  language-javascript"><code class="block-highlight" data-start="18">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+																										<code class="mask">
+																										</code></code><code class=" language-javascript"><code class="token keyword">let</code> age <code class="token operator">=</code> <code class="token function">prompt</code><code class="token punctuation">(</code><code class="token string">"Сколько Вам лет?"</code><code class="token punctuation">,</code> <code class="token number">18</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+																										<code class="token keyword">let</code> welcome<code class="token punctuation">;</code>
+
+																										<code class="token keyword">if</code> <code class="token punctuation">(</code>age <code class="token operator">&lt;</code> <code class="token number">18</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+
+																										<code class="token function-variable function">welcome</code> <code class="token operator">=</code> <code class="token keyword">function</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+																										<code class="token function">alert</code><code class="token punctuation">(</code><code class="token string">"Привет!"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+																										<code class="token punctuation">}</code><code class="token punctuation">;</code>
+
+																										<code class="token punctuation">}</code> <code class="token keyword">else</code> <code class="token punctuation">{</code>
+
+																										<code class="token function-variable function">welcome</code> <code class="token operator">=</code> <code class="token keyword">function</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+																										<code class="token function">alert</code><code class="token punctuation">(</code><code class="token string">"Здравствуйте!"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+																										<code class="token punctuation">}</code><code class="token punctuation">;</code>
+
+																										<code class="token punctuation">}</code>
+
+																										<code class="token function">welcome</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// теперь всё в порядке</code></code><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre>
+																									</div>
+																								</div>
+
+																							</div><p>Можно упростить этот код ещё сильнее, используя условный оператор <code>?</code>:</p>
+																							<div data-trusted="1" class="code-example" data-highlight="[{&quot;start&quot;:6,&quot;end&quot;:6}]" data-prism-highlighted="1">
+																								<div class="codebox code-example__codebox">
+
+																									<div class="toolbar codebox__toolbar">
+																										<div class="toolbar__tool">
+																											<a href="#" title="выполнить" data-action="run" class="toolbar__button toolbar__button_run"></a>
+																										</div>
+																										<div class="toolbar__tool">
+																											<a href="#" title="открыть в песочнице" target="_blank" data-action="edit" class="toolbar__button toolbar__button_edit"></a>
+																										</div>
+																									</div>
+																									<div class="codebox__code" data-code="1">
+																										<pre class="line-numbers  language-javascript"><code class="block-highlight" data-start="6">
+
+
+
+
+
+																											<code class="mask">
+																											</code></code><code class=" language-javascript"><code class="token keyword">let</code> age <code class="token operator">=</code> <code class="token function">prompt</code><code class="token punctuation">(</code><code class="token string">"Сколько Вам лет?"</code><code class="token punctuation">,</code> <code class="token number">18</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+																											<code class="token keyword">let</code> welcome <code class="token operator">=</code> <code class="token punctuation">(</code>age <code class="token operator">&lt;</code> <code class="token number">18</code><code class="token punctuation">)</code> <code class="token operator">?</code>
+																											<code class="token keyword">function</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code> <code class="token function">alert</code><code class="token punctuation">(</code><code class="token string">"Привет!"</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token punctuation">}</code> <code class="token punctuation">:</code>
+																											<code class="token keyword">function</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code> <code class="token function">alert</code><code class="token punctuation">(</code><code class="token string">"Здравствуйте!"</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token punctuation">}</code><code class="token punctuation">;</code>
+
+																											<code class="token function">welcome</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// теперь всё в порядке</code></code><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre>
+																										</div>
+																									</div>
+
+																								</div><div class="important important_smart">
+																									<div class="important__header"><span class="important__type">Когда использовать Function Declaration, а когда Function Expression?</span></div>
+																									<div class="important__content"><p>Как правило, если нам понадобилась функция, в первую очередь нужно рассматривать синтаксис Function Declaration, который мы использовали до этого. Он даёт нам больше свободы в том, как мы можем организовывать код. Функции, объявленные таким образом, можно вызывать до их объявления.</p>
+																										<p>Также функции вида <code>function f(…) {…}</code> чуть более заметны в коде, чем <code>let f = function(…) {…}</code>. Function Declaration легче «ловятся глазами».</p>
+																										<p>…Но если Function Declaration нам не подходит по какой-то причине (мы рассмотрели это в примере выше), то можно использовать объявление при помощи Function Expression.</p>
+																									</div></div>
+																									<h2><a class="main__anchor" name="itogo" href="#itogo">Итого</a></h2><ul>
+																										<li>Функции – это значения. Они могут быть присвоены, скопированы или объявлены в другом месте кода.</li>
+																										<li>Если функция объявлена как отдельная инструкция в основном потоке кода, то это Function Declaration.</li>
+																										<li>Если функция была создана как часть выражения, то считается, что эта функция объявлена при помощи Function Expression.</li>
+																										<li>Function Declaration обрабатываются перед выполнением блока кода. Они видны во всём блоке.</li>
+																										<li>Функции, объявленные при помощи Function Expression, создаются, только когда поток выполнения достигает их.</li>
+																									</ul>
+																									<p>В большинстве случаев, когда нам нужно создать функцию, предпочтительно использовать Function Declaration, т.к. функция будет видима до своего объявления в коде. Это позволяет более гибко организовывать код, и улучшает его читаемость.</p>
+																									<p>Таким образом, мы должны прибегать к объявлению функций при помощи Function Expression в случае, когда синтаксис Function Declaration не подходит для нашей задачи. Мы рассмотрели несколько таких примеров в этой главе, и рассмотрим их ещё больше в будущем.</p>
+			
+		</div>
+	</div>
+</body>
+
+</html>

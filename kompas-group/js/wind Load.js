@@ -1,5 +1,5 @@
 // список городов
-var citiesWindLoad = {
+let citiesWindLoad = {
 	'Киев':37,
 	'Севастополь':46,
 	//АР Крым
@@ -194,7 +194,7 @@ var citiesWindLoad = {
 /*****************************************************************************/
 
 // значения коэффициента "γfm" в зависимости от среднего периода повторяемости
-var medialRepeatabilityPeriod = {
+let medialRepeatabilityPeriod = {
 	'5 лет':0.55,
 	'10 лет':0.69,
 	'15 лет':0.77,
@@ -212,33 +212,33 @@ var medialRepeatabilityPeriod = {
 /*****************************************************************************/
 
 // значения высоты сооружения
-var constructionHight = ['≤ 5 м', '10 м', '20 м', '40 м', '60 м', '80 м', '100 м', '150 м', '200 м'];
+let constructionHight = ['≤ 5 м', '10 м', '20 м', '40 м', '60 м', '80 м', '100 м', '150 м', '200 м'];
 
 // значения "Ch"
-var Ch_Value_Table1_Type1 = ['0.90', '1.20', '1.35', '1.60', '1.75', '1.90', '1.95', '2.15', '2.30'];
-var Ch_Value_Table1_Type2 = ['0.70', '0.90', '1.15', '1.45', '1.65', '1.75', '1.85', '2.10', '2.20'];
-var Ch_Value_Table1_Type3 = ['0.40', '0.60', '0.85', '1.15', '1.35', '1.50', '1.60', '1.85', '2.05'];
-var Ch_Value_Table1_Type4 = ['0.20', '0.40', '0.65', '1.00', '1.10', '1.20', '1.25', '1.35', '1.45'];
+let Ch_Value_Table1_Type1 = ['0.90', '1.20', '1.35', '1.60', '1.75', '1.90', '1.95', '2.15', '2.30'];
+let Ch_Value_Table1_Type2 = ['0.70', '0.90', '1.15', '1.45', '1.65', '1.75', '1.85', '2.10', '2.20'];
+let Ch_Value_Table1_Type3 = ['0.40', '0.60', '0.85', '1.15', '1.35', '1.50', '1.60', '1.85', '2.05'];
+let Ch_Value_Table1_Type4 = ['0.20', '0.40', '0.65', '1.00', '1.10', '1.20', '1.25', '1.35', '1.45'];
 
-var Ch_Value_Table2_Type1 = ['1.40', '1.80', '1.95', '2.25', '2.45', '2.65', '2.70', '2.95', '3.10'];
-var Ch_Value_Table2_Type2 = ['1.20', '1.50', '1.85', '2.20', '2.45', '2.60', '2.70', '3.00', '3.15'];
-var Ch_Value_Table2_Type3 = ['0.90', '1.20', '1.55', '2.00', '2.25', '2.45', '2.60', '2.90', '3.20'];
-var Ch_Value_Table2_Type4 = ['0.60', '1.00', '1.40', '1.95', '2.25', '2.50', '2.70', '3.10', '3.40'];
+let Ch_Value_Table2_Type1 = ['1.40', '1.80', '1.95', '2.25', '2.45', '2.65', '2.70', '2.95', '3.10'];
+let Ch_Value_Table2_Type2 = ['1.20', '1.50', '1.85', '2.20', '2.45', '2.60', '2.70', '3.00', '3.15'];
+let Ch_Value_Table2_Type3 = ['0.90', '1.20', '1.55', '2.00', '2.25', '2.45', '2.60', '2.90', '3.20'];
+let Ch_Value_Table2_Type4 = ['0.60', '1.00', '1.40', '1.95', '2.25', '2.50', '2.70', '3.10', '3.40'];
 
 /*****************************************************************************/
 
 // количество коэффициентов "γfm"
-/* var counter_γfm = 0;
-for (var key in medialRepeatabilityPeriod) {
+/* let counter_γfm = 0;
+for (let key in medialRepeatabilityPeriod) {
 	counter_γfm++;
 };
 console.log('Количество коэффициентов "γfm": ' + counter_γfm); */
 console.log('Количество коэффициентов "γfm": ' + Object.keys(medialRepeatabilityPeriod).length);
 
 // переменная для создания тега "options"
-var options_γfm = '';
+let options_γfm = '';
 
-for (var key in medialRepeatabilityPeriod) {
+for (let key in medialRepeatabilityPeriod) {
 	options_γfm += '<option>' + key + '</option>';
 };
 
@@ -248,17 +248,17 @@ document.getElementById('medialRepeatabilityPeriodList').innerHTML = options_γf
 /*****************************************************************************/
 
 // количество городов
-/* var counterCity = 0;
-for (var key in citiesWindLoad) {
+/* let counterCity = 0;
+for (let key in citiesWindLoad) {
 	counterCity++;
 };
 console.log("Количество городов: " + counterCity); */
 console.log("Количество городов: " + Object.keys(citiesWindLoad).length);
 
 // переменная для создания тега "options"
-var optionsCities = '';
+let optionsCities = '';
 
-for (var key in citiesWindLoad) {
+for (let key in citiesWindLoad) {
 	optionsCities += '<option>' + key + '</option>';
 };
 
@@ -268,9 +268,9 @@ document.getElementById('citiesList').innerHTML = optionsCities;
 /*****************************************************************************/
 
 // переменная для создания тега "options"
-var options_constructionHight = '<option disabled selected>Укажите Z, м:</option>';
+let options_constructionHight = '<option disabled selected>Укажите Z, м:</option>';
 
-for (var i = 0; i < constructionHight.length; i++) {
+for (let i = 0; i < constructionHight.length; i++) {
 	options_constructionHight += '<option>' + constructionHight[i] + '</option>';
 };
 
@@ -282,26 +282,26 @@ document.getElementById('constructionHight').innerHTML = options_constructionHig
 // получить значение коэффициента высоты в зависимости от выбранных из списков значений
 function WmGetSelectCh() {
 	// получить значение коэффициента "γfm"
-	var γfm = document.getElementById('γfm').value;
+	let γfm = document.getElementById('γfm').value;
 	
 	// получить значение "Wo"
-	var Wo = document.getElementById('Wo').value;
+	let Wo = document.getElementById('Wo').value;
 	
 	// получить значения ПОДкоэффициентов "C"
-	var Caer = document.getElementById('Caer').value;
-	var Ch = document.getElementById('Ch'); // значение без .value (!)
-	var Calt = document.getElementById('Calt').value;
-	var Crel = document.getElementById('Crel').value;
-	var Cdir = document.getElementById('Cdir').value;
-	var Cd = document.getElementById('Cd').value;
+	let Caer = document.getElementById('Caer').value;
+	let Ch = document.getElementById('Ch'); // значение без .value (!)
+	let Calt = document.getElementById('Calt').value;
+	let Crel = document.getElementById('Crel').value;
+	let Cdir = document.getElementById('Cdir').value;
+	let Cd = document.getElementById('Cd').value;
 	
 	// значения, от которых зависит значение "Ch"
-	var selected_OFP = document.getElementById('ownFluctuationPeriod').value;
-	var selected_terrainType = document.getElementById('terrainType').value;
-	var selected_constructionHight = document.getElementById('constructionHight').value;
+	let selected_OFP = document.getElementById('ownFluctuationPeriod').value;
+	let selected_terrainType = document.getElementById('terrainType').value;
+	let selected_constructionHight = document.getElementById('constructionHight').value;
 	
-	var selected_Ch_Value_Type;
-	var foundNumber;
+	let selected_Ch_Value_Type;
+	let foundNumber;
 	
 	if ( (selected_OFP == '< 0.25 сек.') & (selected_terrainType == 'ТипI') ) {
 		selected_Ch_Value_Type = Ch_Value_Table1_Type1;
@@ -310,8 +310,10 @@ function WmGetSelectCh() {
 		// найти номер в массиве выбранного значения из списка "Z, м"
 		foundNumber = constructionHight.indexOf(selected_constructionHight);
 		//console.log(foundNumber);
+
 		// получить значение коэффициента "Ch" в зависимости от выбранного из списка "Z, м"
 		Ch = Ch.value = selected_Ch_Value_Type[foundNumber];
+
 	} else if ( (selected_OFP == '< 0.25 сек.') & (selected_terrainType == 'ТипII') ) {
 		selected_Ch_Value_Type = Ch_Value_Table1_Type2;
 		//console.log(selected_Ch_Value_Type);
@@ -319,8 +321,10 @@ function WmGetSelectCh() {
 		// найти номер в массиве выбранного значения из списка "Z, м"
 		foundNumber = constructionHight.indexOf(selected_constructionHight);
 		//console.log(foundNumber);
+
 		// получить значение коэффициента "Ch" в зависимости от выбранного из списка "Z, м"
 		Ch = Ch.value = selected_Ch_Value_Type[foundNumber];
+
 	} else if ( (selected_OFP == '< 0.25 сек.') & (selected_terrainType == 'ТипIII') ) {
 		selected_Ch_Value_Type = Ch_Value_Table1_Type3;
 		//console.log(selected_Ch_Value_Type);
@@ -328,8 +332,10 @@ function WmGetSelectCh() {
 		// найти номер в массиве выбранного значения из списка "Z, м"
 		foundNumber = constructionHight.indexOf(selected_constructionHight);
 		//console.log(foundNumber);
+
 		// получить значение коэффициента "Ch" в зависимости от выбранного из списка "Z, м"
 		Ch = Ch.value = selected_Ch_Value_Type[foundNumber];
+
 	} else if ( (selected_OFP == '< 0.25 сек.') & (selected_terrainType == 'ТипIV') ) {
 		selected_Ch_Value_Type = Ch_Value_Table1_Type4;
 		//console.log(selected_Ch_Value_Type);
@@ -337,8 +343,10 @@ function WmGetSelectCh() {
 		// найти номер в массиве выбранного значения из списка "Z, м"
 		foundNumber = constructionHight.indexOf(selected_constructionHight);
 		//console.log(foundNumber);
+
 		// получить значение коэффициента "Ch" в зависимости от выбранного из списка "Z, м"
 		Ch = Ch.value = selected_Ch_Value_Type[foundNumber];
+
 	} else if ( (selected_OFP == '> 0.25 сек.') & (selected_terrainType == 'ТипI') ) {
 		selected_Ch_Value_Type = Ch_Value_Table2_Type1;
 		//console.log(selected_Ch_Value_Type);
@@ -346,17 +354,21 @@ function WmGetSelectCh() {
 		// найти номер в массиве выбранного значения из списка "Z, м"
 		foundNumber = constructionHight.indexOf(selected_constructionHight);
 		//console.log(foundNumber);
+
 		// получить значение коэффициента "Ch" в зависимости от выбранного из списка "Z, м"
 		Ch = Ch.value = selected_Ch_Value_Type[foundNumber];
+
 	} else if ( (selected_OFP == '> 0.25 сек.') & (selected_terrainType == 'ТипII') ) {
-		var selected_Ch_Value_Type = Ch_Value_Table2_Type2;
+		selected_Ch_Value_Type = Ch_Value_Table2_Type2;
 		//console.log(selected_Ch_Value_Type);
 		
 		// найти номер в массиве выбранного значения из списка "Z, м"
 		foundNumber = constructionHight.indexOf(selected_constructionHight);
 		//console.log(foundNumber);
+
 		// получить значение коэффициента "Ch" в зависимости от выбранного из списка "Z, м"
 		Ch = Ch.value = selected_Ch_Value_Type[foundNumber];
+
 	} else if ( (selected_OFP == '> 0.25 сек.') & (selected_terrainType == 'ТипIII') ) {
 		selected_Ch_Value_Type = Ch_Value_Table2_Type3;
 		//console.log(selected_Ch_Value_Type);
@@ -364,8 +376,10 @@ function WmGetSelectCh() {
 		// найти номер в массиве выбранного значения из списка "Z, м"
 		foundNumber = constructionHight.indexOf(selected_constructionHight);
 		//console.log(foundNumber);
+
 		// получить значение коэффициента "Ch" в зависимости от выбранного из списка "Z, м"
 		Ch = Ch.value = selected_Ch_Value_Type[foundNumber];
+
 	} else if ( (selected_OFP == '> 0.25 сек.') & (selected_terrainType == 'ТипIV') ) {
 		selected_Ch_Value_Type = Ch_Value_Table2_Type4;
 		//console.log(selected_Ch_Value_Type);
@@ -373,6 +387,7 @@ function WmGetSelectCh() {
 		// найти номер в массиве выбранного значения из списка "Z, м"
 		foundNumber = constructionHight.indexOf(selected_constructionHight);
 		//console.log(foundNumber);
+
 		// получить значение коэффициента "Ch" в зависимости от выбранного из списка "Z, м"
 		Ch = Ch.value = selected_Ch_Value_Type[foundNumber];
 	};
@@ -380,19 +395,22 @@ function WmGetSelectCh() {
 	if (!Ch) Ch = document.getElementById('Ch').value = '';
 	
 	// получить местоположение коэффициента "C"
-	var C = document.getElementById('C');
+	let C = document.getElementById('C');
 	
 	// изменить цвет текста коэффициента "C"
 	//C.style.color = 'red';
+
 	// вычислить значение коэффициента "C"
 	C.innerHTML = Math.round(Caer * Ch * Calt * Crel * Cdir * Cd* 100) / 100;
 	
 	if (foundNumber == undefined) C.innerHTML = 0;
 	
 	// получить местоположение "Wm"
-	var Wm = document.getElementById('Wm');
+	let Wm = document.getElementById('Wm');
+
 	// изменить цвет текста "Wm"
 	//Wm.style.color = 'red';
+
 	// вычислить значение "Wm"
 	Wm.innerHTML = Math.round(γfm * Wo * C.innerHTML * 100) / 100;
 }
@@ -402,33 +420,37 @@ function WmGetSelectCh() {
 // расчет "Wm" в зависимости от выбранных значений из списка "T, лет"
 function WmGetSelect_γfm() {
 	// получить значение коэффициента "γfm" в зависимости от выбранного из списка "T, лет"
-	var selected_γfm = document.getElementById('medialRepeatabilityPeriod').value;
+	let selected_γfm = document.getElementById('medialRepeatabilityPeriod').value;
 	//console.log(medialRepeatabilityPeriod[selected_γfm]);
-	var γfm = document.getElementById('γfm').value = medialRepeatabilityPeriod[selected_γfm];
+	let γfm = document.getElementById('γfm').value = medialRepeatabilityPeriod[selected_γfm];
 	if (!γfm) document.getElementById('γfm').value = '';
 	
 	// получить значение "Wo"
-	var Wo = document.getElementById('Wo').value;
+	let Wo = document.getElementById('Wo').value;
 	
 	// получить значения ПОДкоэффициентов "C"
-	var Caer = document.getElementById('Caer').value;
-	var Ch = document.getElementById('Ch').value;
-	var Calt = document.getElementById('Calt').value;
-	var Crel = document.getElementById('Crel').value;
-	var Cdir = document.getElementById('Cdir').value;
-	var Cd = document.getElementById('Cd').value;
+	let Caer = document.getElementById('Caer').value;
+	let Ch = document.getElementById('Ch').value;
+	let Calt = document.getElementById('Calt').value;
+	let Crel = document.getElementById('Crel').value;
+	let Cdir = document.getElementById('Cdir').value;
+	let Cd = document.getElementById('Cd').value;
 	
 	// получить местоположение коэффициента "C"
-	var C = document.getElementById('C');
+	let C = document.getElementById('C');
+
 	// изменить цвет текста коэффициента "C"
 	//C.style.color = 'red';
+
 	// вычислить значение коэффициента "C"
 	C.innerHTML = Math.round(Caer * Ch * Calt * Crel * Cdir * Cd* 100) / 100;
 	
 	// получить местоположение "Wm"
-	var Wm = document.getElementById('Wm');
+	let Wm = document.getElementById('Wm');
+
 	// изменить цвет текста "Wm"
 	//Wm.style.color = 'red';
+
 	// вычислить значение "Wm"
 	Wm.innerHTML = Math.round(γfm * Wo * C.innerHTML * 100) / 100;
 	if (!γfm) Wm.innerHTML = 0;
@@ -439,34 +461,39 @@ function WmGetSelect_γfm() {
 // расчет "Wm" в зависимости от выбранных значений из списка городов
 function WmGetSelectCity() {
 	// получить значение коэффициента "γfm"
-	var γfm = document.getElementById('γfm').value;
+	let γfm = document.getElementById('γfm').value;
 	
 	// получить значение "Wo" в зависимости от выбранного из списка города
-	var selectedCity = document.getElementById('cities').value;
-	//console.log(citiesWindLoad[selectedCity]);
+	let selectedCity = document.getElementById('cities').value;
+	// console.log(citiesWindLoad[selectedCity]);
+
 	// получить значение "Wo"
-	var Wo = document.getElementById('Wo').value = citiesWindLoad[selectedCity];
+	let Wo = document.getElementById('Wo').value = citiesWindLoad[selectedCity];
 	if (!Wo) document.getElementById('Wo').value = '';
 	
 	// получить значения ПОДкоэффициентов "C"
-	var Caer = document.getElementById('Caer').value;
-	var Ch = document.getElementById('Ch').value;
-	var Calt = document.getElementById('Calt').value;
-	var Crel = document.getElementById('Crel').value;
-	var Cdir = document.getElementById('Cdir').value;
-	var Cd = document.getElementById('Cd').value;
+	let Caer = document.getElementById('Caer').value;
+	let Ch = document.getElementById('Ch').value;
+	let Calt = document.getElementById('Calt').value;
+	let Crel = document.getElementById('Crel').value;
+	let Cdir = document.getElementById('Cdir').value;
+	let Cd = document.getElementById('Cd').value;
 	
 	// получить местоположение коэффициента "C"
-	var C = document.getElementById('C');
+	let C = document.getElementById('C');
+
 	// изменить цвет текста коэффициента "C"
 	//C.style.color = 'red';
+
 	// вычислить значение коэффициента "C"
 	C.innerHTML = Math.round(Caer * Ch * Calt * Crel * Cdir * Cd* 100) / 100;
 	
 	// получить местоположение "Wm"
-	var Wm = document.getElementById('Wm');
+	let Wm = document.getElementById('Wm');
+
 	// изменить цвет текста "Wm"
 	//Wm.style.color = 'red';
+
 	// вычислить значение "Wm"
 	Wm.innerHTML = Math.round(γfm * Wo * C.innerHTML * 100) / 100;
 	if (!Wo) Wm.innerHTML = 0;
@@ -477,30 +504,34 @@ function WmGetSelectCity() {
 // расчет "Wm" по введённым значениям вручную
 function Wm() {
 	// получить значение коэффициента "γfm"
-	var γfm = document.getElementById('γfm').value;
+	let γfm = document.getElementById('γfm').value;
 	
 	// получить значение "Wo"
-	var Wo = document.getElementById('Wo').value;
+	let Wo = document.getElementById('Wo').value;
 	
 	// получить значения ПОДкоэффициентов "C"
-	var Caer = document.getElementById('Caer').value;
-	var Ch = document.getElementById('Ch').value;
-	var Calt = document.getElementById('Calt').value;
-	var Crel = document.getElementById('Crel').value;
-	var Cdir = document.getElementById('Cdir').value;
-	var Cd = document.getElementById('Cd').value;
+	let Caer = document.getElementById('Caer').value;
+	let Ch = document.getElementById('Ch').value;
+	let Calt = document.getElementById('Calt').value;
+	let Crel = document.getElementById('Crel').value;
+	let Cdir = document.getElementById('Cdir').value;
+	let Cd = document.getElementById('Cd').value;
 	
 	// получить местоположение коэффициента "C"
-	var C = document.getElementById('C');
+	let C = document.getElementById('C');
+
 	// изменить цвет текста коэффициента "C"
 	//C.style.color = 'red';
+
 	// вычислить значение коэффициента "C"
 	C.innerHTML = Math.round(Caer * Ch * Calt * Crel * Cdir * Cd* 100) / 100;
 	
 	// получить местоположение "Wm"
-	var Wm = document.getElementById('Wm');
+	let Wm = document.getElementById('Wm');
+
 	// изменить цвет текста "Wm"
 	//Wm.style.color = 'red';
+
 	// вычислить значение "Wm"
 	Wm.innerHTML = Math.round(γfm * Wo * C.innerHTML * 100) / 100;
 };

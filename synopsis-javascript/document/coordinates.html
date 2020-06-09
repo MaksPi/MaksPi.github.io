@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Координаты</title>
+	
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/fonts.css">
+</head>
+<body>
+	<div class="page-wrapper">
+		<div class="page">
+			<h1 class="page__title">Координаты</h1>
+			<p>Чтобы передвигать элементы по экрану, нужно познакомиться с системами координат.</p>
+			<p>Большинство соответствующих методов JavaScript работают в одной из двух указанных ниже систем координат:</p>
+			<ol>
+				<li><strong>Относительно окна браузера</strong> – как <code>position:fixed</code>, отсчёт идёт от верхнего левого угла окна.
+					<ul>
+						<li>эти координаты будут обозначены как <code>clientX/clientY</code>, причина выбора таких имён будет ясна позже, когда будут изочены свойства событий.</li>
+					</ul>
+				</li>
+				<li><strong>Относительно документа</strong> – как <code>position:absolute</code> на уровне документа, отсчёт идёт от верхнего левого угла документа.
+					<ul>
+						<li>эти координаты будут обозначены как <code>pageX/pageY</code>.</li>
+					</ul>
+				</li>
+			</ol>
+			<p>Когда страница полностью прокручена в самое начало, то верхний левый угол окна совпадает с левым верхним углом документа, при этом обе этих системы координат тоже совпадают. Но если происходит прокрутка, то координаты элементов в контексте окна меняются, так как они двигаются, но в то же время их координаты относительно документа остаются такими же.</p>
+			<p>На приведённой картинке взята точка в документе и показаны её координат до прокрутки (слева) и после (справа):</p>
+			<div class="image" style="width: 728px">
+				<iframe style="width: 728px; height: calc(358px + 4px)" src="../html/document-and-window-coordinates-scrolled.html"></iframe>
+				<div class="image__ratio" style="padding-top:49.175824175824175%"></div>
+			</div>
+			<p>При прокрутке документа:</p>
+			<ul>
+				<li><code>pageY</code> – координата точки относительно документа осталась без изменений, так как отсчёт по-прежнему ведётся от верхней границы документа (сейчас она прокручена наверх).</li>
+				<li><code>clientY</code> – координата точки относительно окна изменилась (стрелка на рисунке стала короче), так как точка стала ближе к верхней границе окна.</li>
+			</ul>
+			<h2>Координаты относительно окна: getBoundingClientRect</h2>
+			<p>Метод <code>elem.getBoundingClientRect()</code> возвращает координаты в контексте окна для минимального по размеру прямоугольника, который заключает в себе элемент <code>elem</code>, в виде объекта встроенного класса <a href="https://www.w3.org/TR/geometry-1/#domrect">DOMRect</a>.</p>
+			<p>Основные свойства объекта типа <code>DOMRect</code>:</p>
+			<ul>
+				<li><code>x/y</code> – X/Y-координаты начала прямоугольника относительно окна,</li>
+				<li><code>width/height</code> – ширина/высота прямоугольника (могут быть отрицательными).</li>
+			</ul>
+			<p>Дополнительные, «зависимые», свойства:</p>
+			<ul>
+				<li><code>top/bottom</code> – Y-координата верхней/нижней границы прямоугольника,</li>
+				<li><code>left/right</code> – X-координата левой/правой границы прямоугольника.</li>
+			</ul>
+			<p>Чтобы увидеть координаты кнопки относительно окна, нужно кликнуть на неё:</p>
+			<p><input id="brTest" type="button" value="Показать результат вызова button.getBoundingClientRect() для этой кнопки" onclick="showRect(this)"></p>
+			<script src="../js/showRect.js"></script>
+			<p>Если прокрутить страницу, то расположение кнопки в окне поменяется, и, соответственно, её координаты в контексте окна тоже (при вертикальной прокрутке – <code>y/top/bottom</code>).</p>
+			<p>Вот картинка с результатами вызова <code>elem.getBoundingClientRect()</code>:</p>
+			<div class="image" style="width: 521px">
+				<iframe style="width: 521px; height: calc(411px + 4px)" src="../html/coordinates.html"></iframe>
+				<div class="image__ratio" style="padding-top:78.88675623800384%"></div>
+			</div>
+			<p>Как видно на картинке выше, <code>x/y</code> и <code>width/height</code> уже точно задают прямоугольник. Остальные свойства могут быть легко вычислены на их основе:</p>
+			<ul>
+				<li><code>left = x</code></li>
+				<li><code>top = y</code></li>
+				<li><code>right = x + width</code></li>
+				<li><code>bottom = y + height</code></li>
+			</ul>
+			<p>Стоит заметить:</p>
+			<ul>
+				<li>Координаты могут считаться с десятичной частью, например <code>10.5</code>. Это нормально, ведь браузер использует дроби в своих внутренних вычислениях. Мы не обязаны округлять значения при установке <code>style.left/top</code>.</li>
+				<li>Координаты могут быть отрицательными. Например, если страница прокручена так, что элемент <code>elem</code> ушёл вверх за пределы окна, то вызов <code>elem.getBoundingClientRect().top</code> вернёт отрицательное значение.</li>
+			</ul>
+			<div class="important important_smart">
+				<div class="important__header">
+					<span class="important__type">Зачем вообще нужны зависимые свойства? Для чего существуют <code>top/left</code>, если есть <code>x/y</code>?</span>
+				</div>
+				<div class="important__content"><p>С математической точки зрения, прямоугольник однозначно задаётся начальной точкой <code>(x,y)</code> и вектором направления <code>(width,height)</code>.</p>
+					<p>Так что дополнительные зависимые свойства существуют лишь для удобства.</p>
+					<p>Что же касается <code>top/left</code>, то они на самом деле не всегда равны <code>x/y</code>. Технически, значения <code>width/height</code> могут быть отрицательными. Это позволяет задать «направленный» прямоугольник, например, для выделения мышью с отмеченным началом и концом.</p>
+					<p>То есть, отрицательные значения <code>width/height</code> означают, что прямоугольник «растет» влево-вверх из правого угла.</p>
+					<p>Вот прямоугольник с отрицательными <code>width</code> и <code>height</code> (например, <code>width=-200</code>, <code>height=-100</code>):</p>
+					<div class="image" style="width: 521px">
+						<iframe style="width: 521px; height: calc(355px + 4px)" src="../html/coordinates-negative.html"></iframe>
+						<div class="image__ratio" style="padding-top:68.13819577735126%"></div>
+					</div>
+					<p>Как видно на картинке выше, свойства <code>left/top</code> при этом не равны <code>x/y</code>.</p>
+					<p>Впрочем, на практике результат вызова <code>elem.getBoundingClientRect()</code> всегда возвращает положительные значения для ширины/высоты. Здесь упомянуты отрицательные <code>width/height</code> лишь для того, чтобы было понятно, зачем существуют эти с виду дублирующие свойства.</p>
+				</div>
+			</div>
+			<div class="important important_warn">
+				<div class="important__header">
+					<span class="important__type">Internet Explorer и Edge: не поддерживают <code>x/y</code></span>
+				</div>
+				<div class="important__content">
+					<p>Internet Explorer и Edge не поддерживают свойства <code>x/y</code> по историческим причинам.</p>
+					<p>Таким образом, можно либо сделать полифил (добавив соответствующие геттеры в <code>DomRect.prototype</code>), либо использовать <code>top/left</code>, так как это всегда одно и то же при положительных <code>width/height</code>, в частности – в результате вызова <code>elem.getBoundingClientRect()</code>.</p>
+				</div>
+			</div>
+			<div class="important important_warn">
+				<div class="important__header">
+					<span class="important__type">Координаты right/bottom отличаются от одноимённых CSS-свойств</span>
+				</div>
+				<div class="important__content">
+					<p>Есть очевидное сходство между координатами относительно окна и CSS <code>position:fixed</code>.</p>
+					<p>Но в CSS свойство <code>right</code> означает расстояние от правого края, и свойство <code>bottom</code> означает расстояние от нижнего края окна браузера.</p>
+					<p>Если взглянуть на картинку выше, то видно, что в JavaScript это не так. Все координаты в контексте окна считаются от верхнего левого угла, включая <code>right/bottom</code>.</p>
+				</div>
+			</div>
+			<h2>elementFromPoint(x, y)</h2>
+			<p>Вызов <code>document.elementFromPoint(x, y)</code> возвращает самый глубоко вложенный элемент в окне, находящийся по координатам <code>(x, y)</code>.</p>
+			<p>Синтаксис:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">let</code> elem <code class="token operator">=</code> document<code class="token punctuation">.</code><code class="token function">elementFromPoint</code><code class="token punctuation">(</code>x<code class="token punctuation">,</code> y<code class="token punctuation">)</code><code class="token punctuation">;</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(1);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Например, код ниже выделяет с помощью стилей и выводит имя тега элемента, который сейчас в центре окна браузера:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">let</code> centerX <code class="token operator">=</code> document<code class="token punctuation">.</code>documentElement<code class="token punctuation">.</code>clientWidth <code class="token operator">/</code> <code class="token number">2</code><code class="token punctuation">;</code><br>
+							<code class="token keyword">let</code> centerY <code class="token operator">=</code> document<code class="token punctuation">.</code>documentElement<code class="token punctuation">.</code>clientHeight <code class="token operator">/</code> <code class="token number">2</code><code class="token punctuation">;</code><br><br>
+							<code class="token keyword">let</code> elem <code class="token operator">=</code> document<code class="token punctuation">.</code><code class="token function">elementFromPoint</code><code class="token punctuation">(</code>centerX<code class="token punctuation">,</code> centerY<code class="token punctuation">)</code><code class="token punctuation">;</code><br><br>
+							elem<code class="token punctuation">.</code>style<code class="token punctuation">.</code>background <code class="token operator">=</code> <code class="token string">"red"</code><code class="token punctuation">;</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code>elem<code class="token punctuation">.</code>tagName<code class="token punctuation">)</code><code class="token punctuation">;</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(7);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Поскольку используются координаты в контексте окна, то элемент может быть разным, в зависимости от того, какая сейчас прокрутка.</p>
+			<div class="important important_warn">
+				<div class="important__header">
+					<span class="important__type">Для координат за пределами окна метод <code>elementFromPoint</code> возвращает <code>null</code></span>
+				</div>
+				<div class="important__content">
+					<p>Метод <code>document.elementFromPoint(x,y)</code> работает, только если координаты <code>(x,y)</code> относятся к видимой части содержимого окна.</p>
+					<p>Если любая из координат представляет собой отрицательное число или превышает размеры окна, то возвращается <code>null</code>.</p>
+					<p>Вот типичная ошибка, которая может произойти, если в коде нет соответствующей проверки:</p>
+					<div class="code-example">
+						<div class="codebox">
+							<div class="line-numbers language-javascript">
+								<code class="language-javascript">
+									<code class="token keyword">let</code> elem <code class="token operator">=</code> document<code class="token punctuation">.</code><code class="token function">elementFromPoint</code><code class="token punctuation">(</code>x<code class="token punctuation">,</code> y<code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+									<code class="token comment">// если координаты ведут за пределы окна, то elem = null</code><br>
+									elem<code class="token punctuation">.</code>style<code class="token punctuation">.</code>background <code class="token operator">=</code> <code class="token string">''</code><code class="token punctuation">;</code> <code class="token comment">// Ошибка!</code>
+								</code>
+								<span class="line-numbers-rows">
+									<script src="../js/line-numbers-rows.js"></script>
+									<script>rowsNumbers(3);</script>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<h2>Применение для fixed позиционирования</h2>
+			<p>Чаще всего нужны координаты для позиционирования чего-либо.</p>
+			<p>Чтобы показать что-то около нужного элемента, нужно вызвать <code>getBoundingClientRect</code>, чтобы получить его координаты элемента, а затем использовать CSS-свойство <code>position</code> вместе с <code>left/top</code> (или <code>right/bottom</code>).</p>
+			<p>Например, функция <code>createMessageUnder(elem, html)</code> ниже показывает сообщение под элементом <code>elem</code>:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">let</code> elem <code class="token operator">=</code> document<code class="token punctuation">.</code><code class="token function">getElementById</code><code class="token punctuation">(</code><code class="token string">"coords-show-mark"</code><code class="token punctuation">)</code><code class="token punctuation">;</code><br><br>
+							<code class="token keyword">function</code> <code class="token function">createMessageUnder</code><code class="token punctuation">(</code><code class="token parameter">elem<code class="token punctuation">,</code> html</code><code class="token punctuation">)</code> <code class="token punctuation">{</code><br>
+							<code class="token comment rows-double-indentation">// создаём элемент, который будет содержать сообщение</code><br>
+							<code class="token keyword rows-double-indentation">let</code> message <code class="token operator">=</code> document<code class="token punctuation">.</code><code class="token function">createElement</code><code class="token punctuation">(</code><code class="token string">'div'</code><code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+							<code class="token comment rows-double-indentation">// для стилей лучше было бы использовать css-класс здесь</code><br>
+							<code class="token rows-double-indentation">message</code><code class="token punctuation">.</code>style<code class="token punctuation">.</code>cssText <code class="token operator">=</code> <code class="token string">"position:fixed; color: red"</code><code class="token punctuation">;</code><br><br>
+							<code class="token comment rows-double-indentation">// устанавливаем координаты элементу, не забываем про "px"!</code><br>
+							<code class="token keyword rows-double-indentation">let</code> coords <code class="token operator">=</code> elem<code class="token punctuation">.</code><code class="token function">getBoundingClientRect</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code><br><br>
+							<code class="token rows-double-indentation">message</code><code class="token punctuation">.</code>style<code class="token punctuation">.</code>left <code class="token operator">=</code> coords<code class="token punctuation">.</code>left <code class="token operator">+</code> <code class="token string">"px"</code><code class="token punctuation">;</code><br>
+							<code class="token rows-double-indentation">message</code><code class="token punctuation">.</code>style<code class="token punctuation">.</code>top <code class="token operator">=</code> coords<code class="token punctuation">.</code>bottom <code class="token operator">+</code> <code class="token string">"px"</code><code class="token punctuation">;</code><br><br>
+							<code class="token rows-double-indentation">message</code><code class="token punctuation">.</code>innerHTML <code class="token operator">=</code> html<code class="token punctuation">;</code><br><br>
+							<code class="token keyword rows-double-indentation">return</code> message<code class="token punctuation">;</code><br>
+							<code class="token punctuation">}</code><br><br>
+							<code class="token comment">// Использование:</code><br>
+							<code class="token comment">// добавим сообщение на страницу на 5 секунд</code><br>
+							<code class="token keyword">let</code> message <code class="token operator">=</code> <code class="token function">createMessageUnder</code><code class="token punctuation">(</code>elem<code class="token punctuation">,</code> <code class="token string">'Hello, world!'</code><code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+							document<code class="token punctuation">.</code>body<code class="token punctuation">.</code><code class="token function">append</code><code class="token punctuation">(</code>message<code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+							<code class="token function">setTimeout</code><code class="token punctuation">(</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token operator">=&gt;</code> message<code class="token punctuation">.</code><code class="token function">remove</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">,</code> <code class="token number">5000</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(24);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Чтобы увидеть пример в действии нужно кликнуть кнопку:</p>
+			<p><button id="coords-show-mark">Кнопка с id=«coords-show-mark», сообщение появится под ней</button></p>
+			<script src="../js/createMessageUnder.js" defer></script>
+			<p>Код можно изменить, чтобы показывать сообщение слева, справа, снизу, применять к нему CSS-анимации и так далее. Это просто, так как в распоряжении разработчика имеются все координаты и размеры элемента.</p>
+			<p>Но стоит обратить внимание на одну важную деталь: при прокрутке страницы сообщение уплывает от кнопки.</p>
+			<p>Причина весьма очевидна: сообщение позиционируется с помощью <code>position:fixed</code>, поэтому оно остаётся всегда на том же самом месте в окне при прокрутке страницы.</p>
+			<p>Чтобы изменить это, нужно использовать другую систему координат, где сообщение позиционировалось бы относительно документа, и свойство <code>position:absolute</code>.</p>
+			<h2>Координаты относительно документа</h2>
+			<p>В такой системе координат отсчёт ведётся от левого верхнего угла документа, не окна.</p>
+			<p>В CSS координаты относительно окна браузера соответствуют свойству <code>position:fixed</code>, а координаты относительно документа – свойству <code>position:absolute</code> на самом верхнем уровне вложенности.</p>
+			<p>Можно воспользоваться свойствами <code>position:absolute</code> и <code>top/left</code>, чтобы привязать что-нибудь к конкретному месту в документе. При этом прокрутка страницы не имеет значения. Но сначала нужно получить верные координаты.</p>
+			<p>Не существует стандартного метода, который возвращал бы координаты элемента относительно документа, но можно написать его самостоятельно.</p>
+			<p>Две системы координат связаны следующими формулами:</p>
+			<ul>
+				<li><code>pageY</code> = <code>clientY</code> + высота вертикально прокрученной части документа.</li>
+				<li><code>pageX</code> = <code>clientX</code> + ширина горизонтально прокрученной части документа.</li>
+			</ul>
+			<p>Функция <code>getCoords(elem)</code> берёт координаты в контексте окна с помощью <code>elem.getBoundingClientRect()</code> и добавляет к ним значение соответствующей прокрутки:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token comment">// получаем координаты элемента в контексте документа</code><br>
+							<code class="token keyword">function</code> <code class="token function">getCoords</code><code class="token punctuation">(</code><code class="token parameter">elem</code><code class="token punctuation">)</code> <code class="token punctuation">{</code><br>
+							<code class="token keyword rows-double-indentation">let</code> box <code class="token operator">=</code> elem<code class="token punctuation">.</code><code class="token function">getBoundingClientRect</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code><br><br>
+							<code class="token keyword rows-double-indentation">return</code> <code class="token punctuation">{</code><br>
+							<code class="token rows-double-indentation"><code class="token rows-double-indentation">top</code></code><code class="token punctuation">:</code> box<code class="token punctuation">.</code>top <code class="token operator">+</code> pageYOffset<code class="token punctuation">,</code><br>
+							<code class="token rows-double-indentation"><code class="token rows-double-indentation">left</code></code><code class="token punctuation">:</code> box<code class="token punctuation">.</code>left <code class="token operator">+</code> pageXOffset<br>
+							<code class="token punctuation rows-double-indentation">}</code><code class="token punctuation">;</code><br>
+							<code class="token punctuation">}</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(9);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Если бы в примере выше она использовалась вместе с <code>position:absolute</code>, то при прокрутке сообщение оставалось бы рядом с элементом.</p>
+			<p>Модифицированная функция <code>createMessageUnder</code>:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">function</code> <code class="token function">createMessageUnder</code><code class="token punctuation">(</code><code class="token parameter">elem<code class="token punctuation">,</code> html</code><code class="token punctuation">)</code> <code class="token punctuation">{</code><br>
+							<code class="token keyword rows-double-indentation">let</code> message <code class="token operator">=</code> document<code class="token punctuation">.</code><code class="token function">createElement</code><code class="token punctuation">(</code><code class="token string">'div'</code><code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+							<code class="token rows-double-indentation">message</code><code class="token punctuation">.</code>style<code class="token punctuation">.</code>cssText <code class="token operator">=</code> <code class="token string">"position:absolute; color: red"</code><code class="token punctuation">;</code><br><br>
+							<code class="token keyword rows-double-indentation">let</code> coords <code class="token operator">=</code> <code class="token function">getCoords</code><code class="token punctuation">(</code>elem<code class="token punctuation">)</code><code class="token punctuation">;</code><br><br>
+							<code class="token rows-double-indentation">message</code><code class="token punctuation">.</code>style<code class="token punctuation">.</code>left <code class="token operator">=</code> coords<code class="token punctuation">.</code>left <code class="token operator">+</code> <code class="token string">"px"</code><code class="token punctuation">;</code><br>
+							<code class="token rows-double-indentation">message</code><code class="token punctuation">.</code>style<code class="token punctuation">.</code>top <code class="token operator">=</code> coords<code class="token punctuation">.</code>bottom <code class="token operator">+</code> <code class="token string">"px"</code><code class="token punctuation">;</code><br><br>
+							<code class="token rows-double-indentation">message</code><code class="token punctuation">.</code>innerHTML <code class="token operator">=</code> html<code class="token punctuation">;</code><br><br>
+							<code class="token keyword rows-double-indentation">return</code> message<code class="token punctuation">;</code><br>
+							<code class="token punctuation">}</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(13);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

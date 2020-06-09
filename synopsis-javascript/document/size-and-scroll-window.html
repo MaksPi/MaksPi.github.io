@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Размеры и прокрутка окна</title>
+	
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/fonts.css">
+</head>
+<body>
+	<div class="page-wrapper">
+		<div class="page">
+			<h1 class="page__title">Размеры и прокрутка окна</h1>
+			<p>Как узнать ширину и высоту окна браузера? Как получить полную ширину и высоту документа, включая прокрученную часть? Как прокрутить страницу с помощью JavaScript?</p>
+			<p>Для большинства таких запросов можно использовать корневой элемент документа <code>document.documentElement</code>, который соответствует тегу <code>&lt;html&gt;</code>. Однако есть дополнительные методы и особенности, которые необходимо учитывать.</p>
+			<h2>Ширина/высота окна</h2>
+			<p>Чтобы получить ширину/высоту окна, можно взять свойства <code>clientWidth/clientHeight</code> из <code>document.documentElement</code>:</p>
+			<div class="image" style="width: 508px">
+				<iframe style="width: 508px; height: calc(203px + 4px)" src="../html/document-client-width-height.html"></iframe>
+				<div class="image__ratio" style="padding-top:39.960629921259844%"></div>
+			</div>
+			<p>Например, эта кнопка показывает высоту вашего окна:</p>
+			<p><button onclick="alert(document.documentElement.clientHeight)">alert(document.documentElement.clientHeight)</button></p>
+			<div class="important important_warn">
+				<div class="important__header">
+					<span class="important__type">Не <code>window.innerWidth/Height</code></span>
+				</div>
+				<div class="important__content">
+					<p>Браузеры также поддерживают свойства <code>window.innerWidth/innerHeight</code>. Вроде бы, похоже на то, что нам нужно. Почему же не использовать их?</p>
+					<p>Если есть полоса прокрутки, и она занимает какое-то место, то свойства <code>clientWidth/clientHeight</code> указывают на ширину/высоту документа без неё (за её вычетом). Иными словами, они возвращают высоту/ширину видимой части документа, доступной для содержимого.</p>
+					<p>A <code>window.innerWidth/innerHeight</code> включают в себя полосу прокрутки.</p>
+					<p>Если полоса прокрутки занимает некоторое место, то эти две строки выведут разные значения:</p>
+					<div class="code-example">
+						<div class="codebox">
+							<div class="line-numbers language-javascript">
+								<code class="language-javascript">
+									<code class=" language-javascript"><code class="token function">alert</code><code class="token punctuation">(</code> window<code class="token punctuation">.</code>innerWidth <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// полная ширина окна</code><br>
+									<code class="token function">alert</code><code class="token punctuation">(</code> document<code class="token punctuation">.</code>documentElement<code class="token punctuation">.</code>clientWidth <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// ширина окна за вычетом полосы прокрутки</code></code>
+								</code>
+								<span class="line-numbers-rows">
+									<script src="../js/line-numbers-rows.js"></script>
+									<script>rowsNumbers(2);</script>
+								</span>
+							</div>
+						</div>
+					</div>
+					<p>В большинстве случаев нужна <em>доступная</em> ширина окна: для рисования или позиционирования. Полоса прокрутки «отъедает» её часть. Поэтому следует использовать <code>documentElement.clientHeight/Width</code>.</p>
+				</div>
+			</div>
+			<div class="important important_warn">
+				<div class="important__header"><span class="important__type"><code>DOCTYPE</code> – это важно</span></div>
+				<div class="important__content">
+					<p>Следует обратить внимание, что геометрические свойства верхнего уровня могут работать немного иначе, если в HTML нет <code>&lt;!DOCTYPE HTML&gt;</code>. Возможны странности.</p>
+					<p>В современном HTML всегда нужно указывать <code>DOCTYPE</code>.</p>
+				</div>
+			</div>
+			<h2>Ширина/высота документа</h2>
+			<p>Теоретически, т.к. корневым элементом документа является <code>documentElement</code>, и он включает в себя всё содержимое, можно получить полный размер документа как <code>documentElement.scrollWidth/scrollHeight</code>.</p>
+			<p>Но именно на этом элементе, для страницы в целом, эти свойства работают не так, как предполагается. В Chrome/Safari/Opera, если нет прокрутки, то <code>documentElement.scrollHeight</code> может быть даже меньше, чем <code>documentElement.clientHeight</code>! С точки зрения элемента это невозможная ситуация.</p>
+			<p>Чтобы надёжно получить полную высоту документа, нам следует взять максимальное из этих свойств:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">let</code> scrollHeight <code class="token operator">=</code> Math<code class="token punctuation">.</code><code class="token function">max</code><code class="token punctuation">(</code><br>
+							<span class="token rows-double-indentation">document</span><code class="token punctuation">.</code>body<code class="token punctuation">.</code>scrollHeight<code class="token punctuation">,</code> document<code class="token punctuation">.</code>documentElement<code class="token punctuation">.</code>scrollHeight<code class="token punctuation">,</code><br>
+							<span class="token rows-double-indentation">document</span><code class="token punctuation">.</code>body<code class="token punctuation">.</code>offsetHeight<code class="token punctuation">,</code> document<code class="token punctuation">.</code>documentElement<code class="token punctuation">.</code>offsetHeight<code class="token punctuation">,</code><br>
+							<span class="token rows-double-indentation">document</span><code class="token punctuation">.</code>body<code class="token punctuation">.</code>clientHeight<code class="token punctuation">,</code> document<code class="token punctuation">.</code>documentElement<code class="token punctuation">.</code><clientHeightbr></clientHeightbr><br>
+							<code class="token punctuation">)</code><code class="token punctuation">;</code><br><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code><code class="token string">'Полная высота документа с прокручиваемой частью: '</code> <code class="token operator">+</code> scrollHeight<code class="token punctuation">)</code><code class="token punctuation">;</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(7);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Почему? Лучше не спрашивать. Эти несоответствия идут с древних времён. Глубокой логики здесь нет.</p>
+			<h2>Получение текущей прокрутки</h2>
+			<p>Обычные элементы хранят текущее состояние прокрутки в <code>elem.scrollLeft/scrollTop</code>.</p>
+			<p>Что же со страницей?	В большинстве браузеров можно обратиться к <code>documentElement.scrollLeft/Top</code>, за исключением основанных на старом WebKit (Safari), где есть ошибка (<a href="https://bugs.webkit.org/show_bug.cgi?id=5991">5991</a>), и там нужно использовать <code>document.body</code> вместо <code>document.documentElement</code>.</p>
+			<p>К счастью, совсем не обязательно запоминать эти особенности, потому что текущую прокрутку можно прочитать из свойств <code>window.pageXOffset/pageYOffset</code>:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class=" language-javascript"><code class="token function">alert</code><code class="token punctuation">(</code><code class="token string">'Текущая прокрутка сверху: '</code> <code class="token operator">+</code> window<code class="token punctuation">.</code>pageYOffset<code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+							<code class="token function">alert</code><code class="token punctuation">(</code><code class="token string">'Текущая прокрутка слева: '</code> <code class="token operator">+</code> window<code class="token punctuation">.</code>pageXOffset<code class="token punctuation">)</code><code class="token punctuation">;</code></code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(2);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Эти свойства доступны только для чтения.</p>
+			<h2>Прокрутка: scrollTo, scrollBy, scrollIntoView</h2>
+			<div class="important important_warn">
+				<div class="important__header"><span class="important__type">Важно:</span></div>
+				<div class="important__content"><p>Для прокрутки страницы из JavaScript её DOM должен быть полностью построен.</p>
+					<p>Например, если мы попытаемся прокрутить страницу из скрипта в <code>&lt;head&gt;</code>, это не сработает.</p>
+				</div>
+			</div>
+			<p>Обычные элементы можно прокручивать, изменяя <code>scrollTop/scrollLeft</code>.</p>
+			<p>Можно сделать то же самое для страницы в целом, используя  <code>document.documentElement.scrollTop/Left</code> (кроме основанных на старом WebKit (Safari), где, как сказано выше, <code>document.body.scrollTop/Left</code>).</p>
+			<p>Есть и другие способы, в которых подобных несовместимостей нет: специальные методы <code>window.scrollBy(x,y)</code> и <code>window.scrollTo(pageX,pageY)</code>.</p>
+			<ul>
+				<li>
+					<p>Метод <code>scrollBy(x,y)</code> прокручивает страницу <em>относительно её текущего положения</em>. Например, <code>scrollBy(0,10)</code> прокручивает страницу на <code>10px</code> вниз.</p>
+					<p>Кнопка ниже демонстрирует это:</p>
+					<p><button onclick="window.scrollBy(0,10)">window.scrollBy(0,10)</button></p>
+				</li>
+				<li>
+					<p>Метод <code>scrollTo(pageX,pageY)</code> прокручивает страницу <em>на абсолютные координаты</em> <code>(pageX,pageY)</code>. То есть, чтобы левый-верхний угол видимой части страницы имел данные координаты относительно левого верхнего угла документа. Это всё равно, что поставить <code>scrollLeft/scrollTop</code>. Для прокрутки в самое начало можно использовать <code>scrollTo(0,0)</code>.</p>
+					<p><button onclick="window.scrollTo(0,0)">window.scrollTo(0,0)</button></p>
+				</li>
+			</ul>
+			<p>Эти методы одинаково работают для всех браузеров.</p>
+			<h2>scrollIntoView</h2>
+			<p>Для полноты картины давайте рассмотрим ещё один метод: <a href="https://developer.mozilla.org/ru/docs/Web/API/Element/scrollIntoView">elem.scrollIntoView(top)</a>.</p>
+			<p>Вызов <code>elem.scrollIntoView(top)</code> прокручивает страницу, чтобы <code>elem</code> оказался вверху. У него есть один аргумент:</p>
+			<ul>
+				<li>если <code>top=true</code> (по умолчанию), то страница будет прокручена, чтобы <code>elem</code> появился в верхней части окна. Верхний край элемента совмещён с верхней частью окна.</li>
+				<li>если <code>top=false</code>, то страница будет прокручена, чтобы <code>elem</code> появился внизу. Нижний край элемента будет совмещён с нижним краем окна.</li>
+			</ul>
+			<p>Кнопка ниже прокрутит страницу так, что она сама окажется вверху:</p>
+			<p><button onclick="this.scrollIntoView()">this.scrollIntoView()</button></p>
+			<p>А следующая кнопка прокрутит страницу так, что она сама окажется внизу</p>
+			<p><button onclick="this.scrollIntoView(false)">this.scrollIntoView(false)</button></p>
+			<h2>Запретить прокрутку</h2>
+			<p>Иногда нам нужно сделать документ «непрокручиваемым». Например, при показе большого диалогового окна над документом – чтобы посетитель мог прокручивать это окно, но не документ.</p>
+			<p>Чтобы запретить прокрутку страницы, достаточно установить <code>document.body.style.overflow = "hidden"</code>.</p>
+			<p>Попробуйте сами:</p>
+			<p><button onclick="document.body.style.overflow = 'hidden'"><code>document.body.style.overflow = 'hidden'</code></button></p>
+			<p><button onclick="document.body.style.overflow = ''"><code>document.body.style.overflow = ''</code></button></p>
+			<p>Первая кнопка останавливает прокрутку, вторая возобновляет её.</p>
+			<p>Аналогичным образом можно «заморозить» прокрутку для других элементов, а не только для <code>document.body</code>.</p>
+			<p>Недостатком этого способа является то, что сама полоса прокрутки исчезает. Если она занимала некоторую ширину, то теперь эта ширина освободится, и содержимое страницы расширится, текст «прыгнет», заняв освободившееся место.</p>
+			<p>Это выглядит немного странно, но это можно обойти, если сравнить <code>clientWidth</code> до и после остановки, и если <code>clientWidth</code> увеличится (значит полоса прокрутки исчезла), то добавить <code>padding</code> в <code>document.body</code> вместо полосы прокрутки, чтобы оставить ширину содержимого прежней.</p>
+		</div>
+	</div>
+</body>
+</html>

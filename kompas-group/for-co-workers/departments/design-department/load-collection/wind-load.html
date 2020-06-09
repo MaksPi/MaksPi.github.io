@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
-	<title>Расчет ветровой нагрузки</title>
+	<title>Расчёт ветровой нагрузки</title>
 	
 	<link rel="stylesheet" href="../../../../css/style.css">
 	<link rel="stylesheet" href="../../../../css/fonts.css">
@@ -46,7 +46,7 @@
 							<li id="menu-item-3703" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3703">
 								<a href="#http: //kompas-grupp.com.ua/contacts/">Контакты</a>
 							</li>
-							<li id="menu-item-3704" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3704"><a href="../../../for-co-workers.html">Для сотрудников</a>
+							<li id="menu-item-3704" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3704"><a href="../../../../for-co-workers.html">Для сотрудников</a>
 							</li>
 						</ul>
 					</nav>
@@ -164,7 +164,7 @@
 							</li>
 							<!-- Прочностные расчёты -->
 							<li class="menu-item menu-item-has-children strength-calculations"> <!-- id="menu-item-strength-calculations" -->
-								<a href="#" class="sf-with-ul">Прочностные расчеты</a>
+								<a href="#" class="sf-with-ul">Прочностные расчёты</a>
 								<ul class="sub-menu" style="display: none;">
 									<!-- Расчёт металлоконструкций -->
 									<li class="menu-item menu-item-has-children metal-construction">
@@ -248,7 +248,7 @@
 			<main id="main" role="main">
 				<section class="entry-header">
 					<div class="container">
-						<h1 class="entry-title">Расчет ветровой нагрузки</h1>
+						<h1 class="entry-title">Расчёт ветровой нагрузки</h1>
 						<div class="breadcrumbs">
 							<span property="itemListElement" typeof="ListItem">
 								<a property="item" typeof="WebPage" title="Go to КОМПАС-групп" href="../../../../index.html" class="home">
@@ -286,29 +286,33 @@
 							</span>
 							<i class="fa fa-angle-right"></i>
 							<span property="itemListElement" typeof="ListItem">
-								<span property="name">Расчет ветровой нагрузки</span>
+								<span property="name">Расчёт ветровой нагрузки</span>
 							</span>
 						</div>
 					</div>
 					<div class="container">
 						<div class="content-wrap">
-							<p><em><b>Предельное расчетное значение ветровой нагрузки</b></em> определяется по формуле:</p>
+							<p><em><b>Предельное расчётное значение ветровой нагрузки</b></em> определяется по формуле:</p>
 							<p class="interior-paragraph">
 								<em>W<sub>m</sub> = <big>γ</big><sub>fm</sub>*W<sub>0</sub>*C = </em>
 								<span id="Wm"></span>
 								<em>кг/м<sup>2</sup>,</em>
 							</p>
+
 							<!-- <hr align="left"/> -->
 							<p class="interior-paragraph">где:</p>
+
 							<p class="interior-paragraph">
-								<em><big>γ</big><sub>fm =</sub></em>
+								<em><big>γ</big><sub>fm</sub> =</em>
 								<input id="γfm" type="text" value="" size="1"/>
 								- <em>коэффициент надежности по предельному значению ветровой нагрузки</em> (зависит от T, лет);
 							</p>
+							<p class="interior-paragraph">Для объектов массового строительства допускается средний период повторяемости Т принимать равным установленному сроку эксплуатации конструкции T<sub>ef</sub>.</p>
 							<p class="interior-paragraph">
 								<input id="medialRepeatabilityPeriod" type="search" placeholder="Укажите T, лет:" list="medialRepeatabilityPeriodList" size="15" onchange="WmGetSelect_γfm()"/>
 								<datalist id="medialRepeatabilityPeriodList"></datalist>
 							</p>
+
 							<!-- <hr align="left"/> -->
 							<p class="interior-paragraph">
 								<em>W<sub>0</sub> =</em>
@@ -319,13 +323,16 @@
 								<input id="cities" type="search" placeholder="Выберите город:" list="citiesList" size="15" onchange="WmGetSelectCity()"/>
 								<datalist id="citiesList"></datalist>
 							</p>
+
 							<!-- <hr align="left"/> -->
 							<p class="interior-paragraph"><em>Коэффициент</em> <em><b>С</b></em> определяется по формуле:</p>
 							<p class="interior-paragraph">
 								<em>C = C<sub>aer</sub>*C<sub>h</sub>*C<sub>alt</sub>*C<sub>rel</sub>*C<sub>dir</sub>*C<sub>d</sub> =</em>
 								<span id="C"></span>
 							</p>
+
 							<p class="interior-paragraph">где:</p>
+
 							<p class="interior-paragraph">
 								<label><em>C<sub>aer</sub> =</em></label>
 								<input id="Caer" type="text" value="0.8" size="1"/>
@@ -335,6 +342,7 @@
 								<input id="Ch" type="text" value="" size="1"/>
 								- <em>коэффициент высоты сооружения</em> - зависит от 3-х значений, приведенных ниже:
 							</p>
+
 							<select id="constructionHight" onchange="WmGetSelectCh()"></select>
 							<select id="terrainType" onchange="WmGetSelectCh()">
 								<option disabled selected>Укажите тип местности:</option>
@@ -348,6 +356,7 @@
 								<option>< 0.25 сек.</option>
 								<option>> 0.25 сек.</option>
 							</select>
+
 							<p class="interior-paragraph">где:</p>
 
 							<p class="interior-paragraph">Z - <em>высота конструкции над поверхностью земли;</em></p>
@@ -356,9 +365,10 @@
 								<li>I - открытые поверхности морей, озер, а также плоские равнины без препятствий, которые подвергаются действию ветра на участке длиной не менее чем 3 км;</li>
 								<li>II - сельская местность с ограждениями (заборами), небольшими сооружениями, домами и деревьями;</li>
 								<li>III - пригородные и промышленные зоны, протяжные лесные массиви;</li>
-								<li>IV - городские территории, на которых по крайней мере 15% поверхности заняты зданиями, которые имеют вреднюю висоту свыше 15 м.</li>
+								<li>IV - городские территории, на которых по крайней мере 15% поверхности заняты зданиями, которые имеют среднюю высоту свыше 15 м.</li>
 							</ul>
 							<p class="interior-paragraph">Если <em>период собственных колебаний</em> не известен, то данное значение принимать <em><b>> 0,25 сек</b></em>.</p>
+
 							<!-- <hr align="left"/> -->
 							<p class="interior-paragraph">
 								<label><em>C<sub>alt</sub> =</em></label>

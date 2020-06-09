@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Расчёт ветровой нагрузки</title>
+
+	<link rel="stylesheet" href="../../../../css/style.css">
+	<link rel="stylesheet" href="../../../../css/fonts.css">
+
+	<script src="../../../../js/wind Load.js" defer></script>
+</head>
+<body>
+	<div class="page">
+		<header>
+			<div class="pageHeader">
+				<div class="top">
+					<div id="logo_logo" class="logoBox">
+						<a href="#" title='ООО "Компания "Формула комфорта"'>
+							<div class="logo_block">
+								<div class="logo_img">
+									<img src="../../../../img/logo6.png" alt='ООО "Компания "Формула комфорта"'>
+								</div>
+								<div class="logo_info">
+									<div class="logoTextDiv_h1">ООО "Компания "Формула комфорта"</div>
+									<div class="logoTextDiv_h2">1000 решений создания уюта</div>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</header>
+		<div class="pageWrap">
+			<div class="pageMain">
+				<div class="row main_block">
+					<div class="container">
+						<h1>Расчёт ветровой нагрузки</h1>
+						<div class="breadcrumbs">
+							<span class="breadcrumbs__item">
+								<a href="../../../../index.html">
+									<span>Главная</span>
+								</a>
+							</span>
+							<span class="breadcrumbs__item">
+								<a href="../../../../for-co-workers.html">
+									<span>Для сотрудников</span>
+								</a>
+							</span>
+							<span class="breadcrumbs__item">
+								<a href="../../../departments.html">
+									<span>Отделы компании</span>
+								</a>
+							</span>
+							<span class="breadcrumbs__item">
+								<a href="../../estimated-department.html">
+									<span>Сметный отдел</span>
+								</a>
+							</span>
+							<span class="breadcrumbs__item">
+								<a href="../../estimated-department/load-collection.html">
+									<span>Сбор нагрузок</span>
+								</a>
+							</span>
+							<span class="current">Расчёт ветровой нагрузки</span>
+						</div>
+
+						<p><b>Предельное расчётное значение ветровой нагрузки</b> определяется по формуле:</p>
+						<p class="interior-paragraph">
+							<span><em>W<sub>m</sub> = <big>γ</big><sub>fm</sub> * W<sub>0</sub> * C = </em></span>
+							<span id="Wm"></span>
+							<span><em>кг/м<sup> 2</sup>,</em></span>
+						</p>
+
+						<p class="interior-paragraph">где:</p>
+
+						<p class="interior-paragraph">
+							<label class="width-1"><em><big>γ</big><sub>fm</sub> =</em></label>
+							<input id="γfm" type="text" value="" size="3"/>
+							<span>- коэффициент надежности по предельному значению ветровой нагрузки (зависит от T, лет);</span>
+						</p>
+						<p>Для объектов массового строительства допускается средний период повторяемости Т принимать равным установленному сроку эксплуатации конструкции T<sub>ef</sub>.</p>
+						<p class="interior-paragraph">
+							<input id="medialRepeatabilityPeriod" type="search" placeholder="Укажите T, лет:" list="medialRepeatabilityPeriodList" size="21" onchange="WmGetSelect_γfm()"/>
+							<datalist id="medialRepeatabilityPeriodList"></datalist>
+						</p>
+						
+						<p class="interior-paragraph">
+							<label class="width-1"><em>W<sub>0</sub> =</em></label>
+							<input id="Wo" type="text" value="" size="3"/>
+							<span><em>кг/м<sup>2</sup></em> - характеристическое значение ветрового давления (зависит от города);</span>
+						</p>
+						<p class="interior-paragraph">
+							<input id="cities" type="search" placeholder="Выберите город:" list="citiesList" size="21" onchange="WmGetSelectCity()"/>
+							<datalist id="citiesList"></datalist>
+						</p>
+						
+						<p class="interior-paragraph"><b>Коэффициент <em>С</em></b> определяется по формуле:</p>
+						<p class="interior-paragraph">
+							<span><em>C = C<sub>aer</sub> * C<sub>h</sub> * C<sub>alt</sub> * C<sub>rel</sub> * C<sub>dir</sub> * C<sub>d</sub> =</em></span>
+							<span id="C"></span>
+						</p>
+
+						<p class="interior-paragraph">где:</p>
+
+						<p class="interior-paragraph">
+							<label class="width-1"><em>C<sub>aer</sub> =</em></label>
+							<input id="Caer" type="text" value="0.8" size="3"/>
+							<span>- аэродинамический коэффициент;</span>
+							<br>
+							<label class="width-1"><em>C<sub>h</sub> =</em></label>
+							<input id="Ch" type="text" value="" size="3"/>
+							<span>- коэффициент высоты сооружения - зависит от 3-х значений, приведенных ниже:</span>
+						</p>
+
+						<select id="constructionHight" onchange="WmGetSelectCh()"></select>
+						<select id="terrainType" onchange="WmGetSelectCh()">
+							<option disabled selected>Укажите тип местности:</option>
+							<option>ТипI</option>
+							<option>ТипII</option>
+							<option>ТипIII</option>
+							<option>ТипIV</option>
+						</select>
+						<select id="ownFluctuationPeriod" onchange="WmGetSelectCh()">
+							<option disabled selected>Укажите период собственных колебаний:</option>
+							<option>< 0.25 сек.</option>
+							<option>> 0.25 сек.</option>
+						</select>
+
+						<p class="interior-paragraph">где:</p>
+
+						<p class="interior-paragraph"><b>Z</b> - высота конструкции над поверхностью земли;</p>
+						<p class="interior-paragraph"><b>Типы местности:</b></p>
+						<ul>
+							<li>I - открытые поверхности морей, озер, а также плоские равнины без препятствий, которые подвергаются действию ветра на участке длиной не менее чем 3 км;</li>
+							<li>II - сельская местность с ограждениями (заборами), небольшими сооружениями, домами и деревьями;</li>
+							<li>III - пригородные и промышленные зоны, протяжные лесные массиви;</li>
+							<li>IV - городские территории, на которых по крайней мере 15% поверхности заняты зданиями, которые имеют среднюю высоту свыше 15 м.</li>
+						</ul>
+						<p class="interior-paragraph">Если <b>период собственных колебаний</b> не известен, то данное значение принимать <em><b>> 0,25 сек</b></em>.</p>
+						
+						<p class="interior-paragraph">
+							<label class="width-1"><em>C<sub>alt</sub> =</em></label>
+							<input id="Calt" type="text" value="1" size="3"/>
+							<span>- коэффициент географической высоты;</span>
+							<br>
+							<label class="width-1"><em>C<sub>rel</sub> =</em></label>
+							<input id="Crel" type="text" value="1" size="3"/>
+							<span>- коэффициент рельефа;</span>
+							<br>
+							<label class="width-1"><em>C<sub>dir</sub> =</em></label>
+							<input id="Cdir" type="text" value="1" size="3"/>
+							<span>- коэффициент направления;</span>
+							<br>
+							<label class="width-1"><em>C<sub>d</sub> =</em></label>
+							<input id="Cd" type="text" value="1" size="3"/>
+							<span>- коэффициент динамичности.</span>
+						</p>
+						<form>
+							<input type="button" value="Расчитать" onclick="Wm()">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
