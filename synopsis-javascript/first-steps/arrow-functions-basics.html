@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial=scale=1.0">
+
+	<title>Функции-стрелки, основы</title>
+	
+	<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="../css/fonts.css">
+</head>
+
+<body>
+	<div class="page-wrapper">
+		<div class="page">
+			<h1 class="page__title">Функции-стрелки, основы</h1>
+			<p>Существует ещё более простой и краткий синтаксис для создания функций, который часто лучше, чем синтаксис Function Expression.</p>
+			<p>Он называется «функции-стрелки» или «стрелочные функции» (arrow functions), т.к. выглядит следующим образом:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">let</code> <code class="token function-variable function">func</code> <code class="token operator">=</code> <code class="token punctuation">(</code><code class="token parameter">arg1<code class="token punctuation">,</code> arg2<code class="token punctuation">,</code> <code class="token operator">...</code>argN</code><code class="token punctuation">)</code> <code class="token operator">=&gt;</code> expression
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(1);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>…Такой код создаёт функцию <code>func</code> с аргументами <code>arg1..argN</code> и вычисляет <code>expression</code> с правой стороны с их использованием, возвращая результат.</p>
+			<p>Другими словами, это более короткий вариант такой записи:</p>
+			<div class="code-example">
+				<div class="codebox">
+					<div class="line-numbers language-javascript">
+						<code class="language-javascript">
+							<code class="token keyword">let</code> <code class="token function-variable function">func</code> <code class="token operator">=</code> <code class="token keyword">function</code><code class="token punctuation">(</code><code class="token parameter">arg1<code class="token punctuation">,</code> arg2<code class="token punctuation">,</code> <code class="token operator">...</code>argN</code><code class="token punctuation">)</code> <code class="token punctuation">{</code><br>
+							<code class="token keyword rows-double-indentation">return</code> expression<code class="token punctuation">;</code><br>
+							<code class="token punctuation">}</code><code class="token punctuation">;</code>
+						</code>
+						<span class="line-numbers-rows">
+							<script src="../js/line-numbers-rows.js"></script>
+							<script>rowsNumbers(3);</script>
+						</span>
+					</div>
+				</div>
+			</div>
+			<p>Давайте взглянем на конкретный пример:</p>
+<div data-trusted="1" class="code-example" data-prism-highlighted="1">
+			<div class="codebox code-example__codebox">
+				
+				<div class="toolbar codebox__toolbar">
+					<div class="toolbar__tool">
+						<a href="#" title="выполнить" data-action="run" class="toolbar__button toolbar__button_run"></a>
+					</div>
+					<div class="toolbar__tool">
+						<a href="#" title="открыть в песочнице" target="_blank" data-action="edit" class="toolbar__button toolbar__button_edit"></a>
+					</div>
+				</div>
+				<div class="codebox__code" data-code="1">
+					<pre class="line-numbers  language-javascript"><code class=" language-javascript"><code class="token keyword">let</code> <code class="token function-variable function">sum</code> <code class="token operator">=</code> <code class="token punctuation">(</code><code class="token parameter">a<code class="token punctuation">,</code> b</code><code class="token punctuation">)</code> <code class="token operator">=&gt;</code> a <code class="token operator">+</code> b<code class="token punctuation">;</code>
+
+<code class="token comment">/* Более короткая форма для:
+
+let sum = function(a, b) {
+	return a + b;
+};
+*/</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token function">sum</code><code class="token punctuation">(</code><code class="token number">1</code><code class="token punctuation">,</code> <code class="token number">2</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 3</code></code><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre>
+				</div>
+			</div>
+			
+			</div><p>То есть, <code>(a, b) =&gt; a + b</code> задаёт функцию с двумя аргументами <code>a</code> и <code>b</code>, которая при запуске вычисляет выражение справа <code>a + b</code> и возвращает его результат.</p>
+<ul>
+<li>
+<p>Если у нас только один аргумент, то круглые скобки вокруг параметров можно опустить, сделав запись ещё короче:</p>
+<div data-trusted="1" class="code-example" data-highlight="[{&quot;start&quot;:2,&quot;end&quot;:2}]" data-prism-highlighted="1">
+			<div class="codebox code-example__codebox">
+				
+				<div class="toolbar codebox__toolbar">
+					<div class="toolbar__tool">
+						<a href="#" title="выполнить" data-action="run" class="toolbar__button toolbar__button_run"></a>
+					</div>
+					<div class="toolbar__tool">
+						<a href="#" title="открыть в песочнице" target="_blank" data-action="edit" class="toolbar__button toolbar__button_edit"></a>
+					</div>
+				</div>
+				<div class="codebox__code" data-code="1">
+					<pre class="line-numbers  language-javascript"><code class="block-highlight" data-start="2">
+
+<code class="mask">
+</code></code><code class=" language-javascript"><code class="token comment">// тоже что и</code>
+<code class="token comment">// let double = function(n) { return n * 2 }</code>
+<code class="token keyword">let</code> <code class="token function-variable function">double</code> <code class="token operator">=</code> <code class="token parameter">n</code> <code class="token operator">=&gt;</code> n <code class="token operator">*</code> <code class="token number">2</code><code class="token punctuation">;</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token function">double</code><code class="token punctuation">(</code><code class="token number">3</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 6</code></code><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></pre>
+				</div>
+			</div>
+			
+			</div></li>
+<li>
+<p>Если нет аргументов, указываются пустые круглые скобки:</p>
+<div data-trusted="1" class="code-example" data-prism-highlighted="1">
+			<div class="codebox code-example__codebox">
+				
+				<div class="toolbar codebox__toolbar">
+					<div class="toolbar__tool">
+						<a href="#" title="выполнить" data-action="run" class="toolbar__button toolbar__button_run"></a>
+					</div>
+					<div class="toolbar__tool">
+						<a href="#" title="открыть в песочнице" target="_blank" data-action="edit" class="toolbar__button toolbar__button_edit"></a>
+					</div>
+				</div>
+				<div class="codebox__code" data-code="1">
+					<pre class="line-numbers  language-javascript"><code class=" language-javascript"><code class="token keyword">let</code> <code class="token function-variable function">sayHi</code> <code class="token operator">=</code> <code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token operator">=&gt;</code> <code class="token function">alert</code><code class="token punctuation">(</code><code class="token string">"Hello!"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+<code class="token function">sayHi</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code></code><span class="line-numbers-rows"><span></span><span></span><span></span></span></pre>
+				</div>
+			</div>
+			
+			</div></li>
+</ul>
+<p>Функции-стрелки могут быть использованы так же, как и Function Expression.</p>
+<p>Например, для динамического создания функции:</p>
+<div data-trusted="1" class="code-example" data-prism-highlighted="1">
+			<div class="codebox code-example__codebox">
+				
+				<div class="toolbar codebox__toolbar">
+					<div class="toolbar__tool">
+						<a href="#" title="выполнить" data-action="run" class="toolbar__button toolbar__button_run"></a>
+					</div>
+					<div class="toolbar__tool">
+						<a href="#" title="открыть в песочнице" target="_blank" data-action="edit" class="toolbar__button toolbar__button_edit"></a>
+					</div>
+				</div>
+				<div class="codebox__code" data-code="1">
+					<pre class="line-numbers  language-javascript"><code class=" language-javascript"><code class="token keyword">let</code> age <code class="token operator">=</code> <code class="token function">prompt</code><code class="token punctuation">(</code><code class="token string">"Сколько Вам лет?"</code><code class="token punctuation">,</code> <code class="token number">18</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+<code class="token keyword">let</code> welcome <code class="token operator">=</code> <code class="token punctuation">(</code>age <code class="token operator">&lt;</code> <code class="token number">18</code><code class="token punctuation">)</code> <code class="token operator">?</code>
+	<code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token operator">=&gt;</code> <code class="token function">alert</code><code class="token punctuation">(</code><code class="token string">'Привет'</code><code class="token punctuation">)</code> <code class="token punctuation">:</code>
+	<code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token operator">=&gt;</code> <code class="token function">alert</code><code class="token punctuation">(</code><code class="token string">"Здравствуйте!"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+<code class="token function">welcome</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// теперь всё в порядке</code></code><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></pre>
+				</div>
+			</div>
+			
+			</div><p>Поначалу функции-стрелки могут показаться необычными и трудночитаемыми, но это быстро пройдёт, как только глаза привыкнут к этим конструкциям.</p>
+<p>Они очень удобны для простых однострочных действий, когда лень писать много букв.</p>
+<h2><a class="main__anchor" name="mnogostrochnye-strelochnye-funktsii" href="#mnogostrochnye-strelochnye-funktsii">Многострочные стрелочные функции</a></h2><p>В примерах выше аргументы использовались слева от <code>=&gt;</code>, а справа вычислялось выражение с их значениями.</p>
+<p>Порой нам нужно что-то посложнее, например, выполнить несколько инструкций. Это также возможно, нужно лишь заключить инструкции в фигурные скобки. И использовать <code>return</code> внутри них, как в обычной функции.</p>
+<p>Например:</p>
+<div data-trusted="1" class="code-example" data-highlight="[{&quot;start&quot;:2,&quot;end&quot;:2}]" data-prism-highlighted="1">
+			<div class="codebox code-example__codebox">
+				
+				<div class="toolbar codebox__toolbar">
+					<div class="toolbar__tool">
+						<a href="#" title="выполнить" data-action="run" class="toolbar__button toolbar__button_run"></a>
+					</div>
+					<div class="toolbar__tool">
+						<a href="#" title="открыть в песочнице" target="_blank" data-action="edit" class="toolbar__button toolbar__button_edit"></a>
+					</div>
+				</div>
+				<div class="codebox__code" data-code="1">
+					<pre class="line-numbers  language-javascript"><code class="block-highlight" data-start="2">
+
+<code class="mask">
+</code></code><code class=" language-javascript"><code class="token keyword">let</code> <code class="token function-variable function">sum</code> <code class="token operator">=</code> <code class="token punctuation">(</code><code class="token parameter">a<code class="token punctuation">,</code> b</code><code class="token punctuation">)</code> <code class="token operator">=&gt;</code> <code class="token punctuation">{</code>  <code class="token comment">// фигурная скобка, открывающая тело многострочной функции</code>
+	<code class="token keyword">let</code> result <code class="token operator">=</code> a <code class="token operator">+</code> b<code class="token punctuation">;</code>
+	<code class="token keyword">return</code> result<code class="token punctuation">;</code> <code class="token comment">// при фигурных скобках для возврата значения нужно явно вызвать return</code>
+<code class="token punctuation">}</code><code class="token punctuation">;</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token function">sum</code><code class="token punctuation">(</code><code class="token number">1</code><code class="token punctuation">,</code> <code class="token number">2</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 3</code></code><span class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></pre>
+				</div>
+			</div>
+			
+			</div><div class="important important_smart">
+						<div class="important__header"><span class="important__type">Дальше будет ещё информация</span></div>
+						<div class="important__content"><p>Здесь мы рассмотрели функции-стрелки как способ писать меньше букв. Но это далеко не всё!</p>
+<p>Стрелочные функции обладают другими интересными особенностями. Их изучение требует знания некоторых других возможностей языка JavaScript, поэтому мы вернёмся к стрелочным функциям позже, в главе <a href="/arrow-functions">Повторяем стрелочные функции</a>.</p>
+<p>А пока мы можем использовать их для простых однострочных действий и колбэков.</p>
+</div></div>
+<h2><a class="main__anchor" name="itogo" href="#itogo">Итого</a></h2><p>Функции-стрелки очень удобны для однострочных действий. Они бывают двух типов:</p>
+<ol>
+<li>Без фигурных скобок: <code>(...args) =&gt; expression</code> – правая сторона выражение: функция выполняет его и возвращает результат.</li>
+<li>С фигурными скобками: <code>(...args) =&gt; { body }</code> – скобки позволяют нам писать многострочные инструкции внутри функции, но при этом необходимо указывать директиву <code>return</code>, чтобы вернуть какое-либо значение.</li>
+</ol>
+		</div>
+	</div>
+</body>
+
+</html>

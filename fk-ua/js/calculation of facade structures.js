@@ -107,6 +107,9 @@ let f_transom_vertical_load_fact = document.getElementById("f_transom_vertical_l
 // Кнопка Расчитать
 let calculate = document.getElementById("calculate");
 
+// Коллекция inputs
+let inputs = document.querySelectorAll("input");
+
 
 /**/
 
@@ -147,12 +150,22 @@ for (let key in materials_filling) {
 /**/
 
 
-// Обработать Input для ввода дробных чисел
+// Обработать input для ввода дробных чисел
+function handle_inputs() {
+	// Получить вводимое значение
+	let str_value = event.target.value;
+	// console.log(str_value);
 
+	// Преобразовать строку в массив
+	let arr_value = str_value.split(',');
+	// console.log(arr_value);
 
+	// Преобразовать массив в строку
+	let new_str_value = arr_value.join('.');
+	// console.log(new_str_value);
 
-/**/
-
+	event.target.value = new_str_value;
+}
 
 // Вычислить допустимый прогиб для стойки, fдоп (ст)
 function calculate_f_mullion_permiss() {
@@ -229,6 +242,15 @@ function calculate_Q_transom() {
 	}
 }
 
+// Вычислить собственный вес наибольшего ригеля, Fриг
+function calculate_F_transom() {
+	if (γ_const.value && A_transom.value) {
+		F_transom.value = Math.round(γ_const.value / Math.pow(10, 6) * A_transom.value * 100 * Math.max(B1.value, B2.value) * 100) / 100;
+	} else {
+		F_transom.value = "";
+	}
+}
+
 // Вычислить собственный вес наибольшего поля заполнения, F зап
 function calculate_F_filling() {
 	if ((B1.value || B2.value) && (h1.value || h2.value) && t.value && γ_filling.value) {
@@ -248,42 +270,33 @@ function calculate_Ix_mullion_min() {
 		Ix_mullion_min.value = Math.round(
 			5 / 384 *
 			(Q_mullion.value / Math.pow(10, 2) * Math.pow(H.value * Math.pow(10, 2), 4)) /
-			(E.value * f_mullion_permiss.value / 10) * 10) / 10;
+			(E.value * f_mullion_permiss.value / 10) * 100) / 100;
 	} else {
 		Ix_mullion_min.value = "";
 	}
 }
 
-// Вычислить минимально необходимый осевой момент инерции ригеля (в направлении действия ветровой нагрузки), Ix (риг)
+// Вычислить минимально необходимый осевой момент инерции ригеля от действия ветровой нагрузки, Ix (риг)
 function calculate_Ix_transom_min() {
 	if ((B1.value || B2.value) && (h1.value || h2.value) && Wm.value && E.value && f_transom_wind_permiss.value) {
 		Ix_transom_min.value = Math.round(
 			5 / 384 *
 			(Q_transom.value / Math.pow(10, 2) * Math.pow(Math.max(B1.value, B2.value) * Math.pow(10, 2), 4)) /
-			(E.value * f_transom_wind_permiss.value / 10) * 10) / 10;
+			(E.value * f_transom_wind_permiss.value / 10) * 100) / 100;
 	} else {
 		Ix_transom_min.value = "";
 	}
 }
 
-// Вычислить минимально необходимый осевой момент инерции ригеля (в направлении действия ветровой нагрузки), Ix (риг)
+// Вычислить минимально необходимый осевой момент инерции ригеля от действия нагрузки от веса заполнения, Iy (риг)
 function calculate_Iy_transom_min() {
 	if (F_filling.value && a.value && (B1.value || B2.value) && (h1.value || h2.value) && E.value && f_transom_vertical_load_permiss.value) {
 		Iy_transom_min.value = Math.round(
 			F_filling.value / 2 * a.value *
 			(3 * Math.pow(Math.max(B1.value, B2.value) * Math.pow(10, 2), 2) - 4 * Math.pow(a.value, 2)) /
-			(24 * E.value * f_transom_vertical_load_permiss.value / 10) * 10) / 10;
+			(24 * E.value * f_transom_vertical_load_permiss.value / 10) * 100) / 100;
 	} else {
 		Iy_transom_min.value = "";
-	}
-}
-
-// Вычислить собственный вес наибольшего ригеля, Fриг
-function calculate_F_transom() {
-	if (γ_const.value && A_transom.value) {
-		F_transom.value = Math.round(γ_const.value / Math.pow(10, 6) * A_transom.value * 100 * Math.max(B1.value, B2.value) * 100) / 100;
-	} else {
-		F_transom.value = "";
 	}
 }
 
@@ -379,127 +392,159 @@ function calculate_f_transom_vertical_load_fact() {
 /**/
 
 
-H.onchange = () => {
-	calculate_f_mullion_permiss();
-	calculate_Ix_mullion_min();
-	calculate_f_mullion_fact();
-}
+// Вариант 1
+inputs.forEach(function () {
+	this.onchange = () => {
+		handle_inputs();
+		calculate_f_mullion_permiss();
+		calculate_f_transom_wind_permiss();
+		get_E_const();
+		get_γ_const();
+		get_γ_filling();
+		calculate_Q_mullion();
+		calculate_Q_transom();
+		calculate_F_filling();
+		calculate_Ix_mullion_min();
+		calculate_Ix_transom_min();
+		calculate_Iy_transom_min();
+		calculate_F_transom();
+		calculate_f_mullion_fact();
+		calculate_f_transom_wind_fact();
+		calculate_f_transom_filling_fact();
+		calculate_f_transom_self_fact();
+		calculate_f_transom_vertical_load_fact();
+	}
+});
 
-B1.onchange = () => {
-	calculate_Q_mullion();
-	calculate_Q_transom();
-	calculate_f_transom_wind_permiss();
-	calculate_F_filling();
-	calculate_Ix_mullion_min();
-	calculate_Ix_transom_min();
-	calculate_Iy_transom_min();
-	calculate_f_mullion_fact();
-	calculate_f_transom_wind_fact();
-	calculate_f_transom_filling_fact();
-	calculate_f_transom_self_fact();
-	calculate_f_transom_vertical_load_fact();
-}
+// Вариант 2
+// for (let i = 0; i < inputs.length; i++) {
+// 	this.onchange = handle_inputs;
+// }
 
-B2.onchange = () => {
-	calculate_Q_mullion();
-	calculate_Q_transom();
-	calculate_f_transom_wind_permiss();
-	calculate_F_filling();
-	calculate_Ix_mullion_min();
-	calculate_Ix_transom_min();
-	calculate_Iy_transom_min();
-	calculate_f_mullion_fact();
-	calculate_f_transom_wind_fact();
-	calculate_f_transom_filling_fact();
-	calculate_f_transom_self_fact();
-	calculate_f_transom_vertical_load_fact();
-}
+// Вариант 3
+// document.onchange = handle_inputs;
 
-h1.onchange = () => {
-	calculate_Q_transom();
-	calculate_F_filling();
-	calculate_Ix_transom_min();
-	calculate_Iy_transom_min();
-	calculate_f_transom_wind_fact();
-	calculate_f_transom_filling_fact();
-	calculate_f_transom_self_fact();
-	calculate_f_transom_vertical_load_fact();
-}
+// H.onchange = () => {
+// 	calculate_f_mullion_permiss();
+// 	calculate_Ix_mullion_min();
+// 	calculate_f_mullion_fact();
+// }
 
-h2.onchange = () => {
-	calculate_Q_transom();
-	calculate_F_filling();
-	calculate_Ix_transom_min();
-	calculate_Iy_transom_min();
-	calculate_f_transom_wind_fact();
-	calculate_f_transom_filling_fact();
-	calculate_f_transom_self_fact();
-	calculate_f_transom_vertical_load_fact();
-}
+// B1.onchange = () => {
+// 	calculate_Q_mullion();
+// 	calculate_Q_transom();
+// 	calculate_f_transom_wind_permiss();
+// 	calculate_F_filling();
+// 	calculate_Ix_mullion_min();
+// 	calculate_Ix_transom_min();
+// 	calculate_Iy_transom_min();
+// 	calculate_f_mullion_fact();
+// 	calculate_f_transom_wind_fact();
+// 	calculate_f_transom_filling_fact();
+// 	calculate_f_transom_self_fact();
+// 	calculate_f_transom_vertical_load_fact();
+// }
 
-Wm.onchange = () => {
-	calculate_Q_mullion();
-	calculate_Q_transom();
-	calculate_Ix_mullion_min();
-	calculate_Ix_transom_min();
-	calculate_f_mullion_fact();
-	calculate_f_transom_wind_fact();
-}
+// B2.onchange = () => {
+// 	calculate_Q_mullion();
+// 	calculate_Q_transom();
+// 	calculate_f_transom_wind_permiss();
+// 	calculate_F_filling();
+// 	calculate_Ix_mullion_min();
+// 	calculate_Ix_transom_min();
+// 	calculate_Iy_transom_min();
+// 	calculate_f_mullion_fact();
+// 	calculate_f_transom_wind_fact();
+// 	calculate_f_transom_filling_fact();
+// 	calculate_f_transom_self_fact();
+// 	calculate_f_transom_vertical_load_fact();
+// }
 
-material_const.onchange = () => {
-	get_E_const();
-	get_γ_const();
-	calculate_Ix_mullion_min();
-	calculate_Ix_transom_min();
-	calculate_Iy_transom_min();
-	calculate_F_transom();
-	calculate_f_mullion_fact();
-	calculate_f_transom_wind_fact();
-	calculate_f_transom_filling_fact();
-	calculate_f_transom_self_fact();
-	calculate_f_transom_vertical_load_fact();
-}
+// h1.onchange = () => {
+// 	calculate_Q_transom();
+// 	calculate_F_filling();
+// 	calculate_Ix_transom_min();
+// 	calculate_Iy_transom_min();
+// 	calculate_f_transom_wind_fact();
+// 	calculate_f_transom_filling_fact();
+// 	calculate_f_transom_self_fact();
+// 	calculate_f_transom_vertical_load_fact();
+// }
 
-material_filling.onchange = () => {
-	get_γ_filling();
-	calculate_F_filling();
-	calculate_Iy_transom_min();
-	calculate_f_transom_filling_fact();
-	calculate_f_transom_vertical_load_fact();
-}
+// h2.onchange = () => {
+// 	calculate_Q_transom();
+// 	calculate_F_filling();
+// 	calculate_Ix_transom_min();
+// 	calculate_Iy_transom_min();
+// 	calculate_f_transom_wind_fact();
+// 	calculate_f_transom_filling_fact();
+// 	calculate_f_transom_self_fact();
+// 	calculate_f_transom_vertical_load_fact();
+// }
 
-t.onchange = () => {
-	calculate_F_filling();
-	calculate_Iy_transom_min();
-	calculate_f_transom_vertical_load_fact();
-}
+// Wm.onchange = () => {
+// 	calculate_Q_mullion();
+// 	calculate_Q_transom();
+// 	calculate_Ix_mullion_min();
+// 	calculate_Ix_transom_min();
+// 	calculate_f_mullion_fact();
+// 	calculate_f_transom_wind_fact();
+// }
 
-a.onchange = () => {
-	calculate_Iy_transom_min();
-	calculate_f_transom_filling_fact();
-	calculate_f_transom_vertical_load_fact();
-}
+// material_const.onchange = () => {
+// 	get_E_const();
+// 	get_γ_const();
+// 	calculate_Ix_mullion_min();
+// 	calculate_Ix_transom_min();
+// 	calculate_Iy_transom_min();
+// 	calculate_F_transom();
+// 	calculate_f_mullion_fact();
+// 	calculate_f_transom_wind_fact();
+// 	calculate_f_transom_filling_fact();
+// 	calculate_f_transom_self_fact();
+// 	calculate_f_transom_vertical_load_fact();
+// }
 
-A_transom.onchange = () => {
-	calculate_F_transom();
-	calculate_f_transom_filling_fact();
-	calculate_f_transom_self_fact();
-	calculate_f_transom_vertical_load_fact();
-}
+// material_filling.onchange = () => {
+// 	get_γ_filling();
+// 	calculate_F_filling();
+// 	calculate_Iy_transom_min();
+// 	calculate_f_transom_filling_fact();
+// 	calculate_f_transom_vertical_load_fact();
+// }
 
-Ix_mullion.onchange = () => {
-	calculate_f_mullion_fact();
-}
+// t.onchange = () => {
+// 	calculate_F_filling();
+// 	calculate_Iy_transom_min();
+// 	calculate_f_transom_vertical_load_fact();
+// }
 
-Ix_transom.onchange = () => {
-	calculate_f_transom_wind_fact();
-}
+// a.onchange = () => {
+// 	calculate_Iy_transom_min();
+// 	calculate_f_transom_filling_fact();
+// 	calculate_f_transom_vertical_load_fact();
+// }
 
-Iy_transom.onchange = () => {
-	calculate_f_transom_filling_fact();
-	calculate_f_transom_self_fact();
-	calculate_f_transom_vertical_load_fact();
-}
+// A_transom.onchange = () => {
+// 	calculate_F_transom();
+// 	calculate_f_transom_filling_fact();
+// 	calculate_f_transom_self_fact();
+// 	calculate_f_transom_vertical_load_fact();
+// }
+
+// Ix_mullion.onchange = () => {
+// 	calculate_f_mullion_fact();
+// }
+
+// Ix_transom.onchange = () => {
+// 	calculate_f_transom_wind_fact();
+// }
+
+// Iy_transom.onchange = () => {
+// 	calculate_f_transom_filling_fact();
+// 	calculate_f_transom_self_fact();
+// 	calculate_f_transom_vertical_load_fact();
+// }
 
 calculate.onclick = () => {
 	calculate_f_mullion_fact();
