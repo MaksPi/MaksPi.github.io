@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial=scale=1.0">
+
+  <title>Советы по стилю кода</title>
+  
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/fonts.css">
+  <link rel="shortcut icon" href="../img/iconfinder_graduation_cap.png">
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <div class="page">
+      <div class="main__header">
+        <div class="main__header-group">
+          <ol class="breadcrumbs">
+            <li class="breadcrumbs__item breadcrumbs__item_home">
+              <a class="breadcrumbs__link" title="Оглавление" href="../index.html"></a>
+            </li>
+            <li class="breadcrumbs__item"></li>
+          </ol>
+          <div class="updated-at">
+            <div class="updated-at__content">30-го июня 2020</div>
+          </div>
+        </div>
+        <h1 class="page__title">Советы по стилю кода</h1>
+      </div>
+      <p>Код должен быть максимально читаемым и понятным.</p>
+      <p>Это и есть искусство программирования – взять сложную задачу и написать такой код для её решения, который и правильно работает, и легко читается, понятен для людей. Для этого нужен <em>хороший стиль</em> написания кода. В этой главе мы рассмотрим составляющие такого стиля.</p>
+      <h2>Синтаксис</h2>
+      <p>Шпаргалка с правилами синтаксиса (подробнее смотрите ниже по тексту):</p>
+      <div class="image" style="width: 715px">
+        <iframe style="width: 715px; height: calc(528px + 4px)" src="../code-quality/coding-style/code-style.html"></iframe>
+        <div class="image__ratio" style="padding-top: 74.40559440559%"></div>
+      </div>
+      <p>Не всё здесь однозначно, так что разберём эти правила подробнее.</p>
+      <div class="important important_warn">
+        <div class="important__header"><span class="important__type">Ни одно правило не является жёстко обязательным</span></div>
+        <div class="important__content"><p>Здесь нет железных правил. Это стилевые предпочтения, а не религиозные догмы.</p>
+        </div>
+      </div>
+      <h3>Фигурные скобки</h3>
+      <p>В большинстве JavaScript проектов фигурные скобки пишутся в так называемом «египетском» стиле с открывающей скобкой на той же строке, что и соответствующее ключевое слово – не на новой строке. Перед открывающей скобкой должен быть пробел, как здесь:</p>
+      <div class="code-example">
+        <div class="codebox">
+          <div class="line-numbers language-javascript">
+            <code class="language-javascript">
+              <code class="token keyword">if</code> <code class="token punctuation">(</code>condition<code class="token punctuation">)</code> <code class="token punctuation">{</code><br>
+              <code class="token comment rows-double-indentation">// делай это</code><br>
+              <code class="token comment rows-double-indentation">// ...и это</code><br>
+              <code class="token comment rows-double-indentation">// ...и потом это</code><br>
+              <code class="token punctuation">}</code>
+            </code>
+            <span class="line-numbers-rows">
+              <script src="../js/line-numbers-rows.js"></script>
+              <script>rowsNumbers(5);</script>
+            </span>
+          </div>
+        </div>
+      </div>
+      <p>А что если у нас однострочная запись, типа <code>if (condition) doSomething()</code>, должны ли мы использовать фигурные скобки?</p>
+      <p>Вот различные варианты расстановки скобок с комментариями, посмотрите сами, какой вам кажется самым читаемым:</p>
+      <ol>
+        <li>😠 Такое иногда бывает в коде начинающих. Плохо, фигурные скобки не нужны:
+          <div class="code-example">
+            <div class="codebox">
+              <div class="line-numbers language-javascript">
+                <code class="language-javascript">
+                  <code class="token keyword">if</code> <code class="token punctuation">(</code>n <code class="token operator">&lt;</code> <code class="token number">0</code><code class="token punctuation">)</code> <code class="token punctuation">{</code><code class="token function">alert</code><code class="token punctuation">(</code><code class="token template-string"><code class="token string">`Степень </code><code class="token interpolation"><code class="token interpolation-punctuation punctuation">${</code>n<code class="token interpolation-punctuation punctuation">}</code></code><code class="token string"> не поддерживается`</code></code><code class="token punctuation">)</code><code class="token punctuation">;</code><code class="token punctuation">}</code>
+                </code>
+                <span class="line-numbers-rows">
+                  <script src="../js/line-numbers-rows.js"></script>
+                  <script>rowsNumbers(1);</script>
+                </span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>😠 Никогда не разделяйте строки без фигурных скобок, можно ненароком сделать ошибку при добавлении строк:
+          <div class="code-example">
+            <div class="codebox">
+              <div class="line-numbers language-javascript">
+                <code class="language-javascript">
+                  <code class="token keyword">if</code> <code class="token punctuation">(</code>n <code class="token operator">&lt;</code> <code class="token number">0</code><code class="token punctuation">)</code><br>
+                  <code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code><code class="token template-string"><code class="token string">`Степень </code><code class="token interpolation"><code class="token interpolation-punctuation punctuation">${</code>n<code class="token interpolation-punctuation punctuation">}</code></code><code class="token string"> не поддерживается`</code></code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+                </code>
+                <span class="line-numbers-rows">
+                  <script src="../js/line-numbers-rows.js"></script>
+                  <script>rowsNumbers(2);</script>
+                </span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>😏 В одну строку без скобок – приемлемо, если эта строка короткая:
+          <div class="code-example">
+            <div class="codebox">
+              <div class="line-numbers language-javascript">
+                <code class="language-javascript">
+                  <code class="token keyword">if</code> <code class="token punctuation">(</code>n <code class="token operator">&lt;</code> <code class="token number">0</code><code class="token punctuation">)</code> <code class="token function">alert</code><code class="token punctuation">(</code><code class="token template-string"><code class="token string">`Степень </code><code class="token interpolation"><code class="token interpolation-punctuation punctuation">${</code>n<code class="token interpolation-punctuation punctuation">}</code></code><code class="token string"> не поддерживается`</code></code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+                </code>
+                <span class="line-numbers-rows">
+                  <script src="../js/line-numbers-rows.js"></script>
+                  <script>rowsNumbers(1);</script>
+                </span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>😃 Самый лучший вариант:
+          <div class="code-example">
+            <div class="codebox">
+              <div class="line-numbers language-javascript">
+                <code class="language-javascript">
+                  <code class="token keyword">if</code> <code class="token punctuation">(</code>n <code class="token operator">&lt;</code> <code class="token number">0</code><code class="token punctuation">)</code> <code class="token punctuation">{</code><br>
+                  <code class="token function rows-double-indentation">alert</code><code class="token punctuation">(</code><code class="token template-string"><code class="token string">`Степень </code><code class="token interpolation"><code class="token interpolation-punctuation punctuation">${</code>n<code class="token interpolation-punctuation punctuation">}</code></code><code class="token string"> не поддерживается`</code></code><code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+                  <code class="token punctuation">}</code>
+                </code>
+                <span class="line-numbers-rows">
+                  <script src="../js/line-numbers-rows.js"></script>
+                  <script>rowsNumbers(3);</script>
+                </span>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ol>
+      <p>Для очень короткого кода допустима одна строка. Например: <code>if (cond) return null</code>. Но блок кода (последний вариант) обычно всё равно читается лучше.</p>
+      <h3>Длина строки</h3>
+      <p>Никто не любит читать длинные горизонтальные строки кода. Лучше всего разбивать их, например:</p>
+      <div class="code-example">
+        <div class="codebox">
+          <div class="line-numbers language-javascript">
+            <code class="language-javascript">
+              <code class="token comment">// обратные кавычки ` позволяют разделять строку на части</code><br>
+              <code class="token keyword">let</code> str <code class="token operator">=</code> <code class="token template-string"><code class="token string">`<br>
+                <code class="token rows-double-indentation">Рабочая группа TC39 организации Ecma International -</code><br>
+                <code class="token rows-double-indentation">это группа JavaScript-разработчиков, теоретиков и авторов движков JavaScript,</code><br>
+                <code class="token rows-double-indentation">которые вместе с сообществом занимаются поддержкой и развитием языка JavaScript.</code><br>
+              `</code></code><code class="token punctuation">;</code>
+            </code>
+            <span class="line-numbers-rows">
+              <script src="../js/line-numbers-rows.js"></script>
+              <script>rowsNumbers(6);</script>
+            </span>
+          </div>
+        </div>
+      </div>
+      <p>Или для if:</p>
+      <div class="code-example">
+        <div class="codebox">
+          <div class="line-numbers language-javascript">
+            <code class="language-javascript">
+              <code class="token keyword">if</code> <code class="token punctuation">(</code><br>
+              <code class="token rows-double-indentation">id</code> <code class="token operator">===</code> <code class="token number">123</code> <code class="token operator">&amp;&amp;</code><br>
+              <code class="token rows-double-indentation">moonPhase</code> <code class="token operator">===</code> <code class="token string">'Waning Gibbous'</code> <code class="token operator">&amp;&amp;</code><br>
+              <code class="token rows-double-indentation">zodiacSign</code> <code class="token operator">===</code> <code class="token string">'Libra'</code><br>
+              <code class="token punctuation">)</code> <code class="token punctuation">{</code><br>
+              <code class="token function rows-double-indentation">letTheSorceryBegin</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code><br>
+              <code class="token punctuation">}</code>
+            </code>
+            <span class="line-numbers-rows">
+              <script src="../js/line-numbers-rows.js"></script>
+              <script>rowsNumbers(7);</script>
+            </span>
+          </div>
+        </div>
+      </div>
+      <p>Максимальную длину строки согласовывают в команде. Обычно это <code>80</code> или <code>120</code> символов.</p>
+      <h3>Отступы</h3>
+      <p>Существует два типа отступов:</p>
+      <ul>
+        <li>
+          <p><strong>Горизонтальные отступы: два или четыре пробела.</strong></p>
+          <p>Горизонтальный отступ выполняется с помощью 2 или 4 пробелов, или символа табуляции (клавиша <kbd class="shortcut">Tab</kbd>). Какой из них выбрать – это уже на ваше усмотрение. Пробелы больше распространены.</p>
+          <p>Одно из преимуществ пробелов над табуляцией заключается в том, что пробелы допускают более гибкие конфигурации отступов, чем символ табуляции.</p>
+          <p>Например, мы можем выровнять аргументы относительно открывающей скобки:</p>
+          <div class="code-example">
+            <div class="codebox">
+              <div class="line-numbers language-javascript">
+                <code class="language-javascript">
+<pre>
+<code class="token function">show</code><code class="token punctuation">(</code>parameters<code class="token punctuation">,</code>
+     aligned<code class="token punctuation">,</code> <code class="token comment">// 5 пробелов слева</code>
+     one<code class="token punctuation">,</code>
+     after<code class="token punctuation">,</code>
+     another
+  <code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token comment">// ...</code>
+<code class="token punctuation">}</code>
+</pre>
+                </code>
+                <span class="line-numbers-rows">
+                  <script src="../js/line-numbers-rows.js"></script>
+                  <script>rowsNumbers(8);</script>
+                </span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <p><strong>Вертикальные отступы: пустые строки для разбивки кода на «логические блоки».</strong></p>
+          <p>Даже одну функцию часто можно разделить на логические блоки. В примере ниже разделены инициализация переменных, основной цикл и возвращаемый результат:</p>
+          <div class="code-example">
+            <div class="codebox">
+              <div class="line-numbers language-javascript">
+                <code class="language-javascript">
+<pre>
+<code class="token keyword">function</code> <code class="token function">pow</code><code class="token punctuation">(</code><code class="token parameter">x<code class="token punctuation">,</code> n</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token keyword">let</code> result <code class="token operator">=</code> <code class="token number">1</code><code class="token punctuation">;</code>
+  <code class="token comment">//              &lt;--</code>
+  <code class="token keyword">for</code> <code class="token punctuation">(</code><code class="token keyword">let</code> i <code class="token operator">=</code> <code class="token number">0</code><code class="token punctuation">;</code> i <code class="token operator">&lt;</code> n<code class="token punctuation">;</code> i<code class="token operator">++</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+    result <code class="token operator">*=</code> x<code class="token punctuation">;</code>
+  <code class="token punctuation">}</code>
+  <code class="token comment">//              &lt;--</code>
+  <code class="token keyword">return</code> result<code class="token punctuation">;</code>
+<code class="token punctuation">}</code>
+</pre>
+                </code>
+                <span class="line-numbers-rows">
+                  <script src="../js/line-numbers-rows.js"></script>
+                  <script>rowsNumbers(9);</script>
+                </span>
+              </div>
+            </div>
+          </div>
+          <p>Вставляйте дополнительный перевод строки туда, где это сделает код более читаемым. Не должно быть более 9 строк кода подряд без вертикального отступа.</p>
+        </li>
+      </ul>
+      <h3>Точка с запятой</h3>
+      <p>Точки с запятой должны присутствовать после каждого выражения, даже если их, казалось бы, можно пропустить.</p>
+      <p>Есть языки, в которых точка с запятой необязательна и редко используется. Однако в JavaScript бывают случаи, когда перенос строки не интерпретируется, как точка с запятой, что может привести к ошибкам. Подробнее об этом – в главе <a href="https://learn.javascript.ru/structure#semicolon">о структуре кода</a>.</p>
+      <p>Если вы – опытный разработчик на JavaScript, то можно выбрать стиль кода без точек с запятой, например <a href="https://standardjs.com/">StandardJS</a>. В ином случае, лучше будет использовать точки с запятой, чтобы избежать подводных камней. Большинство разработчиков их ставят.</p>
+      <h3>Уровни вложенности</h3>
+      <p>Уровней вложенности должно быть немного.</p>
+      <p>Например, в цикле бывает полезно использовать директиву <a href="https://learn.javascript.ru/while-for#continue"><code>continue</code></a>, чтобы избежать лишней вложенности.</p>
+      <p>Например, вместо добавления вложенного условия <code>if</code>, как здесь:</p>
+      <div class="code-example">
+        <div class="codebox">
+          <div class="line-numbers language-javascript">
+            <code class="language-javascript">
+<pre>
+<code class="token keyword">for</code> <code class="token punctuation">(</code><code class="token keyword">let</code> i <code class="token operator">=</code> <code class="token number">0</code><code class="token punctuation">;</code> i <code class="token operator">&lt;</code> <code class="token number">10</code><code class="token punctuation">;</code> i<code class="token operator">++</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token keyword">if</code> <code class="token punctuation">(</code>cond<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+    <code class="token operator">...</code> <code class="token comment">// &lt;- ещё один уровень вложенности</code>
+  <code class="token punctuation">}</code>
+<code class="token punctuation">}</code>
+</pre>
+            </code>
+            <span class="line-numbers-rows">
+              <script src="../js/line-numbers-rows.js"></script>
+              <script>rowsNumbers(5);</script>
+            </span>
+          </div>
+        </div>
+      </div>
+      <p>Мы можем написать:</p>
+      <div class="code-example">
+        <div class="codebox">
+          <div class="line-numbers language-javascript">
+            <code class="language-javascript">
+<pre>
+<code class="token keyword">for</code> <code class="token punctuation">(</code><code class="token keyword">let</code> i <code class="token operator">=</code> <code class="token number">0</code><code class="token punctuation">;</code> i <code class="token operator">&lt;</code> <code class="token number">10</code><code class="token punctuation">;</code> i<code class="token operator">++</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token keyword">if</code> <code class="token punctuation">(</code><code class="token operator">!</code>cond<code class="token punctuation">)</code> <code class="token keyword">continue</code><code class="token punctuation">;</code>
+  <code class="token operator">...</code>  <code class="token comment">// &lt;- нет лишнего уровня вложенности</code>
+<code class="token punctuation">}</code>
+</pre>
+            </code>
+            <span class="line-numbers-rows">
+              <script src="../js/line-numbers-rows.js"></script>
+              <script>rowsNumbers(4);</script>
+            </span>
+          </div>
+        </div>
+      </div>
+      <p>Аналогичная ситуация – с <code>if/else</code> и <code>return</code>.</p>
+      <p>Например, две нижеследующие конструкции идентичны.</p>
+      <p>Первая:</p>
+      <div class="code-example">
+        <div class="codebox">
+          <div class="line-numbers language-javascript">
+            <code class="language-javascript">
+<pre>
+<code class="token keyword">function</code> <code class="token function">pow</code><code class="token punctuation">(</code><code class="token parameter">x<code class="token punctuation">,</code> n</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token keyword">if</code> <code class="token punctuation">(</code>n <code class="token operator">&lt;</code> <code class="token number">0</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+    <code class="token function">alert</code><code class="token punctuation">(</code><code class="token string">"Отрицательные значения 'n' не поддерживаются"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+  <code class="token punctuation">}</code> <code class="token keyword">else</code> <code class="token punctuation">{</code>
+    <code class="token keyword">let</code> result <code class="token operator">=</code> <code class="token number">1</code><code class="token punctuation">;</code>
+
+    <code class="token keyword">for</code> <code class="token punctuation">(</code><code class="token keyword">let</code> i <code class="token operator">=</code> <code class="token number">0</code><code class="token punctuation">;</code> i <code class="token operator">&lt;</code> n<code class="token punctuation">;</code> i<code class="token operator">++</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+      result <code class="token operator">*=</code> x<code class="token punctuation">;</code>
+    <code class="token punctuation">}</code>
+
+    <code class="token keyword">return</code> result<code class="token punctuation">;</code>
+  <code class="token punctuation">}</code>
+<code class="token punctuation">}</code>
+</pre>
+            </code>
+            <span class="line-numbers-rows">
+              <script src="../js/line-numbers-rows.js"></script>
+              <script>rowsNumbers(13);</script>
+            </span>
+          </div>
+        </div>
+      </div>
+      <p>Вторая:</p>
+      <div class="code-example">
+        <div class="codebox">
+          <div class="line-numbers language-javascript">
+            <code class="language-javascript">
+<pre>
+<code class="token keyword">function</code> <code class="token function">pow</code><code class="token punctuation">(</code><code class="token parameter">x<code class="token punctuation">,</code> n</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token keyword">if</code> <code class="token punctuation">(</code>n <code class="token operator">&lt;</code> <code class="token number">0</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+    <code class="token function">alert</code><code class="token punctuation">(</code><code class="token string">"Отрицательные значения 'n' не поддерживаются"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+    <code class="token keyword">return</code><code class="token punctuation">;</code>
+  <code class="token punctuation">}</code>
+
+  <code class="token keyword">let</code> result <code class="token operator">=</code> <code class="token number">1</code><code class="token punctuation">;</code>
+
+  <code class="token keyword">for</code> <code class="token punctuation">(</code><code class="token keyword">let</code> i <code class="token operator">=</code> <code class="token number">0</code><code class="token punctuation">;</code> i <code class="token operator">&lt;</code> n<code class="token punctuation">;</code> i<code class="token operator">++</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+    result <code class="token operator">*=</code> x<code class="token punctuation">;</code>
+  <code class="token punctuation">}</code>
+
+  <code class="token keyword">return</code> result<code class="token punctuation">;</code>
+<code class="token punctuation">}</code>
+</pre>
+            </code>
+            <span class="line-numbers-rows">
+              <script src="../js/line-numbers-rows.js"></script>
+              <script>rowsNumbers(14);</script>
+            </span>
+          </div>
+        </div>
+      </div>
+      <p>Второй вариант является более читабельным, потому что «особый случай» <code>n &lt; 0</code> обрабатывается на ранней стадии. После проверки можно переходить к «основному» потоку кода без необходимости увеличения вложенности.</p>
+      <h2>Размещение функций</h2>
+      <p>Если вы пишете несколько вспомогательных функций, а затем используемый ими код, то существует три способа организации функций.</p>
+      <ol>
+        <li>
+          <p>Объявить функции <em>перед</em> кодом, который их вызовет:</p>
+          <div class="code-example">
+            <div class="codebox">
+              <div class="line-numbers language-javascript">
+                <code class="language-javascript">
+<pre>
+<code class="token comment">// объявление функций</code>
+<code class="token keyword">function</code> <code class="token function">createElement</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token operator">...</code>
+<code class="token punctuation">}</code>
+
+<code class="token keyword">function</code> <code class="token function">setHandler</code><code class="token punctuation">(</code><code class="token parameter">elem</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token operator">...</code>
+<code class="token punctuation">}</code>
+
+<code class="token keyword">function</code> <code class="token function">walkAround</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token operator">...</code>
+<code class="token punctuation">}</code>
+
+<code class="token comment">// код, который использует их</code>
+<code class="token keyword">let</code> elem <code class="token operator">=</code> <code class="token function">createElement</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token function">setHandler</code><code class="token punctuation">(</code>elem<code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token function">walkAround</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+</pre>
+                </code>
+                <span class="line-numbers-rows">
+                  <script src="../js/line-numbers-rows.js"></script>
+                  <script>rowsNumbers(17);</script>
+                </span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <p>Сначала код, затем функции</p>
+          <div class="code-example">
+            <div class="codebox">
+              <div class="line-numbers language-javascript">
+                <code class="language-javascript">
+<pre>
+<code class="token comment">// код, использующий функции</code>
+<code class="token keyword">let</code> elem <code class="token operator">=</code> <code class="token function">createElement</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token function">setHandler</code><code class="token punctuation">(</code>elem<code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token function">walkAround</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+<code class="token comment">// --- вспомогательные функции ---</code>
+<code class="token keyword">function</code> <code class="token function">createElement</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token operator">...</code>
+<code class="token punctuation">}</code>
+
+<code class="token keyword">function</code> <code class="token function">setHandler</code><code class="token punctuation">(</code><code class="token parameter">elem</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token operator">...</code>
+<code class="token punctuation">}</code>
+
+<code class="token keyword">function</code> <code class="token function">walkAround</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token operator">...</code>
+<code class="token punctuation">}</code>
+</pre>
+                </code>
+                <span class="line-numbers-rows">
+                  <script src="../js/line-numbers-rows.js"></script>
+                  <script>rowsNumbers(17);</script>
+                </span>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <p>Смешанный стиль: функция объявляется там, где она используется впервые.</p>
+        </li>
+      </ol>
+      <p>В большинстве случаев второй вариант является предпочтительным.</p>
+      <p>Это потому, что при чтении кода мы сначала хотим знать, <em>что он делает</em>. Если сначала идёт код, то это тут же становится понятно. И тогда, может быть, нам вообще не нужно будет читать функции, особенно если их имена хорошо подобраны.</p>
+      <h2>Руководства по стилю кода</h2>
+      <p>Руководство по стилю содержит общие правила о том, как писать код, например: какие кавычки использовать, сколько пробелов отступать, максимальную длину строки и так далее – в общем, множество мелочей.</p>
+      <p>Когда все участники команды используют одно и то же руководство по стилю, код выглядит одинаково, независимо от того, кто из команды его написал.</p>
+      <p>Конечно, команда всегда может написать собственное руководство по стилю, но обычно в этом нет необходимости. Существует множество уже готовых.</p>
+      <p>Некоторые популярные руководства:</p>
+      <ul>
+        <li><a href="https://google.github.io/styleguide/javascriptguide.xml">Google JavaScript Style Guide</a></li>
+        <li><a href="https://github.com/airbnb/javascript">Airbnb JavaScript Style Guide</a> (есть <a href="https://leonidlebedev.github.io/javascript-airbnb/">перевод</a>)</li>
+        <li><a href="https://github.com/rwaldron/idiomatic.js">Idiomatic.JS</a> (есть <a href="https://github.com/rwaldron/idiomatic.js/tree/master/translations/ru_RU">перевод</a>)</li>
+        <li><a href="https://standardjs.com/">StandardJS</a></li>
+        <li>(и ещё множество других)</li>
+      </ul>
+      <p>Если вы – начинающий разработчик, то начните со шпаргалки в начале этой главы. Как только вы освоитесь, просмотрите другие руководства, чтобы выбрать общие принципы и решить, какое вам больше подходит.</p>
+      <h2>Автоматизированные средства проверки (линтеры)</h2>
+      <p>Автоматизированные средства проверки, так называемые «линтеры» – это инструменты, которые могут автоматически проверять стиль вашего кода и вносить предложения по его улучшению.</p>
+      <p>Самое замечательное в них то, что проверка стиля может также найти программные ошибки, такие как опечатки в именах переменных или функций. Из-за этой особенности использовать линтер рекомендуется, даже если вы не хотите придерживаться какого-то конкретного «стиля кода».</p>
+      <p>Вот некоторые известные инструменты для проверки:</p>
+      <ul>
+        <li><a href="http://www.jslint.com/">JSLint</a> – проверяет код на соответствие <a href="http://www.jslint.com/lint.html">стилю JSLint</a>, в онлайн-интерфейсе вверху можно ввести код, а внизу – различные настройки проверки, чтобы попробовать её в действии.</li>
+        <li><a href="http://www.jshint.com/">JSHint</a> – больше проверок, чем в JSLint.</li>
+        <li><a href="http://eslint.org/">ESLint</a> – пожалуй, самый современный линтер.</li>
+      </ul>
+      <p>Все они, в общем-то, работают. Автор пользуется <a href="http://eslint.org/">ESLint</a>.</p>
+      <p>Большинство линтеров интегрированы со многими популярными редакторами: просто включите плагин в редакторе и настройте стиль.</p>
+      <p>Например, для ESLint вы должны выполнить следующее:</p>
+      <ol>
+        <li>Установите <a href="https://nodejs.org/">Node.JS</a>.</li>
+        <li>Установите ESLint с помощью команды <code>npm install -g eslint</code> (npm – установщик пакетов JavaScript).</li>
+        <li>Создайте файл конфигурации с именем <code>.eslintrc</code> в корне вашего JavaScript-проекта (в папке, содержащей все ваши файлы).</li>
+        <li>Установите/включите плагин для вашего редактора, который интегрируется с ESLint. У большинства редакторов он есть.</li>
+      </ol>
+      <p>Вот пример файла <code>.eslintrc</code>:</p>
+      <div class="code-example">
+        <div class="codebox">
+          <div class="line-numbers language-javascript">
+            <code class="language-javascript">
+<pre>
+<code class="token punctuation">{</code>
+  <code class="token string">"extends"</code><code class="token punctuation">:</code> <code class="token string">"eslint:recommended"</code><code class="token punctuation">,</code>
+  <code class="token string">"env"</code><code class="token punctuation">:</code> <code class="token punctuation">{</code>
+    <code class="token string">"browser"</code><code class="token punctuation">:</code> <code class="token boolean">true</code><code class="token punctuation">,</code>
+    <code class="token string">"node"</code><code class="token punctuation">:</code> <code class="token boolean">true</code><code class="token punctuation">,</code>
+    <code class="token string">"es6"</code><code class="token punctuation">:</code> <code class="token boolean">true</code>
+  <code class="token punctuation">}</code><code class="token punctuation">,</code>
+  <code class="token string">"rules"</code><code class="token punctuation">:</code> <code class="token punctuation">{</code>
+    <code class="token string">"no-console"</code><code class="token punctuation">:</code> <code class="token number">0</code><code class="token punctuation">,</code>
+    <code class="token string">"indent"</code><code class="token punctuation">:</code> <code class="token punctuation">[</code><code class="token string">"warning"</code><code class="token punctuation">,</code> <code class="token number">2</code><code class="token punctuation">]</code>
+  <code class="token punctuation">}</code>
+<code class="token punctuation">}</code>
+</pre>
+            </code>
+            <span class="line-numbers-rows">
+              <script src="../js/line-numbers-rows.js"></script>
+              <script>rowsNumbers(12);</script>
+            </span>
+          </div>
+        </div>
+      </div>
+      <p>Здесь директива <code>"extends"</code> означает, что конфигурация основана на наборе настроек «eslint:recommended». После этого мы уточняем наши собственные.</p>
+      <p>Кроме того, возможно загрузить наборы правил стиля из сети и расширить их. Смотрите <a href="https://eslint.org/docs/user-guide/getting-started">https://eslint.org/docs/user-guide/getting-started</a> для получения более подробной информации об установке.</p>
+      <p>Также некоторые среды разработки имеют встроенные линтеры, возможно, удобные, но не такие гибкие в настройке, как ESLint.</p>
+    </div>
+  </div>
+</body>
+
+</html>

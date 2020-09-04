@@ -43,6 +43,15 @@ p {
 	font-size: 16px;
 	line-height: 22px;
 }
+pre {
+	margin: 0;
+}
+span.devtools {
+	display: inline-block;
+	background-image: url(../code-quality/debugging-chrome/toolbarButtonGlyphs.svg);
+	height: 16px;
+	width: 16px;
+}
 ul {
 	list-style: none;
 }
@@ -86,6 +95,31 @@ ul {
 	border: 0;
 	width: 100%;
 	height: 100px;
+}
+.breadcrumbs {
+	list-style: none;
+	color: #888;
+}
+.breadcrumbs .breadcrumbs__item {
+	display: inline-block;
+	margin: 0;
+}
+.breadcrumbs__item_home .breadcrumbs__link {
+	color: #999;
+}
+.breadcrumbs__item_home .breadcrumbs__link:before {
+	content: "\f015";
+	font-family: FontIcons;
+}
+.breadcrumbs .breadcrumbs__item+.breadcrumbs__item:before {
+	content: "\2192";
+	margin: 0 9px 0 7px;
+}
+.breadcrumbs .breadcrumbs__item_home .breadcrumbs__link:hover {
+	text-decoration: none;
+}
+.breadcrumbs .breadcrumbs__item .breadcrumbs__link:hover {
+	color: #ba1000;
 }
 .browser-environment .columns {
 	display: flex;
@@ -145,6 +179,33 @@ ul {
 	font-size: 24px;
 	color: rgb(114, 113, 85);
 	text-align: center;
+}
+.browser-environment .window {
+	width: 74px;
+	height: 24px;
+	margin: 0 auto 18px;
+	border: 2px solid rgb(232, 196, 142);
+	background-color: rgb(255, 249, 235);
+	text-align: center;
+	position: relative;
+}
+.browser-environment .window span {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 50%;
+	transform: translate(0, -50%);
+	font-family: PTMono-Regular, "PT Mono";
+	color: rgb(112, 113, 117);
+}
+.browser-environment .bom .XMLHttpRequest {
+	width: 128px;
+	height: 22px;
+	margin: 0;
+	border: 2px solid rgb(153, 192, 195);
+	background-color: rgb(237, 252, 253);
+	text-align: center;
+	position: relative;
 }
 .dom .body {
 	font-size: 14px;
@@ -555,6 +616,17 @@ ul {
 	content: "";
 	padding: 0 .7em 0 .8em;
 }
+.main__header {
+	margin: 40px 0 16px;
+}
+.main__header .breadcrumbs {
+	margin: 0 0 12px;
+	padding: 0;
+}
+.main__header-group {
+	display: flex;
+	justify-content: space-between;
+}
 .navigator, .screen, .location, .frames, .history {
 	width: 81px;
 	height: 22px;
@@ -655,8 +727,17 @@ ul {
 .rows-indentation {
 	margin-left: 8px;
 }
+.shortcut {
+	background: none;
+	border: 1px solid #e8e6e5;
+	border-radius: 2px;
+	padding: 1px 3px;
+	font-family: Consolas,Lucida Console,Menlo,Monaco,monospace;
+	line-height: inherit;
+	word-spacing: -.4ex;
+}
 .tutorial-map {
-	max-width: 1200px;
+	max-width: 920px;
 	margin: 0 auto;
 }
 .tutorial-map__title {
@@ -725,32 +806,13 @@ ul {
 .token.tag {
 	color: #905;
 }
-.browser-environment .window {
-	width: 74px;
-	height: 24px;
-	margin: 0 auto 18px;
-	border: 2px solid rgb(232, 196, 142);
-	background-color: rgb(255, 249, 235);
-	text-align: center;
-	position: relative;
+.updated-at__content {
+	color: gray;
 }
-.browser-environment .window span {
-	position: absolute;
-	left: 0;
-	right: 0;
-	top: 50%;
-	transform: translate(0, -50%);
-	font-family: PTMono-Regular, "PT Mono";
-	color: rgb(112, 113, 117);
-}
-.browser-environment .bom .XMLHttpRequest {
-	width: 128px;
-	height: 22px;
-	margin: 0;
-	border: 2px solid rgb(153, 192, 195);
-	background-color: rgb(237, 252, 253);
-	text-align: center;
-	position: relative;
+.updated-at__content:before {
+	content: "\f073";
+	font-family: FontIcons;
+	padding-right: 6px;
 }
 @media (max-width: 480px) {
 	.image.browser-environment {

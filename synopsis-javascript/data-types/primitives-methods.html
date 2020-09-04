@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial=scale=1.0">
+
+  <title>Методы у примитивов</title>
+  
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/fonts.css">
+  <link rel="shortcut icon" href="../img/iconfinder_graduation_cap.png">
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <div class="page">
+      <div class="main__header">
+        <div class="main__header-group">
+          <ol class="breadcrumbs">
+            <li class="breadcrumbs__item breadcrumbs__item_home">
+              <a class="breadcrumbs__link" title="Оглавление" href="../index.html"></a>
+            </li>
+            <li class="breadcrumbs__item"></li>
+          </ol>
+          <div class="updated-at">
+            <div class="updated-at__content">7-го августа 2020</div>
+          </div>
+        </div>
+        <h1 class="page__title">Методы у примитивов</h1>
+      </div>
+      <div itemprop="articleBody">
+        <p>JavaScript позволяет нам работать с примитивными типами данных – строками, числами и т.д., как будто они являются объектами. У них есть и методы. Мы изучим их позже, а сначала разберём, как это всё работает, потому что, конечно, примитивы – не объекты.</p>
+        <p>Давайте взглянем на ключевые различия между примитивами и объектами.</p>
+        <p>Примитив</p>
+        <ul>
+          <li>Это – значение «примитивного» типа.</li>
+          <li>Есть 7 примитивных типов: <code>string</code>, <code>number</code>, <code>boolean</code>, <code>symbol</code>, <code>null</code>, <code>undefined</code> и <code>bigint</code>.</li>
+        </ul>
+        <p>Объект</p>
+        <ul>
+          <li>Может хранить множество значений как свойства.</li>
+          <li>Объявляется при помощи фигурных скобок <code>{}</code>, например: <code>{name: "Рома", age: 30}</code>. В JavaScript есть и другие виды объектов: например, функции тоже являются объектами.</li>
+        </ul>
+        <p>Одна из лучших особенностей объектов – это то, что мы можем хранить функцию как одно из свойств объекта.</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> roma <code class="token operator">=</code> <code class="token punctuation">{</code>
+  name<code class="token punctuation">:</code> <code class="token string">"Рома"</code><code class="token punctuation">,</code>
+  <code class="token function-variable function">sayHi</code><code class="token punctuation">:</code> <code class="token keyword">function</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+    <code class="token function">alert</code><code class="token punctuation">(</code><code class="token string">"Привет, дружище!"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+  <code class="token punctuation">}</code>
+<code class="token punctuation">}</code><code class="token punctuation">;</code>
+
+roma<code class="token punctuation">.</code><code class="token function">sayHi</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// Привет, дружище!</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(8);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Здесь мы создали объект <code>roma</code> с методом <code>sayHi</code>.</p>
+        <p>Существует множество встроенных объектов. Например, те, которые работают с датами, ошибками, HTML-элементами и т.д. Они имеют различные свойства и методы.</p>
+        <p>Однако у этих возможностей есть обратная сторона!</p>
+        <p>Объекты «тяжелее» примитивов. Они нуждаются в дополнительных ресурсах для поддержания внутренней структуры.</p>
+        <h2>Примитив как объект</h2>
+        <p>Вот парадокс, с которым столкнулся создатель JavaScript:</p>
+        <ul>
+          <li>Есть много всего, что хотелось бы сделать с примитивами, такими как строка или число. Было бы замечательно, если бы мы могли работать с ними через вызовы методов.</li>
+          <li>Примитивы должны быть лёгкими и быстрыми.</li>
+        </ul>
+        <p>Выбранное решение, хотя выглядит оно немного неуклюже:</p>
+        <ol>
+          <li>Примитивы остаются примитивами. Одно значение, как и хотелось.</li>
+          <li>Язык позволяет осуществлять доступ к методам и свойствам строк, чисел, булевых значений и символов.</li>
+          <li>Чтобы это работало, при таком доступе создаётся специальный «объект-обёртка», который предоставляет нужную функциональность, а после удаляется.</li>
+        </ol>
+        <p>Каждый примитив имеет свой собственный «объект-обёртку», которые называются: <code>String</code>, <code>Number</code>, <code>Boolean</code> и <code>Symbol</code>. Таким образом, они имеют разный набор методов.</p>
+        <p>К примеру, существует метод <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase">str.toUpperCase()</a>, который возвращает строку в верхнем регистре.</p>
+        <p>Вот, как он работает:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> str <code class="token operator">=</code> <code class="token string">"Привет"</code><code class="token punctuation">;</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> str<code class="token punctuation">.</code><code class="token function">toUpperCase</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// ПРИВЕТ</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(3);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Очень просто, не правда ли? Вот, что на самом деле происходит в <code>str.toUpperCase()</code>:</p>
+        <ol>
+          <li>Строка <code>str</code> – примитив. В момент обращения к его свойству, создаётся специальный объект, который знает значение строки и имеет такие полезные методы, как <code>toUpperCase()</code>.</li>
+          <li>Этот метод запускается и возвращает новую строку (показывается в <code>alert</code>).</li>
+          <li>Специальный объект удаляется, оставляя только примитив <code>str</code>.</li>
+        </ol>
+        <p>Получается, что примитивы могут предоставлять методы, и в то же время оставаться «лёгкими».</p>
+        <p>Движок JavaScript сильно оптимизирует этот процесс. Он даже может пропустить создание специального объекта. Однако, он всё же должен придерживаться спецификаций и работать так, как будто он его создаёт.</p>
+        <p>Число имеет собственный набор методов. Например, <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed">toFixed(n)</a> округляет число до n знаков после запятой.</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> n <code class="token operator">=</code> <code class="token number">1.23456</code><code class="token punctuation">;</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> n<code class="token punctuation">.</code><code class="token function">toFixed</code><code class="token punctuation">(</code><code class="token number">2</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 1.23</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(3);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Более подробно с различными свойствами и методами мы познакомимся в главах <a href="/number">Числа</a> и <a href="/string">Строки</a>.</p>
+        <div class="important important_warn">
+          <div class="important__header"><span class="important__type">Конструкторы <code>String/Number/Boolean</code> предназначены только для внутреннего пользования</span></div>
+          <div class="important__content">
+            <p>Некоторые языки, такие как Java, позволяют явное создание «объектов-обёрток» для примитивов при помощи такого синтаксиса как <code>new Number(1)</code> или <code>new Boolean(false)</code>.</p>
+            <p>В JavaScript, это тоже возможно по историческим причинам, но очень <strong>не рекомендуется</strong>. В некоторых местах последствия могут быть катастрофическими.</p>
+            <p>Например:</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token keyword">typeof</code> <code class="token number">0</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// "число"</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token keyword">typeof</code> <code class="token keyword">new</code> <code class="token class-name">Number</code><code class="token punctuation">(</code><code class="token number">0</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// "object"!</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(3);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p>Объекты в <code>if</code> всегда дают <code>true</code>, так что в нижеприведённом примере будет показан <code>alert</code>:</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> zero <code class="token operator">=</code> <code class="token keyword">new</code> <code class="token class-name">Number</code><code class="token punctuation">(</code><code class="token number">0</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+<code class="token keyword">if</code> <code class="token punctuation">(</code>zero<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token comment">// zero возвращает "true", так как является объектом</code>
+  <code class="token function">alert</code><code class="token punctuation">(</code> <code class="token string">"zero имеет «истинное» значение?!?"</code> <code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token punctuation">}</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(6);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p>С другой стороны, использование функций <code>String/Number/Boolean</code> без оператора <code>new</code> – вполне разумно и полезно. Они превращают значение в соответствующий примитивный тип: в строку, в число, в булевый тип.</p>
+            <p>К примеру, следующее вполне допустимо:</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> num <code class="token operator">=</code> <code class="token function">Number</code><code class="token punctuation">(</code><code class="token string">"123"</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// превращает строку в число</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(1);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="important important_warn">
+          <div class="important__header"><span class="important__type">null/undefined не имеют методов</span></div>
+          <div class="important__content">
+            <p>Особенные примитивы <code>null</code> и <code>undefined</code> являются исключениями. У них нет соответствующих «объектов-обёрток», и они не имеют никаких методов. В некотором смысле, они «самые примитивные».</p>
+            <p>Попытка доступа к свойствам такого значения возвратит ошибку:</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token function">alert</code><code class="token punctuation">(</code><code class="token keyword">null</code><code class="token punctuation">.</code>test<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// ошибка</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(1);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

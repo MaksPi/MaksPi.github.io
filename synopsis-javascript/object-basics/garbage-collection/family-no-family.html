@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>family-no-family</title>
+
+  <style>
+    body {
+      margin: 0;
+    }
+    svg {
+      max-width: 100%;
+    }
+    /*@import url(https://fonts.googleapis.com/css?family=Open+Sans:bold,italic,bolditalic%7CPT+Mono);*/
+    /* cyrillic-ext */
+    @font-face {
+      font-family: 'Open Sans';
+      font-style: italic;
+      font-weight: 400;
+      src: local('Open Sans Italic'), local('OpenSans-Italic'), url(https://fonts.gstatic.com/s/opensans/v17/mem6YaGs126MiZpBA-UFUK0Udc1UAw.woff2) format('woff2');
+      unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+    }
+    /* cyrillic */
+    @font-face {
+      font-family: 'Open Sans';
+      font-style: italic;
+      font-weight: 400;
+      src: local('Open Sans Italic'), local('OpenSans-Italic'), url(https://fonts.gstatic.com/s/opensans/v17/mem6YaGs126MiZpBA-UFUK0ddc1UAw.woff2) format('woff2');
+      unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+    }
+    /* greek-ext */
+    @font-face {
+      font-family: 'Open Sans';
+      font-style: italic;
+      font-weight: 400;
+      src: local('Open Sans Italic'), local('OpenSans-Italic'), url(https://fonts.gstatic.com/s/opensans/v17/mem6YaGs126MiZpBA-UFUK0Vdc1UAw.woff2) format('woff2');
+      unicode-range: U+1F00-1FFF;
+    }
+    /* greek */
+    @font-face {
+      font-family: 'Open Sans';
+      font-style: italic;
+      font-weight: 400;
+      src: local('Open Sans Italic'), local('OpenSans-Italic'), url(https://fonts.gstatic.com/s/opensans/v17/mem6YaGs126MiZpBA-UFUK0adc1UAw.woff2) format('woff2');
+      unicode-range: U+0370-03FF;
+    }
+    /* vietnamese */
+    @font-face {
+      font-family: 'Open Sans';
+      font-style: italic;
+      font-weight: 400;
+      src: local('Open Sans Italic'), local('OpenSans-Italic'), url(https://fonts.gstatic.com/s/opensans/v17/mem6YaGs126MiZpBA-UFUK0Wdc1UAw.woff2) format('woff2');
+      unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+    }
+    /* latin-ext */
+    @font-face {
+      font-family: 'Open Sans';
+      font-style: italic;
+      font-weight: 400;
+      src: local('Open Sans Italic'), local('OpenSans-Italic'), url(https://fonts.gstatic.com/s/opensans/v17/mem6YaGs126MiZpBA-UFUK0Xdc1UAw.woff2) format('woff2');
+      unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+    /* latin */
+    @font-face {
+      font-family: 'Open Sans';
+      font-style: italic;
+      font-weight: 400;
+      src: local('Open Sans Italic'), local('OpenSans-Italic'), url(https://fonts.gstatic.com/s/opensans/v17/mem6YaGs126MiZpBA-UFUK0Zdc0.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    /* cyrillic-ext */
+    @font-face {
+      font-family: 'Open Sans';
+      font-style: italic;
+      font-weight: 700;
+      src: local('Open Sans Bold Italic'), local('OpenSans-BoldItalic'), url(https://fonts.gstatic.com/s/opensans/v17/memnYaGs126MiZpBA-UFUKWiUNhmIqOjjg.woff2) format('woff2');
+      unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+    }
+    /* cyrillic */
+    @font-face {
+      font-family: 'Open Sans';
+      font-style: italic;
+      font-weight: 700;
+      src: local('Open Sans Bold Italic'), local('OpenSans-BoldItalic'), url(https://fonts.gstatic.com/s/opensans/v17/memnYaGs126MiZpBA-UFUKWiUNhvIqOjjg.woff2) format('woff2');
+      unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+    }
+    /* greek-ext */
+    @font-face {
+      font-family: 'Open Sans';
+      font-style: italic;
+      font-weight: 700;
+      src: local('Open Sans Bold Italic'), local('OpenSans-BoldItalic'), url(https://fonts.gstatic.com/s/opensans/v17/memnYaGs126MiZpBA-UFUKWiUNhnIqOjjg.woff2) format('woff2');
+      unicode-range: U+1F00-1FFF;
+    }
+    /* greek */
+    @font-face {
+      font-family: 'Open Sans';
+      font-style: italic;
+      font-weight: 700;
+      src: local('Open Sans Bold Italic'), local('OpenSans-BoldItalic'), url(https://fonts.gstatic.com/s/opensans/v17/memnYaGs126MiZpBA-UFUKWiUNhoIqOjjg.woff2) format('woff2');
+      unicode-range: U+0370-03FF;
+    }
+    /* vietnamese */
+    @font-face {
+      font-family: 'Open Sans';
+      font-style: italic;
+      font-weight: 700;
+      src: local('Open Sans Bold Italic'), local('OpenSans-BoldItalic'), url(https://fonts.gstatic.com/s/opensans/v17/memnYaGs126MiZpBA-UFUKWiUNhkIqOjjg.woff2) format('woff2');
+      unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+    }
+    /* latin-ext */
+    @font-face {
+      font-family: 'Open Sans';
+      font-style: italic;
+      font-weight: 700;
+      src: local('Open Sans Bold Italic'), local('OpenSans-BoldItalic'), url(https://fonts.gstatic.com/s/opensans/v17/memnYaGs126MiZpBA-UFUKWiUNhlIqOjjg.woff2) format('woff2');
+      unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+    /* latin */
+    @font-face {
+      font-family: 'Open Sans';
+      font-style: italic;
+      font-weight: 700;
+      src: local('Open Sans Bold Italic'), local('OpenSans-BoldItalic'), url(https://fonts.gstatic.com/s/opensans/v17/memnYaGs126MiZpBA-UFUKWiUNhrIqM.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    /* cyrillic-ext */
+    @font-face {
+      font-family: 'Open Sans';
+      font-style: normal;
+      font-weight: 700;
+      src: local('Open Sans Bold'), local('OpenSans-Bold'), url(https://fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UN7rgOX-hpOqc.woff2) format('woff2');
+      unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+    }
+    /* cyrillic */
+    @font-face {
+      font-family: 'Open Sans';
+      font-style: normal;
+      font-weight: 700;
+      src: local('Open Sans Bold'), local('OpenSans-Bold'), url(https://fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UN7rgOVuhpOqc.woff2) format('woff2');
+      unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+    }
+    /* greek-ext */
+    @font-face {
+      font-family: 'Open Sans';
+      font-style: normal;
+      font-weight: 700;
+      src: local('Open Sans Bold'), local('OpenSans-Bold'), url(https://fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UN7rgOXuhpOqc.woff2) format('woff2');
+      unicode-range: U+1F00-1FFF;
+    }
+    /* greek */
+    @font-face {
+      font-family: 'Open Sans';
+      font-style: normal;
+      font-weight: 700;
+      src: local('Open Sans Bold'), local('OpenSans-Bold'), url(https://fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UN7rgOUehpOqc.woff2) format('woff2');
+      unicode-range: U+0370-03FF;
+    }
+    /* vietnamese */
+    @font-face {
+      font-family: 'Open Sans';
+      font-style: normal;
+      font-weight: 700;
+      src: local('Open Sans Bold'), local('OpenSans-Bold'), url(https://fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UN7rgOXehpOqc.woff2) format('woff2');
+      unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+    }
+    /* latin-ext */
+    @font-face {
+      font-family: 'Open Sans';
+      font-style: normal;
+      font-weight: 700;
+      src: local('Open Sans Bold'), local('OpenSans-Bold'), url(https://fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UN7rgOXOhpOqc.woff2) format('woff2');
+      unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+    /* latin */
+    @font-face {
+      font-family: 'Open Sans';
+      font-style: normal;
+      font-weight: 700;
+      src: local('Open Sans Bold'), local('OpenSans-Bold'), url(https://fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UN7rgOUuhp.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    /* cyrillic-ext */
+    @font-face {
+      font-family: 'PT Mono';
+      font-style: normal;
+      font-weight: 400;
+      src: local('PT Mono'), local('PTMono-Regular'), url(https://fonts.gstatic.com/s/ptmono/v7/9oRONYoBnWILk-9AnCIzM-Py.woff2) format('woff2');
+      unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+    }
+    /* cyrillic */
+    @font-face {
+      font-family: 'PT Mono';
+      font-style: normal;
+      font-weight: 400;
+      src: local('PT Mono'), local('PTMono-Regular'), url(https://fonts.gstatic.com/s/ptmono/v7/9oRONYoBnWILk-9AnCszM-Py.woff2) format('woff2');
+      unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+    }
+    /* latin-ext */
+    @font-face {
+      font-family: 'PT Mono';
+      font-style: normal;
+      font-weight: 400;
+      src: local('PT Mono'), local('PTMono-Regular'), url(https://fonts.gstatic.com/s/ptmono/v7/9oRONYoBnWILk-9AnCEzM-Py.woff2) format('woff2');
+      unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+    /* latin */
+    @font-face {
+      font-family: 'PT Mono';
+      font-style: normal;
+      font-weight: 400;
+      src: local('PT Mono'), local('PTMono-Regular'), url(https://fonts.gstatic.com/s/ptmono/v7/9oRONYoBnWILk-9AnC8zMw.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      font-family:'PT Mono';
+      font-weight:700;
+      font-style:normal;
+      src:local('PT MonoBold'),url(/font/PTMonoBold.woff2) format('woff2'),url(/font/PTMonoBold.woff) format('woff'),url(/font/PTMonoBold.ttf) format('truetype')
+    }
+  </style>
+</head>
+
+<body>
+  <svg xmlns="http://www.w3.org/2000/svg" width="420" height="279" viewBox="0 0 420 279">
+    <g id="garbage-collection" fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
+      <g id="family-no-family.svg">
+        <path id="Line" fill="#EE6B47" fill-rule="nonzero" d="M211.5 228.5v6h46v2h-46v6l-14-7 14-7z"/>
+        <path id="Rectangle-1" fill="#FFF9EB" stroke="#E8C48E" stroke-width="2" d="M153 25h153v48H153z"/>
+        <text id="&lt;global&gt;" fill="#8A704D" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal">
+          <tspan x="199" y="43">&lt;global&gt;</tspan>
+        </text>
+        <path id="Rectangle-2" fill="#FFF9EB" stroke="#BCA68E" stroke-width="2" d="M187 123h78v26h-78z"/>
+        <text id="Object" fill="#8A704D" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal">
+          <tspan x="203" y="139">Object</tspan>
+        </text>
+        <path id="Rectangle-3" fill="#FFF9EB" stroke="#BCA68E" stroke-width="2" d="M69 193h118v48H69z"/>
+        <text id="Object-2" fill="#8A704D" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal">
+          <tspan x="103" y="210">Object</tspan>
+        </text>
+        <text id="father" fill="#8A704D" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal">
+          <tspan x="99" y="170">father</tspan>
+        </text>
+        <text id="wife" fill="#8A704D" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal">
+          <tspan x="211" y="193">wife</tspan>
+        </text>
+        <text id="name:-&quot;John&quot;" fill="#8A704D" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal">
+          <tspan x="83" y="230">name: "John"</tspan>
+        </text>
+        <path id="Rectangle-4" fill="#FFF9EB" stroke="#BCA68E" stroke-width="2" d="M278 193h118v48H278z"/>
+        <text id="name:-&quot;Ann&quot;" fill="#8A704D" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal">
+          <tspan x="294" y="230">name: "Ann"</tspan>
+        </text>
+        <text id="mother" fill="#8A704D" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal">
+          <tspan x="306" y="170">mother</tspan>
+        </text>
+        <text id="Object-3" fill="#8A704D" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal">
+          <tspan x="308" y="210">Object</tspan>
+        </text>
+        <path id="Line-2" fill="#EE6B47" fill-rule="nonzero" d="M178.75 154.108l1.142 1.642-.82.57-34.508 24.005 3.426 4.926-15.49 2.249 7.495-13.741 3.426 4.924 34.508-24.004.82-.571z"/>
+        <path id="Line" fill="#EE6B47" fill-rule="nonzero" d="M244.5 194.5l14 7-14 7v-6h-48v-2h48v-6z"/>
+        <text id="husband" fill="#8A704D" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal">
+          <tspan x="200" y="226">husband</tspan>
+        </text>
+        <path id="Line" fill="#EE6B47" fill-rule="nonzero" d="M272.236 154.11l.827.563 35.427 24.121 3.377-4.96L319.5 187.5l-15.512-2.093 3.377-4.96-35.428-24.12-.826-.563 1.125-1.653z"/>
+        <path id="Rectangle-5" stroke="#D0021B" stroke-width="2" d="M48 112h364v150H48z"/>
+        <text id="family:-null" fill="#8A704D" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal">
+          <tspan x="183" y="66">family: null</tspan>
+        </text>
+        <g id="noun_48910_cc" transform="translate(8 110)">
+          <path id="Shape" d="M17.503 1.75h-5.006a.341.341 0 00-.34.342v1.125h5.686V2.092a.341.341 0 00-.34-.341z"/>
+          <path id="Shape" fill="#D0021B" d="M28.364 3.217H19.59V2.092A2.09 2.09 0 0017.503 0h-5.006c-1.15 0-2.087.938-2.087 2.092v1.125H1.637c-.7 0-1.266.568-1.266 1.269v.09c0 .7.567 1.267 1.266 1.267h26.727c.699 0 1.266-.567 1.266-1.268v-.09c0-.7-.567-1.268-1.266-1.268zm-10.52 0h-5.687V2.092c0-.188.153-.341.34-.341h5.006a.34.34 0 01.34.34v1.126zM26.054 6.281H3.728c-1.298 0-2.35-.224-2.35 1.077L3.14 33.196c0 1.3 1.052 2.409 2.35 2.409h18.802c1.298 0 2.35-1.11 2.35-2.409l1.763-25.838c0-1.301-1.053-1.077-2.35-1.077zM9.637 32.193c-.377.012-.691-.261-.704-.612l-.694-19.917c-.012-.351.283-.647.66-.66.376-.013.69.261.703.613l.694 19.916c.013.351-.283.647-.659.66zm6.044-.63c0 .352-.306.637-.682.637-.377 0-.682-.286-.682-.637V11.634c0-.351.305-.636.682-.636.376 0 .682.285.682.636v19.93zm5.384.018c-.012.351-.327.625-.704.612-.376-.013-.672-.308-.66-.66l.695-19.916c.012-.352.326-.626.703-.613.377.014.672.309.66.66l-.694 19.917z"/>
+        </g>
+      </g>
+    </g>
+  </svg>
+</body>
+
+</html>

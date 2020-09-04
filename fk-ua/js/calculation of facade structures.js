@@ -332,7 +332,7 @@ function calculate_f_transom_wind_fact() {
 	if (+f_transom_wind_fact.value <= +f_transom_wind_permiss.value) {
 		f_transom_wind_fact.style.color = "green";
 	} else {
-		f_mullf_transom_wind_faction_fact.style.color = "red";
+		f_transom_wind_fact.style.color = "red";
 	}
 }
 

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial=scale=1.0">
+
+  <title>Комментарии</title>
+  
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/fonts.css">
+  <link rel="shortcut icon" href="../img/iconfinder_graduation_cap.png">
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <div class="page">
+      <div class="main__header">
+        <div class="main__header-group">
+          <ol class="breadcrumbs">
+            <li class="breadcrumbs__item breadcrumbs__item_home">
+              <a class="breadcrumbs__link" title="Оглавление" href="../index.html"></a>
+            </li>
+            <li class="breadcrumbs__item"></li>
+          </ol>
+          <div class="updated-at">
+            <div class="updated-at__content">1-го июля 2020</div>
+          </div>
+        </div>
+        <h1 class="page__title">Комментарии</h1>
+      </div>
+      <div itemprop="articleBody">
+        <p>Как мы знаем из главы <a href="https://learn.javascript.ru/structure">Структура кода</a>, комментарии могут быть однострочными, начинающимися с <code>//</code>, и многострочными: <code>/* ... */</code>.</p>
+        <p>Обычно мы их используем, чтобы описать, как и почему работает код.</p>
+        <p>На первый взгляд, в комментариях нет ничего сложного, но новички в программировании часто применяют их неправильно.</p>
+        <h2>Плохие комментарии</h2>
+        <p>Новички склонны использовать комментарии, чтобы объяснять, «что делает код». Например, так:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token comment">// Этот код делает это (...) и вот это (...)</code>
+<code class="token comment">// ...и кто знает, что ещё...</code>
+очень<code class="token punctuation">;</code>
+сложный<code class="token punctuation">;</code>
+код<code class="token punctuation">;</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(5);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Но в хорошем коде количество «объясняющих» комментариев должно быть минимальным. Серьёзно, код должен быть таким, чтобы его можно было понять без комментариев.</p>
+        <p>Про это есть хорошее правило: «Если код настолько запутанный, что требует комментариев, то, может быть, его стоит переделать?»</p>
+        <h3>Рецепт: выносите код в функции</h3>
+        <p>Иногда выгодно заменить часть кода функцией, например, в таком случае:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">function</code> <code class="token function">showPrimes</code><code class="token punctuation">(</code><code class="token parameter">n</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  nextPrime<code class="token punctuation">:</code>
+  <code class="token keyword">for</code> <code class="token punctuation">(</code><code class="token keyword">let</code> i <code class="token operator">=</code> <code class="token number">2</code><code class="token punctuation">;</code> i <code class="token operator">&lt;</code> n<code class="token punctuation">;</code> i<code class="token operator">++</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+
+    <code class="token comment">// проверяем, является ли i простым числом</code>
+    <code class="token keyword">for</code> <code class="token punctuation">(</code><code class="token keyword">let</code> j <code class="token operator">=</code> <code class="token number">2</code><code class="token punctuation">;</code> j <code class="token operator">&lt;</code> i<code class="token punctuation">;</code> j<code class="token operator">++</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+      <code class="token keyword">if</code> <code class="token punctuation">(</code>i <code class="token operator">%</code> j <code class="token operator">==</code> <code class="token number">0</code><code class="token punctuation">)</code> <code class="token keyword">continue</code> nextPrime<code class="token punctuation">;</code>
+    <code class="token punctuation">}</code>
+
+    <code class="token function">alert</code><code class="token punctuation">(</code>i<code class="token punctuation">)</code><code class="token punctuation">;</code>
+  <code class="token punctuation">}</code>
+<code class="token punctuation">}</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(12);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Лучший вариант – использовать отдельную функцию <code>isPrime</code>:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">function</code> <code class="token function">showPrimes</code><code class="token punctuation">(</code><code class="token parameter">n</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+
+  <code class="token keyword">for</code> <code class="token punctuation">(</code><code class="token keyword">let</code> i <code class="token operator">=</code> <code class="token number">2</code><code class="token punctuation">;</code> i <code class="token operator">&lt;</code> n<code class="token punctuation">;</code> i<code class="token operator">++</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+    <code class="token keyword">if</code> <code class="token punctuation">(</code><code class="token operator">!</code><code class="token function">isPrime</code><code class="token punctuation">(</code>i<code class="token punctuation">)</code><code class="token punctuation">)</code> <code class="token keyword">continue</code><code class="token punctuation">;</code>
+
+    <code class="token function">alert</code><code class="token punctuation">(</code>i<code class="token punctuation">)</code><code class="token punctuation">;</code>
+  <code class="token punctuation">}</code>
+<code class="token punctuation">}</code>
+
+<code class="token keyword">function</code> <code class="token function">isPrime</code><code class="token punctuation">(</code><code class="token parameter">n</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token keyword">for</code> <code class="token punctuation">(</code><code class="token keyword">let</code> i <code class="token operator">=</code> <code class="token number">2</code><code class="token punctuation">;</code> i <code class="token operator">&lt;</code> n<code class="token punctuation">;</code> i<code class="token operator">++</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+    <code class="token keyword">if</code> <code class="token punctuation">(</code>n <code class="token operator">%</code> i <code class="token operator">==</code> <code class="token number">0</code><code class="token punctuation">)</code> <code class="token keyword">return</code> <code class="token boolean">false</code><code class="token punctuation">;</code>
+  <code class="token punctuation">}</code>
+
+  <code class="token keyword">return</code> <code class="token boolean">true</code><code class="token punctuation">;</code>
+<code class="token punctuation">}</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(16);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Теперь код легче понять. Функция сама становится комментарием. Такой код называется <em>самодокументированным</em>.</p>
+        <h3>Рецепт: создавайте функции</h3>
+        <p>И если мы имеем такой длинный кусок кода:</p>
+
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token comment">// здесь мы добавляем виски</code>
+<code class="token keyword">for</code> <code class="token punctuation">(</code><code class="token keyword">let</code> i <code class="token operator">=</code> <code class="token number">0</code><code class="token punctuation">;</code> i <code class="token operator">&lt;</code> <code class="token number">10</code><code class="token punctuation">;</code> i<code class="token operator">++</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token keyword">let</code> drop <code class="token operator">=</code> <code class="token function">getWhiskey</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+  <code class="token function">smell</code><code class="token punctuation">(</code>drop<code class="token punctuation">)</code><code class="token punctuation">;</code>
+  <code class="token function">add</code><code class="token punctuation">(</code>drop<code class="token punctuation">,</code> glass<code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token punctuation">}</code>
+
+<code class="token comment">// здесь мы добавляем сок</code>
+<code class="token keyword">for</code> <code class="token punctuation">(</code><code class="token keyword">let</code> t <code class="token operator">=</code> <code class="token number">0</code><code class="token punctuation">;</code> t <code class="token operator">&lt;</code> <code class="token number">3</code><code class="token punctuation">;</code> t<code class="token operator">++</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token keyword">let</code> tomato <code class="token operator">=</code> <code class="token function">getTomato</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+  <code class="token function">examine</code><code class="token punctuation">(</code>tomato<code class="token punctuation">)</code><code class="token punctuation">;</code>
+  <code class="token keyword">let</code> juice <code class="token operator">=</code> <code class="token function">divss</code><code class="token punctuation">(</code>tomato<code class="token punctuation">)</code><code class="token punctuation">;</code>
+  <code class="token function">add</code><code class="token punctuation">(</code>juice<code class="token punctuation">,</code> glass<code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token punctuation">}</code>
+
+<code class="token comment">// ...</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(16);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>То будет лучше отрефакторить его с использованием функций:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token function">addWhiskey</code><code class="token punctuation">(</code>glass<code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token function">addJuice</code><code class="token punctuation">(</code>glass<code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+<code class="token keyword">function</code> <code class="token function">addWhiskey</code><code class="token punctuation">(</code><code class="token parameter">container</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token keyword">for</code> <code class="token punctuation">(</code><code class="token keyword">let</code> i <code class="token operator">=</code> <code class="token number">0</code><code class="token punctuation">;</code> i <code class="token operator">&lt;</code> <code class="token number">10</code><code class="token punctuation">;</code> i<code class="token operator">++</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+    <code class="token keyword">let</code> drop <code class="token operator">=</code> <code class="token function">getWhiskey</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+    <code class="token comment">//...</code>
+  <code class="token punctuation">}</code>
+<code class="token punctuation">}</code>
+
+<code class="token keyword">function</code> <code class="token function">addJuice</code><code class="token punctuation">(</code><code class="token parameter">container</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token keyword">for</code> <code class="token punctuation">(</code><code class="token keyword">let</code> t <code class="token operator">=</code> <code class="token number">0</code><code class="token punctuation">;</code> t <code class="token operator">&lt;</code> <code class="token number">3</code><code class="token punctuation">;</code> t<code class="token operator">++</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+    <code class="token keyword">let</code> tomato <code class="token operator">=</code> <code class="token function">getTomato</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+    <code class="token comment">//...</code>
+  <code class="token punctuation">}</code>
+<code class="token punctuation">}</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(16);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Здесь комментарии тоже не нужны: функции сами говорят, что делают (если вы понимаете английский язык). И ещё, структура кода лучше, когда он разделён на части. Понятно, что делает каждая функция, что она принимает и что возвращает.</p>
+        <p>В реальности мы не можем полностью избежать «объясняющих» комментариев. Существуют сложные алгоритмы. И есть хитрые уловки для оптимизации. Но в целом мы должны стараться писать простой и самодокументированный код.</p>
+        <h2>Хорошие комментарии</h2>
+        <p>Итак, обычно «объясняющие» комментарии – это плохо. Но тогда какой комментарий считается хорошим?</p>
+        <dl>
+          <dt>Описывайте архитектуру</dt>
+          <dd>
+            <p>Сделайте высокоуровневый обзор компонентов, того, как они взаимодействуют, каков поток управления в различных ситуациях… Если вкратце – обзор кода с высоты птичьего полёта. Существует специальный язык <a href="https://ru.wikipedia.org/wiki/UML">UML</a> для создания диаграмм, разъясняющих архитектуру кода. Его определённо стоит изучить.</p>
+          </dd>
+          <dt>Документируйте параметры и использование функций</dt>
+          <dd>
+            <p>Есть специальный синтаксис <a href="https://ru.wikipedia.org/wiki/JSDoc">JSDoc</a> для документирования функций: использование, параметры, возвращаемое значение.</p>
+            <p>Например:</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token comment">/**
+* Возвращает x, возведённое в n-ную степень.
+*
+* @param {number} x Возводимое в степень число.
+* @param {number} n Степень, должна быть натуральным числом.
+* @return {number} x, возведённое в n-ную степень.
+*/</code>
+<code class="token keyword">function</code> <code class="token function">pow</code><code class="token punctuation">(</code><code class="token parameter">x<code class="token punctuation">,</code> n</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token operator">...</code>
+<code class="token punctuation">}</code>
+</pre>
+                   </code>
+                   <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(10);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p>Подобные комментарии позволяют нам понимать назначение функции и правильно её использовать без необходимости заглядывать в код.</p>
+            <p>Кстати, многие редакторы, такие как <a href="https://www.jetbrains.com/webstorm/">WebStorm</a>, прекрасно их распознают для того, чтобы выполнить автодополнение ввода и различные автоматические проверки кода.</p>
+            <p>Также существуют инструменты, например, <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3</a>, которые умеют генерировать HTML-документацию из комментариев. Получить больше информации о JSDoc вы можете здесь: <a href="http://usejsdoc.org/">http://usejsdoc.org/</a>.</p>
+          </dd>
+          <dt>Почему задача решена именно таким способом?</dt>
+          <dd>
+            <p>Важно то, что написано. Но то, что <em>не</em> написано, может быть даже более важным, чтобы понимать происходящее. Почему задача решена именно этим способом? Код не даёт ответа.</p>
+            <p>Если есть несколько способов решить задачу, то почему вы выбрали именно этот? Особенно если ваш способ – не самый очевидный.</p>
+            <p>Без подобных комментариев возможна следующая ситуация:</p>
+            <ol>
+              <li>Вы (или ваш коллега) открываете написанный некоторое время назад код и видите, что в нём есть, что улучшить.</li>
+              <li>Вы думаете: «Каким глупым я раньше был и насколько умнее стал сейчас», и переписываете его на «более правильный и оптимальный» вариант.</li>
+              <li>…Желание переписать код – это хорошо. Но в процессе вы понимаете, что «оптимальное» решение на самом деле не такое уж и оптимальное. Вы даже смутно припоминаете, почему, так как в прошлый раз вы уже его пробовали. Вы возвращаетесь к правильному варианту, потратив время зря.</li>
+            </ol>
+            <p>Комментарии, объясняющие решение, очень важны. Они помогают продолжать разработку в правильном направлении.</p>
+          </dd>
+          <dt>В коде есть какие-то тонкости? Где они используются?</dt>
+          <dd>
+            <p>Если в коде есть какие-то тонкости и неочевидные вещи, его определённо нужно комментировать.</p>
+          </dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

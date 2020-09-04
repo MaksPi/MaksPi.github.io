@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial=scale=1.0">
+
+  <title>Тип данных Symbol</title>
+  
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/fonts.css">
+  <link rel="shortcut icon" href="../img/iconfinder_graduation_cap.png">
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <div class="page">
+      <div class="main__header">
+        <div class="main__header-group">
+          <ol class="breadcrumbs">
+            <li class="breadcrumbs__item breadcrumbs__item_home">
+              <a class="breadcrumbs__link" title="Оглавление" href="../index.html"></a>
+            </li>
+            <li class="breadcrumbs__item"></li>
+          </ol>
+          <div class="updated-at">
+            <div class="updated-at__content">2-го августа 2020</div>
+          </div>
+        </div>
+        <h1 class="page__title">Тип данных Symbol</h1>
+      </div>
+      <div itemprop="articleBody">
+        <p>По спецификации, в качестве ключей для свойств объекта могут использоваться только строки или символы. Ни числа, ни логические значения не подходят, разрешены только эти два типа данных.</p>
+        <p>До сих пор мы видели только строки. Теперь давайте разберём символы, увидим, что хорошего они нам дают.</p>
+        <h2>Символы</h2>
+        <p>«Символ» представляет собой уникальный идентификатор.</p>
+        <p>Создаются новые символы с помощью функции <code>Symbol()</code>:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token comment">// Создаём новый символ - id</code>
+<code class="token keyword">let</code> id <code class="token operator">=</code> <code class="token function">Symbol</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(2);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>При создании символу можно дать описание (также называемое имя), в основном использующееся для отладки кода:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token comment">// Создаём символ id с описанием (именем) "id"</code>
+<code class="token keyword">let</code> id <code class="token operator">=</code> <code class="token function">Symbol</code><code class="token punctuation">(</code><code class="token string">"id"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(2);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Символы гарантированно уникальны. Даже если мы создадим множество символов с одинаковым описанием, это всё равно будут разные символы. Описание – это просто метка, которая ни на что не влияет.</p>
+        <p>Например, вот два символа с одинаковым описанием – но они не равны:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> id1 <code class="token operator">=</code> <code class="token function">Symbol</code><code class="token punctuation">(</code><code class="token string">"id"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token keyword">let</code> id2 <code class="token operator">=</code> <code class="token function">Symbol</code><code class="token punctuation">(</code><code class="token string">"id"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code>id1 <code class="token operator">==</code> id2<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// false</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(4);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Если вы знаете Ruby или какой-то другой язык программирования, в котором есть своего рода «символы» – пожалуйста, будьте внимательны. Символы в JavaScript имеют свои особенности, и не стоит думать о них, как о символах в Ruby или в других языках.</p>
+        <div class="important important_warn">
+          <div class="important__header"><span class="important__type">Символы не преобразуются автоматически в строки</span></div>
+          <div class="important__content"><p>Большинство типов данных в JavaScript могут быть неявно преобразованы в строку. Например, функция <code>alert</code> принимает практически любое значение, автоматически преобразовывает его в строку, а затем выводит это значение, не сообщая об ошибке. Символы же особенные и не преобразуются автоматически.</p>
+            <p>К примеру, <code>alert</code> ниже выдаст ошибку:</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> id <code class="token operator">=</code> <code class="token function">Symbol</code><code class="token punctuation">(</code><code class="token string">"id"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token function">alert</code><code class="token punctuation">(</code>id<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// TypeError: Cannot convert a Symbol value to a string</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(2);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p>Это – языковая «защита» от путаницы, ведь строки и символы – принципиально разные типы данных и не должны неконтролируемо преобразовываться друг в друга.</p>
+            <p>Если же мы действительно хотим вывести символ с помощью <code>alert</code>, то необходимо явно преобразовать его с помощью метода <code>.toString()</code>, вот так:</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> id <code class="token operator">=</code> <code class="token function">Symbol</code><code class="token punctuation">(</code><code class="token string">"id"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token function">alert</code><code class="token punctuation">(</code>id<code class="token punctuation">.</code><code class="token function">toString</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// Symbol(id), теперь работает</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(2);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p>Или мы можем обратиться к свойству <code>symbol.description</code>, чтобы вывести только описание:</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> id <code class="token operator">=</code> <code class="token function">Symbol</code><code class="token punctuation">(</code><code class="token string">"id"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token function">alert</code><code class="token punctuation">(</code>id<code class="token punctuation">.</code>description<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// id</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(2);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h2>«Скрытые» свойства</h2>
+        <p>Символы позволяют создавать «скрытые» свойства объектов, к которым нельзя нечаянно обратиться и перезаписать их из других частей программы.</p>
+        <p>Например, мы работаем с объектами <code>user</code>, которые принадлежат стороннему коду. Мы хотим добавить к ним идентификаторы.</p>
+        <p>Используем для этого символьный ключ:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> user <code class="token operator">=</code> <code class="token punctuation">{</code>
+  name<code class="token punctuation">:</code> <code class="token string">"Вася"</code>
+<code class="token punctuation">}</code><code class="token punctuation">;</code>
+
+<code class="token keyword">let</code> id <code class="token operator">=</code> <code class="token function">Symbol</code><code class="token punctuation">(</code><code class="token string">"id"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+user<code class="token punctuation">[</code>id<code class="token punctuation">]</code> <code class="token operator">=</code> <code class="token number">1</code><code class="token punctuation">;</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> user<code class="token punctuation">[</code>id<code class="token punctuation">]</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// мы можем получить доступ к данным по ключу-символу</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(9);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Почему же лучше использовать <code>Symbol("id")</code>, а не строку <code>"id"</code>?</p>
+        <p>Так как объект <code>user</code> принадлежит стороннему коду, и этот код также работает с ним, то нам не следует добавлять к нему какие-либо поля. Это небезопасно. Но к символу сложно нечаянно обратиться, сторонний код вряд ли его вообще увидит, и, скорее всего, добавление поля к объекту не вызовет никаких проблем.</p>
+        <p>Кроме того, предположим, что другой скрипт для каких-то своих целей хочет записать собственный идентификатор в объект <code>user</code>. Этот скрипт может быть какой-то JavaScript-библиотекой, абсолютно не связанной с нашим скриптом.</p>
+        <p>Сторонний код может создать для этого свой символ <code>Symbol("id")</code>:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token comment">// ...</code>
+<code class="token keyword">let</code> id <code class="token operator">=</code> <code class="token function">Symbol</code><code class="token punctuation">(</code><code class="token string">"id"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+user<code class="token punctuation">[</code>id<code class="token punctuation">]</code> <code class="token operator">=</code> <code class="token string">"Их идентификатор"</code><code class="token punctuation">;</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(4);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Конфликта между их и нашим идентификатором не будет, так как символы всегда уникальны, даже если их имена совпадают.</p>
+        <p>А вот если бы мы использовали строку <code>"id"</code> вместо символа, то тогда <em>был бы</em> конфликт:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> user <code class="token operator">=</code> <code class="token punctuation">{</code> name<code class="token punctuation">:</code> <code class="token string">"Вася"</code> <code class="token punctuation">}</code><code class="token punctuation">;</code>
+
+<code class="token comment">// Объявляем в нашем скрипте свойство "id"</code>
+user<code class="token punctuation">.</code>id <code class="token operator">=</code> <code class="token string">"Наш идентификатор"</code><code class="token punctuation">;</code>
+
+<code class="token comment">// ...другой скрипт тоже хочет свой идентификатор...</code>
+
+user<code class="token punctuation">.</code>id <code class="token operator">=</code> <code class="token string">"Их идентификатор"</code>
+<code class="token comment">// Ой! Свойство перезаписано сторонней библиотекой!</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(9);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <h3>Символы в литеральном объекте</h3>
+        <p>Если мы хотим использовать символ при литеральном объявлении объекта <code>{...}</code>, его необходимо заключить в квадратные скобки.</p>
+        <p>Вот так:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> id <code class="token operator">=</code> <code class="token function">Symbol</code><code class="token punctuation">(</code><code class="token string">"id"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+<code class="token keyword">let</code> user <code class="token operator">=</code> <code class="token punctuation">{</code>
+  name<code class="token punctuation">:</code> <code class="token string">"Вася"</code><code class="token punctuation">,</code>
+  <code class="token punctuation">[</code>id<code class="token punctuation">]</code><code class="token punctuation">:</code> <code class="token number">123</code> <code class="token comment">// просто "id: 123" не сработает</code>
+<code class="token punctuation">}</code><code class="token punctuation">;</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(6);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Это вызвано тем, что нам нужно использовать значение переменной <code>id</code> в качестве ключа, а не строку «id».</p>
+        <h3>Символы игнорируются циклом for…in</h3>
+        <p>Свойства, чьи ключи – символы, не перебираются циклом <code>for..in</code>.</p>
+        <p>Например:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> id <code class="token operator">=</code> <code class="token function">Symbol</code><code class="token punctuation">(</code><code class="token string">"id"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token keyword">let</code> user <code class="token operator">=</code> <code class="token punctuation">{</code>
+  name<code class="token punctuation">:</code> <code class="token string">"Вася"</code><code class="token punctuation">,</code>
+  age<code class="token punctuation">:</code> <code class="token number">30</code><code class="token punctuation">,</code>
+  <code class="token punctuation">[</code>id<code class="token punctuation">]</code><code class="token punctuation">:</code> <code class="token number">123</code>
+<code class="token punctuation">}</code><code class="token punctuation">;</code>
+
+<code class="token keyword">for</code> <code class="token punctuation">(</code><code class="token keyword">let</code> key <code class="token keyword">in</code> user<code class="token punctuation">)</code> <code class="token function">alert</code><code class="token punctuation">(</code>key<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// name, age (свойства с ключом-символом нет среди перечисленных)</code>
+
+<code class="token comment">// хотя прямой доступ по символу работает</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token string">"Напрямую: "</code> <code class="token operator">+</code> user<code class="token punctuation">[</code>id<code class="token punctuation">]</code> <code class="token punctuation">)</code><code class="token punctuation">;</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(11);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Это – часть общего принципа «сокрытия символьных свойств». Если другая библиотека или скрипт будут работать с нашим объектом, то при переборе они не получат ненароком наше символьное свойство. <code>Object.keys(user)</code> также игнорирует символы.</p>
+        <p>А вот <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/assign">Object.assign</a>, в отличие от цикла <code>for..in</code>, копирует и строковые, и символьные свойства:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> id <code class="token operator">=</code> <code class="token function">Symbol</code><code class="token punctuation">(</code><code class="token string">"id"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token keyword">let</code> user <code class="token operator">=</code> <code class="token punctuation">{</code>
+  <code class="token punctuation">[</code>id<code class="token punctuation">]</code><code class="token punctuation">:</code> <code class="token number">123</code>
+<code class="token punctuation">}</code><code class="token punctuation">;</code>
+
+<code class="token keyword">let</code> clone <code class="token operator">=</code> Object<code class="token punctuation">.</code><code class="token function">assign</code><code class="token punctuation">(</code><code class="token punctuation">{</code><code class="token punctuation">}</code><code class="token punctuation">,</code> user<code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> clone<code class="token punctuation">[</code>id<code class="token punctuation">]</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 123</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(8);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Здесь нет никакого парадокса или противоречия. Так и задумано. Идея заключается в том, что, когда мы клонируем или объединяем объекты, мы обычно хотим скопировать <em>все</em> свойства (включая такие свойства с ключами-символами, как, например, <code>id</code> в примере выше).</p>
+        <h2>Глобальные символы</h2>
+        <p>Итак, как мы видели, обычно все символы уникальны, даже если их имена совпадают. Но иногда мы наоборот хотим, чтобы символы с одинаковыми именами были одной сущностью. Например, разные части нашего приложения хотят получить доступ к символу <code>"id"</code>, подразумевая именно одно и то же свойство.</p>
+        <p>Для этого существует <em>глобальный реестр символов</em>. Мы можем создавать в нём символы и обращаться к ним позже, и при каждом обращении нам гарантированно будет возвращаться один и тот же символ.</p>
+        <p>Для чтения (или, при отсутствии, создания) символа из реестра используется вызов <code>Symbol.for(key)</code>.</p>
+        <p>Он проверяет глобальный реестр и, при наличии в нём символа с именем <code>key</code>, возвращает его, иначе же создаётся новый символ <code>Symbol(key)</code> и записывается в реестр под ключом <code>key</code>.</p>
+        <p>Например:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token comment">// читаем символ из глобального реестра и записываем его в переменную</code>
+<code class="token keyword">let</code> id <code class="token operator">=</code> Symbol<code class="token punctuation">.</code><code class="token function">for</code><code class="token punctuation">(</code><code class="token string">"id"</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// если символа не существует, он будет создан</code>
+
+<code class="token comment">// читаем его снова в другую переменную (возможно, из другого места кода)</code>
+<code class="token keyword">let</code> idAgain <code class="token operator">=</code> Symbol<code class="token punctuation">.</code><code class="token function">for</code><code class="token punctuation">(</code><code class="token string">"id"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+<code class="token comment">// проверяем -- это один и тот же символ</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> id <code class="token operator">===</code> idAgain <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// true</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(8);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Символы, содержащиеся в реестре, называются <em>глобальными символами</em>. Если вам нужен символ, доступный везде в коде – используйте глобальные символы.</p>
+        <div class="important important_smart">
+          <div class="important__header"><span class="important__type">Похоже на Ruby</span></div>
+          <div class="important__content"><p>В некоторых языках программирования, например, Ruby, на одно имя (описание) приходится один символ, и не могут существовать разные символы с одинаковым именем.</p>
+            <p>В JavaScript, как мы видим, это утверждение верно только для глобальных символов.</p>
+          </div>
+        </div>
+        <h3>Symbol.keyFor</h3>
+        <p>Для глобальных символов, кроме <code>Symbol.for(key)</code>, который ищет символ по имени, существует обратный метод: <code>Symbol.keyFor(sym)</code>, который, наоборот, принимает глобальный символ и возвращает его имя.</p>
+        <p>К примеру:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token comment">// получаем символ по имени</code>
+<code class="token keyword">let</code> sym <code class="token operator">=</code> Symbol<code class="token punctuation">.</code><code class="token function">for</code><code class="token punctuation">(</code><code class="token string">"name"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token keyword">let</code> sym2 <code class="token operator">=</code> Symbol<code class="token punctuation">.</code><code class="token function">for</code><code class="token punctuation">(</code><code class="token string">"id"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+<code class="token comment">// получаем имя по символу</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> Symbol<code class="token punctuation">.</code><code class="token function">keyFor</code><code class="token punctuation">(</code>sym<code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// name</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> Symbol<code class="token punctuation">.</code><code class="token function">keyFor</code><code class="token punctuation">(</code>sym2<code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// id</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(7);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Внутри метода <code>Symbol.keyFor</code> используется глобальный реестр символов для нахождения имени символа. Так что этот метод не будет работать для неглобальных символов. Если символ неглобальный, метод не сможет его найти и вернёт <code>undefined</code>.</p>
+        <p>Впрочем, для любых символов доступно свойство <code>description</code>.</p>
+        <p>Например:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> globalSymbol <code class="token operator">=</code> Symbol<code class="token punctuation">.</code><code class="token function">for</code><code class="token punctuation">(</code><code class="token string">"name"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token keyword">let</code> localSymbol <code class="token operator">=</code> <code class="token function">Symbol</code><code class="token punctuation">(</code><code class="token string">"name"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> Symbol<code class="token punctuation">.</code><code class="token function">keyFor</code><code class="token punctuation">(</code>globalSymbol<code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// name, глобальный символ</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> Symbol<code class="token punctuation">.</code><code class="token function">keyFor</code><code class="token punctuation">(</code>localSymbol<code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// undefined для неглобального символа</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> localSymbol<code class="token punctuation">.</code>description <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// name</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(7);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <h2>Системные символы</h2>
+        <p>Существует множество «системных» символов, использующихся внутри самого JavaScript, и мы можем использовать их, чтобы настраивать различные аспекты поведения объектов.</p>
+        <p>Эти символы перечислены в спецификации в таблице <a href="https://tc39.github.io/ecma262/#sec-well-known-symbols">Well-known symbols</a>:</p>
+        <ul>
+          <li><code>Symbol.hasInstance</code></li>
+          <li><code>Symbol.isConcatSdivadable</code></li>
+          <li><code>Symbol.iterator</code></li>
+          <li><code>Symbol.toPrimitive</code></li>
+          <li>…и так далее.</li>
+        </ul>
+        <p>В частности, <code>Symbol.toPrimitive</code> позволяет описать правила для объекта, согласно которым он будет преобразовываться к примитиву. Мы скоро увидим его применение.</p>
+        <p>С другими системными символами мы тоже скоро познакомимся, когда будем изучать соответствующие возможности языка.</p>        
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

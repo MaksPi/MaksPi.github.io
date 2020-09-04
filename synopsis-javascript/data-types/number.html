@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial=scale=1.0">
+
+  <title>Числа</title>
+  
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/fonts.css">
+  <link rel="shortcut icon" href="../img/iconfinder_graduation_cap.png">
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <div class="page">
+      <div class="main__header">
+        <div class="main__header-group">
+          <ol class="breadcrumbs">
+            <li class="breadcrumbs__item breadcrumbs__item_home">
+              <a class="breadcrumbs__link" title="Оглавление" href="../index.html"></a>
+            </li>
+            <li class="breadcrumbs__item"></li>
+          </ol>
+          <div class="updated-at">
+            <div class="updated-at__content">8-го августа 2020</div>
+          </div>
+        </div>
+        <h1 class="page__title">Числа</h1>
+      </div>
+      <div itemprop="articleBody">
+        <p>В современном JavaScript существует два типа чисел:</p>
+        <ol>
+          <li>Обычные числа в JavaScript хранятся в 64-битном формате <a href="http://en.wikipedia.org/wiki/IEEE_754-1985">IEEE-754</a>, который также называют «числа с плавающей точкой двойной точности» (double precision floating point numbers). Это числа, которые мы будем использовать чаще всего. Мы поговорим о них в этой главе.</li>
+          <li><code>BigInt</code> числа дают возможность работать с целыми числами произвольной длины. Они нужны достаточно редко и используются в случаях, когда необходимо работать со значениями более чем <code>2<sup>53</sup></code> или менее чем <code>-2<sup>53</sup></code>. Так как <code>BigInt</code> числа нужны достаточно редко, мы рассмотрим их в отдельной главе <a href="/bigint">BigInt</a>.</li>
+        </ol>
+        <p>В данной главе мы рассмотрим только первый тип чисел: числа типа <code>number</code>. Давайте глубже изучим, как с ними работать в JavaScript.</p>
+        <h2>Способы записи числа</h2>
+        <p>Представьте, что нам надо записать число 1 миллиард. Самый очевидный путь:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> billion <code class="token operator">=</code> <code class="token number">1000000000</code><code class="token punctuation">;</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(1);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Но в реальной жизни мы обычно опускаем запись множества нулей, так как можно легко ошибиться. Укороченная запись может выглядеть как <code>"1млрд"</code> или <code>"7.3млрд"</code> для 7 миллиардов 300 миллионов. Такой принцип работает для всех больших чисел.</p>
+        <p>В JavaScript можно использовать букву <code>"e"</code>, чтобы укоротить запись числа. Она добавляется к числу и заменяет указанное количество нулей:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> billion <code class="token operator">=</code> <code class="token number">1e9</code><code class="token punctuation">;</code>  <code class="token comment">// 1 миллиард, буквально: 1 и 9 нулей</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token number">7.3e9</code> <code class="token punctuation">)</code><code class="token punctuation">;</code>  <code class="token comment">// 7.3 миллиардов (7,300,000,000)</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(3);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Другими словами, <code>"e"</code> производит операцию умножения числа на 1 с указанным количеством нулей.</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token number">1e3</code> <code class="token operator">=</code> <code class="token number">1</code> <code class="token operator">*</code> <code class="token number">1000</code>
+<code class="token number">1.23e6</code> <code class="token operator">=</code> <code class="token number">1.23</code> <code class="token operator">*</code> <code class="token number">1000000</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(2);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Сейчас давайте запишем что-нибудь очень маленькое. К примеру, 1 микросекунду (одна миллионная секунды):</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> ms <code class="token operator">=</code> <code class="token number">0.000001</code><code class="token punctuation">;</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(1);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Записать микросекунду в укороченном виде нам поможет <code>"e"</code>.</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> ms <code class="token operator">=</code> <code class="token number">1e-6</code><code class="token punctuation">;</code> <code class="token comment">// шесть нулей, слева от 1</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(1);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Если мы подсчитаем количество нулей <code>0.000001</code>, их будет 6. Естественно, верная запись <code>1e-6</code>.</p>
+        <p>Другими словами, отрицательное число после <code>"e"</code> подразумевает деление на 1 с указанным количеством нулей:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token comment">// -3 делится на 1 с 3 нулями</code>
+<code class="token number">1e-3</code> <code class="token operator">=</code> <code class="token number">1</code> <code class="token operator">/</code> <code class="token number">1000</code> <code class="token punctuation">(</code><code class="token operator">=</code><code class="token number">0.001</code><code class="token punctuation">)</code>
+
+<code class="token comment">// -6 делится на 1 с 6 нулями</code>
+<code class="token number">1.23e-6</code> <code class="token operator">=</code> <code class="token number">1.23</code> <code class="token operator">/</code> <code class="token number">1000000</code> <code class="token punctuation">(</code><code class="token operator">=</code><code class="token number">0.00000123</code><code class="token punctuation">)</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(5);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <h3>Шестнадцатеричные, двоичные и восьмеричные числа</h3>
+        <p><a href="https://ru.wikipedia.org/wiki/%D0%A8%D0%B5%D1%81%D1%82%D0%BD%D0%B0%D0%B4%D1%86%D0%B0%D1%82%D0%B5%D1%80%D0%B8%D1%87%D0%BD%D0%B0%D1%8F_%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D0%B0_%D1%81%D1%87%D0%B8%D1%81%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F">Шестнадцатеричные</a> числа широко используются в JavaScript для представления цветов, кодировки символов и многого другого. Естественно, есть короткий стиль записи: <code>0x</code>, после которого указывается число.</p>
+        <p>Например:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token number">0xff</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 255</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token number">0xFF</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 255 (то же самое, регистр не имеет значения)</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(2);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Не так часто используются двоичные и восьмеричные числа, но они также поддерживаются <code>0b</code> для двоичных и <code>0o</code> для восьмеричных:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> a <code class="token operator">=</code> <code class="token number">0b11111111</code><code class="token punctuation">;</code> <code class="token comment">// бинарная форма записи числа 255</code>
+<code class="token keyword">let</code> b <code class="token operator">=</code> <code class="token number">0o377</code><code class="token punctuation">;</code> <code class="token comment">// восьмеричная форма записи числа 255</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> a <code class="token operator">==</code> b <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// true, с двух сторон число 255</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(4);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Есть только 3 системы счисления с такой поддержкой. Для других систем счисления мы рекомендуем использовать функцию <code>parseInt</code> (рассмотрим позже в этой главе).</p>
+        <h2>toString(base)</h2>
+        <p>Метод <code>num.toString(base)</code> возвращает строковое представление числа <code>num</code> в системе счисления <code>base</code>.</p>
+        <p>Например:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> num <code class="token operator">=</code> <code class="token number">255</code><code class="token punctuation">;</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> num<code class="token punctuation">.</code><code class="token function">toString</code><code class="token punctuation">(</code><code class="token number">16</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code>  <code class="token comment">// ff</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> num<code class="token punctuation">.</code><code class="token function">toString</code><code class="token punctuation">(</code><code class="token number">2</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code>   <code class="token comment">// 11111111</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(4);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p><code>base</code> может варьироваться от <code>2</code> до <code>36</code> (по умолчанию <code>10</code>).</p>
+        <p>Часто используемые:</p>
+        <ul>
+          <li>
+            <p><strong>base=16</strong> — для шестнадцатеричного представления цвета, кодировки символов и т.д., цифры могут быть <code>0..9</code> или <code>A..F</code>.</p>
+          </li>
+          <li>
+            <p><strong>base=2</strong> — обычно используется для отладки побитовых операций, цифры <code>0</code> или <code>1</code>.</p>
+          </li>
+          <li>
+            <p><strong>base=36</strong> — максимальное основание, цифры могут быть <code>0..9</code> или <code>A..Z</code>. То есть, используется весь латинский алфавит для представления числа. Забавно, но можно использовать <code>36</code>-разрядную систему счисления для получения короткого представления большого числового идентификатора. К примеру, для создания короткой ссылки. Для этого просто преобразуем его в <code>36</code>-разрядную систему счисления:</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token number">123456.</code><code class="token punctuation">.</code><code class="token function">toString</code><code class="token punctuation">(</code><code class="token number">36</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 2n9c</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(1);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div class="important important_warn">
+          <div class="important__header"><span class="important__type">Две точки для вызова метода</span></div>
+          <div class="important__content">
+            <p>Внимание! Две точки в <code>123456..toString(36)</code> это не опечатка. Если нам надо вызвать метод непосредственно на числе, как <code>toString</code> в примере выше, то нам надо поставить две точки <code>..</code> после числа.</p>
+            <p>Если мы поставим одну точку: <code>123456.toString(36)</code>, тогда это будет ошибкой, поскольку синтаксис JavaScript предполагает, что после первой точки начинается десятичная часть. А если поставить две точки, то JavaScript понимает, что десятичная часть отсутствует, и начинается метод.</p>
+            <p>Также можно записать как <code>(123456).toString(36)</code>.</p>
+          </div>
+        </div>
+        <h2>Округление</h2>
+        <p>Одна из часто используемых операций при работе с числами – это округление.</p>
+        <p>В JavaScript есть несколько встроенных функций для работы с округлением:</p>
+        <dl>
+          <dt><code>Math.floor</code></dt>
+          <dd>Округление в меньшую сторону: <code>3.1</code> становится <code>3</code>, а <code>-1.1</code> — <code>-2</code>.</dd>
+          <dt><code>Math.ceil</code></dt>
+          <dd>Округление в большую сторону: <code>3.1</code> становится <code>4</code>, а <code>-1.1</code> — <code>-1</code>.</dd>
+          <dt><code>Math.round</code></dt>
+          <dd>Округление до ближайшего целого: <code>3.1</code> становится <code>3</code>, <code>3.6</code> — <code>4</code>, а <code>-1.1</code> — <code>-1</code>.</dd>
+          <dt><code>Math.trunc</code> (не поддерживается в Internet Explorer)</dt>
+          <dd>Производит удаление дробной части без округления: <code>3.1</code> становится <code>3</code>, а <code>-1.1</code> — <code>-1</code>.</dd>
+        </dl>
+        <p>Ниже представлена таблица с различиями между функциями округления:</p>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th><code>Math.floor</code></th>
+              <th><code>Math.ceil</code></th>
+              <th><code>Math.round</code></th>
+              <th><code>Math.trunc</code></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>3.1</code></td>
+              <td><code>3</code></td>
+              <td><code>4</code></td>
+              <td><code>3</code></td>
+              <td><code>3</code></td>
+            </tr>
+            <tr>
+              <td><code>3.6</code></td>
+              <td><code>3</code></td>
+              <td><code>4</code></td>
+              <td><code>4</code></td>
+              <td><code>3</code></td>
+            </tr>
+            <tr>
+              <td><code>-1.1</code></td>
+              <td><code>-2</code></td>
+              <td><code>-1</code></td>
+              <td><code>-1</code></td>
+              <td><code>-1</code></td>
+            </tr>
+            <tr>
+              <td><code>-1.6</code></td>
+              <td><code>-2</code></td>
+              <td><code>-1</code></td>
+              <td><code>-2</code></td>
+              <td><code>-1</code></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Эти функции охватывают все возможные способы обработки десятичной части. Что если нам надо округлить число до <code>n-ого</code> количества цифр в дробной части?</p>
+        <p>Например, у нас есть <code>1.2345</code> и мы хотим округлить число до 2-х знаков после запятой, оставить только <code>1.23</code>.</p>
+        <p>Есть два пути решения:</p>
+        <ol>
+          <li>
+            <p>Умножить и разделить.</p>
+            <p>Например, чтобы округлить число до второго знака после запятой, мы можем умножить число на <code>100</code>, вызвать функцию округления и разделить обратно.</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> num <code class="token operator">=</code> <code class="token number">1.23456</code><code class="token punctuation">;</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> Math<code class="token punctuation">.</code><code class="token function">floor</code><code class="token punctuation">(</code>num <code class="token operator">*</code> <code class="token number">100</code><code class="token punctuation">)</code> <code class="token operator">/</code> <code class="token number">100</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 1.23456 -&gt; 123.456 -&gt; 123 -&gt; 1.23</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(3);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <p>Метод <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed">toFixed(n)</a> округляет число до <code>n</code> знаков после запятой и возвращает строковое представление результата.</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> num <code class="token operator">=</code> <code class="token number">12.34</code><code class="token punctuation">;</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> num<code class="token punctuation">.</code><code class="token function">toFixed</code><code class="token punctuation">(</code><code class="token number">1</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// "12.3"</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(2);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p>Округляет значение до ближайшего числа, как в большую, так и в меньшую сторону, аналогично методу <code>Math.round</code>:</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> num <code class="token operator">=</code> <code class="token number">12.36</code><code class="token punctuation">;</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> num<code class="token punctuation">.</code><code class="token function">toFixed</code><code class="token punctuation">(</code><code class="token number">1</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// "12.4"</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(2);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p>Обратите внимание, что результатом <code>toFixed</code> является строка. Если десятичная часть короче, чем необходима, будут добавлены нули в конец строки:</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> num <code class="token operator">=</code> <code class="token number">12.34</code><code class="token punctuation">;</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> num<code class="token punctuation">.</code><code class="token function">toFixed</code><code class="token punctuation">(</code><code class="token number">5</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// "12.34000", добавлены нули, чтобы получить 5 знаков после запятой</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(2);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p>Мы можем преобразовать полученное значение в число, используя унарный оператор <code>+</code> или <code>Number()</code>, пример с унарным оператором: <code>+num.toFixed(5)</code>.</p>
+          </li>
+        </ol>
+        <h2>Неточные вычисления</h2>
+        <p>Внутри JavaScript число представлено в виде 64-битного формата <a href="https://ru.wikipedia.org/wiki/IEEE_754-1985">IEEE-754</a>. Для хранения числа используется 64 бита: 52 из них используется для хранения цифр, 11 из них для хранения положения десятичной точки (если число целое, то хранится 0), и один бит отведён на хранение знака.</p>
+        <p>Если число слишком большое, оно переполнит 64-битное хранилище, JavaScript вернёт бесконечность:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token number">1e500</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// Infinity</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(1);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Наиболее часто встречающаяся ошибка при работе с числами в JavaScript – это потеря точности.</p>
+        <p>Посмотрите на это (неверное!) сравнение:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class=" language-javascript">
+<pre>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token number">0.1</code> <code class="token operator">+</code> <code class="token number">0.2</code> <code class="token operator">==</code> <code class="token number">0.3</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// false</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(1);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Да-да, сумма <code>0.1</code> и <code>0.2</code> не равна <code>0.3</code>.</p>
+        <p>Странно! Что тогда, если не <code>0.3</code>?</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token number">0.1</code> <code class="token operator">+</code> <code class="token number">0.2</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 0.30000000000000004</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(1);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Ой! Здесь гораздо больше последствий, чем просто некорректное сравнение. Представьте, вы делаете интернет-магазин и посетители формируют заказ из 2-х позиций за <code>$0.10</code> и <code>$0.20</code>. Итоговый заказ будет <code>$0.30000000000000004</code>. Это будет сюрпризом для всех.</p>
+        <p>Но почему это происходит?</p>
+        <p>Число хранится в памяти в бинарной форме, как последовательность бит – единиц и нулей. Но дроби, такие как <code>0.1</code>, <code>0.2</code>, которые выглядят довольно просто в десятичной системе счисления, на самом деле являются бесконечной дробью в двоичной форме.</p>
+        <p>Другими словами, что такое <code>0.1</code>? Это единица делённая на десять — <code>1/10</code>, одна десятая. В десятичной системе счисления такие числа легко представимы, по сравнению с одной третьей: <code>1/3</code>, которая становится бесконечной дробью <code>0.33333(3)</code>.</p>
+        <p>Деление на <code>10</code> гарантированно хорошо работает в десятичной системе, но деление на <code>3</code> – нет. По той же причине и в двоичной системе счисления, деление на <code>2</code> обязательно сработает, а <code>1/10</code> становится бесконечной дробью.</p>
+        <p>В JavaScript нет возможности для хранения точных значений 0.1 или 0.2, используя двоичную систему, точно также, как нет возможности хранить одну третью в десятичной системе счисления.</p>
+        <p>Числовой формат IEEE-754 решает эту проблему путём округления до ближайшего возможного числа. Правила округления обычно не позволяют нам увидеть эту «крошечную потерю точности», но она существует.</p>
+        <p>Пример:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token number">0.1</code><code class="token punctuation">.</code><code class="token function">toFixed</code><code class="token punctuation">(</code><code class="token number">20</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 0.10000000000000000555</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(1);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>И когда мы суммируем 2 числа, их «неточности» тоже суммируются.</p>
+        <p>Вот почему <code>0.1 + 0.2</code> – это не совсем <code>0.3</code>.</p>
+        <div class="important important_smart">
+          <div class="important__header"><span class="important__type">Не только в JavaScript</span></div>
+          <div class="important__content"><p>Справедливости ради заметим, что ошибка в точности вычислений для чисел с плавающей точкой сохраняется в любом другом языке, где используется формат IEEE 754, включая PHP, Java, C, Perl, Ruby.</p>
+          </div>
+        </div>
+        <p>Можно ли обойти проблему? Конечно, наиболее надёжный способ — это округлить результат используя метод <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed">toFixed(n)</a>:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> sum <code class="token operator">=</code> <code class="token number">0.1</code> <code class="token operator">+</code> <code class="token number">0.2</code><code class="token punctuation">;</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> sum<code class="token punctuation">.</code><code class="token function">toFixed</code><code class="token punctuation">(</code><code class="token number">2</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 0.30</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(2);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Помните, что метод <code>toFixed</code> всегда возвращает строку. Это гарантирует, что результат будет с заданным количеством цифр в десятичной части. Также это удобно для форматирования цен в интернет-магазине <code>$0.30</code>. В других случаях можно использовать унарный оператор <code>+</code>, чтобы преобразовать строку в число:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> sum <code class="token operator">=</code> <code class="token number">0.1</code> <code class="token operator">+</code> <code class="token number">0.2</code><code class="token punctuation">;</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token operator">+</code>sum<code class="token punctuation">.</code><code class="token function">toFixed</code><code class="token punctuation">(</code><code class="token number">2</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 0.3</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(2);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Также можно временно умножить число на 100 (или на большее), чтобы привести его к целому, выполнить математические действия, а после разделить обратно. Суммируя целые числа, мы уменьшаем погрешность, но она все равно появляется при финальном делении:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token punctuation">(</code><code class="token number">0.1</code> <code class="token operator">*</code> <code class="token number">10</code> <code class="token operator">+</code> <code class="token number">0.2</code> <code class="token operator">*</code> <code class="token number">10</code><code class="token punctuation">)</code> <code class="token operator">/</code> <code class="token number">10</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 0.3</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token punctuation">(</code><code class="token number">0.28</code> <code class="token operator">*</code> <code class="token number">100</code> <code class="token operator">+</code> <code class="token number">0.14</code> <code class="token operator">*</code> <code class="token number">100</code><code class="token punctuation">)</code> <code class="token operator">/</code> <code class="token number">100</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 0.4200000000000001</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(2);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Таким образом, метод умножения/деления уменьшает погрешность, но полностью её не решает.</p>
+        <p>Иногда можно попробовать полностью отказаться от дробей. Например, если мы в нашем интернет-магазине начнём использовать центы вместо долларов. Но что будет, если мы применим скидку 30%? На практике у нас не получится полностью избавиться от дроби. Просто используйте округление, чтобы отрезать «хвосты», когда надо.</p>
+        <div class="important important_smart">
+          <div class="important__header"><span class="important__type">Забавный пример</span></div>
+          <div class="important__content"><p>Попробуйте выполнить его:</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token comment">// Привет! Я – число, растущее само по себе!</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token number">9999999999999999</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// покажет 10000000000000000</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(2);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p>Причина та же – потеря точности. Из 64 бит, отведённых на число, сами цифры числа занимают до 52 бит, остальные 11 бит хранят позицию десятичной точки и один бит – знак. Так что если 52 бит не хватает на цифры, то при записи пропадут младшие разряды.</p>
+            <p>Интерпретатор не выдаст ошибку, но в результате получится «не совсем то число», что мы и видим в примере выше. Как говорится: «как смог, так записал».</p>
+          </div>
+        </div>
+        <div class="important important_smart">
+          <div class="important__header"><span class="important__type">Два нуля</span></div>
+          <div class="important__content"><p>Другим забавным следствием внутреннего представления чисел является наличие двух нулей: <code>0</code> и <code>-0</code>.</p>
+            <p>Все потому, что знак представлен отдельным битом, так что, любое число может быть положительным и отрицательным, включая нуль.</p>
+            <p>В большинстве случаев это поведение незаметно, так как операторы в JavaScript воспринимают их одинаковыми.</p>
+          </div>
+        </div>
+        <h2>Проверка: isFinite и isNaN</h2>
+        <p>Помните эти специальные числовые значения?</p>
+        <ul>
+          <li><code>Infinity</code> (и <code>-Infinity</code>) — особенное численное значение, которое ведёт себя в точности как математическая бесконечность ∞.</li>
+          <li><code>NaN</code> представляет ошибку.</li>
+        </ul>
+        <p>Эти числовые значения принадлежат типу <code>number</code>, но они не являются «обычными» числами, поэтому есть функции для их проверки:</p>
+        <ul>
+          <li>
+            <p><code>isNaN(value)</code> преобразует значение в число и проверяет является ли оно <code>NaN</code>:</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token function">isNaN</code><code class="token punctuation">(</code><code class="token number">NaN</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// true</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token function">isNaN</code><code class="token punctuation">(</code><code class="token string">"str"</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// true</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(2);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p>Нужна ли нам эта функция? Разве не можем ли мы просто сравнить <code>=== NaN</code>? К сожалению, нет. Значение <code>NaN</code> уникально тем, что оно не является равным ни чему другому, даже самому себе:</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token number">NaN</code> <code class="token operator">===</code> <code class="token number">NaN</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// false</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(1);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <p><code>isFinite(value)</code> преобразует аргумент в число и возвращает <code>true</code>, если оно является обычным числом, т.е. не <code>NaN/Infinity/-Infinity</code>:</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token function">isFinite</code><code class="token punctuation">(</code><code class="token string">"15"</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// true</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token function">isFinite</code><code class="token punctuation">(</code><code class="token string">"str"</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// false, потому что специальное значение: NaN</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token function">isFinite</code><code class="token punctuation">(</code><code class="token number">Infinity</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// false, потому что специальное значение: Infinity</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(3);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <p>Иногда <code>isFinite</code> используется для проверки, содержится ли в строке число:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> num <code class="token operator">=</code> <code class="token operator">+</code><code class="token function">prompt</code><code class="token punctuation">(</code><code class="token string">"Enter a number"</code><code class="token punctuation">,</code> <code class="token string">''</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+<code class="token comment">// вернёт true всегда, кроме ситуаций, когда аргумент - Infinity/-Infinity или не число</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token function">isFinite</code><code class="token punctuation">(</code>num<code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(4);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Помните, что пустая строка интерпретируется как <code>0</code> во всех числовых функциях, включая<code>isFinite</code>.</p>
+        <div class="important important_smart">
+          <div class="important__header"><span class="important__type">Сравнение <code>Object.is</code></span></div>
+          <div class="important__content"><p>Существует специальный метод <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/is">Object.is</a>, который сравнивает значения примерно как <code>===</code>, но более надёжен в двух особых ситуациях:</p>
+            <ol>
+              <li>Работает с <code>NaN</code>: <code>Object.is(NaN, NaN) === true</code>, здесь он хорош.</li>
+              <li>Значения <code>0</code> и <code>-0</code> разные: <code>Object.is(0, -0) === false</code>, это редко используется, но технически эти значения разные.</li>
+            </ol>
+            <p>Во всех других случаях <code>Object.is(a, b)</code> идентичен <code>a === b</code>.</p>
+            <p>Этот способ сравнения часто используется в спецификации JavaScript. Когда внутреннему алгоритму необходимо сравнить 2 значения на предмет точного совпадения, он использует <code>Object.is</code> (Определение <a href="https://tc39.github.io/ecma262/#sec-samevalue">SameValue</a>).</p>
+          </div>
+        </div>
+        <h2>parseInt и parseFloat</h2>
+        <p>Для явного преобразования к числу можно использовать <code>+</code> или <code>Number()</code>. Если строка не является в точности числом, то результат будет <code>NaN</code>:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token operator">+</code><code class="token string">"100px"</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// NaN</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(1);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Единственное исключение — это пробелы в начале строки и в конце, они игнорируются.</p>
+        <p>В реальной жизни мы часто сталкиваемся со значениями у которых есть единица измерения, например <code>"100px"</code> или <code>"12pt"</code> в CSS. Также во множестве стран символ валюты записывается после номинала <code>"19€"</code>. Так как нам получить числовое значение из таких строк?</p>
+        <p>Для этого есть <code>parseInt</code> и <code>parseFloat</code>.</p>
+        <p>Они «читают» число из строки. Если в процессе чтения возникает ошибка, они возвращают полученное до ошибки число. Функция <code>parseInt</code> возвращает целое число, а <code>parseFloat</code> возвращает число с плавающей точкой:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token function">parseInt</code><code class="token punctuation">(</code><code class="token string">'100px'</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 100</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token function">parseFloat</code><code class="token punctuation">(</code><code class="token string">'12.5em'</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 12.5</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token function">parseInt</code><code class="token punctuation">(</code><code class="token string">'12.3'</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 12, вернётся только целая часть</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token function">parseFloat</code><code class="token punctuation">(</code><code class="token string">'12.3.4'</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 12.3, произойдёт остановка чтения на второй точке</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(5);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Функции <code>parseInt/parseFloat</code> вернут <code>NaN</code>, если не смогли прочитать ни одну цифру:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token function">parseInt</code><code class="token punctuation">(</code><code class="token string">'a123'</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// NaN, на первом символе происходит остановка чтения</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(1);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="important important_smart">
+          <div class="important__header"><span class="important__type">Второй аргумент <code>parseInt(str, radix)</code></span></div>
+          <div class="important__content"><p>Функция <code>parseInt()</code> имеет необязательный второй параметр. Он определяет систему счисления, таким образом <code>parseInt</code> может также читать строки с шестнадцатеричными числами, двоичными числами и т.д.:</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token function">parseInt</code><code class="token punctuation">(</code><code class="token string">'0xff'</code><code class="token punctuation">,</code> <code class="token number">16</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 255</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token function">parseInt</code><code class="token punctuation">(</code><code class="token string">'ff'</code><code class="token punctuation">,</code> <code class="token number">16</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 255, без 0x тоже работает</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token function">parseInt</code><code class="token punctuation">(</code><code class="token string">'2n9c'</code><code class="token punctuation">,</code> <code class="token number">36</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 123456</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(4);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h2>Другие математические функции</h2>
+        <p>В JavaScript встроен объект <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math">Math</a>, который содержит различные математические функции и константы.</p>
+        <p>Несколько примеров:</p>
+        <dl>
+          <dt><code>Math.random()</code></dt>
+          <dd>
+            <p>Возвращает псевдослучайное число в диапазоне от 0 (включительно) до 1 (но не включая 1)</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token function">alert</code><code class="token punctuation">(</code> Math<code class="token punctuation">.</code><code class="token function">random</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 0.1234567894322</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> Math<code class="token punctuation">.</code><code class="token function">random</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 0.5435252343232</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> Math<code class="token punctuation">.</code><code class="token function">random</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// ... (любое количество псевдослучайных чисел)</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(3);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </dd>
+          <dt><code>Math.max(a, b, c...)</code> / <code>Math.min(a, b, c...)</code></dt>
+          <dd>
+            <p>Возвращает наибольшее/наименьшее число из перечисленных аргументов.</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token function">alert</code><code class="token punctuation">(</code> Math<code class="token punctuation">.</code><code class="token function">max</code><code class="token punctuation">(</code><code class="token number">3</code><code class="token punctuation">,</code> <code class="token number">5</code><code class="token punctuation">,</code> <code class="token operator">-</code><code class="token number">10</code><code class="token punctuation">,</code> <code class="token number">0</code><code class="token punctuation">,</code> <code class="token number">1</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 5</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> Math<code class="token punctuation">.</code><code class="token function">min</code><code class="token punctuation">(</code><code class="token number">1</code><code class="token punctuation">,</code> <code class="token number">2</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 1</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(2);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </dd>
+          <dt><code>Math.pow(n, power)</code></dt>
+          <dd>
+            <p>Возвращает число <code>n</code>, возведённое в степень <code>power</code></p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token function">alert</code><code class="token punctuation">(</code> Math<code class="token punctuation">.</code><code class="token function">pow</code><code class="token punctuation">(</code><code class="token number">2</code><code class="token punctuation">,</code> <code class="token number">10</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 2 в степени 10 = 1024</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(1);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </dd>
+        </dl>
+        <p>В объекте <code>Math</code> есть множество функций и констант, включая тригонометрические функции, подробнее можно ознакомиться в документации по объекту <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math">Math</a>.</p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

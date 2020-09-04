@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial=scale=1.0">
+
+  <title>Массивы</title>
+  
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/fonts.css">
+  <link rel="shortcut icon" href="../img/iconfinder_graduation_cap.png">
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <div class="page">
+      <div class="main__header">
+        <div class="main__header-group">
+          <ol class="breadcrumbs">
+            <li class="breadcrumbs__item breadcrumbs__item_home">
+              <a class="breadcrumbs__link" title="Оглавление" href="../index.html"></a>
+            </li>
+            <li class="breadcrumbs__item"></li>
+          </ol>
+          <div class="updated-at">
+            <div class="updated-at__content">31-го августа 2020</div>
+          </div>
+        </div>
+        <h1 class="page__title">Массивы</h1>
+      </div>
+      <div itemprop="articleBody">
+        <p>Объекты позволяют хранить данные со строковыми ключами. Это замечательно.</p>
+        <p>Но довольно часто мы понимаем, что нам необходима <em>упорядоченная коллекция</em> данных, в которой присутствуют 1-й, 2-й, 3-й элементы и т.д. Например, она понадобится нам для хранения списка чего-либо: пользователей, товаров, элементов HTML и т.д.</p>
+        <p>В этом случае использовать объект неудобно, так как он не предоставляет методов управления порядком элементов. Мы не можем вставить новое свойство «между» уже существующими. Объекты просто не предназначены для этих целей.</p>
+        <p>Для хранения упорядоченных коллекций существует особая структура данных, которая называется массив, <code>Array</code>.</p>
+        <h2>Объявление</h2>
+        <p>Существует два варианта синтаксиса для создания пустого массива:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> arr <code class="token operator">=</code> <code class="token keyword">new</code> <code class="token class-name">Array</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token keyword">let</code> arr <code class="token operator">=</code> <code class="token punctuation">[</code><code class="token punctuation">]</code><code class="token punctuation">;</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(2);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Практически всегда используется второй вариант синтаксиса. В скобках мы можем указать начальные значения элементов:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> fruits <code class="token operator">=</code> <code class="token punctuation">[</code><code class="token string">"Яблоко"</code><code class="token punctuation">,</code> <code class="token string">"Апельсин"</code><code class="token punctuation">,</code> <code class="token string">"Слива"</code><code class="token punctuation">]</code><code class="token punctuation">;</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(1);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Элементы массива нумеруются, начиная с нуля.</p>
+        <p>Мы можем получить элемент, указав его номер в квадратных скобках:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> fruits <code class="token operator">=</code> <code class="token punctuation">[</code><code class="token string">"Яблоко"</code><code class="token punctuation">,</code> <code class="token string">"Апельсин"</code><code class="token punctuation">,</code> <code class="token string">"Слива"</code><code class="token punctuation">]</code><code class="token punctuation">;</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> fruits<code class="token punctuation">[</code><code class="token number">0</code><code class="token punctuation">]</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// Яблоко</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> fruits<code class="token punctuation">[</code><code class="token number">1</code><code class="token punctuation">]</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// Апельсин</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> fruits<code class="token punctuation">[</code><code class="token number">2</code><code class="token punctuation">]</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// Слива</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(5);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Мы можем заменить элемент:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+fruits<code class="token punctuation">[</code><code class="token number">2</code><code class="token punctuation">]</code> <code class="token operator">=</code> <code class="token string">'Груша'</code><code class="token punctuation">;</code> <code class="token comment">// теперь ["Яблоко", "Апельсин", "Груша"]</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(1);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>…Или добавить новый к существующему массиву:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+fruits<code class="token punctuation">[</code><code class="token number">3</code><code class="token punctuation">]</code> <code class="token operator">=</code> <code class="token string">'Лимон'</code><code class="token punctuation">;</code> <code class="token comment">// теперь ["Яблоко", "Апельсин", "Груша", "Лимон"]</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(1);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Общее число элементов массива содержится в его свойстве <code>length</code>:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> fruits <code class="token operator">=</code> <code class="token punctuation">[</code><code class="token string">"Яблоко"</code><code class="token punctuation">,</code> <code class="token string">"Апельсин"</code><code class="token punctuation">,</code> <code class="token string">"Слива"</code><code class="token punctuation">]</code><code class="token punctuation">;</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> fruits<code class="token punctuation">.</code>length <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 3</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(3);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Вывести массив целиком можно при помощи <code>alert</code>.</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> fruits <code class="token operator">=</code> <code class="token punctuation">[</code><code class="token string">"Яблоко"</code><code class="token punctuation">,</code> <code class="token string">"Апельсин"</code><code class="token punctuation">,</code> <code class="token string">"Слива"</code><code class="token punctuation">]</code><code class="token punctuation">;</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> fruits <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// Яблоко, Апельсин, Слива</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(3);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>В массиве могут храниться элементы любого типа.</p>
+        <p>Например:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token comment">// разные типы значений</code>
+<code class="token keyword">let</code> arr <code class="token operator">=</code> <code class="token punctuation">[</code> <code class="token string">'Яблоко'</code><code class="token punctuation">,</code> <code class="token punctuation">{</code> name<code class="token punctuation">:</code> <code class="token string">'Джон'</code> <code class="token punctuation">}</code><code class="token punctuation">,</code> <code class="token boolean">true</code><code class="token punctuation">,</code> <code class="token keyword">function</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code> <code class="token function">alert</code><code class="token punctuation">(</code><code class="token string">'привет'</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token punctuation">}</code> <code class="token punctuation">]</code><code class="token punctuation">;</code>
+
+<code class="token comment">// получить элемент с индексом 1 (объект) и затем показать его свойство</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> arr<code class="token punctuation">[</code><code class="token number">1</code><code class="token punctuation">]</code><code class="token punctuation">.</code>name <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// Джон</code>
+
+<code class="token comment">// получить элемент с индексом 3 (функция) и выполнить её</code>
+arr<code class="token punctuation">[</code><code class="token number">3</code><code class="token punctuation">]</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// привет</code>
+</pre>
+                </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(8);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="important important_smart">
+          <div class="important__header"><span class="important__type">Висячая запятая</span></div>
+          <div class="important__content">
+            <p>Список элементов массива, как и список свойств объекта, может оканчиваться запятой:</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> fruits <code class="token operator">=</code> <code class="token punctuation">[</code>
+  <code class="token string">"Яблоко"</code><code class="token punctuation">,</code>
+  <code class="token string">"Апельсин"</code><code class="token punctuation">,</code>
+  <code class="token string">"Слива"</code><code class="token punctuation">,</code>
+<code class="token punctuation">]</code><code class="token punctuation">;</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(5);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p>«Висячая запятая» упрощает процесс добавления/удаления элементов, так как все строки становятся идентичными.</p>
+          </div>
+        </div>
+        <h2>Методы pop/push, shift/unshift</h2>
+        <p><a href="https://ru.wikipedia.org/wiki/%D0%9E%D1%87%D0%B5%D1%80%D0%B5%D0%B4%D1%8C_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)">Очередь</a> – один из самых распространённых вариантов применения массива. В области компьютерных наук так называется упорядоченная коллекция элементов, поддерживающая два вида операций:</p>
+        <ul>
+          <li><code>push</code> добавляет элемент в конец.</li>
+          <li><code>shift</code> удаляет элемент в начале, сдвигая очередь, так что второй элемент становится первым.</li>
+        </ul>
+        <div class="image" style="width: 187px">
+          <iframe style="width: 187px; height: calc(108px + 4px)" src="../data-types/array/queue.html"></iframe>
+          <div class="image__ratio" style="padding-top: 59.89304812834%"></div>
+        </div>
+        <p>Массивы поддерживают обе операции.</p>
+        <p>На практике необходимость в этом возникает очень часто. Например, очередь сообщений, которые надо показать на экране.</p>
+        <p>Существует и другой вариант применения для массивов – структура данных, называемая <a href="https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D0%B5%D0%BA">стек</a>.</p>
+        <p>Она поддерживает два вида операций:</p>
+        <ul>
+          <li><code>push</code> добавляет элемент в конец.</li>
+          <li><code>pop</code> удаляет последний элемент.</li>
+        </ul>
+        <p>Таким образом, новые элементы всегда добавляются или удаляются из «конца».</p>
+        <p>Примером стека обычно служит колода карт: новые карты кладутся наверх и берутся тоже сверху:</p>
+        <div class="image" style="width: 145px">
+          <iframe style="width: 145px; height: calc(149px + 4px)" src="../data-types/array/stack.html"></iframe>
+          <div class="image__ratio" style="padding-top: 105.5172413793%"></div>
+        </div>
+        <p>Массивы в JavaScript могут работать и как очередь, и как стек. Мы можем добавлять/удалять элементы как в начало, так и в конец массива.</p>
+        <p>В компьютерных науках структура данных, делающая это возможным, называется <a href="https://ru.wikipedia.org/wiki/%D0%94%D0%B2%D1%83%D1%85%D1%81%D1%82%D0%BE%D1%80%D0%BE%D0%BD%D0%BD%D1%8F%D1%8F_%D0%BE%D1%87%D0%B5%D1%80%D0%B5%D0%B4%D1%8C">двусторонняя очередь</a>.</p>
+        <p><strong>Методы, работающие с концом массива:</strong></p>
+        <dl>
+          <dt><code>pop</code></dt>
+          <dd>
+            <p>Удаляет последний элемент из массива и возвращает его:</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> fruits <code class="token operator">=</code> <code class="token punctuation">[</code><code class="token string">"Яблоко"</code><code class="token punctuation">,</code> <code class="token string">"Апельсин"</code><code class="token punctuation">,</code> <code class="token string">"Груша"</code><code class="token punctuation">]</code><code class="token punctuation">;</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> fruits<code class="token punctuation">.</code><code class="token function">pop</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// удаляем "Груша" и выводим его</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> fruits <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// Яблоко, Апельсин</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(5);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </dd>
+          <dt><code>push</code></dt>
+          <dd>
+            <p>Добавляет элемент в конец массива:</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> fruits <code class="token operator">=</code> <code class="token punctuation">[</code><code class="token string">"Яблоко"</code><code class="token punctuation">,</code> <code class="token string">"Апельсин"</code><code class="token punctuation">]</code><code class="token punctuation">;</code>
+
+fruits<code class="token punctuation">.</code><code class="token function">push</code><code class="token punctuation">(</code><code class="token string">"Груша"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> fruits <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// Яблоко, Апельсин, Груша</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(5);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p>Вызов <code>fruits.push(...)</code> равнозначен <code>fruits[fruits.length] = ...</code>.</p>
+          </dd>
+        </dl>
+        <p><strong>Методы, работающие с началом массива:</strong></p>
+        <dl>
+          <dt><code>shift</code></dt>
+          <dd>
+            <p>Удаляет из массива первый элемент и возвращает его:</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> fruits <code class="token operator">=</code> <code class="token punctuation">[</code><code class="token string">"Яблоко"</code><code class="token punctuation">,</code> <code class="token string">"Апельсин"</code><code class="token punctuation">,</code> <code class="token string">"Груша"</code><code class="token punctuation">]</code><code class="token punctuation">;</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> fruits<code class="token punctuation">.</code><code class="token function">shift</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// удаляем Яблоко и выводим его</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> fruits <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// Апельсин, Груша</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(5);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </dd>
+          <dt><code>unshift</code></dt>
+          <dd>
+            <p>Добавляет элемент в начало массива:</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> fruits <code class="token operator">=</code> <code class="token punctuation">[</code><code class="token string">"Апельсин"</code><code class="token punctuation">,</code> <code class="token string">"Груша"</code><code class="token punctuation">]</code><code class="token punctuation">;</code>
+
+fruits<code class="token punctuation">.</code><code class="token function">unshift</code><code class="token punctuation">(</code><code class="token string">'Яблоко'</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> fruits <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// Яблоко, Апельсин, Груша</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(5);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </dd>
+        </dl>
+        <p>Методы <code>push</code> и <code>unshift</code> могут добавлять сразу несколько элементов:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> fruits <code class="token operator">=</code> <code class="token punctuation">[</code><code class="token string">"Яблоко"</code><code class="token punctuation">]</code><code class="token punctuation">;</code>
+
+fruits<code class="token punctuation">.</code><code class="token function">push</code><code class="token punctuation">(</code><code class="token string">"Апельсин"</code><code class="token punctuation">,</code> <code class="token string">"Груша"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+fruits<code class="token punctuation">.</code><code class="token function">unshift</code><code class="token punctuation">(</code><code class="token string">"Ананас"</code><code class="token punctuation">,</code> <code class="token string">"Лимон"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+<code class="token comment">// ["Ананас", "Лимон", "Яблоко", "Апельсин", "Груша"]</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> fruits <code class="token punctuation">)</code><code class="token punctuation">;</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(7);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <h2>Внутреннее устройство массива</h2>
+        <p>Массив – это особый подвид объектов. Квадратные скобки, используемые для того, чтобы получить доступ к свойству <code>arr[0]</code> – это по сути обычный синтаксис доступа по ключу, как <code>obj[key]</code>, где в роли <code>obj</code> у нас <code>arr</code>, а в качестве ключа – числовой индекс.</p>
+        <p>Массивы расширяют объекты, так как предусматривают специальные методы для работы с упорядоченными коллекциями данных, а также свойство <code>length</code>. Но в основе всё равно лежит объект.</p>
+        <p>Следует помнить, что в JavaScript существует 8 основных типов данных. Массив является объектом и, следовательно, ведёт себя как объект.</p>
+        <p>Например, копируется по ссылке:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> fruits <code class="token operator">=</code> <code class="token punctuation">[</code><code class="token string">"Банан"</code><code class="token punctuation">]</code>
+
+<code class="token keyword">let</code> arr <code class="token operator">=</code> fruits<code class="token punctuation">;</code> <code class="token comment">// копируется по ссылке (две переменные ссылаются на один и тот же массив)</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> arr <code class="token operator">===</code> fruits <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// true</code>
+
+arr<code class="token punctuation">.</code><code class="token function">push</code><code class="token punctuation">(</code><code class="token string">"Груша"</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// массив меняется по ссылке</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> fruits <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// Банан, Груша - теперь два элемента</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(9);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>…Но то, что действительно делает массивы особенными – это их внутреннее представление. Движок JavaScript старается хранить элементы массива в непрерывной области памяти, один за другим, так, как это показано на иллюстрациях к этой главе. Существуют и другие способы оптимизации, благодаря которым массивы работают очень быстро.</p>
+        <p>Но все они утратят эффективность, если мы перестанем работать с массивом как с «упорядоченной коллекцией данных» и начнём использовать его как обычный объект.</p>
+        <p>Например, технически мы можем сделать следующее:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> fruits <code class="token operator">=</code> <code class="token punctuation">[</code><code class="token punctuation">]</code><code class="token punctuation">;</code> <code class="token comment">// создаём массив</code>
+
+fruits<code class="token punctuation">[</code><code class="token number">99999</code><code class="token punctuation">]</code> <code class="token operator">=</code> <code class="token number">5</code><code class="token punctuation">;</code> <code class="token comment">// создаём свойство с индексом, намного превышающим длину массива</code>
+
+fruits<code class="token punctuation">.</code>age <code class="token operator">=</code> <code class="token number">25</code><code class="token punctuation">;</code> <code class="token comment">// создаём свойство с произвольным именем</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(5);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Это возможно, потому что в основе массива лежит объект. Мы можем присвоить ему любые свойства.</p>
+        <p>Но движок поймёт, что мы работаем с массивом, как с обычным объектом. Способы оптимизации, используемые для массивов, в этом случае не подходят, поэтому они будут отключены и никакой выгоды не принесут.</p>
+        <p>Варианты неправильного применения массива:</p>
+        <ul>
+          <li>Добавление нечислового свойства, например:  <code>arr.test = 5</code>.</li>
+          <li>Создание «дыр», например: добавление <code>arr[0]</code>, затем <code>arr[1000]</code> (между ними ничего нет).</li>
+          <li>Заполнение массива в обратном порядке, например: <code>arr[1000]</code>, <code>arr[999]</code> и т.д.</li>
+        </ul>
+        <p>Массив следует считать особой структурой, позволяющей работать с <em>упорядоченными данными</em>. Для этого массивы предоставляют специальные методы. Массивы тщательно настроены в движках JavaScript для работы с однотипными упорядоченными данными, поэтому, пожалуйста, используйте их именно в таких случаях. Если вам нужны произвольные ключи, вполне возможно, лучше подойдёт обычный объект <code>{}</code>.</p>
+        <h2>Эффективность</h2>
+        <p>Методы <code>push/pop</code> выполняются быстро, а методы <code>shift/unshift</code> – медленно.</p>
+        <div class="image" style="width: 354px">
+          <iframe style="width: 354px; height: calc(173px + 4px)" src="../data-types/array/array-speed.html"></iframe>
+          <div class="image__ratio" style="padding-top: 50%"></div>
+        </div>
+        <p>Почему работать с концом массива быстрее, чем с его началом? Давайте посмотрим, что происходит во время выполнения:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+fruits<code class="token punctuation">.</code><code class="token function">shift</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// удаляем первый элемент с начала</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(1);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Просто взять и удалить элемент с номером <code>0</code> недостаточно. Нужно также заново пронумеровать остальные элементы.</p>
+        <p>Операция <code>shift</code> должна выполнить 3 действия:</p>
+        <ol>
+          <li>Удалить элемент с индексом <code>0</code>.</li>
+          <li>Сдвинуть все элементы влево, заново пронумеровать их, заменив <code>1</code> на <code>0</code>, <code>2</code> на <code>1</code> и т.д.</li>
+          <li>Обновить свойство <code>length</code> .</li>
+        </ol>
+        <div class="image" style="width: 610px">
+          <iframe style="width: 610px; height: calc(175px + 4px)" src="../data-types/array/array-shift.html"></iframe>
+          <div class="image__ratio" style="padding-top: 29.34426229508%"></div>
+        </div>
+        <p><strong>Чем больше элементов содержит массив, тем больше времени потребуется для того, чтобы их переместить, больше операций с памятью.</strong></p>
+        <p>То же самое происходит с <code>unshift</code>: чтобы добавить элемент в начало массива, нам нужно сначала сдвинуть существующие элементы вправо, увеличивая их индексы.</p>
+        <p>А что же с <code>push/pop</code>? Им не нужно ничего перемещать. Чтобы удалить элемент в конце массива, метод <code>pop</code> очищает индекс и уменьшает значение <code>length</code>.</p>
+        <p>Действия при операции <code>pop</code>:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+fruits<code class="token punctuation">.</code><code class="token function">pop</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// удаляем один элемент с конца</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(1);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="image" style="width: 479px">
+          <iframe style="width: 479px; height: calc(148px + 4px)" src="../data-types/array/array-pop.html"></iframe>
+          <div class="image__ratio" style="padding-top: 31.73277661795%"></div>
+        </div>
+        <p><strong>Метод <code>pop</code> не требует перемещения, потому что остальные элементы остаются с теми же индексами. Именно поэтому он выполняется очень быстро.</strong></p>
+        <p>Аналогично работает метод <code>push</code>.</p>
+        <h2>Перебор элементов</h2>
+        <p>Одним из самых старых способов перебора элементов массива является цикл for по цифровым индексам:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> arr <code class="token operator">=</code> <code class="token punctuation">[</code><code class="token string">"Яблоко"</code><code class="token punctuation">,</code> <code class="token string">"Апельсин"</code><code class="token punctuation">,</code> <code class="token string">"Груша"</code><code class="token punctuation">]</code><code class="token punctuation">;</code>
+
+<code class="token keyword">for</code> <code class="token punctuation">(</code><code class="token keyword">let</code> i <code class="token operator">=</code> <code class="token number">0</code><code class="token punctuation">;</code> i <code class="token operator">&lt;</code> arr<code class="token punctuation">.</code>length<code class="token punctuation">;</code> i<code class="token operator">++</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token function">alert</code><code class="token punctuation">(</code> arr<code class="token punctuation">[</code>i<code class="token punctuation">]</code> <code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token punctuation">}</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(5);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Но для массивов возможен и другой вариант цикла, <code>for..of</code>:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> fruits <code class="token operator">=</code> <code class="token punctuation">[</code><code class="token string">"Яблоко"</code><code class="token punctuation">,</code> <code class="token string">"Апельсин"</code><code class="token punctuation">,</code> <code class="token string">"Слива"</code><code class="token punctuation">]</code><code class="token punctuation">;</code>
+
+<code class="token comment">// проходит по значениям</code>
+<code class="token keyword">for</code> <code class="token punctuation">(</code><code class="token keyword">let</code> fruit <code class="token keyword">of</code> fruits<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token function">alert</code><code class="token punctuation">(</code> fruit <code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token punctuation">}</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(6);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Цикл <code>for..of</code> не предоставляет доступа к номеру текущего элемента, только к его значению, но в большинстве случаев этого достаточно. А также это короче.</p>
+        <p>Технически, так как массив является объектом, можно использовать и вариант <code>for..in</code>:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> arr <code class="token operator">=</code> <code class="token punctuation">[</code><code class="token string">"Яблоко"</code><code class="token punctuation">,</code> <code class="token string">"Апельсин"</code><code class="token punctuation">,</code> <code class="token string">"Груша"</code><code class="token punctuation">]</code><code class="token punctuation">;</code>
+
+<code class="token keyword">for</code> <code class="token punctuation">(</code><code class="token keyword">let</code> key <code class="token keyword">in</code> arr<code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token function">alert</code><code class="token punctuation">(</code> arr<code class="token punctuation">[</code>key<code class="token punctuation">]</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// Яблоко, Апельсин, Груша</code>
+<code class="token punctuation">}</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(5);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Но на самом деле это – плохая идея. Существуют скрытые недостатки этого способа:</p>
+        <ol>
+          <li>
+            <p>Цикл <code>for..in</code> выполняет перебор <em>всех свойств</em> объекта, а не только цифровых.</p>
+            <p>В браузере и других программных средах также существуют так называемые «псевдомассивы» – объекты, которые <em>выглядят, как массив</em>. То есть, у них есть свойство <code>length</code> и индексы, но они также могут иметь дополнительные нечисловые свойства и методы, которые нам обычно не нужны. Тем не менее, цикл <code>for..in</code> выведет и их. Поэтому, если нам приходится иметь дело с объектами, похожими на массив, такие «лишние» свойства могут стать проблемой.</p>
+          </li>
+          <li>
+            <p>Цикл <code>for..in</code> оптимизирован под произвольные объекты, не массивы, и поэтому в 10-100 раз медленнее. Увеличение скорости выполнения может иметь значение только при возникновении узких мест. Но мы всё же должны представлять разницу.</p>
+          </li>
+        </ol>
+        <p>В общем, не следует использовать цикл <code>for..in</code> для массивов.</p>
+        <h2>Немного о «length»</h2>
+        <p>Свойство <code>length</code> автоматически обновляется при изменении массива. Если быть точными, это не количество элементов массива, а наибольший цифровой индекс плюс один.</p>
+        <p>Например, единственный элемент, имеющий большой индекс, даёт большую длину:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> fruits <code class="token operator">=</code> <code class="token punctuation">[</code><code class="token punctuation">]</code><code class="token punctuation">;</code>
+fruits<code class="token punctuation">[</code><code class="token number">123</code><code class="token punctuation">]</code> <code class="token operator">=</code> <code class="token string">"Яблоко"</code><code class="token punctuation">;</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> fruits<code class="token punctuation">.</code>length <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 124</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(4);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Обратите внимание, что обычно мы не используем массивы таким образом.</p>
+        <p>Ещё один интересный факт о свойстве <code>length</code> – его можно перезаписать.</p>
+        <p>Если мы вручную увеличим его, ничего интересного не произойдёт. Зато, если мы уменьшим его, массив станет короче. Этот процесс необратим, как мы можем понять из примера:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> arr <code class="token operator">=</code> <code class="token punctuation">[</code><code class="token number">1</code><code class="token punctuation">,</code> <code class="token number">2</code><code class="token punctuation">,</code> <code class="token number">3</code><code class="token punctuation">,</code> <code class="token number">4</code><code class="token punctuation">,</code> <code class="token number">5</code><code class="token punctuation">]</code><code class="token punctuation">;</code>
+
+arr<code class="token punctuation">.</code>length <code class="token operator">=</code> <code class="token number">2</code><code class="token punctuation">;</code> <code class="token comment">// укорачиваем до двух элементов</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> arr <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// [1, 2]</code>
+
+arr<code class="token punctuation">.</code>length <code class="token operator">=</code> <code class="token number">5</code><code class="token punctuation">;</code> <code class="token comment">// возвращаем length как было</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> arr<code class="token punctuation">[</code><code class="token number">3</code><code class="token punctuation">]</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// undefined: значения не восстановились</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(7);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Таким образом, самый простой способ очистить массив – это <code>arr.length = 0;</code>.</p>
+        <h2>new Array()</h2>
+        <p>Существует ещё один вариант синтаксиса для создания массива:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> arr <code class="token operator">=</code> <code class="token keyword">new</code> <code class="token class-name">Array</code><code class="token punctuation">(</code><code class="token string">"Яблоко"</code><code class="token punctuation">,</code> <code class="token string">"Груша"</code><code class="token punctuation">,</code> <code class="token string">"и тд"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(1);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Он редко применяется, так как квадратные скобки <code>[]</code> короче. Кроме того, у него есть хитрая особенность.</p>
+        <p>Если <code>new Array</code> вызывается с одним аргументом, который представляет собой число, он создаёт массив <em>без элементов, но с заданной длиной</em>.</p>
+        <p>Давайте посмотрим, как можно оказать себе медвежью услугу:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> arr <code class="token operator">=</code> <code class="token keyword">new</code> <code class="token class-name">Array</code><code class="token punctuation">(</code><code class="token number">2</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// создастся ли массив [2]?</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> arr<code class="token punctuation">[</code><code class="token number">0</code><code class="token punctuation">]</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// undefined! нет элементов.</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> arr<code class="token punctuation">.</code>length <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// length 2</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(5);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Как мы видим, в коде, представленном выше, в <code>new Array(number)</code> все элементы равны <code>undefined</code>.</p>
+        <p>Чтобы избежать появления таких неожиданных ситуаций, мы обычно используем квадратные скобки, если, конечно, не знаем точно, что по какой-то причине нужен именно <code>Array</code>.</p>
+        <h2>Многомерные массивы</h2>
+        <p>Массивы могут содержать элементы, которые тоже являются массивами. Это можно использовать для создания многомерных массивов, например, для хранения матриц:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> matrix <code class="token operator">=</code> <code class="token punctuation">[</code>
+  <code class="token punctuation">[</code><code class="token number">1</code><code class="token punctuation">,</code> <code class="token number">2</code><code class="token punctuation">,</code> <code class="token number">3</code><code class="token punctuation">]</code><code class="token punctuation">,</code>
+  <code class="token punctuation">[</code><code class="token number">4</code><code class="token punctuation">,</code> <code class="token number">5</code><code class="token punctuation">,</code> <code class="token number">6</code><code class="token punctuation">]</code><code class="token punctuation">,</code>
+  <code class="token punctuation">[</code><code class="token number">7</code><code class="token punctuation">,</code> <code class="token number">8</code><code class="token punctuation">,</code> <code class="token number">9</code><code class="token punctuation">]</code>
+<code class="token punctuation">]</code><code class="token punctuation">;</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> matrix<code class="token punctuation">[</code><code class="token number">1</code><code class="token punctuation">]</code><code class="token punctuation">[</code><code class="token number">1</code><code class="token punctuation">]</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 5, центральный элемент</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(7);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <h2>toString</h2>
+        <p>Массивы по-своему реализуют метод <code>toString</code>, который возвращает список элементов, разделённых запятыми.</p>
+        <p>Например:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> arr <code class="token operator">=</code> <code class="token punctuation">[</code><code class="token number">1</code><code class="token punctuation">,</code> <code class="token number">2</code><code class="token punctuation">,</code> <code class="token number">3</code><code class="token punctuation">]</code><code class="token punctuation">;</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> arr <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// 1,2,3</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token function">String</code><code class="token punctuation">(</code>arr<code class="token punctuation">)</code> <code class="token operator">===</code> <code class="token string">'1,2,3'</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// true</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(4);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Давайте теперь попробуем следующее:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token punctuation">[</code><code class="token punctuation">]</code> <code class="token operator">+</code> <code class="token number">1</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// "1"</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token punctuation">[</code><code class="token number">1</code><code class="token punctuation">]</code> <code class="token operator">+</code> <code class="token number">1</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// "11"</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token punctuation">[</code><code class="token number">1</code><code class="token punctuation">,</code><code class="token number">2</code><code class="token punctuation">]</code> <code class="token operator">+</code> <code class="token number">1</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// "1,21"</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(3);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Массивы не имеют ни <code>Symbol.toPrimitive</code>, ни функционирующего <code>valueOf</code>, они реализуют только преобразование <code>toString</code>, таким образом, здесь <code>[]</code> становится пустой строкой, <code>[1]</code> становится <code>"1"</code>, а <code>[1,2]</code> становится <code>"1,2"</code>.</p>
+        <p>Когда бинарный оператор плюс <code>"+"</code> добавляет что-либо к строке, он тоже преобразует это в строку, таким образом:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token string">""</code> <code class="token operator">+</code> <code class="token number">1</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// "1"</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token string">"1"</code> <code class="token operator">+</code> <code class="token number">1</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// "11"</code>
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token string">"1,2"</code> <code class="token operator">+</code> <code class="token number">1</code> <code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// "1,21"</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(3);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

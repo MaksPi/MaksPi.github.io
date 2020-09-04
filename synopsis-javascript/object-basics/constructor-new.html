@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial=scale=1.0">
+
+  <title>Конструкторы, создание объектов через "new"</title>
+  
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/fonts.css">
+  <link rel="shortcut icon" href="../img/iconfinder_graduation_cap.png">
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <div class="page">
+      <div class="main__header">
+        <div class="main__header-group">
+          <ol class="breadcrumbs">
+            <li class="breadcrumbs__item breadcrumbs__item_home">
+              <a class="breadcrumbs__link" title="Оглавление" href="../index.html"></a>
+            </li>
+            <li class="breadcrumbs__item"></li>
+          </ol>
+          <div class="updated-at">
+            <div class="updated-at__content">5-го августа 2020</div>
+          </div>
+        </div>
+        <h1 class="page__title">Конструкторы, создание объектов через "new"</h1>
+      </div>
+      <div itemprop="articleBody">
+        <p>Обычный синтаксис <code>{...}</code> позволяет создать только один объект. Но зачастую нам нужно создать множество однотипных объектов, таких как пользователи, элементы меню и т.д.</p>
+        <p>Это можно сделать при помощи функции-конструктора и оператора <code>"new"</code>.</p>
+        <h2>Функция-конструктор</h2>
+        <p>Функции-конструкторы являются обычными функциями. Но есть два соглашения:</p>
+        <ol>
+          <li>Имя функции-конструктора должно начинаться с большой буквы.</li>
+          <li>Функция-конструктор должна вызываться при помощи оператора <code>"new"</code>.</li>
+        </ol>
+        <p>Например:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">function</code> <code class="token function">User</code><code class="token punctuation">(</code><code class="token parameter">name</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token keyword">this</code><code class="token punctuation">.</code>name <code class="token operator">=</code> name<code class="token punctuation">;</code>
+  <code class="token keyword">this</code><code class="token punctuation">.</code>isAdmin <code class="token operator">=</code> <code class="token boolean">false</code><code class="token punctuation">;</code>
+<code class="token punctuation">}</code>
+
+<code class="token keyword">let</code> user <code class="token operator">=</code> <code class="token keyword">new</code> <code class="token class-name">User</code><code class="token punctuation">(</code><code class="token string">"Вася"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code>user<code class="token punctuation">.</code>name<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// Вася</code>
+<code class="token function">alert</code><code class="token punctuation">(</code>user<code class="token punctuation">.</code>isAdmin<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// false</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(9);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Когда функция вызывается как <code>new User(...)</code>, происходит следующее:</p>
+        <ol>
+          <li>Создаётся новый пустой объект, и он присваивается <code>this</code>.</li>
+          <li>Выполняется код функции. Обычно он модифицирует <code>this</code>, добавляет туда новые свойства.</li>
+          <li>Возвращается значение <code>this</code>.</li>
+        </ol>
+        <p>Другими словами, вызов <code>new User(...)</code> делает примерно вот что:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">function</code> <code class="token function">User</code><code class="token punctuation">(</code><code class="token parameter">name</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token comment">// this = {};  (неявно)</code>
+
+  <code class="token comment">// добавляет свойства к this</code>
+  <code class="token keyword">this</code><code class="token punctuation">.</code>name <code class="token operator">=</code> name<code class="token punctuation">;</code>
+  <code class="token keyword">this</code><code class="token punctuation">.</code>isAdmin <code class="token operator">=</code> <code class="token boolean">false</code><code class="token punctuation">;</code>
+
+  <code class="token comment">// return this;  (неявно)</code>
+<code class="token punctuation">}</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(9);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>То есть, результат вызова <code>new User("Вася")</code> – это тот же объект, что и:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> user <code class="token operator">=</code> <code class="token punctuation">{</code>
+  name<code class="token punctuation">:</code> <code class="token string">"Вася"</code><code class="token punctuation">,</code>
+  isAdmin<code class="token punctuation">:</code> <code class="token boolean">false</code>
+<code class="token punctuation">}</code><code class="token punctuation">;</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(4);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Теперь, когда нам необходимо будет создать других пользователей, мы можем использовать <code>new User("Маша")</code>, <code>new User("Даша")</code> и т.д. Данная конструкция гораздо удобнее и читабельнее, чем каждый раз создавать литерал объекта. Это и является основной целью конструкторов – удобное повторное создание однотипных объектов.</p>
+        <p>Ещё раз заметим: технически любая функция может быть использована как конструктор. То есть, каждая функция может быть вызвана при помощи оператора <code>new</code>, и выполнится алгоритм, указанный выше в примере. Заглавная буква в названии функции является всеобщим соглашением по именованию, она как бы подсказывает разработчику, что данная функция является функцией-конструктором, и её нужно вызывать через <code>new</code>.</p>
+        <div class="important important_smart">
+          <div class="important__header"><span class="important__type">new function() { … }</span></div>
+          <div class="important__content">
+            <p>Если в нашем коде большое количество строк, создающих один сложный объект, мы можем обернуть их в функцию-конструктор следующим образом:</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> user <code class="token operator">=</code> <code class="token keyword">new</code> <code class="token class-name">function</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token keyword">this</code><code class="token punctuation">.</code>name <code class="token operator">=</code> <code class="token string">"Вася"</code><code class="token punctuation">;</code>
+  <code class="token keyword">this</code><code class="token punctuation">.</code>isAdmin <code class="token operator">=</code> <code class="token boolean">false</code><code class="token punctuation">;</code>
+
+  <code class="token comment">// ...другой код для создания пользователя</code>
+  <code class="token comment">// возможна любая сложная логика и выражения</code>
+  <code class="token comment">// локальные переменные и т. д.</code>
+<code class="token punctuation">}</code><code class="token punctuation">;</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(8);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p>Такой конструктор не может быть вызван дважды, так как он нигде не сохраняется, просто создаётся и тут же вызывается. Таким образом, такой метод создания позволяет инкапсулировать код, который создаёт отдельный объект, но без возможности его повторного использования.</p>
+          </div>
+        </div>
+        <h2>Проверка на вызов в режиме конструктора: new.target</h2>
+        <div class="important important_smart">
+          <div class="important__header"><span class="important__type">Продвинутая возможность</span></div>
+          <div class="important__content">
+            <p>Данный метод используется очень редко. Вы можете пропустить эту секцию, если не хотите углубляться в детали языка.</p>
+          </div>
+        </div>
+        <p>Используя специальное свойство <code>new.target</code> внутри функции, мы можем проверить, вызвана ли функция при помощи оператора <code>new</code> или без него.</p>
+        <p>В случае, если функция вызвана при помощи <code>new</code>, то в <code>new.target</code> будет сама функция, в противном случае <code>undefined</code>.</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">function</code> <code class="token function">User</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token function">alert</code><code class="token punctuation">(</code><code class="token keyword">new</code><code class="token punctuation">.</code>target<code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token punctuation">}</code>
+
+<code class="token comment">// без "new":</code>
+<code class="token function">User</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// undefined</code>
+
+<code class="token comment">// с "new":</code>
+<code class="token keyword">new</code> <code class="token class-name">User</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// function User { ... }</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(9);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Это можно использовать, чтобы отличить обычный вызов от вызова «в режиме конструктора». В частности, вот так можно сделать, чтобы функцию можно было вызывать как с, так и без <code>new</code>:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">function</code> <code class="token function">User</code><code class="token punctuation">(</code><code class="token parameter">name</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token keyword">if</code> <code class="token punctuation">(</code><code class="token operator">!</code><code class="token keyword">new</code><code class="token punctuation">.</code>target<code class="token punctuation">)</code> <code class="token punctuation">{</code> <code class="token comment">// в случае, если вы вызвали без оператора new</code>
+    <code class="token keyword">return</code> <code class="token keyword">new</code> <code class="token class-name">User</code><code class="token punctuation">(</code>name<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// ...добавим оператор new за вас</code>
+  <code class="token punctuation">}</code>
+
+  <code class="token keyword">this</code><code class="token punctuation">.</code>name <code class="token operator">=</code> name<code class="token punctuation">;</code>
+<code class="token punctuation">}</code>
+
+<code class="token keyword">let</code> vasya <code class="token operator">=</code> <code class="token function">User</code><code class="token punctuation">(</code><code class="token string">"Вася"</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// переадресовывает вызовы на new User</code>
+<code class="token function">alert</code><code class="token punctuation">(</code>vasya<code class="token punctuation">.</code>name<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// Вася</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(10);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Такой подход иногда используется в библиотеках для создания более гибкого синтаксиса, который позволяет разработчикам вызывать функции при помощи оператора <code>new</code> или без него.</p>
+        <p>Впрочем, это не очень хорошая практика, так как отсутствие <code>new</code> может ввести разработчика в заблуждение. С оператором <code>new</code> мы точно знаем, что в итоге будет создан новый объект.</p>
+        <h2>Возврат значения из конструктора return</h2>
+        <p>Обычно конструкторы ничего не возвращают явно. Их задача – записать все необходимое в <code>this</code>, который в итоге станет результатом.</p>
+        <p>Но если <code>return</code> всё же есть, то применяется простое правило:</p>
+        <ul>
+          <li>При вызове <code>return</code> с объектом, будет возвращён объект, а не <code>this</code>.</li>
+          <li>При вызове <code>return</code> с примитивным значением, примитивное значение будет отброшено.</li>
+        </ul>
+        <p>Другими словами, <code>return</code> с объектом возвращает объект, в любом другом случае конструктор вернёт <code>this</code>.</p>
+        <p>В примере ниже <code>return</code> возвращает объект вместо <code>this</code>:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">function</code> <code class="token function">BigUser</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+
+  <code class="token keyword">this</code><code class="token punctuation">.</code>name <code class="token operator">=</code> <code class="token string">"Вася"</code><code class="token punctuation">;</code>
+
+  <code class="token keyword">return</code> <code class="token punctuation">{</code> name<code class="token punctuation">:</code> <code class="token string">"Godzilla"</code> <code class="token punctuation">}</code><code class="token punctuation">;</code>  <code class="token comment">// &lt;-- возвращает этот объект</code>
+<code class="token punctuation">}</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token keyword">new</code> <code class="token class-name">BigUser</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">.</code>name <code class="token punctuation">)</code><code class="token punctuation">;</code>  <code class="token comment">// Godzilla, получили этот объект</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(8);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>А вот пример с пустым <code>return</code> (или мы могли бы поставить примитив после <code>return</code>, неважно)</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">function</code> <code class="token function">SmallUser</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+
+  <code class="token keyword">this</code><code class="token punctuation">.</code>name <code class="token operator">=</code> <code class="token string">"Вася"</code><code class="token punctuation">;</code>
+
+  <code class="token keyword">return</code><code class="token punctuation">;</code> <code class="token comment">// &lt;-- возвращает this</code>
+<code class="token punctuation">}</code>
+
+<code class="token function">alert</code><code class="token punctuation">(</code> <code class="token keyword">new</code> <code class="token class-name">SmallUser</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">.</code>name <code class="token punctuation">)</code><code class="token punctuation">;</code>  <code class="token comment">// Вася</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(8);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Обычно у конструкторов отсутствует <code>return</code>. В данном блоке мы упомянули особое поведение с возвращаемыми объектами, чтобы не оставлять пробелов в изучении языка.</p>
+        <div class="important important_smart">
+          <div class="important__header"><span class="important__type">Отсутствие скобок</span></div>
+          <div class="important__content">
+            <p>Кстати, мы можем не ставить скобки после <code>new</code>, если вызов конструктора идёт без аргументов.</p>
+            <div class="code-example">
+              <div class="codebox">
+                <div class="line-numbers language-javascript">
+                  <code class="language-javascript">
+<pre>
+<code class="token keyword">let</code> user <code class="token operator">=</code> <code class="token keyword">new</code> <code class="token class-name">User</code><code class="token punctuation">;</code> <code class="token comment">// &lt;-- без скобок</code>
+<code class="token comment">// то же, что и</code>
+<code class="token keyword">let</code> user <code class="token operator">=</code> <code class="token keyword">new</code> <code class="token class-name">User</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+</pre>
+                  </code>
+                  <span class="line-numbers-rows">
+                    <script src="../js/line-numbers-rows.js"></script>
+                    <script>rowsNumbers(3);</script>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p>Пропуск скобок считается плохой практикой, но синтаксис языка такое позволяет.</p>
+          </div>
+        </div>
+        <h2>Создание методов в конструкторе</h2>
+        <p>Использование конструкторов для создания объектов даёт большую гибкость. Можно передавать конструктору параметры, определяющие, как создавать объект, и что в него записывать.</p>
+        <p>В <code>this</code> мы можем добавлять не только свойства, но и методы.</p>
+        <p>Например, в примере ниже, <code>new User(name)</code>&nbsp;создаёт объект с данным именем <code>name</code> и методом <code>sayHi</code>:</p>
+        <div class="code-example">
+          <div class="codebox">
+            <div class="line-numbers language-javascript">
+              <code class="language-javascript">
+<pre>
+<code class="token keyword">function</code> <code class="token function">User</code><code class="token punctuation">(</code><code class="token parameter">name</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token keyword">this</code><code class="token punctuation">.</code>name <code class="token operator">=</code> name<code class="token punctuation">;</code>
+
+  <code class="token keyword">this</code><code class="token punctuation">.</code><code class="token function-variable function">sayHi</code> <code class="token operator">=</code> <code class="token keyword">function</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+    <code class="token function">alert</code><code class="token punctuation">(</code> <code class="token string">"Меня зовут: "</code> <code class="token operator">+</code> <code class="token keyword">this</code><code class="token punctuation">.</code>name <code class="token punctuation">)</code><code class="token punctuation">;</code>
+  <code class="token punctuation">}</code><code class="token punctuation">;</code>
+<code class="token punctuation">}</code>
+
+<code class="token keyword">let</code> vasya <code class="token operator">=</code> <code class="token keyword">new</code> <code class="token class-name">User</code><code class="token punctuation">(</code><code class="token string">"Вася"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+
+vasya<code class="token punctuation">.</code><code class="token function">sayHi</code><code class="token punctuation">(</code><code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// Меня зовут: Вася</code>
+
+<code class="token comment">/*
+vasya = {
+  name: "Вася",
+  sayHi: function() { ... }
+}*/</code>
+</pre>
+              </code>
+              <span class="line-numbers-rows">
+                <script src="../js/line-numbers-rows.js"></script>
+                <script>rowsNumbers(18);</script>
+              </span>
+            </div>
+          </div>
+        </div>
+        <p>Для создания сложных объектов есть и более «продвинутый» синтаксис – <a href="/classes">классы</a>, которые мы разберём позже.</p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
