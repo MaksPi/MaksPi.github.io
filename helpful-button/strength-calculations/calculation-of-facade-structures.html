@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Расчет фасадных конструкций</title>
+
+	<link rel="stylesheet" href="../../css/style.css">
+	<link rel="stylesheet" href="../../css/fonts.css">
+
+	<script defer src="../../js/main.js"></script>
+	<script defer src="../../js/calculation-of-facade-structures.js"></script>
+</head>
+<body>
+	<main class="main">
+		<header class="header">
+			<nav class="header-nav">
+				<ul class="top-panel-menu">
+					<li><a href="#">Портфолио</a></li>
+					<li><a href="#">Контакты</a></li>
+					<li><a href="#">Обо мне</a></li>
+				</ul>
+				<ul class="top-panel-menu">
+					<li><a href="../../index.html">MaksPi</a></li>
+				</ul>
+				<ul class="top-panel-menu">
+					<li><a href="../../helpful-button.html">Полезная кнопка</a></li>
+				</ul>
+			</nav>
+		</header>
+		<nav class="breadcrumbs">
+			<ul class="breadcrumbs-list">
+				<li class="breadcrumbs-item home">
+					<a href="../../index.html" title="Главная"></a>
+				</li>
+				<li class="breadcrumbs-item">
+					<a href="../../helpful-button.html">Полезная кнопка</a>
+				</li>
+				<li class="breadcrumbs-item">
+					<a href="../../helpful-button/strength-calculations.html">Прочностные расчеты</a>
+				</li>
+				<li class="breadcrumbs-item last"></li>
+			</ul>
+		</nav>
+		<article>
+			<h2>Расчет фасадных конструкций:</h2>
+			<!-- <p><b>Конструктивная схема:</b></p> -->
+			<!-- <img src="../../img/Фасадка_001.png"> -->
+			<div class="constructive-scheme">
+				
+			</div>
+			<!-- Конструктивные исходные данные -->
+			<h3>Конструктивные исходные данные:</h3>
+			<p class="indent-left">
+				<label class="width-75"><em>H<sub>max</sub> =</em></label>
+				<input id="H" type="text" value="" size="1">
+				<span><em>(м)</em> - высота конструкции (длина стойки / расстояние между точками крепления стойки);</span>
+			</p>
+			<p class="indent-left">
+				<label class="width-75"><em>B<sub>1</sub> =</em></label>
+				<input id="B1" type="text" value="" size="1">
+				<span><em>(м)</em> - шаг стоек;</span>
+			</p>
+			<p class="indent-left">
+				<label class="width-75"><em>B<sub>2</sub> =</em></label>
+				<input id="B2" type="text" value="" size="1">
+				<span><em>(м)</em> - шаг стоек;</span>
+			</p>
+			<p class="indent-left">
+				<label class="width-75"><em>h<sub>1</sub> =</em></label>
+				<input id="h1" type="text" value="" size="1">
+				<span><em>(м)</em> - шаг ригелей;</span>
+			</p>
+			<p class="indent-left">
+				<label class="width-75"><em>h<sub>2</sub> =</em></label>
+				<input id="h2" type="text" value="" size="1">
+				<span><em>(м)</em> - шаг ригелей;</span>
+			</p>
+			<p class="indent-left">
+				<label class="width-75"><em>t =</em></label>
+				<input id="t" type="text" value="" size="1">
+				<span><em>(см)</em> - толщина заполнения (если стеклопакет, то сумма толщин стёкол в стеклопакете);</span>
+			</p>
+			<p class="indent-left">
+				<label class="width-75"><em>a =</em></label>
+				<input id="a" type="text" value="10" size="1">
+				<span><em>(см)</em> - расстояние от стойки до оси подкладки;</span>
+			</p>
+			<p class="indent-left">
+				<label class="width-75"><em>f<sub>доп (ст)</sub> =</em></label>
+				<input id="f_mullion_permiss" type="text" value="" size="1">
+				<span><em>(мм)</em> - допустимый прогиб для стойки;</span>
+			</p>
+			<p class="indent-left">
+				<label class="width-75"><em>f<sub>доп (риг)</sub> =</em></label>
+				<input id="f_transom_wind_permiss" type="text" value="" size="1">
+				<span><em>(мм)</em> - допустимый прогиб для ригеля (в направлении действия ветровой нагрузки);</span>
+			</p>
+			<p class="indent-left">
+				<label class="width-75"><em>f<sub>доп (риг)</sub> =</em></label>
+				<input id="f_transom_vertical_load_permiss" type="text" value="3" size="1">
+				<span><em>(мм)</em> - допустимый прогиб для ригеля (в направлении действия нагрузки от собственного веса и веса заполнения).</span>
+			</p>
+			<!-- Физические свойства материалов -->
+			<h3>Физические свойства материалов:</h3>
+			<p class="indent-left">
+				<!-- Материал стойки -->
+				<select id="material_construction">
+					<option disabled selected>Укажите материал стойки / ригеля:</option>
+					<option>Алюминий</option>
+					<option>Сталь</option>
+				</select>
+				<!-- <input id="material_const" type="search" placeholder="Укажите материал стойки / ригеля:" list="material_const_list" size="0"> -->
+				<!-- <datalist id="material_const_list"></datalist> -->
+				<!-- Материал заполнения -->
+				<select id="material_filling">
+					<option disabled selected>Укажите материал заполнения:</option>
+					<option>Стекло</option>
+				</select>
+				<!-- <input id="material_filling" type="search" placeholder="Укажите материал заполнения:" list="material_filling_list" size="0"> -->
+				<!-- <datalist id="material_filling_list"></datalist> -->
+			</p>
+			<!-- <p class="indent">
+				<label class="width-75"><em>R<sub>y</sub> =</em></label>
+				<input id="Ry" type="text" value="" size="3">
+				<span><em>(кгс/(см<sup> 2)</sup>)</em> - предел прочности материала стойки и ригеля;</span>
+			</p> -->
+			<p class="indent-left">
+				<label class="width-75"><em>E =</em></label>
+				<input id="E" type="text" value="" size="4">
+				<span><em>(кгс/см<sup> 2</sup>)</em> - модуль упругости материала стойки и ригеля;</span>
+			</p>
+			<p class="indent-left">
+				<label class="width-75"><em>γ<sub>ст/р</sub> =</em></label>
+				<input id="γ_const" type="text" value="" size="1">
+				<span><em>(кгс/м<sup> 3</sup>)</em> - удельный вес материала стойки и ригеля;</span>
+			</p>
+			<p class="indent-left">
+				<label class="width-75"><em>γ<sub>зап</sub> =</em></label>
+				<input id="γ_filling" type="text" value="" size="1">
+				<span><em>(кгс/м<sup> 3</sup>)</em> - удельный вес материала заполнения.</span>
+			</p>
+			<!-- Сбор нагрузок -->
+			<h3>Сбор нагрузок:</h3>
+			<p class="indent-left">
+				<label class="width-75"><em>W<sub>m</sub> =</em></label>
+				<input id="Wm" type="text" value="" size="1">
+				<span><em>(кг/м<sup> 2</sup>)</em> - предельное расчётное значение ветровой нагрузки (см. <a href="../load-collection/wind-load.html" target="_blank">расчёт ветровой нагрузки</a>);</span>
+			</p>
+			<p class="indent-left">
+				<label class="width-75"><em>Q<sub>ст</sub><!--  = W<sub>m</sub> * ( <sup>B<sub>1</sub></sup> / <sub>2</sub> + <sup>B<sub>2</sub></sup> / <sub>2</sub> ) --> =</em></label>
+				<input id="Q_mullion" type="text" value="" size="1">
+				<span><em>(кг/м)</em> - ветровая нагрузка, приведённая к линейной равномерно распределённой нагрузке на стойку;</span>
+			</p>
+			<p class="indent-left">
+				<label class="width-75"><em>Q<sub>риг</sub><!--  = W<sub>m</sub> * ( <sup>h<sub>1</sub></sup> / <sub>2</sub> + <sup>h<sub>2</sub></sup> / <sub>2</sub> ) --> =</em></label>
+				<input id="Q_transom" type="text" value="" size="1">
+				<span><em>(кг/м)</em> - ветровая нагрузка, приведённая к линейной равномерно распределённой нагрузке на ригель;</span>
+			</p>
+			<!-- <p class="indent-left">
+				<label class="width-75"><em>F<sub>ст</sub> =</em></label>
+				<input type="text" value="" size="3">
+				<span>- собственный вес стойки;</span>
+			</p> -->
+			<p class="indent-left">
+				<label class="width-75"><em>F<sub>риг</sub> =</em></label>
+				<input id="F_transom" type="text" value="" size="1">
+				<span><em>(кг)</em> - собственный вес наибольшего ригеля (зависит от площади сечения ригеля);</span>
+			</p>
+			<p class="indent-left">
+				<label class="width-75"><em>F<sub>зап</sub> =</em></label>
+				<input id="F_filling" type="text" value="" size="1">
+				<span><em>(кг)</em> - собственный вес наибольшего поля заполнения.</span>
+			</p>
+			<!-- Расчёт минимально необходимых геометрических характеристик сечений стойки и ригеля -->
+			<h3>Расчёт минимально необходимых геометрических характеристик сечений стойки и ригеля:</h3>
+			<p class="indent-left">
+				<label class="width-75"><em>I<sub>x (ст)</sub> =</em></label>
+				<input id="Ix_mullion_min" type="text" value="" size="1">
+				<span><em>(см<sup> 4)</sup></em> - минимально необходимый осевой момент инерции стойки;</span>
+			</p>
+			<p class="indent-left">
+				<label class="width-75"><em>I<sub>x (риг)</sub> =</em></label>
+				<input id="Ix_transom_min" type="text" value="" size="1">
+				<span><em>(см<sup> 4)</sup></em> - минимально необходимый осевой момент инерции ригеля от действия ветровой нагрузки;</span>
+			</p>
+			<p class="indent-left">
+				<label class="width-75"><em>I<sub>y (риг)</sub> =</em></label>
+				<input id="Iy_transom_min" type="text" value="" size="1">
+				<span><em>(см<sup> 4)</sup></em> - минимально необходимый осевой момент инерции ригеля от действия нагрузки от веса заполнения.</span>
+			</p>
+			<!-- Проверяемые геометрические характеристики сечений стойки и ригеля -->
+			<h3>Проверяемые геометрические характеристики сечений стойки и ригеля:</h3>
+			<!-- <p class="indent-left">
+				<label class="width-75"><em>A<sub>ст</sub> =</em></label>
+				<input type="text" value="" size="5">
+				<span><em>(см<sup> 2)</sup></em> - площадь сечения стойки (из каталога профильной системы);</span>
+			</p> -->
+			<p class="indent-left">
+				<label class="width-75"><em>A<sub>риг</sub> =</em></label>
+				<input id="A_transom" type="text" value="" size="1">
+				<span><em>(см<sup> 2)</sup></em> - площадь сечения ригеля (из каталога профильной системы);</span>
+			</p>
+			<p class="indent-left">
+				<label class="width-75"><em>I<sub>x (ст)</sub> =</em></label>
+				<input id="Ix_mullion" type="text" value="" size="1">
+				<span><em>(см<sup> 4)</sup></em> - осевой момент инерции стойки (из каталога профильной системы);</span>
+			</p>
+			<p class="indent-left">
+				<label class="width-75"><em>I<sub>x (риг)</sub> =</em></label>
+				<input id="Ix_transom" type="text" value="" size="1">
+				<span><em>(см<sup> 4)</sup></em> - осевой момент инерции ригеля (в направлении действия ветровой нагрузки - из каталога профильной системы);</span>
+			</p>
+			<p class="indent-left">
+				<label class="width-75"><em>I<sub>y (риг)</sub> =</em></label>
+				<input id="Iy_transom" type="text" value="" size="1">
+				<span><em>(см<sup> 4)</sup></em> - осевой момент инерции ригеля (в направлении действия нагрузки от собственного веса и веса заполнения - из каталога профильной системы).</span>
+			</p>
+			<!-- Результаты расчёта -->
+			<h3>Результаты расчёта:</h3>
+			<p class="indent-left">
+				<label class="width-75"><em>f<sub>факт (ст)</sub> =</em></label>
+				<input id="f_mullion_fact" type="text" value="" size="1">
+				<span><em>(мм)</em> - фактический прогиб стойки;</span>
+			</p>
+			<p class="indent-left">
+				<label class="width-75"><em>f<sub>факт (риг)</sub> =</em></label>
+				<input id="f_transom_wind_fact" type="text" value="" size="1">
+				<span><em>(мм)</em> - фактический прогиб ригеля от действия ветровой нагрузки;</span>
+			</p>
+			<p class="indent-left">
+				<label class="width-75"><em>f<sub>факт (риг)</sub> =</em></label>
+				<input id="f_transom_filling_fact" type="text" value="" size="1">
+				<span><em>(мм)</em> - фактический прогиб ригеля от действия нагрузки от веса заполнения.</span>
+			</p>
+			<p class="indent-left">
+				<label class="width-75"><em>f<sub>факт (риг)</sub> =</em></label>
+				<input id="f_transom_self_fact" type="text" value="" size="1">
+				<span><em>(мм)</em> - фактический прогиб ригеля от действия нагрузки от собственного веса.</span>
+			</p>
+			<p class="indent-left">
+				<label class="width-75"><em>f<sub>факт (риг)</sub> =</em></label>
+				<input id="f_transom_vertical_load_fact" type="text" value="" size="1">
+				<span><em>(мм)</em> - фактический суммарный прогиб ригеля от действия нагрузки от собственного веса и веса заполнения.</span>
+			</p>
+		</article>
+	</main>
+</body>
+</html>

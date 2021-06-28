@@ -1,0 +1,465 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+:link {
+	text-decoration: none;
+}
+#Wm, #C {
+	color: red;
+}
+body {
+	background: #f0f0f0;
+	color: #303036;
+	font-family: KlavikaWebCondensed,"Arial Narrow",Arial,sans-serif;
+	line-height: 1.5rem;
+}
+article label {
+	display: inline-block;
+}
+article label + input + span {
+	margin-left: 3px;
+}
+/*article label.width-35 {
+	width: 35px;
+}*/
+article label.width-40 {
+	width: 40px;
+}
+/*article label.width-45 {
+	width: 45px;
+}*/
+/*article label.width-55 {
+	width: 55px;
+}
+article label.width-65 {
+	width: 65px;
+}*/
+article label.width-75 {
+	width: 75px;
+}
+article label.width-110 {
+	width: 110px;
+}
+article label.width-120 {
+	width: 120px;
+}
+article a.bold {
+	font-weight: 700;
+}
+article a.black {
+	color: #1f1f1f;;
+}
+article a:hover {
+	color: #d20a0a;
+}
+/*li.underline {
+	border-bottom: 1px solid black;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+}*/
+table {
+	border-collapse: collapse;
+	margin: 15px 0;
+}
+thead tr.order-name {
+	text-align: left;
+}
+tfoot tr {
+	font-weight: bold;
+}
+tfoot tr .total {
+	text-align: right;
+	padding-right: 10px;
+}
+tr.table-header th {
+	background-color: lightsteelblue;
+	padding: 15px 5px;
+}
+th, td {
+	border: 1px solid black;
+	padding: 5px;
+}
+td {
+	padding: 1px 5px;
+}
+td input {
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+}
+ol {
+	list-style: none; /*убираем стандартную нумерацию*/
+	padding-left: 20px;
+	counter-reset: li; /*Идентифицируем счетчик и даем ему имя li. Значение счетчика не указано - по умолчанию оно равно 0*/
+}
+ol>li:before {
+	counter-increment: li; /*Определяем элемент, который будет нумероваться — li. Псевдоэлемент before указывает, что содержимое, вставляемое при помощи свойства content, будет располагаться перед пунктами списка. Здесь же устанавливается значение приращения счетчика (по умолчанию равно 1).*/
+	content: counters(li, ".") ". "; /*С помощью свойства content выводится номер пункта списка. counters() означает, что генерируемый текст представляет собой значения всех счетчиков с таким именем. Точка в кавычках добавляет разделяющую точку между цифрами, а точка с пробелом добавляется перед содержимым каждого пункта списка*/
+}
+ul {
+	list-style: none;
+	/*padding-left: 10px;*/
+}
+.breadcrumbs {
+	margin: 30px auto 15px;
+}
+.breadcrumbs .breadcrumbs-item {
+	display: inline-block;
+}
+.breadcrumbs .breadcrumbs-item a {
+	color: #303036;
+}
+.breadcrumbs .breadcrumbs-item.home a {
+	color: #999;
+}
+.breadcrumbs .breadcrumbs-item.last {
+	color: #d20a0a;
+}
+.breadcrumbs .breadcrumbs-item + .breadcrumbs-item::before {
+	content: "\2192";
+	font-family: FontIcons;
+	color: #999;
+	margin: 0 9px 0 7px;
+}
+.breadcrumbs .breadcrumbs-item.home a::before {
+	content: "\f015";
+	font-family: FontIcons;
+}
+.breadcrumbs .breadcrumbs-item a:hover {
+	color: #d20a0a;
+	font-weight: 700;
+}
+.first-paragraph {
+	margin: 40px auto 10px;
+}
+.header {
+	background-color: #fff;
+	position: sticky;
+	top: 0;
+	margin: 30px auto 30px;
+	box-shadow: 0 4px 14px 0 rgba(0,0,0,.2);
+}
+.header-nav {
+	display: flex;
+	justify-content: space-between;
+}
+.indent-left {
+	margin-left: 10px;
+}
+.indent-top {
+	margin-top: 10px;
+}
+.initial-data td {
+	text-align: center;
+}
+.initial-data td input {
+	text-align: center;
+}
+.initial-data .hidden, .specification-of-elements-for-structure .hidden {
+	border: none;
+	background-color: #f0f0f0;
+	padding: 0;
+}
+.initial-data td.hidden .add-row, .specification-of-elements-for-structure td.hidden .add-row {
+	padding: 0 4px;
+	color: green;
+	cursor: pointer;
+}
+.initial-data td.hidden .add-row::before, .specification-of-elements-for-structure td.hidden .add-row::before {
+	font-family:"FontIcons";
+	content: '\f067';
+}
+.initial-data td.hidden .add-row:hover, .specification-of-elements-for-structure td.hidden .add-row:hover {
+	background-color: green;
+	color: white;
+}
+.initial-data td.hidden .delete-row, .specification-of-elements-for-structure td.hidden .delete-row {
+	padding: 0 4px;
+	color: red;
+	cursor: pointer;
+}
+.initial-data td.hidden .delete-row::before, .specification-of-elements-for-structure td.hidden .delete-row::before {
+	font-family:"FontIcons";
+	content: '\f00d';
+}
+.initial-data td.hidden .delete-row:hover, .specification-of-elements-for-structure td.hidden .delete-row:hover {
+	background-color: red;
+	color: white;
+}
+.main {
+	max-width: 90%;
+	margin: 15px auto;
+}
+.main.flex {
+	display: flex;
+}
+.main .italic {
+	font-style: italic;
+}
+.main article.experience ul {
+	list-style: disc;
+	padding-left: 20px;
+}
+.main h2, main h3 {
+	font-weight: 500;
+	margin: 15px 0 10px;
+}
+.main .main-list {
+	display: inline-block;
+}
+.main .main-list li:first-child {
+	border-top: 1px solid #f0f0f0;
+}
+.main .main-list li {
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #f0f0f0;
+}
+.main .main-list li:last-child {
+	border-bottom: 1px solid #999;
+}
+.main .main-list li:hover {
+	background-color: #fff;
+	box-shadow: 0 4px 14px 0 rgb(0 0 0 / 20%);
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+}
+.main .main-list li:hover + li {
+	border-top: 1px solid #fff;
+}
+.main .main-list a {
+	color: #303036;
+	display: block;
+	padding: .2rem 1rem;
+}
+.main .main-list a:hover {
+	color: #d20a0a;
+}
+.main .sidebar {
+	background-color: dimgrey;
+	min-height: 50vh;
+	padding: 15px 0;
+}
+.main .sidebar .photo-block, .main .sidebar .skills-block, .main .sidebar .education-block {
+	padding: 0 15px;
+	box-sizing: border-box;
+	width: 100%;
+}
+.main .sidebar .photo-block img {
+	max-width: 100%;
+	box-sizing: border-box;
+	border: 5px solid #fff;
+	border-radius: 50%;
+}
+.main .sidebar .photo-block .contacts-block {
+	text-align: center;
+	margin: 10px;
+}
+.main .sidebar .photo-block .contacts-block a {
+	color: #fff;
+}
+.main .sidebar .photo-block .contacts-block a:hover {
+	color: #d20a0a;
+}
+.main .sidebar .photo-block .address, .main .sidebar .photo-block .age {
+	color: #fff;
+	text-align: center;
+}
+.main .sidebar hr {
+	background-color: #fff;
+	margin: 10px 0;
+}
+.main .sidebar .education-block hr {
+	display: none;
+}
+.main .sidebar h2 {
+	color: #fff;
+	font-weight: 500;
+	margin: 15px 0 10px;
+}
+.main .sidebar .skills-block ul, .main .sidebar .education-block ul {
+	list-style: disc;
+	color: #fff;
+	padding-left: 20px;
+}
+.main .main-content {
+	background-color: #fff;
+	flex-grow: 1;
+	padding: 20px;
+	position: relative;
+}
+.main .main-content #lang-switcher {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+.main .main-content header h1 {
+	text-align: center;
+	margin: 30px 0;
+	font-size: 2em;
+	font-weight: 500;
+}
+.main .main-content header h2 {
+	text-align: center;
+	position: relative;
+}
+.main .main-content header h2 span {
+	position: relative;
+	color: dimgrey;
+	background-color: #fff;
+	font-weight: 500;
+	padding: 0 5px;
+}
+.main .main-content header h2::before {
+	content: "";
+	width: 100%;
+	border-top: 1px solid dimgrey;
+	position: absolute;
+	left: 0;
+	top: 50%;
+}
+.main .main-content .experience .company-block {
+	margin-top: 10px;
+}
+.main .main-content .experience .company, .main .main-content .experience .date {
+	font-weight: 600;
+	font-size: 1.1rem;
+}
+.main .main-content .experience .location, .main .main-content .experience .duration {
+	font-style: italic;
+}
+.main .main-content .experience .title {
+	margin-bottom: 5px;
+	text-decoration: underline;
+	font-size: 1.1rem;
+}
+/*.specification-of-hardware-for-facade-structures article ul {
+	display: inline-block;
+}*/
+/*.specification-of-hardware-for-facade-structures label {
+	display: inline;
+}*/
+.specification-of-elements-for-structure tbody tr:first-child {
+	text-align: center;
+	background-color: lightgrey;
+	font-weight: bold;
+}
+.specification-of-elements-for-structure td:nth-child(2), .specification-of-elements-for-structure td:nth-child(4) input {
+	text-align: center;
+}
+.specification-of-hardware {
+		width: 100%;
+}
+.specification-of-hardware td:first-child {
+	text-align: center;
+}
+.specification-of-hardware td:nth-child(3) {
+	text-align: right;
+}
+.top-panel-menu {
+	display: flex;
+}
+.top-panel-menu .current {
+	color: #d20a0a;
+}
+.top-panel-menu li a {
+	text-decoration: none;
+	color: #1f1f1f;
+	display: block;
+	padding: 1.5rem;
+	font-weight: 700;
+}
+.top-panel-menu li a:hover {
+	color: #d20a0a;
+}
+@media (min-width: 576px) {
+	.main {
+		max-width: 540px;
+	}
+}
+@media (min-width: 768px) {
+	.main {
+		max-width: 720px;
+	}
+	.main .sidebar {
+		width: calc(100%/3);
+	}
+}
+@media (min-width: 992px) {
+	.main {
+		max-width: 960px;
+	}
+	.main .sidebar {
+		width: 25%;
+	}
+}
+@media (min-width: 1200px) {
+	.main, .header {
+		max-width: 1140px;
+	}
+}
+@media (max-width: 767.98px) {
+	.main.flex {
+		flex-wrap: wrap;
+	}
+	.main .sidebar {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.main .sidebar .photo-block, .main .sidebar .skills-block {
+		width: 50%;
+	}
+	.main .sidebar .skills-block hr {
+		display: none;
+	}
+	.main .sidebar .education-block hr {
+		display: block;
+	}
+}
+@media (max-width: 575.98px) {
+	.main {
+		min-width: 100%;
+		margin: 0;
+	}
+	.main .sidebar .photo-block, .main .sidebar .skills-block {
+		width: 100%;
+	}
+	.main .sidebar .skills-block hr {
+		display: block;
+	}
+	.main .sidebar .education-block hr {
+		display: none;
+	}
+	.main .sidebar .photo-block img {
+		max-width: 50%;
+		display: block;
+		margin: 0 auto;
+	}
+	.main .sidebar .photo-block .age {
+		margin-top: 10px;
+	}
+}
+@page {
+	margin: 0;
+}
+@media print {
+	.main {
+		max-width: 100%;
+		min-height: 100vh;
+		margin: 0;
+	}
+	.main.flex {
+		flex-wrap: nowrap;
+	}
+	.main .sidebar {
+		width: 30%;
+		display: block;
+	}
+	.main .sidebar .photo-block, .main .sidebar .skills-block {
+		width: 100%;
+	}
+	.main .main-content #lang-switcher {
+		display: none;
+	}
+}

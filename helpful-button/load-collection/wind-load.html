@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Расчет ветровойй нагрузки</title>
+
+	<link rel="stylesheet" href="../../css/style.css">
+	<link rel="stylesheet" href="../../css/fonts.css">
+
+	<script defer src="../../js/main.js"></script>
+	<script defer src="../../js/wind Load.js"></script>
+</head>
+<body>
+	<main class="main">
+		<header class="header">
+			<nav class="header-nav">
+				<ul class="top-panel-menu">
+					<li><a href="#">Портфолио</a></li>
+					<li><a href="#">Контакты</a></li>
+					<li><a href="#">Обо мне</a></li>
+				</ul>
+				<ul class="top-panel-menu">
+					<li><a href="../../index.html">MaksPi</a></li>
+				</ul>
+				<ul class="top-panel-menu">
+					<li><a href="../../helpful-button.html">Полезная кнопка</a></li>
+				</ul>
+			</nav>
+		</header>
+		<nav class="breadcrumbs">
+			<ul class="breadcrumbs-list">
+				<li class="breadcrumbs-item home">
+					<a href="../../index.html" title="Главная"></a>
+				</li>
+				<li class="breadcrumbs-item">
+					<a href="../../helpful-button.html">Полезная кнопка</a>
+				</li>
+				<li class="breadcrumbs-item">
+					<a href="../../helpful-button/load-collection.html">Сборы нагрузок</a>
+				</li>
+				<li class="breadcrumbs-item last"></li>
+			</ul>
+		</nav>
+		<article>
+			<h2>Расчет ветровой нагрузки:</h2>
+			<h3>Предельное расчётное значение ветровой нагрузки:</h3>
+			<p class="indent-left">
+				<span><em>W<sub>m</sub> = <big>γ</big><sub>fm</sub> * W<sub>0</sub> * C = </em></span>
+				<span id="Wm"></span>
+				<span><em>кг/м<sup> 2</sup>,</em></span>
+			</p>
+
+			<p class="indent-left indent-top">где:</p>
+
+			<p class="indent-left indent-top">
+				<label class="width-40"><em><big>γ</big><sub>fm</sub> =</em></label>
+				<input id="γfm" type="text" value="" size="1"/>
+				<span>- коэффициент надежности по предельному значению ветровой нагрузки (зависит от T, лет);</span>
+			</p>
+			<p class="indent-left">Для объектов массового строительства допускается средний период повторяемости Т принимать равным установленному сроку эксплуатации конструкции T<sub>ef</sub>.</p>
+			<p class="indent-left">
+				<input id="medialRepeatabilityPeriod" type="search" placeholder="Укажите T, лет:" list="medialRepeatabilityPeriodList" size="21" onchange="WmGetSelect_γfm()"/>
+				<datalist id="medialRepeatabilityPeriodList"></datalist>
+			</p>
+
+			<p class="indent-left indent-top">
+				<label class="width-40"><em>W<sub>0</sub> =</em></label>
+				<input id="Wo" type="text" value="" size="1"/>
+				<span><em>кг/м<sup>2</sup></em> - характеристическое значение ветрового давления (зависит от города);</span>
+			</p>
+			<p class="indent-left">
+				<input id="cities" type="search" placeholder="Выберите город:" list="citiesList" size="21" onchange="WmGetSelectCity()"/>
+				<datalist id="citiesList"></datalist>
+			</p>
+
+			<h3>Коэффициент <b>С</b>:</h3>
+			<p class="indent-left">
+				<span><em>C = C<sub>aer</sub> * C<sub>h</sub> * C<sub>alt</sub> * C<sub>rel</sub> * C<sub>dir</sub> * C<sub>d</sub> =</em></span>
+				<span id="C"></span>
+			</p>
+
+			<p class="indent-left indent-top">где:</p>
+
+			<p class="indent-left indent-top">
+				<label class="width-40"><em>C<sub>aer</sub> =</em></label>
+				<input id="Caer" type="text" value="0.8" size="1"/>
+				<span>- аэродинамический коэффициент;</span>
+				<br>
+				<label class="width-40"><em>C<sub>h</sub> =</em></label>
+				<input id="Ch" type="text" value="" size="1"/>
+				<span>- коэффициент высоты сооружения - зависит от 3-х значений, приведенных ниже:</span>
+			</p>
+
+			<select class="indent-left" id="constructionHight" onchange="WmGetSelectCh()"></select>
+			<select class="indent-left" id="terrainType" onchange="WmGetSelectCh()">
+				<option disabled selected>Укажите тип местности:</option>
+				<option>ТипI</option>
+				<option>ТипII</option>
+				<option>ТипIII</option>
+				<option>ТипIV</option>
+			</select>
+			<select id="ownFluctuationPeriod" onchange="WmGetSelectCh()">
+				<option disabled selected>Укажите период собственных колебаний:</option>
+				<option>< 0.25 сек.</option>
+				<option>> 0.25 сек.</option>
+			</select>
+
+			<p class="indent-left indent-top">где:</p>
+
+			<p class="indent-left indent-top"><b>Z</b> - высота конструкции над поверхностью земли;</p>
+			<p class="indent-left indent-top"><b>Типы местности:</b></p>
+			<ul class="indent-left">
+				<li class="indent-left">I - открытые поверхности морей, озер, а также плоские равнины без препятствий, которые подвергаются действию ветра на участке длиной не менее чем 3 км;</li>
+				<li class="indent-left">II - сельская местность с ограждениями (заборами), небольшими сооружениями, домами и деревьями;</li>
+				<li class="indent-left">III - пригородные и промышленные зоны, протяжные лесные массиви;</li>
+				<li class="indent-left">IV - городские территории, на которых по крайней мере 15% поверхности заняты зданиями, которые имеют среднюю высоту свыше 15 м.</li>
+			</ul>
+			<p class="indent-left indent-top">Если <b>период собственных колебаний</b> не известен, то данное значение принимать <em><b>> 0,25 сек</b></em>.</p>
+
+			<p class="indent-left indent-top">
+				<label class="width-40"><em>C<sub>alt</sub> =</em></label>
+				<input id="Calt" type="text" value="1" size="1"/>
+				<span>- коэффициент географической высоты;</span>
+				<br>
+				<label class="width-40"><em>C<sub>rel</sub> =</em></label>
+				<input id="Crel" type="text" value="1" size="1"/>
+				<span>- коэффициент рельефа;</span>
+				<br>
+				<label class="width-40"><em>C<sub>dir</sub> =</em></label>
+				<input id="Cdir" type="text" value="1" size="1"/>
+				<span>- коэффициент направления;</span>
+				<br>
+				<label class="width-40"><em>C<sub>d</sub> =</em></label>
+				<input id="Cd" type="text" value="1" size="1"/>
+				<span>- коэффициент динамичности.</span>
+			</p>
+		</article>
+	</main>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Спецификация метизов для фасадных конструкций</title>
+
+	<link rel="stylesheet" href="../../css/style.css">
+	<link rel="stylesheet" href="../../css/fonts.css">
+
+	<script defer src="../../js/main.js"></script>
+	<script defer src="../../js/calculation-of-number-of-piece-materials-for-facade-structures.js"></script>
+</head>
+<body class="specification-of-hardware-for-facade-structures">
+	<main class="main">
+		<header class="header">
+			<nav class="header-nav">
+				<ul class="top-panel-menu">
+					<li><a href="#">Портфолио</a></li>
+					<li><a href="#">Контакты</a></li>
+					<li><a href="#">Обо мне</a></li>
+				</ul>
+				<ul class="top-panel-menu">
+					<li><a href="../../index.html">MaksPi</a></li>
+				</ul>
+				<ul class="top-panel-menu">
+					<li><a href="../../helpful-button.html">Полезная кнопка</a></li>
+				</ul>
+			</nav>
+		</header>
+		<nav class="breadcrumbs">
+			<ul class="breadcrumbs-list">
+				<li class="breadcrumbs-item home">
+					<a href="../../index.html" title="Главная"></a>
+				</li>
+				<li class="breadcrumbs-item">
+					<a href="../../helpful-button.html">Полезная кнопка</a>
+				</li>
+				<li class="breadcrumbs-item">
+					<a href="../../helpful-button/calculations.html">Калькуляции</a>
+				</li>
+				<li class="breadcrumbs-item last"></li>
+			</ul>
+		</nav>
+		<article>
+			<h2>Спецификация метизов для фасадных конструкций:</h2>
+			<!-- <h3>Исходные данные:</h3> -->
+			<p class="indent-left">
+				<label class="width-110">Название заказа:</label>
+				<input id="order-name" type="text" value="" size="20">
+			</p>
+			<table class="initial-data">
+				<thead>
+					<tr>
+						<th class="hidden"></th>
+						<th colspan="5">Исходные данные</th>
+					</tr>
+					<tr class="table-header">
+						<th class="hidden"></th>
+						<th>№ п/п</th>
+						<th>Поз.</th>
+						<th>Кол-во полей<br>по ширине<br>(шт)</th>
+						<th>Кол-во полей<br>по выстоте<br>(шт)</th>
+						<th>Кол-во пролетов<br>/ этажей<br>(шт)</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="hidden"><span class="add-row"></span><span class="delete-row"></span></td>
+						<td></td>
+						<td><input type="text" size="1" class="position"></td>
+						<td><input type="text" size="1" class="quantity-of-fields-in-width"></td>
+						<td><input type="text" size="1" class="quantity-of-fields-in-height"></td>
+						<td><input type="text" size="1" class="quantity-of-floors"></td>
+					</tr>
+				</tbody>
+			</table>
+			<table class="specification-of-elements-for-structure">
+				<thead>
+					<tr>
+						<th class="hidden"></th>
+						<th colspan="5">Спецификация элементов конструкции</th>
+					</tr>
+					<tr class="table-header">
+						<th class="hidden"></th>
+						<th>№ п/п</th>
+						<th>Наименование материалов</th>
+						<th>Кол-во</th>
+						<th>Ед. изм.</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="hidden"></td>
+						<td colspan="4">Конструкция поз.:<span></span></td>
+					</tr>
+					<tr>
+						<td class="hidden"><!-- <span class="add-row"></span><span class="delete-row"></span> --></td>
+						<td></td>
+						<td>Стойка</td>
+						<td><input type="text" size="1" class="quantity-of-mullions"></td>
+						<td>шт</td>
+					</tr>
+					<tr>
+						<td class="hidden"><!-- <span class="add-row"></span><span class="delete-row"></span> --></td>
+						<td></td>
+						<td>Капельник</td>
+						<td><input type="text" size="1" class="quantity-of-mullion-drips"></td>
+						<td>шт</td>
+					</tr>
+					<tr>
+						<td class="hidden"><!-- <span class="add-row"></span><span class="delete-row"></span> --></td>
+						<td></td>
+						<td>Соединитель стойки</td>
+						<td><input type="text" size="1" class="quantity-of-mullion-connectors"></td>
+						<td>шт</td>
+					</tr>
+					<tr>
+						<td class="hidden"><!-- <span class="add-row"></span><span class="delete-row"></span> --></td>
+						<td></td>
+						<td>Ригель</td>
+						<td><input type="text" size="1" class="quantity-of-transoms"></td>
+						<td>шт</td>
+					</tr>
+					<tr>
+						<td class="hidden"><span class="add-row"></span><span class="delete-row"></span></td>
+						<td></td>
+						<td>Соединители для ригелей</td>
+						<td><input type="text" size="1" class="quantity-of-transom-connectors"></td>
+						<td>шт</td>
+					</tr>
+					<tr>
+						<td class="hidden"><span class="add-row"></span><span class="delete-row"></span></td>
+						<td></td>
+						<td>Опоры под стеклопакеты</td>
+						<td><input type="text" size="1" class="quantity-of-supports-for-glazing"></td>
+						<td>шт</td>
+					</tr>
+					<tr>
+						<td class="hidden"><!-- <span class="add-row"></span><span class="delete-row"></span> --></td>
+						<td></td>
+						<td>Кронштейн нижний</td>
+						<td><input type="text" size="1" class="quantity-of-bottom-brackets"></td>
+						<td>шт</td>
+					</tr>
+					<tr>
+						<td class="hidden"><!-- <span class="add-row"></span><span class="delete-row"></span> --></td>
+						<td></td>
+						<td>Кронштейн промежуточный</td>
+						<td><input type="text" size="1" class="quantity-of-middle-brackets"></td>
+						<td>шт</td>
+					</tr>
+					<tr>
+						<td class="hidden"><!-- <span class="add-row"></span><span class="delete-row"></span> --></td>
+						<td></td>
+						<td>Кронштейн верхний</td>
+						<td><input type="text" size="1" class="quantity-of-top-brackets"></td>
+						<td>шт</td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- <h3>Результат:</h3> -->
+			<table class="specification-of-hardware">
+				<thead>
+					<tr class="order-name">
+						<th colspan="6">Заказ:<span></span></th>
+					</tr>
+					<tr>
+						<th colspan="6">Спецификация метизов</th>
+					</tr>
+					<tr class="table-header">
+						<th>№ п/п</th>
+						<th>Наименование материалов</th>
+						<th>Кол-во</th>
+						<th>Ед. изм.</th>
+						<th>Место доставки</th>
+						<th>Применяется в узле</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td></td>
+						<td>Болт М10x80 A2 DIN 931</td>
+						<td class="bolt-M10-80-DIN-931-for-fixing-reinforced-transom-connectors"></td>
+						<td>шт</td>
+						<td>В цех</td>
+						<td>Крепление усиленных соединителей для ригелей</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>Болт М10x80 A2 DIN 931</td>
+						<td class="bolt-M10-80-DIN-931-for-fixing-mullion"></td>
+						<td>шт</td>
+						<td>На объект</td>
+						<td>Крепление стоек</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>Винт М8х20 А2 DIN 7991</td>
+						<td></td>
+						<td>шт</td>
+						<td>На объект</td>
+						<td>Крепление ригелей к усиленным соединителям</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>Гайка М10 А2 DIN 934</td>
+						<td class="nut-М10-А2-DIN-934-for-fixing-mullion"></td>
+						<td>шт</td>
+						<td>На объект</td>
+						<td>Крепление стоек</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>Гайка М10 А2 DIN 985</td>
+						<td></td>
+						<td>шт</td>
+						<td>В цех</td>
+						<td>Крепление усиленных соединителей для ригелей</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>Саморез 3,9х13 А2 DIN7981</td>
+						<td class="screw-3-9x13-А2-DIN-7981-for-fixing-mullion-connectors"></td>
+						<td>шт</td>
+						<td>В цех</td>
+						<td>Крепление стоечных соединителей к стойкам</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>Саморез 3,9х13 А2 DIN7981</td>
+						<td class="screw-3-9x13-А2-DIN-7981-for-fixing-transoms-to-mullions"></td>
+						<td>шт</td>
+						<td>На объект</td>
+						<td>Крепление ригелей к стойкам</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>Саморез 3,9х16 А2 DIN7981</td>
+						<td class="screw-3-9x16-А2-DIN-7981-for-fixing-transom-connectors"></td>
+						<td>шт</td>
+						<td>В цех</td>
+						<td>Крепление соединителей для ригелей</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>Саморез 4,2х16 A2 DIN7981</td>
+						<td></td>
+						<td>шт</td>
+						<td>На объект</td>
+						<td>Крепление капельников</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>Саморез 4,8х19 А2 DIN7981</td>
+						<td></td>
+						<td>шт</td>
+						<td>На объект</td>
+						<td>Крепление дверей</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>Саморез 5,5х32 А2 DIN7981</td>
+						<td></td>
+						<td>шт</td>
+						<td>На объект</td>
+						<td>Крепление усиленных опор под стеклопакеты</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>Саморез 5,5х... А2 DIN7981</td>
+						<td></td>
+						<td>шт</td>
+						<td>На объект</td>
+						<td>Крепление прижимной планки</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>Шайба 10 А2 DIN 125</td>
+						<td></td>
+						<td>шт</td>
+						<td>В цех</td>
+						<td>Крепление усиленных соединителей для ригелей</td>
+					</tr>
+						<td></td>
+						<td>Шайба 10 А2 DIN 125</td>
+						<td class="washer-10-А2-DIN-125-for-fixing-mullion"></td>
+						<td>шт</td>
+						<td>На объект</td>
+						<td>Крепление стоек</td>
+					</tr>
+						<td></td>
+						<td>Шайба пружинная 10 А2 DIN 7980</td>
+						<td class="spring-washer-10-А2-DIN-7980-for-fixing-mullion"></td>
+						<td>шт</td>
+						<td>На объект</td>
+						<td>Крепление стоек</td>
+					</tr>
+						<td></td>
+						<td>Шайба-розетка 8 А2 DIN 9081 или NFE 27-619 со скосом (под винт М8 DIN 7991)</td>
+						<td></td>
+						<td>шт</td>
+						<td>На объект</td>
+						<td>Крепление ригелей к усиленным соединителям</td>
+					</tr>
+				</tbody>
+			</table>
+		</article>
+	</main>
+</body>
+</html>
