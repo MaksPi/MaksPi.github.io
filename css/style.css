@@ -4,6 +4,10 @@
 }
 :link {
 	text-decoration: none;
+	color: #337ab7;
+}
+a:visited {
+	color: #337ab7;
 }
 #Wm, #C {
 	color: red;
@@ -13,6 +17,7 @@ body {
 	color: #303036;
 	font-family: KlavikaWebCondensed,"Arial Narrow",Arial,sans-serif;
 	line-height: 1.5rem;
+	box-sizing: border-box;
 }
 article label {
 	display: inline-block;
@@ -100,6 +105,9 @@ ol>li:before {
 ul {
 	list-style: none;
 	/*padding-left: 10px;*/
+}
+.mobile {
+	display: none;
 }
 .breadcrumbs {
 	margin: 30px auto 15px;
@@ -227,6 +235,9 @@ ul {
 .main .main-list li:hover + li {
 	border-top: 1px solid #fff;
 }
+.main .main-list li:last-chald:hover {
+	border-bottom: 1px solid #fff;
+}
 .main .main-list a {
 	color: #303036;
 	display: block;
@@ -238,10 +249,10 @@ ul {
 .main .sidebar {
 	background-color: dimgrey;
 	min-height: 50vh;
-	padding: 15px 0;
+	padding: 15px /*0*/;
 }
 .main .sidebar .photo-block, .main .sidebar .skills-block, .main .sidebar .education-block {
-	padding: 0 15px;
+	/*padding: 0 15px;*/
 	box-sizing: border-box;
 	width: 100%;
 }
@@ -268,9 +279,6 @@ ul {
 .main .sidebar hr {
 	background-color: #fff;
 	margin: 10px 0;
-}
-.main .sidebar .education-block hr {
-	display: none;
 }
 .main .sidebar h2 {
 	color: #fff;
@@ -399,6 +407,81 @@ ul {
 	}
 }
 @media (max-width: 767.98px) {
+	.desktop {
+		display: none;
+	}
+	.mobile {
+		display: inline;
+	}
+	.main {
+		min-width: 100%;
+		margin: 0;
+	}
+	.header {
+		margin-top: 0;
+	}
+	.mob-menu {
+		cursor: pointer;
+		padding: 1rem;
+	}
+	.bar-1, .bar-2, .bar-3 {
+		width: 1.6em;
+		height: 0.2em;
+		background-color: #1f1f1f;
+		margin: 0.5rem;
+		transition: 0.4s;
+		margin-right: 0;
+		margin-left: auto;
+	}
+	.header-nav {
+		flex-direction: column;
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height 0.4s;
+	}
+	.top-panel-menu {
+		flex-direction: column;
+	}
+	.top-panel-menu li {
+		border-top: 1px solid #999;
+		border-bottom: 1px solid #fff;
+		border-left: 1px solid #fff;
+		border-right: 1px solid #fff;
+	}
+	.top-panel-menu li a {
+		padding: 0.2rem 1.5rem;
+		font-weight: 400;
+	}
+	.change .bar-1 {
+		transform: rotate(-45deg) translate(-0.5em, 0.5em);
+	}
+	.change .bar-2 {
+		opacity: 0;
+	}
+	.change .bar-3 {
+		transform: rotate(45deg) translate(-0.5em, -0.5em);
+	}
+	.change .header-nav {
+		max-height: 11rem;
+	}
+	.change .top-panel-menu li:hover {
+		background-color: #f0f0f0;
+		box-shadow: 0 4px 14px 0 rgb(0 0 0 / 20%);
+		border-left: 1px solid #999;
+		border-right: 1px solid #999;
+	}
+	.change .top-panel-menu:last-child li:last-child:hover {
+		border-bottom: 1px solid #999;
+	}
+	.breadcrumbs {
+    margin: 30px auto 15px 15px;
+  }
+  .main section, .main article {
+  	margin-left: 15px;
+  }
+  .main .main-content, .main .photo-block, .main .skills-block, .main .education-block {
+  	margin-left: 0;
+  }
 	.main.flex {
 		flex-wrap: wrap;
 	}
@@ -407,29 +490,18 @@ ul {
 		display: flex;
 		flex-wrap: wrap;
 	}
-	.main .sidebar .photo-block, .main .sidebar .skills-block {
+	.main .sidebar .photo-block {
 		width: 50%;
-	}
-	.main .sidebar .skills-block hr {
-		display: none;
-	}
-	.main .sidebar .education-block hr {
 		display: block;
+		margin: 0 auto;
+	}
+	.main .sidebar .photo-block .age {
+		margin-top: 3px;
 	}
 }
 @media (max-width: 575.98px) {
-	.main {
-		min-width: 100%;
-		margin: 0;
-	}
 	.main .sidebar .photo-block, .main .sidebar .skills-block {
 		width: 100%;
-	}
-	.main .sidebar .skills-block hr {
-		display: block;
-	}
-	.main .sidebar .education-block hr {
-		display: none;
 	}
 	.main .sidebar .photo-block img {
 		max-width: 50%;
@@ -445,20 +517,29 @@ ul {
 }
 @media print {
 	.main {
-		max-width: 100%;
-		min-height: 100vh;
-		margin: 0;
+		--width-for-print: 960px;
+		--width-of-sheet: 210;
+		--height-of-sheet: 297;
+		min-width: var(--width-for-print);
+		min-height: calc( var(--width-for-print) * ( var(--height-of-sheet) / var(--width-of-sheet) ) );
 	}
 	.main.flex {
 		flex-wrap: nowrap;
 	}
 	.main .sidebar {
-		width: 30%;
+		width: 25%;
 		display: block;
+		background-color: dimgrey;
 	}
-	.main .sidebar .photo-block, .main .sidebar .skills-block {
+	.main .sidebar .photo-block, .main .sidebar .skills-block, .main .sidebar .education-block {
 		width: 100%;
 	}
+	.main .sidebar .skills-block hr {
+		display: block;
+	}
+	.main .sidebar .education-block hr {
+    display: block;
+  }
 	.main .main-content #lang-switcher {
 		display: none;
 	}

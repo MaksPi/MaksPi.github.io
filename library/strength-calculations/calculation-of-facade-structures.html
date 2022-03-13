@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title>Расчет фасадных конструкций</title>
+	<title>Расчет светопрозрачных фасадных конструкций</title>
 
 	<link rel="stylesheet" href="../../css/style.css">
 	<link rel="stylesheet" href="../../css/fonts.css">
@@ -15,17 +15,22 @@
 <body>
 	<main class="main">
 		<header class="header">
+			<div class="mob-menu">
+				<div class="bar-1"></div>
+				<div class="bar-2"></div>
+				<div class="bar-3"></div>
+			</div>
 			<nav class="header-nav">
 				<ul class="top-panel-menu">
 					<li><a href="#">Портфолио</a></li>
-					<li><a href="#">Контакты</a></li>
-					<li><a href="#">Обо мне</a></li>
+					<li><a href="../../contacts.html">Контакты</a></li>
+					<li><a href="../../about-me.html">Обо мне</a></li>
 				</ul>
 				<ul class="top-panel-menu">
 					<li><a href="../../index.html">MaksPi</a></li>
 				</ul>
 				<ul class="top-panel-menu">
-					<li><a href="../../helpful-button.html">Полезная кнопка</a></li>
+					<li><a href="../../library.html" class="current">Библиотека</a></li>
 				</ul>
 			</nav>
 		</header>
@@ -35,16 +40,16 @@
 					<a href="../../index.html" title="Главная"></a>
 				</li>
 				<li class="breadcrumbs-item">
-					<a href="../../helpful-button.html">Полезная кнопка</a>
+					<a href="../../library.html">Библиотека</a>
 				</li>
 				<li class="breadcrumbs-item">
-					<a href="../../helpful-button/strength-calculations.html">Прочностные расчеты</a>
+					<a href="../../library/strength-calculations.html">Прочностные расчеты</a>
 				</li>
 				<li class="breadcrumbs-item last"></li>
 			</ul>
 		</nav>
 		<article>
-			<h2>Расчет фасадных конструкций:</h2>
+			<h2>Расчет светопрозрачных фасадных конструкций:</h2>
 			<!-- <p><b>Конструктивная схема:</b></p> -->
 			<!-- <img src="../../img/Фасадка_001.png"> -->
 			<div class="constructive-scheme">
@@ -87,6 +92,7 @@
 				<input id="a" type="text" value="10" size="1">
 				<span><em>(см)</em> - расстояние от стойки до оси подкладки;</span>
 			</p>
+			<h3>Допустимые прогибы:</h3>
 			<p class="indent-left">
 				<label class="width-75"><em>f<sub>доп (ст)</sub> =</em></label>
 				<input id="f_mullion_permiss" type="text" value="" size="1">
@@ -177,17 +183,17 @@
 			<h3>Расчёт минимально необходимых геометрических характеристик сечений стойки и ригеля:</h3>
 			<p class="indent-left">
 				<label class="width-75"><em>I<sub>x (ст)</sub> =</em></label>
-				<input id="Ix_mullion_min" type="text" value="" size="1">
+				<input id="Ix_mullion_min" type="text" value="" size="4">
 				<span><em>(см<sup> 4)</sup></em> - минимально необходимый осевой момент инерции стойки;</span>
 			</p>
 			<p class="indent-left">
 				<label class="width-75"><em>I<sub>x (риг)</sub> =</em></label>
-				<input id="Ix_transom_min" type="text" value="" size="1">
+				<input id="Ix_transom_min" type="text" value="" size="4">
 				<span><em>(см<sup> 4)</sup></em> - минимально необходимый осевой момент инерции ригеля от действия ветровой нагрузки;</span>
 			</p>
 			<p class="indent-left">
 				<label class="width-75"><em>I<sub>y (риг)</sub> =</em></label>
-				<input id="Iy_transom_min" type="text" value="" size="1">
+				<input id="Iy_transom_min" type="text" value="" size="4">
 				<span><em>(см<sup> 4)</sup></em> - минимально необходимый осевой момент инерции ригеля от действия нагрузки от веса заполнения.</span>
 			</p>
 			<!-- Проверяемые геометрические характеристики сечений стойки и ригеля -->
@@ -198,24 +204,24 @@
 				<span><em>(см<sup> 2)</sup></em> - площадь сечения стойки (из каталога профильной системы);</span>
 			</p> -->
 			<p class="indent-left">
-				<label class="width-75"><em>A<sub>риг</sub> =</em></label>
-				<input id="A_transom" type="text" value="" size="1">
-				<span><em>(см<sup> 2)</sup></em> - площадь сечения ригеля (из каталога профильной системы);</span>
-			</p>
-			<p class="indent-left">
 				<label class="width-75"><em>I<sub>x (ст)</sub> =</em></label>
-				<input id="Ix_mullion" type="text" value="" size="1">
+				<input id="Ix_mullion" type="text" value="" size="4">
 				<span><em>(см<sup> 4)</sup></em> - осевой момент инерции стойки (из каталога профильной системы);</span>
 			</p>
 			<p class="indent-left">
 				<label class="width-75"><em>I<sub>x (риг)</sub> =</em></label>
-				<input id="Ix_transom" type="text" value="" size="1">
+				<input id="Ix_transom" type="text" value="" size="4">
 				<span><em>(см<sup> 4)</sup></em> - осевой момент инерции ригеля (в направлении действия ветровой нагрузки - из каталога профильной системы);</span>
 			</p>
 			<p class="indent-left">
 				<label class="width-75"><em>I<sub>y (риг)</sub> =</em></label>
-				<input id="Iy_transom" type="text" value="" size="1">
+				<input id="Iy_transom" type="text" value="" size="4">
 				<span><em>(см<sup> 4)</sup></em> - осевой момент инерции ригеля (в направлении действия нагрузки от собственного веса и веса заполнения - из каталога профильной системы).</span>
+			</p>
+			<p class="indent-left">
+				<label class="width-75"><em>A<sub>риг</sub> =</em></label>
+				<input id="A_transom" type="text" value="" size="1">
+				<span><em>(см<sup> 2)</sup></em> - площадь сечения ригеля (из каталога профильной системы);</span>
 			</p>
 			<!-- Результаты расчёта -->
 			<h3>Результаты расчёта:</h3>
