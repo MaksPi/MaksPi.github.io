@@ -474,13 +474,13 @@ ul {
 		border-bottom: 1px solid #999;
 	}
 	.breadcrumbs {
-    margin: 30px auto 15px 15px;
+    margin: 30px 15px 15px 15px;
   }
   .main section, .main article {
-  	margin-left: 15px;
+  	margin: 0 15px;
   }
   .main .main-content, .main .photo-block, .main .skills-block, .main .education-block {
-  	margin-left: 0;
+  	margin: 0;
   }
 	.main.flex {
 		flex-wrap: wrap;

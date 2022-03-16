@@ -277,6 +277,10 @@ const lang_obj = {
 	},
 	"interior-planning-of-private-dwellings": {
 		"en": "Interior planning of private dwellings.",
-		"ru": "Внутренняя планировка частных жилщ."
+		"ru": "Внутренняя планировка частных жилищ."
+	},
+	"last-job-place": {
+		"en": "last job place",
+		"ru": "последнее место работы",
 	},
 }
