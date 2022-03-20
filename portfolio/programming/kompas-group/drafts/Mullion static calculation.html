@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <script src="Wind Load.js"></script>
+  <script src="Constructions Data.js"></script>
+</head>
+
+<body>
+  
+  <script>
+  'use strict';
+  console.log(`Предельное расчетное значение ветровой нагрузки:\nWm = ${Wm.Wm} кг/м2`);
+  
+  var q = Wm.Wm * ( ( ConstructionsDate.w1 + ConstructionsDate.w2 ) / 2 );
+  
+  console.log(`Распределенная нагрузка на стойку:\nq = ${q} кг/м`);
+  /*
+  var elementData = {
+    length: 3, // m
+	step1: 1, // m
+	step2: 2, // m
+	//crosArea:
+	//resistanceMoment:
+	//inertiaMoment:
+	//resilienceModulus:
+	//resistance:
+  };
+  
+  var f = (5 / 384) * q * constructionsDate.height**4 / (E * I);
+  
+  alert(f);
+  */
+  </script>
+
+</body>
+
+</html>

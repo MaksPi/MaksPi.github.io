@@ -60,8 +60,8 @@ const lang_obj = {
 		"ru": "чертежи",
 	},
 	"static-calculations": {
-		"en": "static calculations",
-		"ru": "статические расчеты",
+		"en": "strength calculations",
+		"ru": "прочностные расчеты",
 	},
 	"excel-advanced": {
 		"en": "advanced",
@@ -91,9 +91,149 @@ const lang_obj = {
 		"en": "Front-End Developer",
 		"ru": "Front-End разработчик",
 	},
+	"about-me": {
+		"en": "About me",
+		"ru": "Обо мне",
+	},
+	"about-me-1": {
+		"en": "After graduating from the academy, for many years I worked and developed within the framework of the received profession (civil engineer).",
+		"ru": "После окончания ВУЗа, многие годы работал и развивался в рамках полученной профессии (Инженер-строитель).",
+	},
+	"about-me-2": {
+		"en": "I became interested in programming in 2019. Introduction to programming began with the JavaScript programming language through a tutorial on the website",
+		"ru": "Программированием начал интересоваться в 2019 году. Знакомство с программированием началось с языка программирования JavaScript по учебнику на веб сайте",
+	},
+	"about-me-3-1": {
+		"en": "Continuing to work in the specialty received at the academy, I began to use programming as online help tools (online calculations, online instructions) to facilitate current work",
+		"ru": "Продолжая работать по полученной в ВУЗе специальности, стал применять программирование в качестве помогающих онлайн-инструментов (онлайн-расчеты, онлайн-инструкции), для облегчения текущей работы",
+	},
+	"about-me-3-2": {
+		"en": 'below, in the "Experience" block, there are links to my online developments',
+		"ru": 'ниже, в блоке "Опыт работы", приведены ссылки на мои онлайн-разработки',
+	},
+	"about-me-4": {
+		"en": "Also, you can see my portfolio on my website",
+		"ru": "Также, можно ознакомиться с моим портфолио на моем веб сайте",
+	},
+	"studying": {
+		"en": "Studying",
+		"ru": "Обучение",
+	},
+	"studying-1-1": {
+		"en": "For studying",
+		"ru": "Для изучения",
+	},
+	"studying-1-2": {
+		"en": "JavaScript programming language and layout skills, I use the following",
+		"ru": "языка программирования JavsScript и навыков верстки, использую следующие",
+	},
+	"studying-1-3": {
+		"en": "websites",
+		"ru": "веб сайты",
+	},
+	"studying-2": {
+		"en": "Online tutorial on the website",
+		"ru": "Онлайн учебник на веб сайте",
+	},
+	"studying-3": {
+		"en": "Website address guide",
+		"ru": "Справочник по адресу на веб сайте",
+	},
+	"studying-4": {
+		"en": "Front-end and back-end lessons",
+		"ru": "Уроки front-end и back-end",
+	},
+	"studying-5": {
+		"en": "Manuals and tutorials on the website",
+		"ru": "Справочники и самоучители на веб сайте",
+	},
+	"studying-6-1": {
+		"en": "Also, for studying",
+		"ru": "Также, для изучения",
+	},
+	"studying-6-2": {
+		"en": "JavaScript programming language and layout skills, I use some",
+		"ru": "языка программирования JavsScript и навыков верстки, использую некоторые",
+	},
+	"studying-6-3": {
+		"en": "youtube channels",
+		"ru": "youtube каналы",
+	},
+	"studying-6-4": {
+		"en": "for example",
+		"ru": "например",
+	},
+	"studying-7": {
+		"en": "His website",
+		"ru": "Его веб сайт",
+	},
+	"studying-8": {
+		"en": "Her websites",
+		"ru": "Ее веб сайты",
+	},
+	"studying-9": {
+		"en": "His websites",
+		"ru": "Его веб сайты",
+	},
+	"studying-10-1": {
+		"en": "As sources of inspiration",
+		"ru": "В качестве источников вдохновения",
+	},
+	"studying-10-2": {
+		"en": "I use some",
+		"ru": "использую некоторые",
+	},
+	"studying-11": {
+		"en": "Their tutorial website",
+		"ru": "Их обучающий веб сайт",
+	},
 	"experience": {
 		"en": "experience:",
 		"ru": "опыт работы:",
+	},
+	"experience-1-1": {
+		"en": "In addition to the duties related to the position held, I developed on my website",
+		"ru": "Кроме обязанностей, касающихся занимаемой должности, разработал на своем веб сайте",
+	},
+	"experience-1-2": {
+		"en": "the following online calculations",
+		"ru": "следующие онлайн-расчеты",
+	},
+	"experience-2": {
+		"en": "A very useful online strength calculation for determining the cross sections of glazing structural elements",
+		"ru": "Очень полезный прочностной онлайн расчет для подбора сечений элементов конструкций остекления",
+	},
+	"experience-3": {
+		"en": "This calculation mainly involves working with input and with events associated with input",
+		"ru": "В данном расчете в основном задействована работа с input и с событиями, связанными с input",
+	},
+	"experience-4": {
+		"en": "Online calculator that fills in the table (specification) of fasteners for glazing structures",
+		"ru": "Онлайн калькулятор, который заполняет таблицу (спецификацию) элементов крепления конструкций остекления",
+	},
+	"experience-5": {
+		"en": "This calculation is based on dynamic creation and editing of tables, dynamic filling of tables, work with several tables at the same time",
+		"ru": "Данный расчет построен на динамическом создании и редактировании таблиц, динамическом заполнении таблиц, работе с несколькими таблицами одновременно",
+	},
+	"experience-6": {
+		"en": "In addition to the duties related to the position held, I developed an internal website-portal for the company",
+		"ru": "Кроме обязанностей, касающихся занимаемой должности, для компании разработал внутренний сайт-портал",
+	},
+	"experience-7": {
+		"en": "This website-portal contains",
+		"ru": "Данный сайт-портал содержит",
+	},
+	"experience-8": {
+		"en": "Online Job Descriptions",
+		"ru": "Должностные инструкции",
+	},
+	"experience-9": {
+		"en": "Online Working Instructions",
+		"ru": "Рабочие инструкции",
+	},
+	"experience-10": {
+		"en": "Online Load Collection",
+		"ru": "Онлайн сбор нагрузок",
 	},
 	"comfort-line-plus": {
 		"en": "COMFORT-LINE plus",
@@ -212,8 +352,8 @@ const lang_obj = {
 		"ru": "Формула комфорта",
 	},
 	"leading-design-engineer-of-glazing-constructions": {
-		"en": "Leading design engineer of glazing constructions.",
-		"ru": "Ведущий инженер-проектировщик конструкций остекления."
+		"en": "Leading design engineer of glazing constructions",
+		"ru": "Ведущий инженер-проектировщик конструкций остекления"
 	},
 	"participation-in-the-development-business-processes": {
 		"en": "Participation in the development of the company's business processes.",
@@ -278,9 +418,5 @@ const lang_obj = {
 	"interior-planning-of-private-dwellings": {
 		"en": "Interior planning of private dwellings.",
 		"ru": "Внутренняя планировка частных жилищ."
-	},
-	"last-job-place": {
-		"en": "last job place",
-		"ru": "последнее место работы",
 	},
 }

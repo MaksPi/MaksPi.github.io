@@ -1,0 +1,71 @@
+.service-catalog > a::before { content: '\f115'; }
+.winter-garden > a::before { content: '\f19c'; }
+.terrasa > a::before { content: '\f1cb'; }
+.sliding-systems > a::before { content: '\f0ec'; }
+.sliding-doors > a::before { content: '\f278'; }
+.glass-system > a::before { content: '\f096'; }
+.windows-doors > a::before { content: '\f24d'; }
+.fasad > a::before { content: '\f0f7'; }
+.windows > a::before { content: '\f009'; }
+.vip-service > a::before { content: '\f219'; }
+.rebson > a::before { content: '\f00b'; }
+.sun-protection > a::before { content: '\f185'; }
+.contacts > a::before { content: '\f095'; }
+.podbor > a::before { content: '\f2b5'; }
+/* icons my add */
+/* Добавление эффекта свечения к иконкам*/
+.cold-systems > a::before {
+    content: '\f2dc';
+    color: #7FC7FF;
+    text-shadow: 1px 1px 10px #94cbf0;
+}
+.warm-systems1 > a::before {content: '\f06d'; color: rgb(255,130,140); text-shadow: 1px 1px 10px #eeb0b3;}
+.warm-systems2 > a::before {content: '\f06d'; color:rgb(255,120,110); text-shadow: 1px 1px 12px #f09498;}
+.warm-systems3 > a::before {content: '\f06d'; color:rgb(255,80,70); text-shadow: 1px 1px 12px #f5616a;}
+.warm-systems4 > a::before {content: '\f06d'; color:rgb(255,50,40); text-shadow: 1px 1px 12px #f01440;}
+.warm-systems5 > a::before  {content: '\f06d'; color:rgb(255,30,20); text-shadow: 1px 1px 12px #e01a41;}
+
+/*
+.warm-systems1 > a::before { content: '\f06d'; -webkit-box-shadow: 0 8px 5px 2px rgba(255,130,140,.9);
+box-shadow: 0 8px 5px 2px rgba(255,130,140,.9); -moz-box-shadow: 0 8px 5px 2px rgba(255,130,140,.9); content:'\f06d';}
+.warm-systems2 a::before { content: '\f06d'; -webkit-box-shadow: 0 8px 5px 4px rgba(255,120,110,.9);
+box-shadow: 0 8px 5px 4px rgba(255,120,110,.9); -moz-box-shadow: 0 8px 5px 4px rgba(255,120,110,.9);}
+.warm-systems3 > a::before { content: '\f06d'; -webkit-box-shadow: 0 8px 5px 5px rgba(255,80,70,.9);
+box-shadow: 0 8px 5px 5px rgba(255,80,70,.9);  -moz-box-shadow: 0 8px 5px 5px rgba(255,80,70,.9);}
+.warm-systems4 > a::before { content: '\f06d'; -webkit-box-shadow: 0 8px 6px 5px rgba(255,50,40,.9);
+box-shadow: 0 8px 6px 5px rgba(255,50,40,.9); -moz-box-shadow: 0 8px 6px 5px rgba(255,50,40,.9);}
+.warm-systems5 > a::before { -webkit-box-shadow: 0 8px 6px 5px rgba(255,30,20,1);
+box-shadow: 0 8px 6px 5px rgba(255,30,20,1); -moz-box-shadow: 0 8px 6px 5px rgba(255,30,20,1); }
+ -webkit-box-shadow: 0 8px 4px 4px rgba(150,205,235,.9);
+  box-shadow: 0 8px 4px 4px rgba(150,205,235,.9);
+ -moz-box-shadow: 0 8px 4px 4px rgba(150,205,235,.9);
+*/
+
+.sun-icon > a::before { content: '\f185'; }
+.navigation-icon > a::before { content: '\f124'; }
+.exlusive-icon > a::before { content: '\f219'; }
+.blog-icon > a::before { content: '\f19d'; }
+.showroom-icon > a::before { content: '\f06e'; }
+.portfolio-icon > a::before { content: '\f03e'; }
+.zenith-icon > a::before { content: '\f077'; }
+.zenit-icon > a::before { content: '\f0d8'; }
+
+/* Правки в некоторых стилях 
+.info-wrap h4 {
+    margin-top: -17px !important;
+} */
+img.size-full {
+	width: 100%;
+	height: auto;
+}
+@media (max-width: 400px) {
+	h1 { font-size: 1.5em; }
+}
+
+li#wp-admin-bar-delete-cache { display: none; }
+
+.top-pannel .top-panel-row .phone-block::before {top: 15px;font-size: 38px; }
+.sticky .top-pannel .top-panel-row .phone-block::before { top: 0px; }
+/*
+.top-pannel, .site-header { top: 0; }
+*/

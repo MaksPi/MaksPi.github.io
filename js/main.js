@@ -51,7 +51,7 @@ function getFullYears(year, month, date) {
 
 		if (monthEnd === "present" || monthEnd === "текущее время") {
 			yearEnd = new Date().getFullYear();
-			monthEnd = new Date().getMonth();
+			monthEnd = new Date().getMonth() + 1;
 		}
 
 		let durationYear = yearEnd - yearStart;

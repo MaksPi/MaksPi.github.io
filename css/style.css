@@ -205,7 +205,7 @@ ul {
 .main .italic {
 	font-style: italic;
 }
-.main article.experience ul {
+.main article.experience ul, .main article.about-me ul {
 	list-style: disc;
 	padding-left: 20px;
 }
@@ -249,10 +249,9 @@ ul {
 .main .sidebar {
 	background-color: dimgrey;
 	min-height: 50vh;
-	padding: 15px /*0*/;
+	padding: 15px;
 }
 .main .sidebar .photo-block, .main .sidebar .skills-block, .main .sidebar .education-block {
-	/*padding: 0 15px;*/
 	box-sizing: border-box;
 	width: 100%;
 }
@@ -268,6 +267,7 @@ ul {
 }
 .main .sidebar .photo-block .contacts-block a {
 	color: #fff;
+	border-bottom: solid 1px #fff;
 }
 .main .sidebar .photo-block .contacts-block a:hover {
 	color: #d20a0a;
@@ -326,9 +326,6 @@ ul {
 	left: 0;
 	top: 50%;
 }
-.main .main-content .experience .company-block {
-	margin-top: 10px;
-}
 .main .main-content .experience .company, .main .main-content .experience .date {
 	font-weight: 600;
 	font-size: 1.1rem;
@@ -341,12 +338,6 @@ ul {
 	text-decoration: underline;
 	font-size: 1.1rem;
 }
-/*.specification-of-hardware-for-facade-structures article ul {
-	display: inline-block;
-}*/
-/*.specification-of-hardware-for-facade-structures label {
-	display: inline;
-}*/
 .specification-of-elements-for-structure tbody tr:first-child {
 	text-align: center;
 	background-color: lightgrey;
@@ -384,13 +375,17 @@ ul {
 	.main {
 		max-width: 540px;
 	}
+  .main article section {
+  	margin: 10px 15px;
+  }
 }
 @media (min-width: 768px) {
 	.main {
 		max-width: 720px;
 	}
 	.main .sidebar {
-		width: calc(100%/3);
+		min-width: calc(100%/3);
+		max-width: calc(100%/3);
 	}
 }
 @media (min-width: 992px) {
@@ -398,7 +393,8 @@ ul {
 		max-width: 960px;
 	}
 	.main .sidebar {
-		width: 25%;
+		min-width: 25%;
+		max-width: 25%;
 	}
 }
 @media (min-width: 1200px) {
@@ -476,26 +472,21 @@ ul {
 	.breadcrumbs {
     margin: 30px 15px 15px 15px;
   }
-  .main section, .main article {
-  	margin: 0 15px;
-  }
   .main .main-content, .main .photo-block, .main .skills-block, .main .education-block {
   	margin: 0;
   }
 	.main.flex {
 		flex-wrap: wrap;
 	}
-	.main .sidebar {
+	.main.flex .sidebar {
 		width: 100%;
-		display: flex;
-		flex-wrap: wrap;
 	}
-	.main .sidebar .photo-block {
+	.main.flex .sidebar .photo-block {
 		width: 50%;
 		display: block;
 		margin: 0 auto;
 	}
-	.main .sidebar .photo-block .age {
+	.main.flex .sidebar .photo-block .age {
 		margin-top: 3px;
 	}
 }
@@ -517,7 +508,7 @@ ul {
 }
 @media print {
 	.main {
-		--width-for-print: 960px;
+		--width-for-print: 1140px;
 		--width-of-sheet: 210;
 		--height-of-sheet: 297;
 		min-width: var(--width-for-print);
@@ -527,19 +518,13 @@ ul {
 		flex-wrap: nowrap;
 	}
 	.main .sidebar {
-		width: 25%;
-		display: block;
-		background-color: dimgrey;
+		min-width: 25%;
+		max-width: 25%;
+		display: inline-block;
 	}
 	.main .sidebar .photo-block, .main .sidebar .skills-block, .main .sidebar .education-block {
-		width: 100%;
+		min-width: 100%;
 	}
-	.main .sidebar .skills-block hr {
-		display: block;
-	}
-	.main .sidebar .education-block hr {
-    display: block;
-  }
 	.main .main-content #lang-switcher {
 		display: none;
 	}
